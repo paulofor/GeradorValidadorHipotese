@@ -2,5 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/daolib.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-3.0.17-ga-bin.jar"/>
+	<classpathentry kind="lib" path="lib/async-http-client-1.9.38.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.10.5.Final.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="lib" path="lib/org.json.jar"/>
+	<classpathentry kind="lib" path="lib/google-collections-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

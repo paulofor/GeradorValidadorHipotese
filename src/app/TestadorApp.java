@@ -1,3 +1,4 @@
+package app;
 
 import gerapp.modelo.Aplicacao;
 import gerapp.modelo.FabricaVo;
