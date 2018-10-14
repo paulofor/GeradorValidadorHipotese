@@ -1,6 +1,7 @@
 package gerapp.dao.montador;
 
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import br.com.digicom.lib.dao.*;
 import br.com.digicom.lib.*;
@@ -44,5 +45,8 @@ public  class AplicacaoMontador   implements MontadorDaoI {
 	public  int quantidadeCampos() {
 		return 10;
 	}
+
+
+	
 
 }
