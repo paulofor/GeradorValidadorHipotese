@@ -43,6 +43,10 @@ public class AtributoWrapperAngular extends AtributoWrapper {
 		// TODO Auto-generated method stub
 		return converteTipo.getTipoSqlite(base);
 	}
+	public String formatoUpdateInsert(String objeto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 	
