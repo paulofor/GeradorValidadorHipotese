@@ -101,8 +101,46 @@ public class RestContract {
         return item != null ? item.getVerb() : "POST";
     }
 
-   
-  
+    /**
+     * Gets the ParameterEncoding for the given method.
+     *
+     * @param method The method to resolve.
+     * @return The parameter encoding.
+     */
+    public RestAdapter.ParameterEncoding getParameterEncodingForMethod(String method) {
+        if (method == null) {
+            throw new IllegalArgumentException("Method cannot be null");
+        }
+
+        RestContractItem item = items.get(method);
+
+        return item != null
+                ? item.getParameterEncoding()
+                : RestAdapter.ParameterEncoding.JSON;
+    }
+
+    /**
+     * Resolves a specific method, replacing pattern fragments with the optional
+     * parameters as appropriate.
+     * @param method The method to resolve.
+     * @param parameters Pattern parameters. Can be <code>null</code>.
+     * @return The complete, resolved URL.
+     */
+    public String getUrlForMethod(String method,
+    		Map<String, ? extends Object> parameters) {
+        if (method == null) {
+            throw new IllegalArgumentException("Method cannot be null");
+        }
+
+        String pattern = getPatternForMethod(method);
+
+        if (pattern != null) {
+            return getUrl(pattern, parameters);
+        }
+        else {
+            return getUrlForMethodWithoutItem(method);
+        }
+    }
 
     /**
      * Generates a fallback URL for a method whose contract has not been
