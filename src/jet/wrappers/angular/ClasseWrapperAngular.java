@@ -13,26 +13,35 @@ public class ClasseWrapperAngular extends ClasseWrapper {
 
 	public ClasseWrapperAngular(Entidade ent) {
 		super(ent);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected RelacionamentoWrapper criaRelacionamentoWrapper(
 			RelacionamentoEntidade relac) {
-		// TODO Auto-generated method stub
 		return new RelacionamentoWrapperAngular(relac);
 	}
 
 	@Override
 	protected AtributoWrapper criaAtributoWrapper(AtributoEntidade item) {
-		// TODO Auto-generated method stub
 		return new AtributoWrapperAngular(item);
 	}
 
 	@Override
 	protected ProcValorWrapper criaProcValorWrapper(ProcValor item) {
-		// TODO Auto-generated method stub
 		return new ProcValorWrapperAngular(item);
 	}
 
+	public String getNomeParaArquivo() {
+		String nome = this.getNomeParaClasse();
+		String saida = "";
+		for (int i=0;i < nome.length(); i++) {
+			if (Character.isUpperCase(nome.charAt(i))) {
+				if (i==0) saida += ("" + nome.charAt(i)).toLowerCase();
+				else saida += "-" + ("" + nome.charAt(i)).toLowerCase();
+			} else {
+				saida += ("" + nome.charAt(i));
+			}
+		}
+		return saida;
+	}
 }

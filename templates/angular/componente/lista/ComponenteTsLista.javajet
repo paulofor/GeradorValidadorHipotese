@@ -1,0 +1,38 @@
+<%@ jet package="jet.angular.componente.lista" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
+class="ComponenteTsLista" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { Component, OnInit } from '@angular/core';
+import { <%= classe.getNomeParaClasse() %>, <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
+
+
+@Component({
+  selector: 'app-lista-<%= classe.getNomeParaArquivo() %>',
+  templateUrl: './lista-<%= classe.getNomeParaArquivo() %>.component.html',
+  styleUrls: ['./lista-<%= classe.getNomeParaArquivo() %>.component.scss']
+})
+export class Lista<%= classe.getNomeParaClasse() %>Component implements OnInit {
+
+
+  itens: <%= classe.getNomeParaClasse() %>[];
+  errMess: string;
+
+  constructor(private srv: <%= classe.getNomeParaClasse() %>Api) {
+
+  }
+
+  ngOnInit() {
+    this.srv.find()
+      .subscribe((result: <%= classe.getNomeParaClasse() %>[]) =>
+        this.itens = result
+      );
+  }
+
+
+
+}

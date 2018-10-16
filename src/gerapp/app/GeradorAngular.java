@@ -4,20 +4,23 @@ import gerapp.modelo.Entidade;
 
 import java.io.IOException;
 
+import jet.angular.ComponenteTsLista;
 import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 
 public class GeradorAngular extends GeradorArquivosBase {
 	
-	
+	private String PATH = "../../../../ProdutosNode/";
 	protected Configuracao configuracao = null;
 	protected ClasseWrapper entidade = null;
 
 	@Override
 	public void criaArquivoEntidade(Recursos recurso) throws IOException {
-		String nomeArquivo = recurso.getConfiguracao().getPathServicoInterface() + "//" + recurso.getClasse().getNomeParaClasse()  + "Servico.java";
-		//String conteudo = Servico.create("\n").generate(recurso);
-		//geraArquivoFonte(conteudo,nomeArquivo);
+		String nomeArquivo = PATH + recurso.getConfiguracao().getNamespace() + 
+				"//src//app//" + recurso.getClasse().getNomeParaClasse()  + "-Lista//" + 
+				recurso.getClasse().getNomeParaClasse().toLowerCase() + "-lista.component.ts";
+		String conteudo = ComponenteTsLista.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo,nomeArquivo);
 	}
 
 	@Override
