@@ -1,8 +1,10 @@
-package com.strongloop.android.remoting;
+package loopback.android.remoting;
 
 
 
 public class BeanUtil {
+	
+	/*
     public static void setProperties(Object object, Map<String, ? extends Object> properties, boolean includeSuperClasses) {
         if (object == null || properties == null) {
             return;
@@ -58,7 +60,9 @@ public class BeanUtil {
             }
         }
     }
+    */
 
+	/*
     public static Map<String, Object> getProperties(Object object, boolean includeSuperClasses, boolean deepCopy) {
         HashMap<String, Object> map = new HashMap<String, Object>();
         if (object == null) {
@@ -123,7 +127,9 @@ public class BeanUtil {
 
         return map;
     }
+    */
 
+	/*
     private static boolean isAssignableFrom(Class<?> parameterType, Object value) {
         if (parameterType.isPrimitive()) {
             if (value == null) {
@@ -174,13 +180,14 @@ public class BeanUtil {
         }
         else {
             return objectClass.isPrimitive() ||
-                    CharSequence.class.isAssignableFrom(objectClass) ||
+                    //CharSequence.class.isAssignableFrom(objectClass) ||
                     Character.class.isAssignableFrom(objectClass) ||
                     Boolean.class.isAssignableFrom(objectClass) ||
                     Number.class.isAssignableFrom(objectClass);
         }
     }
 
+    /*
     private static Object convertObject(Object object, boolean includeSuperClasses) {
         if (isSimpleObject(object)) {
             return object;
@@ -189,4 +196,5 @@ public class BeanUtil {
             return getProperties(object, includeSuperClasses, true);
         }
     }
+    */
 }

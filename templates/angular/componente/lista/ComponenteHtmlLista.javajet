@@ -1,0 +1,42 @@
+<%@ jet package="jet.angular.componente.lista" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
+class="ComponenteHtmlLista" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+Configuracao conf = recursos.getConfiguracao();
+%>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Validação de Hipóteses de Valor</h4>
+          </div>
+          <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>Projeto</th>
+                  <th>Mercado</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of itens">
+                  <td>{{projeto.nome}}</td>
+                  <td>{{projeto.mercado}}</td>
+                  <td><a routerLink="/projetosValor/{{projeto.id}}">Gerenciar</a></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

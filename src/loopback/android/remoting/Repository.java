@@ -1,10 +1,12 @@
 // Copyright (c) 2013 StrongLoop. All rights reserved.
 
-package com.strongloop.android.remoting;
+package loopback.android.remoting;
 
 import java.util.Map;
 
-import com.strongloop.android.remoting.adapters.Adapter;
+import loopback.remoting.adapters.Adapter;
+
+
 
 /**
  * A local representative of remote model repository, it provides

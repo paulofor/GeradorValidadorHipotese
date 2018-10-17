@@ -17,17 +17,7 @@ import org.json.JSONObject;
  */
 public class JsonUtil {
 
-    /**
-     * Converts a Java object to a JSON object. A {@link java.util.Map} is
-     * converted to a {@link org.json.JSONObject}, a {@link java.util.List} or
-     * array is converted to a {@link org.json.JSONArray},
-     * and <code>null</code> is converted to  {@link org.json.JSONObject#NULL}.
-     * Other objects, like {@link java.lang.Number}, {@link java.lang.String},
-     * and {@link java.lang.Boolean} are returned without conversion.
-     * @param object The object to convert.
-     * @return a JSON object.
-     * @throws JSONException If the object cannot be converted.
-     */
+    /*
     public static Object toJson(Object object) throws JSONException {
         if (object == null || object == JSONObject.NULL) {
             return JSONObject.NULL;
@@ -73,13 +63,8 @@ public class JsonUtil {
             return object.toString();
         }
     }
-
-    /**
-     * Converts a {@link org.json.JSONObject} to a {@link java.util.Map}.
-     * @param object The JSON object to convert.
-     * @return a map, or <code>null</code> if the object is <code>null</code>.
-     * @throws JSONException If the object cannot be converted.
-     */
+	*/
+   
     public static Map<String, Object> fromJson(JSONObject object) {
         if (object == null) {
             return null;
@@ -95,12 +80,6 @@ public class JsonUtil {
         return map;
     }
 
-    /**
-     * Converts a {@link org.json.JSONArray} to a {@link java.util.List}.
-     * @param array The JSON array to convert.
-     * @return a list, or <code>null</code> if the array is <code>null</code>.
-     * @throws JSONException If the array cannot be converted.
-     */
     public static List<Object> fromJson(JSONArray array) {
         if (array == null) {
             return null;
