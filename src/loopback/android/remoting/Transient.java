@@ -1,4 +1,4 @@
-package com.strongloop.android.remoting;
+package loopback.android.remoting;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

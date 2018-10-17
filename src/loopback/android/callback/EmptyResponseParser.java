@@ -1,6 +1,8 @@
-package com.strongloop.android.loopback.callbacks;
+package loopback.android.callback;
 
-import com.strongloop.android.remoting.adapters.Adapter;
+import loopback.remoting.adapters.Adapter;
+
+
 
 public class EmptyResponseParser implements Adapter.Callback {
     private final VoidCallback callback;

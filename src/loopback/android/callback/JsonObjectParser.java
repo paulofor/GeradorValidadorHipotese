@@ -1,12 +1,11 @@
-package com.strongloop.android.loopback.callbacks;
+package loopback.android.callback;
 
-import com.strongloop.android.remoting.JsonUtil;
-import com.strongloop.android.remoting.Repository;
-import com.strongloop.android.remoting.VirtualObject;
-import com.strongloop.android.remoting.adapters.Adapter;
 
-import br.com.digicom.modelo.repositorio.RepositorioBase.CampanhaAdRepository;
-import br.com.digicom.modelo.util.ListaCampanha;
+
+import loopback.android.remoting.JsonUtil;
+import loopback.android.remoting.Repository;
+import loopback.android.remoting.VirtualObject;
+import loopback.remoting.adapters.Adapter;
 
 import org.json.JSONObject;
 
@@ -25,6 +24,7 @@ public class JsonObjectParser<T extends VirtualObject>
 
 	@Override
     public void onSuccess(JSONObject response) {
+		System.out.println("Resposta:" + response.toString());
         if (response == null) {
             // Not found
             callback.onSuccess(null);
@@ -37,6 +37,7 @@ public class JsonObjectParser<T extends VirtualObject>
 
     @Override
     public void onError(Throwable throwable) {
+    	throwable.printStackTrace();
         callback.onError(throwable);
     }
 }

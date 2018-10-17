@@ -1,6 +1,8 @@
-package com.strongloop.android.loopback.callbacks;
+package loopback.android.callback;
 
-import com.strongloop.android.remoting.VirtualObject;
+import loopback.android.remoting.VirtualObject;
+
+
 
 public interface ObjectCallback<T extends VirtualObject> extends TypedCallback<T> {
     

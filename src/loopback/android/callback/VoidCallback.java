@@ -1,4 +1,4 @@
-package com.strongloop.android.loopback.callbacks;
+package loopback.android.callback;
 
 public interface VoidCallback {
     public void onSuccess();

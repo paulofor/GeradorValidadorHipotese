@@ -1,8 +1,11 @@
-package com.strongloop.android.loopback;
+package loopback.android;
 
-import com.strongloop.android.remoting.Repository;
-import com.strongloop.android.remoting.VirtualObject;
-import com.strongloop.android.remoting.adapters.RestContract;
+import loopback.android.remoting.Repository;
+import loopback.android.remoting.VirtualObject;
+import loopback.remoting.adapters.RestAdapter;
+import loopback.remoting.adapters.RestContract;
+
+
 
 public class RestRepository<T extends VirtualObject> extends Repository<T> {
     public RestRepository(String className) {

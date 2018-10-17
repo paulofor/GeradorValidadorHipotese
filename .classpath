@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/org.json.jar"/>
 	<classpathentry kind="lib" path="lib/google-collections-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/daolib.jar"/>
+	<classpathentry kind="lib" path="lib/evo-inflector-1.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

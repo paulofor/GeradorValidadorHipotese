@@ -1,8 +1,10 @@
-package com.strongloop.android.loopback.callbacks;
+package loopback.android.callback;
 
-import com.strongloop.android.remoting.VirtualObject;
+
 
 import java.util.List;
+
+import loopback.android.remoting.VirtualObject;
 
 public interface ListCallback<T extends VirtualObject> {
     public void onSuccess(List<T> objects);

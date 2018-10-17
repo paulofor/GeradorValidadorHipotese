@@ -1,4 +1,4 @@
-package com.strongloop.android.loopback.callbacks;
+package loopback.android.callback;
 
 /**
  * Created by christopher on 31/01/15.

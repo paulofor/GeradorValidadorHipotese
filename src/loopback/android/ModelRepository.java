@@ -7,6 +7,15 @@ package loopback.android;
 import java.util.HashMap;
 import java.util.Map;
 
+import loopback.android.callback.JsonArrayParser;
+import loopback.android.callback.JsonObjectParser;
+import loopback.android.callback.ListCallback;
+import loopback.android.callback.ObjectCallback;
+import loopback.remoting.adapters.Adapter;
+import loopback.remoting.adapters.RestContract;
+import loopback.remoting.adapters.RestContractItem;
+import org.atteo.evo.inflector.English;
+
 /**
  * A local representative of a single model type on the server, encapsulating
  * the name of the model type for easy {@link Model} creation, discovery, and

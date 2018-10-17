@@ -1,14 +1,16 @@
-package com.strongloop.android.loopback.callbacks;
-
-import com.strongloop.android.remoting.JsonUtil;
-import com.strongloop.android.remoting.Repository;
-import com.strongloop.android.remoting.VirtualObject;
-import com.strongloop.android.remoting.adapters.Adapter;
-
-import org.json.JSONArray;
+package loopback.android.callback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import loopback.android.remoting.JsonUtil;
+import loopback.android.remoting.Repository;
+import loopback.android.remoting.VirtualObject;
+import loopback.remoting.adapters.Adapter;
+
+import org.json.JSONArray;
+
+
 
 public class JsonArrayParser<T extends VirtualObject> extends Adapter.JsonArrayCallback {
     private final Repository<T> repository;
