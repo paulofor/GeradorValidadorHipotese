@@ -127,7 +127,7 @@ public class RestContract {
      * @param parameters The values to render with.
      * @return The rendered URL.
      */
-    /*
+    
     public String getUrl(String pattern,
     		Map<String, ? extends Object> parameters) {
         if (pattern == null) {
@@ -139,15 +139,45 @@ public class RestContract {
             return url;
         }
 
+        /*
         for (Map.Entry<String, ? extends Object> entry :
         	parameters.entrySet()) {
             String key = ":" + entry.getKey();
             String value = String.valueOf(entry.getValue());
             url = url.replace(key, value);
         }
+        */
 
         return url;
     }
-    */
+    
+    
+    public String getUrlForMethod(String method,
+    		Map<String, ? extends Object> parameters) {
+        if (method == null) {
+            throw new IllegalArgumentException("Method cannot be null");
+        }
+
+        String pattern = getPatternForMethod(method);
+
+        if (pattern != null) {
+            return getUrl(pattern, parameters);
+        }
+        else {
+            return getUrlForMethodWithoutItem(method);
+        }
+    }
+    
+    public RestAdapter.ParameterEncoding getParameterEncodingForMethod(String method) {
+        if (method == null) {
+            throw new IllegalArgumentException("Method cannot be null");
+        }
+
+        RestContractItem item = items.get(method);
+
+        return item != null
+                ? item.getParameterEncoding()
+                : RestAdapter.ParameterEncoding.JSON;
+    }
 }
 

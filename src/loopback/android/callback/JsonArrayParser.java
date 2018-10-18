@@ -26,8 +26,7 @@ public class JsonArrayParser<T extends VirtualObject> extends Adapter.JsonArrayC
         List<T> list = new ArrayList<T>();
         if (response != null) {
             for (int i = 0; i < response.length(); i++) {
-                list.add(repository.createObject(JsonUtil.fromJson(
-                        response.optJSONObject(i))));
+                //list.add(repository.createObject(JsonUtil.fromJson(response.optJSONObject(i))));
             }
         }
         callback.onSuccess(list);

@@ -52,4 +52,7 @@ public class RestContractItem {
 		return verb;
 	}
 
+	public RestAdapter.ParameterEncoding getParameterEncoding() {
+		return parameterEncoding;
+	}
 }

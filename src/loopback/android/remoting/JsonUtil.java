@@ -17,8 +17,9 @@ import org.json.JSONObject;
  */
 public class JsonUtil {
 
-    /*
+    
     public static Object toJson(Object object) throws JSONException {
+    	/*
         if (object == null || object == JSONObject.NULL) {
             return JSONObject.NULL;
         }
@@ -62,9 +63,11 @@ public class JsonUtil {
         else {
             return object.toString();
         }
+        */
+    	return null;
     }
-	*/
-   
+	
+    /*
     public static Map<String, Object> fromJson(JSONObject object) {
         if (object == null) {
             return null;
@@ -107,4 +110,5 @@ public class JsonUtil {
             return json;
         }
     }
+    */
 }
