@@ -38,8 +38,13 @@ public class RestAdapter extends Adapter {
 
 	@Override
 	public void connect(String url) {
-		// TODO Auto-generated method stub
-
+		if (url == null) {
+			client = null;
+		} else {
+			client = new HttpClient(url);
+			// TODO: Find way to set these headers globally
+			// client.addHeader("Accept", "application/json");
+		}
 	}
 
 	@Override
@@ -88,8 +93,7 @@ public class RestAdapter extends Adapter {
 
 	@Override
 	public boolean isConnected() {
-		// TODO Auto-generated method stub
-		return false;
+		return client != null;
 	}
 
 	public <U extends RestRepository> U createRepository(
@@ -322,9 +326,10 @@ public class RestAdapter extends Adapter {
 				request.addHeader(header, getHeader(header));
 			}
 
-			ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987",
-					"eureka07");
-			// request.setProxyServer(proxy);
+			ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987","eureka07");
+			request.setProxyServer(proxy);
+			
+			System.out.println("Request:" + request.toString());
 
 			if ("GET".equalsIgnoreCase(method)) {
 
@@ -346,6 +351,7 @@ public class RestAdapter extends Adapter {
 		}
 
 		private BoundRequestBuilder prepareRequest(String method, String url) {
+			System.out.println("Url:" + url);
 			if ("GET".equalsIgnoreCase(method)) {
 				return prepareGet(url);
 			} else if ("HEAD".equalsIgnoreCase(method)) {
