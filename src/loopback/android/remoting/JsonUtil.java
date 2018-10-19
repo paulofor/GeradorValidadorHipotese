@@ -67,7 +67,7 @@ public class JsonUtil {
     	return null;
     }
 	
-    /*
+   
     public static Map<String, Object> fromJson(JSONObject object) {
         if (object == null) {
             return null;
@@ -82,7 +82,7 @@ public class JsonUtil {
         }
         return map;
     }
-
+    
     public static List<Object> fromJson(JSONArray array) {
         if (array == null) {
             return null;
@@ -110,5 +110,5 @@ public class JsonUtil {
             return json;
         }
     }
-    */
+    
 }

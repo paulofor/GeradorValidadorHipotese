@@ -31,7 +31,7 @@ public class JsonObjectParser<T extends VirtualObject>
             return;
         }
 
-        //callback.onSuccess(repository.createObject(JsonUtil.fromJson(response)));
+        callback.onSuccess(repository.createObject(JsonUtil.fromJson(response)));
     }
 
     @Override

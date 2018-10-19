@@ -1,5 +1,6 @@
 package loopback.android.remoting;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,26 +11,26 @@ public class BeanUtil {
 	public static void setProperties(Object object,
 			Map<String, ? extends Object> properties,
 			boolean includeSuperClasses) {
-		//if (object == null || properties == null) {
-		//	return;
-		//}
+		if (object == null || properties == null) {
+			return;
+		}
 
-		//Class objectClass = object.getClass();
-		Class cls = object.getClass();
-
+		Class objectClass = object.getClass();
+		System.out.println("Ola Mundo Doido");
+		
 		Set<?> chaves = properties.keySet();
 		for (Object chave : chaves) {
-			//String key = "" + chave;
-			//Object value = properties.get(chave);
-			//if (key == null)
-			//	continue;
-			//if (key.length() == 0)
-			//	continue;
+			String key = "" + chave;
+			Object value = properties.get(chave);
+			if (key == null)
+				continue;
+			if (key.length() == 0)
+				continue;
 
-			//String setterName = "set" + Character.toUpperCase(key.charAt(0)) + key.substring(1);
-			//Method setter = null;
+			String setterName = "set" + Character.toUpperCase(key.charAt(0)) + key.substring(1);
+			Method setter = null;
 
-			/*
+			
 			if (value != null) {
 				// String entrando aqui !!!!!
 				try {
@@ -41,9 +42,9 @@ public class BeanUtil {
 				} catch (Exception ex) {
 				}
 			}
-			*/
+			
 
-			/*
+			
 			if (setter == null) {
 				Method[] methods = includeSuperClasses ? objectClass.getMethods() : objectClass.getDeclaredMethods();
 				for (Method method : methods) {
@@ -57,10 +58,10 @@ public class BeanUtil {
 					}
 				}
 			}
-			*/
+			
 
 			// Invoke
-			/*
+			
 			if (setter != null) {
 				if (setter.getAnnotation(Transient.class) != null)
 					continue;
@@ -72,7 +73,7 @@ public class BeanUtil {
 					// failed " + e.getMessage());
 				}
 			}
-			*/
+			
 		}
 	}
 
@@ -81,7 +82,7 @@ public class BeanUtil {
 		return null;
 	}
 
-	/*
+	
 	private static boolean isAssignableFrom(Class<?> parameterType, Object value) {
 		if (parameterType.isPrimitive()) {
 			if (value == null) {
@@ -128,5 +129,5 @@ public class BeanUtil {
 					|| parameterType.isAssignableFrom(value.getClass());
 		}
 	}
-	*/
+	
 }
