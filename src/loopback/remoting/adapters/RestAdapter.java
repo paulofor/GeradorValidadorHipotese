@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import loopback.android.RestRepository;
 import loopback.android.remoting.JsonUtil;
@@ -260,6 +261,13 @@ public class RestAdapter extends Adapter {
 				if ("GET".equalsIgnoreCase(method)
 						|| "HEAD".equalsIgnoreCase(method)
 						|| "DELETE".equalsIgnoreCase(method)) {
+
+					Set chaves = parameters.keySet();
+					for (Object chave : chaves) {
+						String chaveStr = ":" + chave;
+						String valor = "" + parameters.get(chave);
+						url = url.replaceAll(chaveStr, valor);
+					}
 					// for (Map.Entry<String, ? extends Object> entry :
 					// flattenParameters(parameters).entrySet()) {
 					// request.addQueryParam(entry.getKey(),
@@ -273,6 +281,13 @@ public class RestAdapter extends Adapter {
 					// and is untested.
 					contentType = "application/x-www-form-urlencoded; charset="
 							+ charset;
+
+					Set chaves = parameters.keySet();
+					for (Object chave : chaves) {
+						String chaveStr = ":" + chave;
+						String valor = "" + parameters.get(chave);
+						request.addFormParam(chaveStr, valor);
+					}
 					// TODO: Set body param properly
 					// for (Map.Entry<String, ? extends Object> entry :
 					// parameters.entrySet()) {
@@ -326,9 +341,10 @@ public class RestAdapter extends Adapter {
 				request.addHeader(header, getHeader(header));
 			}
 
-			ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987","eureka07");
-			request.setProxyServer(proxy);
-			
+			ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987",
+					"eureka07");
+			// request.setProxyServer(proxy);
+
 			System.out.println("Request:" + request.toString());
 
 			if ("GET".equalsIgnoreCase(method)) {

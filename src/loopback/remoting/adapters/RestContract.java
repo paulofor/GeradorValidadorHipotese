@@ -3,6 +3,7 @@ package loopback.remoting.adapters;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A contract specifies how remote method names map to HTTP routes.
@@ -138,7 +139,14 @@ public class RestContract {
         if (parameters == null) {
             return url;
         }
-
+        
+        
+        Set chaves = parameters.keySet();
+        for (Object chave : chaves) {
+        	String chaveStr = ":" + chave;
+        	String valor = "" +parameters.get(chave);
+        	url = url.replaceAll(chaveStr,valor);
+        }
         /*
         for (Map.Entry<String, ? extends Object> entry :
         	parameters.entrySet()) {
