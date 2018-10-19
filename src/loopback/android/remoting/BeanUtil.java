@@ -1,6 +1,5 @@
 package loopback.android.remoting;
 
-import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,7 +14,8 @@ public class BeanUtil {
 		//	return;
 		//}
 
-		Class objectClass = object.getClass();
+		//Class objectClass = object.getClass();
+		Class cls = object.getClass();
 
 		Set<?> chaves = properties.keySet();
 		for (Object chave : chaves) {
