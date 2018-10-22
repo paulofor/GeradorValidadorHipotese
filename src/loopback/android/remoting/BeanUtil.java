@@ -29,6 +29,7 @@ public class BeanUtil {
 
 			String setterName = "set" + Character.toUpperCase(key.charAt(0)) + key.substring(1);
 			Method setter = null;
+			System.out.println("setter:" + setterName);
 
 			
 			if (value != null) {

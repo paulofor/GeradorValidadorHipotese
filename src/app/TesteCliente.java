@@ -22,6 +22,7 @@ public class TesteCliente {
             @Override 
             public void onSuccess(AplicacaoRest model) { 
             	System.out.println("Sucesso: " + model);
+            	TestadorApp.executa(model);
             }
 			@Override
 			public void onError(Throwable t) {

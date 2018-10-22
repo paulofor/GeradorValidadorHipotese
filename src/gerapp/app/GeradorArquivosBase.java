@@ -34,8 +34,8 @@ import br.com.digicom.lib.dao.DaoException;
 
 public abstract class GeradorArquivosBase {
 
-	private AplicacaoWrapper aplicacao = null;
-	private List<ClasseWrapper> listaClasse = null;
+	protected AplicacaoWrapper aplicacao = null;
+	protected List<ClasseWrapper> listaClasse = null;
 	
 	public void setAplicacao(Aplicacao aplicacao)  throws DaoException{
 

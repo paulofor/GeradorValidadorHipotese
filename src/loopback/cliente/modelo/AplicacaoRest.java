@@ -1,15 +1,18 @@
 package loopback.cliente.modelo;
 
+import gerapp.modelo.Aplicacao;
 import loopback.android.Model;
 
 public class AplicacaoRest  extends Model{
 
 	private String projetoMySqlId;
 	private String namespace;
-	private String id_aplicacao;
+	private Integer id_aplicacao;
 	private String diretorio;
 	private String nome;
 	private String diretorio_java;
+	
+	
 	public String getProjetoMySqlId() {
 		return projetoMySqlId;
 	}
@@ -22,10 +25,10 @@ public class AplicacaoRest  extends Model{
 	public void setNamespace(String namespace) {
 		this.namespace = namespace;
 	}
-	public String getIdaplicacao() {
+	public Integer getId_aplicacao() {
 		return id_aplicacao;
 	}
-	public void setIdaplicacao(String id_aplicacao) {
+	public void setId_aplicacao(Integer id_aplicacao) {
 		this.id_aplicacao = id_aplicacao;
 	}
 	public String getDiretorio() {
@@ -49,7 +52,13 @@ public class AplicacaoRest  extends Model{
 	
 	
 	public String toString() {
-		return id_aplicacao + " - " + namespace; 
+		return this.id_aplicacao + " - " + namespace; 
+	}
+	
+	public Aplicacao atualiza(Aplicacao aplicacao) {
+		
+		aplicacao.setIdAplicacao(this.id_aplicacao);
+		return aplicacao;
 	}
 	
 }

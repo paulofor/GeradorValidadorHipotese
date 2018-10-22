@@ -1,9 +1,9 @@
 package app;
 
+import gerapp.app.GeradorAngular;
 import gerapp.modelo.Aplicacao;
 import gerapp.modelo.FabricaVo;
-
-import gerapp.app.GeradorAngular;
+import loopback.cliente.modelo.AplicacaoRest;
 
 
 
@@ -20,6 +20,19 @@ public class TestadorApp {
 		GeradorAngular gerador = new GeradorAngular();
 		//GeradorArquivosAndroid2 gerador = new GeradorArquivosAndroid2();
 		//GeradorArquivosCpp gerador = new GeradorArquivosCpp();
+		try {
+			gerador.setAplicacao(aplicacao);
+			gerador.criaArquivos();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void executa(AplicacaoRest appRest) {
+		Aplicacao aplicacao = FabricaVo.criaAplicacao();
+		//aplicacao.setIdAplicacao(1);
+		aplicacao = appRest.atualiza(aplicacao);
+		GeradorAngular gerador = new GeradorAngular();
 		try {
 			gerador.setAplicacao(aplicacao);
 			gerador.criaArquivos();

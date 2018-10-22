@@ -11,7 +11,7 @@ import jet.angular.componente.lista.ComponenteTsLista;
 import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 
-public class GeradorAngular extends GeradorArquivosBase {
+public class GeradorAngular extends GeradorArquivosLoopback {
 
 	private String PATH = "../../../../ProdutosNode/";
 	protected Configuracao configuracao = null;
