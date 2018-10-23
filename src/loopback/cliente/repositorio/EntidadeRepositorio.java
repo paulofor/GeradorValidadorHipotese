@@ -11,7 +11,7 @@ import loopback.cliente.modelo.EntidadeRest;
 
 public class EntidadeRepositorio  extends ModelRepository<EntidadeRest> {
 
-	public EntidadeRepositorio(String className) {
+	public EntidadeRepositorio() {
 		super("Entidade", EntidadeRest.class);
 	}
 
