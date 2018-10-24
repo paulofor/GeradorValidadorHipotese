@@ -8,8 +8,10 @@ import java.util.List;
 import loopback.android.callback.ListCallback;
 import loopback.cliente.modelo.AtributoEntidadeRest;
 import loopback.cliente.modelo.EntidadeRest;
+import loopback.cliente.modelo.RelacionamentoEntidadeRest;
 import loopback.cliente.repositorio.AtributoEntidadeRepositorio;
 import loopback.cliente.repositorio.EntidadeRepositorio;
+import loopback.cliente.repositorio.RelacionamentoEntidadeRepositorio;
 import loopback.remoting.adapters.RestAdapter;
 import br.com.digicom.lib.dao.DaoException;
 
@@ -17,6 +19,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 	
 	private List listaEntidade = null;
 	private List listaAtributo = null;
+	private List listaRelacionamento = null;
 	
 	public void setAplicacao(Aplicacao aplicacao)  throws DaoException{
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
@@ -75,5 +78,39 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 		return listaAtributo;
 	}
 	
+	public List getListaRelacionamento(long idEntidade) throws DaoException{
+		listaRelacionamento = null;
+		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		RelacionamentoEntidadeRepositorio rep = adapter.createRepository(RelacionamentoEntidadeRepositorio.class);
 
+		rep.findByIdEntidade(idEntidade, new ListCallback<RelacionamentoEntidadeRest>() { 
+         
+			@Override
+			public void onError(Throwable t) {
+				t.printStackTrace();
+			}
+
+			@Override
+			public void onSuccess(List<RelacionamentoEntidadeRest> lista) {
+				List listaSaida = new ArrayList();
+				for (RelacionamentoEntidadeRest item : lista) {
+					System.out.println("ID-Rel:" + item.getId_relacionamento_entidade());
+					listaSaida.add(item.criaItem());
+				}
+				listaRelacionamento = listaSaida;
+			} 
+        });
+		do {} while (listaRelacionamento == null);
+		return listaRelacionamento;
+	}
+	
+	public List getListaFiltro(long idEntidade) {
+		return new ArrayList();
+	}
+	public List getListaRegra(long idEntidade) {
+		return new ArrayList();
+	}
+	public List getListaProcValor(long idEntidade) {
+		return new ArrayList();
+	}
 }

@@ -77,6 +77,7 @@ public abstract class GeradorArquivosBase {
 	}
 	
 	private void montaListaClasse() throws DaoException{
+		System.out.println("Inicio Monta Lista Classe");
 		listaClasse = new ArrayList<ClasseWrapper>();
 		List lista = getListaEntidade();
 		Iterator iterador = lista.iterator();
@@ -85,9 +86,9 @@ public abstract class GeradorArquivosBase {
 			ClasseWrapper corrente = criaWrapper(entidade);
 			List<AtributoEntidade> listaAtributos = getListaAtributos(corrente.getId());
 			
-			AtributoEntidade attChave = this.getAtributo(corrente.getIdChave());
+			AtributoEntidade attChave = this.getAtributo(corrente.getIdChave(),listaAtributos);
 			corrente.setChave(attChave);
-			AtributoEntidade attIdent = this.getAtributo(corrente.getIdIdentificador());
+			AtributoEntidade attIdent = this.getAtributo(corrente.getIdIdentificador(),listaAtributos);
 			corrente.setIdentificador(attIdent);
 			Iterator<AtributoEntidade> itAtributoEntidade = listaAtributos.iterator();
 			while (itAtributoEntidade.hasNext()) {
@@ -114,6 +115,7 @@ public abstract class GeradorArquivosBase {
 			corrente.setListaProcValor(listaProcValor);
 			listaClasse.add(corrente);
 		}
+		System.out.println("Final Monta Lista Classe");
 	}
 	
 	
@@ -175,6 +177,17 @@ public abstract class GeradorArquivosBase {
 		AtributoEntidade saida = atributoRC.obtemPorChave(codigo);
 		return saida;
 		
+	}
+	
+	public AtributoEntidade getAtributo(long codigo, List<AtributoEntidade> listaAtributo) {
+		AtributoEntidade saida = null;
+		for (AtributoEntidade item : listaAtributo) {
+			if (item.getIdAtributoEntidade()==codigo) {
+				saida = item;
+				break;
+			}
+		}
+		return saida;
 	}
 
 	

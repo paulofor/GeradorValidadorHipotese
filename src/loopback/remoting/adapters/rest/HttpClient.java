@@ -81,6 +81,7 @@ public class HttpClient extends AsyncHttpClient {
 					String chaveStr = ":" + chave;
 					String valor = "" + parameters.get(chave);
 					//url = url.replaceAll(chaveStr, valor);
+					request.addQueryParam("" + chave,valor);
 				}
 				// for (Map.Entry<String, ? extends Object> entry :
 				// flattenParameters(parameters).entrySet()) {
@@ -157,7 +158,7 @@ public class HttpClient extends AsyncHttpClient {
 
 		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987",
 				"eureka07");
-		request.setProxyServer(proxy);
+		//request.setProxyServer(proxy);
 
 		System.out.println("Request:" + request.toString());
 
