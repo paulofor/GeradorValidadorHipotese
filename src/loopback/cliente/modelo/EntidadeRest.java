@@ -1,6 +1,7 @@
 package loopback.cliente.modelo;
 
 import gerapp.modelo.Entidade;
+import gerapp.modelo.FabricaVo;
 import loopback.android.Model;
 
 public class EntidadeRest extends Model{
@@ -70,6 +71,12 @@ public class EntidadeRest extends Model{
 	}
 	
 	public Entidade criaItem() {
-		Entidade item = FabricaVo.
+		Entidade item = FabricaVo.criaEntidade();
+		item.setIdEntidade(this.id_entidade);
+		item.setNome(this.nome);
+		item.setAssociativa(false);
+		item.setIdAtributoEntidadeC((this.id_chave!=null?this.id_chave:0));
+		item.setIdAtributoEntidadeI((this.id_atributo_identificador!=null?this.id_atributo_identificador:0));
+		return item;
 	}
 }
