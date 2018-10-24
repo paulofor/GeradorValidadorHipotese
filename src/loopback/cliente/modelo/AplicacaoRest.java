@@ -56,7 +56,6 @@ public class AplicacaoRest  extends Model{
 	}
 	
 	public Aplicacao atualiza(Aplicacao aplicacao) {
-		
 		aplicacao.setIdAplicacao(this.id_aplicacao);
 		return aplicacao;
 	}

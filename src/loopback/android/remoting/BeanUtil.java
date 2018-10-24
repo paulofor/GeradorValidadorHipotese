@@ -16,7 +16,7 @@ public class BeanUtil {
 		}
 
 		Class objectClass = object.getClass();
-		System.out.println("Ola Mundo Doido");
+		System.out.println();
 		
 		Set<?> chaves = properties.keySet();
 		for (Object chave : chaves) {
@@ -29,11 +29,12 @@ public class BeanUtil {
 
 			String setterName = "set" + Character.toUpperCase(key.charAt(0)) + key.substring(1);
 			Method setter = null;
-			System.out.println("setter:" + setterName);
+			
 
 			
 			if (value != null) {
 				// String entrando aqui !!!!!
+				System.out.println("setter:" + setterName + "(" + value.getClass() + ")");
 				try {
 					if (includeSuperClasses) {
 						setter = objectClass.getMethod(setterName, value.getClass());

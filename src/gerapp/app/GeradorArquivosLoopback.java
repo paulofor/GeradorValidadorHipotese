@@ -34,7 +34,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 			public void onSuccess(List<EntidadeRest> lista) {
 				// TODO Auto-generated method stub
 				for (EntidadeRest item : lista) {
-					System.out.println("ID:" + item.getId());
+					System.out.println("ID:" + item.getNome());
 				}
 				listaCorrente = lista;
 			} 
