@@ -17,6 +17,23 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	protected Configuracao configuracao = null;
 	protected ClasseWrapper entidade = null;
 
+	
+	
+	
+	
+	
+	
+	@Override
+	protected void verificaDiretorios(Recursos recurso) throws IOException {
+		if (!existe(this.getDiretorioAppAngular(recurso))) {
+			this.criaCaminho(this.getDiretorioAppAngular(recurso));
+		}
+	}
+
+	private String getDiretorioAppAngular(Recursos recurso) {
+		return PATH + recurso.getConfiguracao().getNamespace();
+	}
+
 	@Override
 	public void criaArquivoEntidade(Recursos recurso) throws IOException {
 		componenteListaSimples(recurso);
@@ -58,8 +75,8 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
-		String nomeArquivo = recurso.getConfiguracao().getPathAndroid()
-				+ "//servico//FabricaServico.java";
+		//String nomeArquivo = recurso.getConfiguracao().getPathAndroid()
+		//		+ "//servico//FabricaServico.java";
 		// String conteudo = FabricaServico.create("\n").generate(recurso);
 		// geraArquivoFonte(conteudo,nomeArquivo);
 

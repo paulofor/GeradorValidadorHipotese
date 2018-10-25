@@ -1,6 +1,7 @@
 package loopback.cliente.modelo;
 
 import gerapp.modelo.Aplicacao;
+import gerapp.modelo.FabricaVo;
 import loopback.android.Model;
 
 public class AplicacaoRest  extends Model{
@@ -55,8 +56,11 @@ public class AplicacaoRest  extends Model{
 		return this.id_aplicacao + " - " + namespace; 
 	}
 	
-	public Aplicacao atualiza(Aplicacao aplicacao) {
+	
+	public Aplicacao criaItem() {
+		Aplicacao aplicacao = FabricaVo.criaAplicacao();
 		aplicacao.setIdAplicacao(this.id_aplicacao);
+		aplicacao.setNamespace(this.namespace);
 		return aplicacao;
 	}
 	

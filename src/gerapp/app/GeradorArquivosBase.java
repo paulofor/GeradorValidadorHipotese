@@ -37,6 +37,9 @@ public abstract class GeradorArquivosBase {
 	protected AplicacaoWrapper aplicacao = null;
 	protected List<ClasseWrapper> listaClasse = null;
 	
+	
+
+	
 	public void setAplicacao(Aplicacao aplicacao)  throws DaoException{
 
 		AplicacaoRegraColecao aplicacaoRC = FabricaRegra.getInstancia().getAplicacaoRegraColecao();
@@ -83,6 +86,7 @@ public abstract class GeradorArquivosBase {
 		Iterator iterador = lista.iterator();
 		while (iterador.hasNext()) {
 			Entidade entidade = (Entidade) iterador.next();
+			System.out.println("Vai tratar " + entidade.getNome());
 			ClasseWrapper corrente = criaWrapper(entidade);
 			List<AtributoEntidade> listaAtributos = getListaAtributos(corrente.getId());
 			
@@ -113,12 +117,16 @@ public abstract class GeradorArquivosBase {
 			corrente.setListaFiltroColecao(listaFiltro);
 			corrente.setListaRegraColecao(listaRegra);
 			corrente.setListaProcValor(listaProcValor);
+			System.out.println("Tratou " + corrente.getNomeParaClasse());
 			listaClasse.add(corrente);
 		}
 		System.out.println("Final Monta Lista Classe");
 	}
 	
 	
+	protected void verificaDiretorios(Recursos recurso) throws IOException {
+		
+	}
 	
 	
 	public void criaArquivos() {
@@ -130,6 +138,7 @@ public abstract class GeradorArquivosBase {
 			Recursos recurso = new Recursos();
 			recurso.setConfiguracao(criaConfiguracao());
 			recurso.setListaClasse(listaClasse);
+			verificaDiretorios(recurso);
 			limpaArquivos(recurso);
 			criaArquivoUnico(recurso);
 			Iterator<ClasseWrapper> iterador = listaClasse.iterator();

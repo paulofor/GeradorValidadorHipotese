@@ -25,7 +25,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
 	}
 	
-	public List getListaEntidade() throws DaoException{
+	public synchronized List getListaEntidade() throws DaoException{
 		listaEntidade = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		EntidadeRepositorio rep = adapter.createRepository(EntidadeRepositorio.class);
@@ -52,7 +52,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 	}
 	
 	
-	public List getListaAtributos(long idEntidade) throws DaoException{
+	public synchronized List getListaAtributos(long idEntidade) throws DaoException{
 		listaAtributo = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		AtributoEntidadeRepositorio rep = adapter.createRepository(AtributoEntidadeRepositorio.class);
@@ -74,11 +74,13 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 				listaAtributo = listaSaida;
 			} 
         });
-		do {} while (listaAtributo == null);
+		do {
+			System.out.println("aguardando listaAtributo");
+		} while (listaAtributo == null);
 		return listaAtributo;
 	}
 	
-	public List getListaRelacionamento(long idEntidade) throws DaoException{
+	public synchronized List getListaRelacionamento(long idEntidade) throws DaoException{
 		listaRelacionamento = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		RelacionamentoEntidadeRepositorio rep = adapter.createRepository(RelacionamentoEntidadeRepositorio.class);
@@ -100,7 +102,9 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 				listaRelacionamento = listaSaida;
 			} 
         });
-		do {} while (listaRelacionamento == null);
+		do {
+			System.out.println("aguardando listaRelacionamento");
+		} while (listaRelacionamento == null);
 		return listaRelacionamento;
 	}
 	

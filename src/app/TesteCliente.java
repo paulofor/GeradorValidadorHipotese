@@ -1,5 +1,8 @@
 package app;
 
+import gerapp.app.GeradorAngular;
+import gerapp.modelo.Aplicacao;
+
 import java.util.List;
 
 import loopback.android.callback.ObjectCallback;
@@ -22,15 +25,25 @@ public class TesteCliente {
             @Override 
             public void onSuccess(AplicacaoRest model) { 
             	System.out.println("Sucesso: " + model);
-            	TestadorApp.executa(model);
+            	executa(model);
             }
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
 				t.printStackTrace();
 			} 
-        });
-               
+	    });
+	}
+	
+	
+	public static void executa(AplicacaoRest appRest) {
+		Aplicacao aplicacao = appRest.criaItem();
+		GeradorAngular gerador = new GeradorAngular();
+		try {
+			gerador.setAplicacao(aplicacao);
+			gerador.criaArquivos();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
