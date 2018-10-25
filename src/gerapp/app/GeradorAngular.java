@@ -22,52 +22,57 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	
 	
 	
-	
+	/*
 	@Override
 	protected void verificaDiretorios(Recursos recurso) throws IOException {
-		if (!existe(this.getDiretorioAppAngular(recurso))) {
-			this.criaCaminho(this.getDiretorioAppAngular(recurso));
+		String caminho = this.getDiretorioAppAngular(recurso);
+		boolean existeDir = existe(caminho);
+		if (!existe(caminho)) {
+			this.criaCaminho(caminho);
+		}
+		if (!existe(caminho + "/src")) {
+			System.out.println("Criar aplicacao");
 		}
 	}
+	*/
 
-	private String getDiretorioAppAngular(Recursos recurso) {
-		return PATH + recurso.getConfiguracao().getNamespace();
+	private String getDiretorioAngular(Recursos recurso) {
+		return PATH + recurso.getConfiguracao().getNamespace() + 
+			"//front//src//app//";
 	}
 
 	@Override
 	public void criaArquivoEntidade(Recursos recurso) throws IOException {
+		entidade = recurso.getClasse();
 		componenteListaSimples(recurso);
 	}
 
 	private void componenteListaSimples(Recursos recurso) throws IOException {
-		String nomeArquivo = PATH + recurso.getConfiguracao().getNamespace()
-				+ "//src//app//" + recurso.getClasse().getNomeParaClasse()
-				+ "-Lista//"
-				+ recurso.getClasse().getNomeParaClasse().toLowerCase()
-				+ "-lista.component.ts";
+		String caminhoComponente = this.getDiretorioAngular(recurso)  
+			+ recurso.getClasse().getNomeParaClasse()
+			+ "-Lista//";
+		if (!existe(caminhoComponente)) {
+			this.criaCaminho(caminhoComponente);
+		}
+		
+		String nomeArquivo = caminhoComponente + 
+			entidade.getNomeParaClasse().toLowerCase()
+			+ "-lista.component.ts";
 		String conteudo = ComponenteTsLista.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 
-		nomeArquivo = PATH + recurso.getConfiguracao().getNamespace()
-				+ "//src//app//" + recurso.getClasse().getNomeParaClasse()
-				+ "-Lista//"
-				+ recurso.getClasse().getNomeParaClasse().toLowerCase()
-				+ "-lista.component.html";
+		
+		nomeArquivo = caminhoComponente + entidade.getNomeParaClasse().toLowerCase()
+			+ "-lista.component.html";
 		conteudo = ComponenteHtmlLista.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 
-		nomeArquivo = PATH + recurso.getConfiguracao().getNamespace()
-				+ "//src//app//" + recurso.getClasse().getNomeParaClasse()
-				+ "-Lista//"
-				+ recurso.getClasse().getNomeParaClasse().toLowerCase()
+		nomeArquivo = caminhoComponente + entidade.getNomeParaClasse().toLowerCase()
 				+ "-lista.component.scss";
 		conteudo = ComponenteScssVazio.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 
-		nomeArquivo = PATH + recurso.getConfiguracao().getNamespace()
-				+ "//src//app//" + recurso.getClasse().getNomeParaClasse()
-				+ "-Lista//"
-				+ recurso.getClasse().getNomeParaClasse().toLowerCase()
+		nomeArquivo = caminhoComponente + entidade.getNomeParaClasse().toLowerCase()
 				+ "-lista.component.spec.ts";
 		conteudo = ComponenteSpecLista.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
