@@ -22,7 +22,9 @@ import gerapp.regracolecao.filtro.ProcValorFiltro;
 import gerapp.regracolecao.filtro.RegraColecaoFiltro;
 import gerapp.regracolecao.filtro.RelacionamentoEntidadeFiltro;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,10 +50,35 @@ public abstract class GeradorArquivosBase {
 	}
 	
 	protected void geraArquivoFonte(String texto, String nomeArquivo) throws IOException {
-		FileWriter x = new FileWriter(nomeArquivo); 
+		geraArquivoFonte(texto, nomeArquivo, false); 
+	}
+	protected void geraArquivoFonte(String texto, String nomeArquivo, boolean override) throws IOException {
+		FileWriter x = new FileWriter(nomeArquivo, override); 
 		x.write(texto); 
 		x.close(); 
 	}
+	protected void copiaArquivo(String origem, String destino) throws IOException {
+		String texto = leArquivoTexto(origem);
+		geraArquivoFonte(texto, destino, true);
+	}
+	
+	public String leArquivoTexto(String fileName) throws IOException{
+	    String returnValue = "";
+	    FileReader file;
+	    String line = "";
+	    file = new FileReader(fileName);
+	    BufferedReader reader = new BufferedReader(file);
+	    try {
+	    	while ((line = reader.readLine()) != null) {
+	    		returnValue += line + "\n";
+	    	} 
+	    }finally {
+	    	reader.close();
+	    }
+	    return returnValue;
+	}
+	
+	
 	protected void limpaCaminho(String caminhoArquivo) throws IOException {
 		File caminho = new File(caminhoArquivo);
 		if (caminho.isDirectory()) {  
@@ -61,14 +88,18 @@ public abstract class GeradorArquivosBase {
 			}
 		}
 	}
+
 	
+	protected void criaCaminhoSeNaoExiste(String caminho) throws IOException {
+		if (!existe(caminho)) {
+			criaCaminho(caminho);
+		}
+	}
 	protected void criaCaminho(String caminhoArquivo) throws IOException {
 		File caminho = new File(caminhoArquivo);
 		caminho.mkdirs();
 	}
-	
 	protected boolean existe(String nomeCompleto) throws IOException {
-		//String nomeCompleto = caminhoArquivo + File.separator + nomeArquivo;
 		File arquivo = new File(nomeCompleto);
 		return arquivo.exists();
 	}

@@ -42,28 +42,28 @@ public class ConverteTipoAngular extends ConverteTipo{
 	
 	public String getTipoPorOriginal(String tipoOriginal) {
 		if (tipoOriginal.compareTo("TNota10")==0	)
-			return "int";
+			return "number";
 		if (tipoOriginal.compareTo("TLbl")==0 || 
 			tipoOriginal.compareTo("TLblLg")==0 || 
 			tipoOriginal.compareTo("CriptoTLbl")==0 ||
 			tipoOriginal.compareTo("TDesc")==0)
-			return "String";
+			return "string";
 		if (tipoOriginal.compareTo("Moeda")==0 || 
 			tipoOriginal.compareTo("Percent")==0 || 
 			tipoOriginal.compareTo("CriptoMoeda")==0 || 
 			tipoOriginal.compareTo("Decimal")==0)
-			return "float";
+			return "number";
 		if (tipoOriginal.compareTo("Data")==0 ||
 			tipoOriginal.compareTo("DTemp")==0)
-			return "Timestamp";
+			return "date";
 		if (tipoOriginal.compareTo("Logic")==0)
-			return "boolean";
+			return "string";
 		if (tipoOriginal.compareTo("NInt")==0)
-			return "long";
+			return "number";
 		if (tipoOriginal.compareTo("Itens")==0)
-			return "List";
+			return "string";
 		if (tipoOriginal.compareTo("Tempo") == 0)
-			return "Timestamp";
+			return "date";
 		return tipoOriginal;
 	}
 	

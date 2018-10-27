@@ -1,0 +1,87 @@
+<%@ jet package="jet.angular.loopback" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
+class="LoopbackModel" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+Configuracao conf = recursos.getConfiguracao();
+%>
+/* tslint:disable */
+import {
+  <%= classe.getNomeParaClasse() %>
+} from '../index';
+
+declare var Object: any;
+export interface <%= classe.getNomeParaClasse() %>Interface {
+<%
+	Iterator<AtributoTotalI> iterador = classe.getListaAtributoTotal().iterator();
+	while (iterador.hasNext()) {
+		AtributoTotalI atributo = iterador.next();
+%>
+  "<%= atributo.getNomeVariavel() %>": <%= atributo.getTipo() %>;
+<%
+	}
+%>
+
+}
+
+export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomeParaClasse() %>Interface {
+<%
+	iterador = classe.getListaAtributoTotal().iterator();
+	while (iterador.hasNext()) {
+		AtributoTotalI atributo = iterador.next();
+%>
+  "<%= atributo.getNomeVariavel() %>": <%= atributo.getTipo() %>;
+<%
+	}
+%>
+  constructor(data?: <%= classe.getNomeParaClasse() %>Interface) {
+    Object.assign(this, data);
+  }
+  /**
+   * The name of the model represented by this $resource,
+   * i.e. `GanhoDorCanvasMySql`.
+   */
+  public static getModelName() {
+    return "<%= classe.getNomeParaClasse() %>";
+  }
+  /**
+  * @method factory
+  * @author Paulo 
+  * @license MIT
+  * This method creates an instance of <%= classe.getNomeParaClasse() %> for dynamic purposes.
+  **/
+  public static factory(data: <%= classe.getNomeParaClasse() %>Interface): <%= classe.getNomeParaClasse() %>{
+    return new <%= classe.getNomeParaClasse() %>(data);
+  }
+  /**
+  * @method getModelDefinition
+  * @author Paulo
+  * @license MIT
+  * This method returns an object that represents some of the model
+  * definitions.
+  **/
+  public static getModelDefinition() {
+    return {
+      name: '<%= classe.getNomeParaClasse() %>',
+      plural: '<%= classe.getNomeParaClasse() %>s',
+      path: '<%= classe.getNomeParaClasse() %>s',
+      idName: 'id',
+      properties: {
+		<%
+		iterador = classe.getListaAtributoTotal().iterator();
+		while (iterador.hasNext()) {
+			AtributoTotalI atributo = iterador.next();
+		%>
+        "<%= atributo.getNomeVariavel() %>" : {
+        	name : "<%= atributo.getNomeVariavel() %>",
+        	type : "<%= atributo.getTipo() %>"
+        },
+        <% } %>
+      },
+      relations: {
+      }
+    }
+  }
+}

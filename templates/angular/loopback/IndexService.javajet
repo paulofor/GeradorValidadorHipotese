@@ -1,0 +1,21 @@
+<%@ jet package="jet.angular.loopback" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
+class="IndexService" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+List<ClasseWrapper> classes = recursos.getListaClasse();
+Configuracao conf = recursos.getConfiguracao();
+%>
+<%
+Iterator<ClasseWrapper> iterador = classes.iterator();
+while (iterador.hasNext()) {
+	ClasseWrapper classe = iterador.next();
+%>
+export * from './<%= classe.getNomeParaClasse() %>';
+<%
+}
+%>
+export * from './Container';
+export * from './SDKModels';
+export * from './logger.service';

@@ -25,6 +25,9 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
 	}
 	
+	
+	
+	
 	public synchronized List getListaEntidade() throws DaoException{
 		listaEntidade = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
