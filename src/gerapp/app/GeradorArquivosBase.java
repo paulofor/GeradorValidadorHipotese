@@ -50,16 +50,14 @@ public abstract class GeradorArquivosBase {
 	}
 	
 	protected void geraArquivoFonte(String texto, String nomeArquivo) throws IOException {
-		geraArquivoFonte(texto, nomeArquivo, false); 
-	}
-	protected void geraArquivoFonte(String texto, String nomeArquivo, boolean override) throws IOException {
-		FileWriter x = new FileWriter(nomeArquivo, override); 
+		FileWriter x = new FileWriter(nomeArquivo); 
 		x.write(texto); 
-		x.close(); 
+		x.close();
 	}
+
 	protected void copiaArquivo(String origem, String destino) throws IOException {
 		String texto = leArquivoTexto(origem);
-		geraArquivoFonte(texto, destino, true);
+		geraArquivoFonte(texto, destino);
 	}
 	
 	public String leArquivoTexto(String fileName) throws IOException{
