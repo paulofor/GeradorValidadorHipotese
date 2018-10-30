@@ -19,36 +19,23 @@ import { <%= classe.getNomeParaClasse() %> } from '../../models/<%= classe.getNo
 <%
 }
 %>
-
 export interface Models { [name: string]: any }
 
 @Injectable()
 export class SDKModels {
 
   private models: Models = {
-    User: User,
-    Projeto: Projeto,
-    ProjetoCanvas: ProjetoCanvas,
-    ProjetoMySql: ProjetoMySql,
-    ProjetoCanvasMySql: ProjetoCanvasMySql,
-    MvpCanvasMySql: MvpCanvasMySql,
-    GanhoDorCanvasMySql: GanhoDorCanvasMySql,
-    PaginaValidacaoWeb: PaginaValidacaoWeb,
-    ItemValidacaoPagina: ItemValidacaoPagina,
-    RegistroInteresse: RegistroInteresse,
-    ProjetoExemplo: ProjetoExemplo,
-    Receita: Receita,
-    Container: Container,
-    Visitante: Visitante,
-    AnuncioAds: AnuncioAds,
-    CampanhaAds: CampanhaAds,
-    PalavraChaveAds: PalavraChaveAds,
-    Aplicacao: Aplicacao,
-    Atributo_entidade: Atributo_entidade,
-    Entidade: Entidade,
-    ModeloCampanhaAds: ModeloCampanhaAds,
-    Relacionamento_entidade: Relacionamento_entidade,
-    
+<%
+iterador = classes.iterator();
+while (iterador.hasNext()) {
+	ClasseWrapper classe = iterador.next();
+%>
+	<%= classe.getNomeParaClasse() %>: <%= classe.getNomeParaClasse() %>,
+<%
+}
+%>
+	User: User,
+    Container: Container
   };
 
   public get(modelName: string): any {

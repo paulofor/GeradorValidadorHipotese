@@ -14,6 +14,7 @@ import jet.angular.loopback.IndexPrincipal;
 import jet.angular.loopback.IndexService;
 import jet.angular.loopback.LoopbackModel;
 import jet.angular.loopback.LoopbackService;
+import jet.angular.loopback.SDKModel;
 import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 
@@ -61,6 +62,10 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		// Index Service
 		nomeArquivo = pathDestino + "//services//custom//index.ts";
 		conteudo = IndexService.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		// SDKModels
+		nomeArquivo = pathDestino + "//services//custom//SDKModels.ts";
+		conteudo = SDKModel.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 		
 		List<ClasseWrapper> listaClasse = recurso.getListaClasse();

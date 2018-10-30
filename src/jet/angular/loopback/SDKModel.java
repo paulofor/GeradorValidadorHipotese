@@ -23,8 +23,12 @@ public class SDKModel
   protected final String TEXT_3 = NL + "import { ";
   protected final String TEXT_4 = " } from '../../models/";
   protected final String TEXT_5 = "';";
-  protected final String TEXT_6 = NL + NL + "export interface Models { [name: string]: any }" + NL + "" + NL + "@Injectable()" + NL + "export class SDKModels {" + NL + "" + NL + "  private models: Models = {" + NL + "    User: User," + NL + "    Projeto: Projeto," + NL + "    ProjetoCanvas: ProjetoCanvas," + NL + "    ProjetoMySql: ProjetoMySql," + NL + "    ProjetoCanvasMySql: ProjetoCanvasMySql," + NL + "    MvpCanvasMySql: MvpCanvasMySql," + NL + "    GanhoDorCanvasMySql: GanhoDorCanvasMySql," + NL + "    PaginaValidacaoWeb: PaginaValidacaoWeb," + NL + "    ItemValidacaoPagina: ItemValidacaoPagina," + NL + "    RegistroInteresse: RegistroInteresse," + NL + "    ProjetoExemplo: ProjetoExemplo," + NL + "    Receita: Receita," + NL + "    Container: Container," + NL + "    Visitante: Visitante," + NL + "    AnuncioAds: AnuncioAds," + NL + "    CampanhaAds: CampanhaAds," + NL + "    PalavraChaveAds: PalavraChaveAds," + NL + "    Aplicacao: Aplicacao," + NL + "    Atributo_entidade: Atributo_entidade," + NL + "    Entidade: Entidade," + NL + "    ModeloCampanhaAds: ModeloCampanhaAds," + NL + "    Relacionamento_entidade: Relacionamento_entidade," + NL + "    " + NL + "  };" + NL + "" + NL + "  public get(modelName: string): any {" + NL + "    return this.models[modelName];" + NL + "  }" + NL + "" + NL + "  public getAll(): Models {" + NL + "    return this.models;" + NL + "  }" + NL + "" + NL + "  public getModelNames(): string[] {" + NL + "    return Object.keys(this.models);" + NL + "  }" + NL + "}";
-  protected final String TEXT_7 = NL;
+  protected final String TEXT_6 = NL + "export interface Models { [name: string]: any }" + NL + "" + NL + "@Injectable()" + NL + "export class SDKModels {" + NL + "" + NL + "  private models: Models = {";
+  protected final String TEXT_7 = NL + "\t";
+  protected final String TEXT_8 = ": ";
+  protected final String TEXT_9 = ",";
+  protected final String TEXT_10 = NL + "\tUser: User," + NL + "    Container: Container" + NL + "  };" + NL + "" + NL + "  public get(modelName: string): any {" + NL + "    return this.models[modelName];" + NL + "  }" + NL + "" + NL + "  public getAll(): Models {" + NL + "    return this.models;" + NL + "  }" + NL + "" + NL + "  public getModelNames(): string[] {" + NL + "    return Object.keys(this.models);" + NL + "  }" + NL + "}";
+  protected final String TEXT_11 = NL;
 
   public String generate(Object argument)
   {
@@ -50,7 +54,21 @@ while (iterador.hasNext()) {
 }
 
     stringBuffer.append(TEXT_6);
+    
+iterador = classes.iterator();
+while (iterador.hasNext()) {
+	ClasseWrapper classe = iterador.next();
+
     stringBuffer.append(TEXT_7);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_8);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_9);
+    
+}
+
+    stringBuffer.append(TEXT_10);
+    stringBuffer.append(TEXT_11);
     return stringBuffer.toString();
   }
 }

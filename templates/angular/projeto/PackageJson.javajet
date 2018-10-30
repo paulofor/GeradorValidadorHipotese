@@ -1,6 +1,6 @@
-<%@ jet package="jet.angular.componente" 
+<%@ jet package="jet.angular.projeto" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
-class="ComponenteScssVazio" %>
+class="PackageJson" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
