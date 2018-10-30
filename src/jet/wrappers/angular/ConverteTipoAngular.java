@@ -55,7 +55,7 @@ public class ConverteTipoAngular extends ConverteTipo{
 			return "number";
 		if (tipoOriginal.compareTo("Data")==0 ||
 			tipoOriginal.compareTo("DTemp")==0)
-			return "date";
+			return "Date";
 		if (tipoOriginal.compareTo("Logic")==0)
 			return "string";
 		if (tipoOriginal.compareTo("NInt")==0)
@@ -63,7 +63,7 @@ public class ConverteTipoAngular extends ConverteTipo{
 		if (tipoOriginal.compareTo("Itens")==0)
 			return "string";
 		if (tipoOriginal.compareTo("Tempo") == 0)
-			return "date";
+			return "Date";
 		return tipoOriginal;
 	}
 	

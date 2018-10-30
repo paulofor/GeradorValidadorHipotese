@@ -9,7 +9,7 @@ Configuracao conf = recursos.getConfiguracao();
 %>
 /* tslint:disable */
 import {
-  <%= classe.getNomeParaClasse() %>
+ 
 } from '../index';
 
 declare var Object: any;
