@@ -46,6 +46,29 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	sdk/core/
 	 */
 	
+	private void arquivosRotasFixo(Recursos recurso) throws IOException {
+		String pathOrigem = ".//fixos//angular//app-routing//";
+		String pathDestino = getDiretorioAngular(recurso) + "app-routing//";
+		
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaLoopbakCliente("app-routing.module.ts", pathOrigem, pathDestino, recurso);
+		this.copiaLoopbakCliente("rotas.ts", pathOrigem, pathDestino, recurso);
+
+	}
+	
+	private void arquivosLoginFixo(Recursos recurso) throws IOException {
+		String pathOrigem = ".//fixos//angular//login//";
+		String pathDestino = getDiretorioAngular(recurso) + "login//";
+		
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaLoopbakCliente("login.component.css", pathOrigem, pathDestino, recurso);
+		this.copiaLoopbakCliente("login.component.html", pathOrigem, pathDestino, recurso);
+		this.copiaLoopbakCliente("login.component.ts", pathOrigem, pathDestino, recurso);
+		this.copiaLoopbakCliente("login.component.spec.ts", pathOrigem, pathDestino, recurso);
+
+	}
+	
+	
 	private void arquivosLoopbackClient(Recursos recurso) throws IOException {
 		String pathDestino = getDiretorioAngular(recurso) + "shared//sdk//";
 		String conteudo = "";
@@ -176,6 +199,8 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
 		this.arquivosLoopbackClient(recurso);
+		this.arquivosRotasFixo(recurso);
+		this.arquivosLoginFixo(recurso);
 		//String nomeArquivo = recurso.getConfiguracao().getPathAndroid()
 		//		+ "//servico//FabricaServico.java";
 		// String conteudo = FabricaServico.create("\n").generate(recurso);
