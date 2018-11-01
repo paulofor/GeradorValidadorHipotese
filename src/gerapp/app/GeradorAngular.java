@@ -15,6 +15,7 @@ import jet.angular.loopback.IndexService;
 import jet.angular.loopback.LoopbackModel;
 import jet.angular.loopback.LoopbackService;
 import jet.angular.loopback.SDKModel;
+import jet.angular.projeto.PackageJson;
 import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 
@@ -47,12 +48,13 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	 */
 	
 	private void arquivosRotasFixo(Recursos recurso) throws IOException {
-		String pathOrigem = ".//fixos//angular//app-routing//";
-		String pathDestino = getDiretorioAngular(recurso) + "app-routing//";
+		String pathOrigem = ".//fixos//angular//rotas//";
+		String pathDestino = getDiretorioAngular(recurso) + "//";
 		
-		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaLoopbakCliente("app-routing.module.ts", pathOrigem, pathDestino, recurso);
-		this.copiaLoopbakCliente("rotas.ts", pathOrigem, pathDestino, recurso);
+		//this.criaCaminhoSeNaoExiste(pathDestino);
+		//this.copiaLoopbakCliente("app-routing.module.ts", pathOrigem, pathDestino, recurso);
+		//this.copiaLoopbakCliente("rotas.ts", pathOrigem, pathDestino, recurso);
+		this.copiaLoopbakCliente("rotas-principal.ts", pathOrigem, pathDestino, recurso);
 
 	}
 	
@@ -66,6 +68,27 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		this.copiaLoopbakCliente("login.component.ts", pathOrigem, pathDestino, recurso);
 		this.copiaLoopbakCliente("login.component.spec.ts", pathOrigem, pathDestino, recurso);
 
+	}
+	private void arquivosPrincipalFixo(Recursos recurso) throws IOException {
+		String pathOrigem = ".//fixos//angular//principal//";
+		String pathDestino = getDiretorioAngular(recurso) + "principal//";
+		
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaLoopbakCliente("principal.component.css", pathOrigem, pathDestino, recurso);
+		this.copiaLoopbakCliente("principal.component.html", pathOrigem, pathDestino, recurso);
+		this.copiaLoopbakCliente("principal.component.ts", pathOrigem, pathDestino, recurso);
+		this.copiaLoopbakCliente("principal.component.spec.ts", pathOrigem, pathDestino, recurso);
+	}
+	
+	private void arquivosProjeto(Recursos recurso) throws IOException {
+
+		String pathDestino = recurso.getConfiguracao().getNamespace() + "//front//";
+		String conteudo = "";
+		String nomeArquivo = "";
+		
+		nomeArquivo = pathDestino + "//package.json";
+		conteudo = PackageJson.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
 	}
 	
 	
@@ -201,6 +224,8 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		this.arquivosLoopbackClient(recurso);
 		this.arquivosRotasFixo(recurso);
 		this.arquivosLoginFixo(recurso);
+		this.arquivosPrincipalFixo(recurso);
+		this.arquivosProjeto(recurso);
 		//String nomeArquivo = recurso.getConfiguracao().getPathAndroid()
 		//		+ "//servico//FabricaServico.java";
 		// String conteudo = FabricaServico.create("\n").generate(recurso);
