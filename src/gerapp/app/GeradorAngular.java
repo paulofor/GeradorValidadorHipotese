@@ -81,11 +81,9 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	}
 	
 	private void arquivosProjeto(Recursos recurso) throws IOException {
-
-		String pathDestino = recurso.getConfiguracao().getNamespace() + "//front//";
+		String pathDestino = PATH + recurso.getConfiguracao().getNamespace() + "//front//";
 		String conteudo = "";
 		String nomeArquivo = "";
-		
 		nomeArquivo = pathDestino + "//package.json";
 		conteudo = PackageJson.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
