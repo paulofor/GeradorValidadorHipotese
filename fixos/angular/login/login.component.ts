@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
   }
 
   verificaLogin() {
-    this.clienteSrv.findOne({ "where": { "login": this.cliente.login } })
+    //this.clienteSrv.findOne({ "where": { "login": this.cliente.login } })
+    this.clienteSrv.obtemPrimeiro({ "where": { "login": this.cliente.login } })
       .subscribe((item: Cliente) => {
         console.log('Cliente: ', item);
 
