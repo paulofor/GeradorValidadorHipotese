@@ -36,7 +36,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
 		this.arquivosLoopbackClient(recurso);
-		this.arquivosRotasFixo(recurso);
+		
 		this.arquivosLoginFixo(recurso);
 		this.arquivosPrincipalFixo(recurso);
 		this.arquivosProjeto(recurso);
@@ -61,16 +61,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	sdk/core/
 	 */
 	
-	private void arquivosRotasFixo(Recursos recurso) throws IOException {
-		String pathOrigem = ".//fixos//angular//rotas//";
-		String pathDestino = getDiretorioAngular(recurso) + "//";
-		
-		//this.criaCaminhoSeNaoExiste(pathDestino);
-		//this.copiaLoopbakCliente("app-routing.module.ts", pathOrigem, pathDestino, recurso);
-		//this.copiaLoopbakCliente("rotas.ts", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("rotas-principal.ts", pathOrigem, pathDestino, recurso);
-
-	}
+	
 	
 	private void principalRouting(Recursos recurso) throws IOException {
 		String pathDestino = getDiretorioAngular(recurso) + "//principal-routing//";
