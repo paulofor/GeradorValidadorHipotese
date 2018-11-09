@@ -1,0 +1,47 @@
+<%@ jet package="jet.angular.projeto" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
+class="PrincipalRouting" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { PrincipalComponent } from '../principal/principal.component';
+import { LoginComponent } from '../login/login.component';
+import { AdmHomeComponent } from '../adm-home/adm-home.component';
+import { FormsModule }   from '@angular/forms';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+
+
+const principalRotas: Routes = [
+  { path : '' , component: LoginComponent  },
+  { 
+    path : 'home' , component: PrincipalComponent, 
+    children : [
+      {path:'', component: AdmHomeComponent}
+    ]
+  }
+]
+
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(principalRotas),
+    FormsModule
+  ],
+  exports: [
+    RouterModule
+  ],
+  declarations: [
+    LoginComponent,
+    PrincipalComponent,
+    AdmHomeComponent,
+    SidebarComponent
+  ]
+})
+export class PrincipalRoutingModule { }

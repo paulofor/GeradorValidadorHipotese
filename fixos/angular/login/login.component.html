@@ -1,25 +1,19 @@
-<mat-toolbar mat-dialog-title color="primary">
-    <span class="linha-full">Login</span>
-  </mat-toolbar>
-  
-  <span class="flex-spacer"></span>
- 
-  
-  <form class="example-form" (ngSubmit)="onSubmit()">
-    <mat-dialog-content>
-      <p>
-        <mat-form-field class="example-full-width">
-          <input matInput type="text" placeholder="Login" name="login" [(ngModel)]="cliente.login" >
-        </mat-form-field>
-  
-        <mat-form-field class="example-full-width">
-          <input matInput type="password" placeholder="Senha" name="senha" [(ngModel)]="cliente.senha" >
-        </mat-form-field>
-      </p>
-    </mat-dialog-content>
-  
-    <mat-dialog-actions>
-      <button mat-dialog-close mat-raised-button>Cancelar</button>
-      <button type="submit" mat-raised-button>Entrar</button>
-    </mat-dialog-actions>
+<div class="container">
+  <h1>Login</h1>
+
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="usuario">Usuário</label>
+      <input type="text"  [(ngModel)]="cliente.login"  name="login" class="form-control" id="usuario" required>
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input type="password" [(ngModel)]="cliente.senha" name="senha"  class="form-control" id="senha">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+
   </form>
+
+</div>

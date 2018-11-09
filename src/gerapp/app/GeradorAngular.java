@@ -16,6 +16,7 @@ import jet.angular.loopback.LoopbackModel;
 import jet.angular.loopback.LoopbackService;
 import jet.angular.loopback.SDKModel;
 import jet.angular.projeto.PackageJson;
+import jet.angular.projeto.PrincipalRouting;
 import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 
@@ -33,6 +34,19 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	}
 
 	@Override
+	public void criaArquivoUnico(Recursos recurso) throws IOException {
+		this.arquivosLoopbackClient(recurso);
+		
+		this.arquivosLoginFixo(recurso);
+		this.arquivosPrincipalFixo(recurso);
+		this.arquivosProjeto(recurso);
+		this.principalRouting(recurso);
+		this.arquivosAdmHome(recurso);
+		this.arquivosSidebar(recurso);
+	}
+	
+	
+	@Override
 	public void criaArquivoEntidade(Recursos recurso) throws IOException {
 		entidade = recurso.getClasse();
 		componenteListaSimples(recurso);
@@ -47,15 +61,43 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	sdk/core/
 	 */
 	
-	private void arquivosRotasFixo(Recursos recurso) throws IOException {
-		String pathOrigem = ".//fixos//angular//rotas//";
-		String pathDestino = getDiretorioAngular(recurso) + "//";
+	
+	
+	private void principalRouting(Recursos recurso) throws IOException {
+		String pathDestino = getDiretorioAngular(recurso) + "//principal-routing//";
+		this.criaCaminhoSeNaoExiste(pathDestino);
 		
-		//this.criaCaminhoSeNaoExiste(pathDestino);
-		//this.copiaLoopbakCliente("app-routing.module.ts", pathOrigem, pathDestino, recurso);
-		//this.copiaLoopbakCliente("rotas.ts", pathOrigem, pathDestino, recurso);
-		this.copiaLoopbakCliente("rotas-principal.ts", pathOrigem, pathDestino, recurso);
+		String pathOrigem = ".//fixos//angular//principal-routing//";
+		
+		String nomeArquivo = pathDestino + "//principal-routing.module.ts";
+		String conteudo = PrincipalRouting.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		this.copiaArquivo("principal.css", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("principal-routing.module.spec.ts", pathOrigem, pathDestino, recurso);
 
+	}
+	
+	private void arquivosAdmHome(Recursos recurso) throws IOException {
+		String pathDestino = getDiretorioAngular(recurso) + "//adm-home//";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		String pathOrigem = ".//fixos//angular//adm-home//";
+		
+		this.copiaArquivo("adm-home.component.css", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("adm-home.component.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("adm-home.component.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("adm-home.component.spec.ts", pathOrigem, pathDestino, recurso);
+	}
+	
+	private void arquivosSidebar(Recursos recurso) throws IOException{
+		String pathDestino = getDiretorioAngular(recurso) + "//sidebar//";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		String pathOrigem = ".//fixos//angular//sidebar//";
+		
+		this.copiaArquivo("sidebar.component.css", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("sidebar.component.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("sidebar.component.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("sidebar.component.spec.ts", pathOrigem, pathDestino, recurso);
 	}
 	
 	private void arquivosLoginFixo(Recursos recurso) throws IOException {
@@ -63,10 +105,10 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		String pathDestino = getDiretorioAngular(recurso) + "login//";
 		
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaLoopbakCliente("login.component.css", pathOrigem, pathDestino, recurso);
-		this.copiaLoopbakCliente("login.component.html", pathOrigem, pathDestino, recurso);
-		this.copiaLoopbakCliente("login.component.ts", pathOrigem, pathDestino, recurso);
-		this.copiaLoopbakCliente("login.component.spec.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.component.css", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.component.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.component.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.component.spec.ts", pathOrigem, pathDestino, recurso);
 
 	}
 	private void arquivosPrincipalFixo(Recursos recurso) throws IOException {
@@ -74,10 +116,10 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		String pathDestino = getDiretorioAngular(recurso) + "principal//";
 		
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaLoopbakCliente("principal.component.css", pathOrigem, pathDestino, recurso);
-		this.copiaLoopbakCliente("principal.component.html", pathOrigem, pathDestino, recurso);
-		this.copiaLoopbakCliente("principal.component.ts", pathOrigem, pathDestino, recurso);
-		this.copiaLoopbakCliente("principal.component.spec.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("principal.component.css", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("principal.component.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("principal.component.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("principal.component.spec.ts", pathOrigem, pathDestino, recurso);
 	}
 	
 	private void arquivosProjeto(Recursos recurso) throws IOException {
@@ -142,43 +184,43 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		this.criaCaminhoSeNaoExiste(pathDestino + "//storage//");
 		
 		// Raiz
-		this.copiaLoopbakCliente("lb.config.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("lb.config.ts", pathOrigem, pathDestino, recurso);
 
 		// Models
-		this.copiaLoopbakCliente("//models//BaseModels.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//models//Container.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//models//FireLoop.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//models//FireLoopRef.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//models//User.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//models//BaseModels.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//models//Container.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//models//FireLoop.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//models//FireLoopRef.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//models//User.ts", pathOrigem , pathDestino, recurso);
 		
 		// Services 
-		this.copiaLoopbakCliente("//services//index.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//core//auth.service.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//core//base.service.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//core//error.service.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//core//index.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//core//io.service.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//core//real.time.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//custom//Container.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//custom//logger.service.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//custom//SDKModels.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//services//custom//User.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//index.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//core//auth.service.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//core//base.service.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//core//error.service.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//core//index.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//core//io.service.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//core//real.time.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//custom//Container.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//custom//logger.service.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//custom//SDKModels.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//services//custom//User.ts", pathOrigem , pathDestino, recurso);
 
 
 		
 		// Sockets
-		this.copiaLoopbakCliente("//sockets//socket.browser.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//sockets//socket.connections.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//sockets//socket.driver.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//sockets//socket.browser.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//sockets//socket.connections.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//sockets//socket.driver.ts", pathOrigem , pathDestino, recurso);
 		
 		// Storage 
-		this.copiaLoopbakCliente("//storage//cookie.browser.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//storage//storage.browser.ts", pathOrigem , pathDestino, recurso);
-		this.copiaLoopbakCliente("//storage//storage.swaps.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//storage//cookie.browser.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//storage//storage.browser.ts", pathOrigem , pathDestino, recurso);
+		this.copiaArquivo("//storage//storage.swaps.ts", pathOrigem , pathDestino, recurso);
 		
 	}
 	
-	private void copiaLoopbakCliente(String arquivo, String pathOrigem, String pathDestino, Recursos recurso) throws IOException {
+	private void copiaArquivo(String arquivo, String pathOrigem, String pathDestino, Recursos recurso) throws IOException {
 		this.copiaArquivo(pathOrigem + arquivo, pathDestino + arquivo);
 	}
 
@@ -217,19 +259,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		geraArquivoFonte(conteudo, nomeArquivo);
 	}
 
-	@Override
-	public void criaArquivoUnico(Recursos recurso) throws IOException {
-		this.arquivosLoopbackClient(recurso);
-		this.arquivosRotasFixo(recurso);
-		this.arquivosLoginFixo(recurso);
-		this.arquivosPrincipalFixo(recurso);
-		this.arquivosProjeto(recurso);
-		//String nomeArquivo = recurso.getConfiguracao().getPathAndroid()
-		//		+ "//servico//FabricaServico.java";
-		// String conteudo = FabricaServico.create("\n").generate(recurso);
-		// geraArquivoFonte(conteudo,nomeArquivo);
-
-	}
+	
 
 	@Override
 	protected ClasseWrapper criaWrapper(Entidade entidade) {
