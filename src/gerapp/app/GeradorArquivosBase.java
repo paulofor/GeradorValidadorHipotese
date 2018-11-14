@@ -55,8 +55,13 @@ public abstract class GeradorArquivosBase {
 	protected void geraArquivoFonte(String texto, String nomeArquivo)
 			throws IOException {
 		FileOutputStream fos = new FileOutputStream(nomeArquivo);
-		Writer w = new BufferedWriter(new OutputStreamWriter(fos, "US-ASCII"));
-		w.write(texto);
+		Writer w = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"));
+	    Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
+	    Charset UTF_8 = Charset.forName("UTF-8");
+		
+		byte[] ptext = texto.getBytes(ISO_8859_1); 
+		String value = new String(ptext, UTF_8);
+		w.write(value);
 		w.flush();
 		w.close();
 	}
