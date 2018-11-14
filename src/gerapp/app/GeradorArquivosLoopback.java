@@ -21,6 +21,9 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 	private List listaAtributo = null;
 	private List listaRelacionamento = null;
 	
+	private List listaTelaWeb = null;
+	
+	
 	public void setAplicacao(Aplicacao aplicacao)  throws DaoException{
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
 	}
@@ -82,6 +85,36 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase{
 		} while (listaAtributo == null);
 		return listaAtributo;
 	}
+	
+	public synchronized List getListaTelaWeb(long idEntidade) throws DaoException{
+		listaRelacionamento = null;
+		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		RelacionamentoEntidadeRepositorio rep = adapter.createRepository(RelacionamentoEntidadeRepositorio.class);
+
+		rep.findByIdEntidade(idEntidade, new ListCallback<RelacionamentoEntidadeRest>() { 
+         
+			@Override
+			public void onError(Throwable t) {
+				t.printStackTrace();
+			}
+
+			@Override
+			public void onSuccess(List<RelacionamentoEntidadeRest> lista) {
+				List listaSaida = new ArrayList();
+				for (RelacionamentoEntidadeRest item : lista) {
+					System.out.println("ID-Rel:" + item.getId_relacionamento_entidade());
+					listaSaida.add(item.criaItem());
+				}
+				listaRelacionamento = listaSaida;
+			} 
+        });
+		do {
+			System.out.println("aguardando listaRelacionamento");
+		} while (listaRelacionamento == null);
+		return listaRelacionamento;
+	}
+	
+	
 	
 	public synchronized List getListaRelacionamento(long idEntidade) throws DaoException{
 		listaRelacionamento = null;

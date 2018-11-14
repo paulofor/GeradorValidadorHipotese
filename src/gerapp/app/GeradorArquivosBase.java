@@ -42,6 +42,7 @@ public abstract class GeradorArquivosBase {
 
 	protected AplicacaoWrapper aplicacao = null;
 	protected List<ClasseWrapper> listaClasse = null;
+	protected List<TelaWebWrapper> listaTelaWeb = null;
 
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 
@@ -113,6 +114,10 @@ public abstract class GeradorArquivosBase {
 	protected Configuracao criaConfiguracao() {
 		Configuracao confW = new Configuracao(aplicacao);
 		return confW;
+	}
+	
+	private void montaListaTelaWeb() throws DaoException {
+		
 	}
 
 	private void montaListaClasse() throws DaoException {
