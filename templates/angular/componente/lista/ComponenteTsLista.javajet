@@ -8,7 +8,7 @@ ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { Component, OnInit } from '@angular/core';
-import { <%= classe.getNomeParaClasse() %>, <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
+import { <%= classe.getNomeParaClasse() %>, <%= classe.getNomeParaClasse() %>Api } from '../../shared/sdk';
 
 
 @Component({

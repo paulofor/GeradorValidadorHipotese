@@ -1,10 +1,10 @@
 <%@ jet package="jet.angular.projeto" 
-imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* " 
 class="PrincipalRouting" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
-ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+List<TelaWebWrapper> telas = recursos.getListaTelaWeb();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { NgModule } from '@angular/core';
@@ -15,6 +15,15 @@ import { LoginComponent } from '../login/login.component';
 import { AdmHomeComponent } from '../adm-home/adm-home.component';
 import { FormsModule }   from '@angular/forms';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+<%
+Iterator<TelaWebWrapper> iterador = telas.iterator();
+while (iterador.hasNext()) {
+	TelaWebWrapper tela = iterador.next();
+%>
+import { <%= tela.getNomeComponente() %>TelaComponent } from '../tela/<%= tela.getNomeArquivoComponente() %>-tela/<%= tela.getNomeArquivoComponente() %>-tela.component';
+<%
+	}
+%>
 
 
 const principalRotas: Routes = [
@@ -22,7 +31,16 @@ const principalRotas: Routes = [
   { 
     path : 'home' , component: PrincipalComponent, 
     children : [
-      {path:'', component: AdmHomeComponent}
+      	{path:'', component: AdmHomeComponent},
+<%
+iterador = telas.iterator();
+while (iterador.hasNext()) {
+	TelaWebWrapper tela = iterador.next();
+%>
+		{path:'<%= tela.getNomeUrl() %>' , component: <%= tela.getNomeComponente() %>TelaComponent },
+<%
+	}
+%>
     ]
   }
 ]
@@ -41,7 +59,16 @@ const principalRotas: Routes = [
     LoginComponent,
     PrincipalComponent,
     AdmHomeComponent,
-    SidebarComponent
+    SidebarComponent,
+<%
+iterador = telas.iterator();
+while (iterador.hasNext()) {
+	TelaWebWrapper tela = iterador.next();
+%>
+	<%= tela.getNomeComponente() %>TelaComponent,
+<%
+	}
+%>
   ]
 })
 export class PrincipalRoutingModule { }

@@ -42,32 +42,28 @@ public abstract class GeradorArquivosBase {
 
 	protected AplicacaoWrapper aplicacao = null;
 	protected List<ClasseWrapper> listaClasse = null;
-	protected List<TelaWebWrapper> listaTelaWeb = null;
 
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 
-		AplicacaoRegraColecao aplicacaoRC = FabricaRegra.getInstancia()
-				.getAplicacaoRegraColecao();
+		AplicacaoRegraColecao aplicacaoRC = FabricaRegra.getInstancia().getAplicacaoRegraColecao();
 		aplicacao = aplicacaoRC.obtemPorChave(aplicacao.getIdAplicacao());
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
 	}
 
-	protected void geraArquivoFonte(String texto, String nomeArquivo)
-			throws IOException {
+	protected void geraArquivoFonte(String texto, String nomeArquivo) throws IOException {
 		FileOutputStream fos = new FileOutputStream(nomeArquivo);
 		Writer w = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"));
-	    Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
-	    Charset UTF_8 = Charset.forName("UTF-8");
-		
-		byte[] ptext = texto.getBytes(ISO_8859_1); 
+		Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
+		Charset UTF_8 = Charset.forName("UTF-8");
+
+		byte[] ptext = texto.getBytes(ISO_8859_1);
 		String value = new String(ptext, UTF_8);
 		w.write(value);
 		w.flush();
 		w.close();
 	}
 
-	protected void copiaArquivo(String origem, String destino)
-			throws IOException {
+	protected void copiaArquivo(String origem, String destino) throws IOException {
 		String texto = leArquivoTexto(origem);
 		geraArquivoFonte(texto, destino);
 	}
@@ -120,10 +116,6 @@ public abstract class GeradorArquivosBase {
 		Configuracao confW = new Configuracao(aplicacao);
 		return confW;
 	}
-	
-	private void montaListaTelaWeb() throws DaoException {
-		
-	}
 
 	private void montaListaClasse() throws DaoException {
 		System.out.println("Inicio Monta Lista Classe");
@@ -134,36 +126,27 @@ public abstract class GeradorArquivosBase {
 			Entidade entidade = (Entidade) iterador.next();
 			System.out.println("Vai tratar " + entidade.getNome());
 			ClasseWrapper corrente = criaWrapper(entidade);
-			List<AtributoEntidade> listaAtributos = getListaAtributos(corrente
-					.getId());
+			List<AtributoEntidade> listaAtributos = getListaAtributos(corrente.getId());
 
-			AtributoEntidade attChave = this.getAtributo(corrente.getIdChave(),
-					listaAtributos);
+			AtributoEntidade attChave = this.getAtributo(corrente.getIdChave(), listaAtributos);
 			corrente.setChave(attChave);
-			AtributoEntidade attIdent = this.getAtributo(corrente
-					.getIdIdentificador(), listaAtributos);
+			AtributoEntidade attIdent = this.getAtributo(corrente.getIdIdentificador(), listaAtributos);
 			corrente.setIdentificador(attIdent);
-			Iterator<AtributoEntidade> itAtributoEntidade = listaAtributos
-					.iterator();
+			Iterator<AtributoEntidade> itAtributoEntidade = listaAtributos.iterator();
 			while (itAtributoEntidade.hasNext()) {
 				AtributoEntidade atributo = itAtributoEntidade.next();
-				if (attChave != null
-						&& attChave.getIdAtributoEntidade() == atributo
-								.getIdAtributoEntidade()) {
+				if (attChave != null && attChave.getIdAtributoEntidade() == atributo.getIdAtributoEntidade()) {
 					atributo.setChave(true);
 				} else {
 					atributo.setChave(false);
 				}
-				if (attIdent != null
-						&& attIdent.getIdAtributoEntidade() == atributo
-								.getIdAtributoEntidade()) {
+				if (attIdent != null && attIdent.getIdAtributoEntidade() == atributo.getIdAtributoEntidade()) {
 					atributo.setIdentificador(true);
 				} else {
 					atributo.setIdentificador(false);
 				}
 			}
-			List<RelacionamentoEntidade> listaRelacionamento = getListaRelacionamento(corrente
-					.getId());
+			List<RelacionamentoEntidade> listaRelacionamento = getListaRelacionamento(corrente.getId());
 			List<FiltroColecao> listaFiltro = getListaFiltro(corrente.getId());
 			List<RegraColecao> listaRegra = getListaRegra(corrente.getId());
 			List<ProcValor> listaProcValor = getListaProcValor(corrente.getId());
@@ -175,8 +158,11 @@ public abstract class GeradorArquivosBase {
 			System.out.println("Tratou " + corrente.getNomeParaClasse());
 			listaClasse.add(corrente);
 		}
+		
 		System.out.println("Final Monta Lista Classe");
 	}
+
+	protected abstract void montaListasNovas(Recursos recurso);
 
 	protected void verificaDiretorios(Recursos recurso) throws IOException {
 
@@ -191,6 +177,7 @@ public abstract class GeradorArquivosBase {
 			Recursos recurso = new Recursos();
 			recurso.setConfiguracao(criaConfiguracao());
 			recurso.setListaClasse(listaClasse);
+			montaListasNovas(recurso);
 			verificaDiretorios(recurso);
 			limpaArquivos(recurso);
 			criaArquivoUnico(recurso);
@@ -211,12 +198,10 @@ public abstract class GeradorArquivosBase {
 
 	public abstract void criaArquivoUnico(Recursos recurso) throws IOException;
 
-	public abstract void criaArquivoEntidade(Recursos recurso)
-			throws IOException;
+	public abstract void criaArquivoEntidade(Recursos recurso) throws IOException;
 
 	public List getListaAtributos(long codigoEntidade) throws DaoException {
-		AtributoEntidadeRegraColecao atributoRC = FabricaRegra.getInstancia()
-				.getAtributoEntidadeRegraColecao();
+		AtributoEntidadeRegraColecao atributoRC = FabricaRegra.getInstancia().getAtributoEntidadeRegraColecao();
 		List listaSaida = null;
 		AtributoEntidadeFiltro filtro = atributoRC.getFiltro();
 		filtro.setCodigoEntidade(codigoEntidade);
@@ -225,8 +210,8 @@ public abstract class GeradorArquivosBase {
 	}
 
 	public List getListaRelacionamento(long codigo) throws DaoException {
-		RelacionamentoEntidadeRegraColecao relacRC = FabricaRegra
-				.getInstancia().getRelacionamentoEntidadeRegraColecao();
+		RelacionamentoEntidadeRegraColecao relacRC = FabricaRegra.getInstancia()
+				.getRelacionamentoEntidadeRegraColecao();
 		List listaSaida = null;
 		RelacionamentoEntidadeFiltro filtro = relacRC.getFiltro();
 		filtro.setCodigoEntidade1(codigo);
@@ -240,15 +225,13 @@ public abstract class GeradorArquivosBase {
 	public AtributoEntidade getAtributo(long codigo) throws DaoException {
 		if (codigo == 0)
 			return null;
-		AtributoEntidadeRegraColecao atributoRC = FabricaRegra.getInstancia()
-				.getAtributoEntidadeRegraColecao();
+		AtributoEntidadeRegraColecao atributoRC = FabricaRegra.getInstancia().getAtributoEntidadeRegraColecao();
 		AtributoEntidade saida = atributoRC.obtemPorChave(codigo);
 		return saida;
 
 	}
 
-	public AtributoEntidade getAtributo(long codigo,
-			List<AtributoEntidade> listaAtributo) {
+	public AtributoEntidade getAtributo(long codigo, List<AtributoEntidade> listaAtributo) {
 		AtributoEntidade saida = null;
 		for (AtributoEntidade item : listaAtributo) {
 			if (item.getIdAtributoEntidade() == codigo) {
@@ -260,8 +243,7 @@ public abstract class GeradorArquivosBase {
 	}
 
 	public List getListaEntidade() throws DaoException {
-		EntidadeRegraColecao entidadeRC = FabricaRegra.getInstancia()
-				.getEntidadeRegraColecao();
+		EntidadeRegraColecao entidadeRC = FabricaRegra.getInstancia().getEntidadeRegraColecao();
 		List listaSaida = null;
 		EntidadeFiltro filtro = entidadeRC.getFiltro();
 		filtro.setCodigoAplicacao(aplicacao.getId());
@@ -270,8 +252,7 @@ public abstract class GeradorArquivosBase {
 	}
 
 	public List getListaFiltro(long codigoEntidade) throws DaoException {
-		FiltroColecaoRegraColecao filtroRC = FabricaRegra.getInstancia()
-				.getFiltroColecaoRegraColecao();
+		FiltroColecaoRegraColecao filtroRC = FabricaRegra.getInstancia().getFiltroColecaoRegraColecao();
 		List listaSaida = null;
 		FiltroColecaoFiltro filtro = filtroRC.getFiltro();
 		filtro.setCodigoEntidade(codigoEntidade);
@@ -280,8 +261,7 @@ public abstract class GeradorArquivosBase {
 	}
 
 	public List getListaRegra(long codigoEntidade) throws DaoException {
-		RegraColecaoRegraColecao regraRC = FabricaRegra.getInstancia()
-				.getRegraColecaoRegraColecao();
+		RegraColecaoRegraColecao regraRC = FabricaRegra.getInstancia().getRegraColecaoRegraColecao();
 		List listaSaida = null;
 		RegraColecaoFiltro filtro = regraRC.getFiltro();
 		filtro.setCodigoEntidade(codigoEntidade);
@@ -290,8 +270,7 @@ public abstract class GeradorArquivosBase {
 	}
 
 	public List getListaProcValor(long codigoEntidade) throws DaoException {
-		ProcValorRegraColecao valorRC = FabricaRegra.getInstancia()
-				.getProcValorRegraColecao();
+		ProcValorRegraColecao valorRC = FabricaRegra.getInstancia().getProcValorRegraColecao();
 		List listaSaida = null;
 		ProcValorFiltro filtro = valorRC.getFiltro();
 		filtro.setCodigoEntidadeRelacionada(codigoEntidade);

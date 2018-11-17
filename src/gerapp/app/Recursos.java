@@ -3,14 +3,30 @@ package gerapp.app;
 import java.util.List;
 
 import jet.wrappers.base.ClasseWrapper;
+import jet.wrappers.base.node.TelaWebWrapper;
 
 public class Recursos {
 
 	private ClasseWrapper classe;
 	private Configuracao configuracao;
 	private List<ClasseWrapper> listaClasse;
+	private List<TelaWebWrapper> listaTelaWeb;
 	
+	private TelaWebWrapper telaWeb;
 	
+	public TelaWebWrapper getTelaWebCorrente() {
+		return telaWeb;
+	}
+	public void setTelaWebCorrente(TelaWebWrapper tela) {
+		this.telaWeb = tela;
+	}
+	
+	public List<TelaWebWrapper> getListaTelaWeb() {
+		return listaTelaWeb;
+	}
+	public void setListaTelaWeb(List<TelaWebWrapper> listaTelaWeb) {
+		this.listaTelaWeb = listaTelaWeb;
+	}
 	public void setListaClasse(List<ClasseWrapper> listaClasse) {
 		this.listaClasse = listaClasse;
 	}

@@ -1,0 +1,34 @@
+<%@ jet package="jet.angular.componente.tela" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* " 
+class="ComponenteSpecTela" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+TelaWebWrapper tela = (TelaWebWrapper) recursos.getTelaWebCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { <%= tela.getNomeComponente() %>TelaComponent } from './tela-<%= tela.getNomeArquivoComponente() %>.component';
+
+describe('<%= tela.getNomeComponente() %>TelaComponent', () => {
+  let component: ListaProjetoValorComponent;
+  let fixture: ComponentFixture<<%= tela.getNomeComponente() %>TelaComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ <%= tela.getNomeComponente() %>TelaComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(<%= tela.getNomeComponente() %>TelaComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

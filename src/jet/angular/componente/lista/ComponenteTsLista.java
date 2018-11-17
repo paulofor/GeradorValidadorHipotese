@@ -21,7 +21,7 @@ public class ComponenteTsLista
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL + "import { Component, OnInit } from '@angular/core';" + NL + "import { ";
   protected final String TEXT_3 = ", ";
-  protected final String TEXT_4 = "Api } from '../shared/sdk';" + NL + "" + NL + "" + NL + "@Component({" + NL + "  selector: 'app-lista-";
+  protected final String TEXT_4 = "Api } from '../../shared/sdk';" + NL + "" + NL + "" + NL + "@Component({" + NL + "  selector: 'app-lista-";
   protected final String TEXT_5 = "'," + NL + "  templateUrl: './lista-";
   protected final String TEXT_6 = ".component.html'," + NL + "  styleUrls: ['./lista-";
   protected final String TEXT_7 = ".component.scss']" + NL + "})" + NL + "export class Lista";

@@ -1,0 +1,42 @@
+<%@ jet package="jet.angular.componente.aplicacao" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* " 
+class="SidebarHtml" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+List<TelaWebWrapper> telas = recursos.getListaTelaWeb();
+Configuracao conf = recursos.getConfiguracao();
+%>
+<div class="sidebar" data-color="purple" data-image="../../assets-lbd/img/sidebar-5.jpg">
+  <!--
+      Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+      Tip 2: you can also add an image using data-image tag
+      versao nova
+  -->
+  <div class="sidebar-wrapper">
+  
+    <div class="logo">
+      <a href="http://www.creative-tim.com" class="simple-text">
+        Digicom
+      </a>
+    </div>
+
+    <ul class="nav">
+<%
+Iterator<TelaWebWrapper> iterador = telas.iterator();
+while (iterador.hasNext()) {
+	TelaWebWrapper tela = iterador.next();
+%>
+	<li>
+    	<a routerLink="/home/<%= tela.getNomeUrl() %>">
+    	<i class="pe-7s-graph"></i>
+    	<p><%= tela.getNomeMenu() %></p>
+    	</a>
+    </li>
+<%
+	}
+%>
+    </ul>
+    
+  </div>
+</div>
