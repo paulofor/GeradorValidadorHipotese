@@ -1,0 +1,34 @@
+<%@ jet package="jet.angular" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ComponenteSpec" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+ComponenteAngular comp = (ComponenteAngular) recursos.getComponente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { <%= comp.getNome() %> } from './<%= comp.getArquivo() %>';
+
+describe('<%= comp.getNome() %>', () => {
+  let component: <%= comp.getNome() %>;
+  let fixture: ComponentFixture<<%= comp.getNome() %>>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ <%= comp.getNome() %> ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(<%= comp.getNome() %>);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

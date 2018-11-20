@@ -6,13 +6,13 @@ import jet.wrappers.base.*;
 import jet.wrappers.angular.*;
 import gerapp.modelo.*;
 
-public class ComponenteTsLista
+public class ModuloTsLista
 {
   protected static String nl;
-  public static synchronized ComponenteTsLista create(String lineSeparator)
+  public static synchronized ModuloTsLista create(String lineSeparator)
   {
     nl = lineSeparator;
-    ComponenteTsLista result = new ComponenteTsLista();
+    ModuloTsLista result = new ModuloTsLista();
     nl = null;
     return result;
   }

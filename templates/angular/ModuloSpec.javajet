@@ -1,0 +1,23 @@
+<%@ jet package="jet.angular" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ModuloSpec" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+ComponenteAngular comp = (ComponenteAngular) recursos.getComponente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { <%= comp.getNome() %> } from './<%= comp.getArquivo() %>';
+
+describe('<%= comp.getNome() %>', () => {
+  let <%= comp.getNomeVariavel() %>: <%= comp.getNome() %>;
+
+  beforeEach(() => {
+    <%= comp.getNomeVariavel() %> = new <%= comp.getNome() %>();
+  });
+
+  it('should create an instance', () => {
+    expect(listaModule).toBeTruthy();
+  });
+});
+

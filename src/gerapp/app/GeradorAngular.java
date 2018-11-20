@@ -1,16 +1,16 @@
 package gerapp.app;
 
 import gerapp.modelo.Entidade;
+import gerapp.modelo.node.ComponenteAngular;
 
 import java.io.IOException;
 import java.util.List;
 
-import jet.angular.componente.ComponenteScssVazio;
+import jet.angular.ComponenteScssVazio;
+import jet.angular.ComponenteSpec;
 import jet.angular.componente.aplicacao.SidebarHtml;
 import jet.angular.componente.lista.ComponenteHtmlLista;
-import jet.angular.componente.lista.ComponenteSpecLista;
 import jet.angular.componente.lista.ComponenteTsLista;
-import jet.angular.componente.tela.ComponenteSpecTela;
 import jet.angular.componente.tela.ComponenteTsTela;
 import jet.angular.loopback.IndexModel;
 import jet.angular.loopback.IndexPrincipal;
@@ -37,6 +37,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
 		this.arquivosLoopbackClient(recurso);
+		this.criaComponentesTela(recurso);
 
 		this.arquivosLoginFixo(recurso);
 		this.arquivosPrincipalFixo(recurso);
@@ -46,16 +47,12 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		this.principalRouting(recurso);
 		this.arquivosAdmHome(recurso);
 		this.arquivosSidebar(recurso);
-		
-
-		this.criaComponentesTela(recurso);
+	
 		this.criaComponentesLista(recurso);
 	}
 
 	@Override
 	public void criaArquivoEntidade(Recursos recurso) throws IOException {
-		entidade = recurso.getClasse();
-		//componenteListaSimples(recurso);
 	}
 
 	/*
@@ -68,17 +65,25 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		String pathOrigem = ".//fixos//angular//componente-tela//";
 		for (TelaWebWrapper tela : recurso.getListaTelaWeb()) {
 			recurso.setTelaWebCorrente(tela);
+			String objeto = tela.getNomeComponente() + "TelaComponent";
+			String arquivo =  tela.getNomeArquivoComponente() + "-tela.component";
+			ComponenteAngular comp = new ComponenteAngular(objeto,arquivo);
+			recurso.setComponente(comp);
+			
 			String pathDestino = getDiretorioAngular(recurso) + "//tela//" + tela.getNomeArquivoComponente() + "-tela//" ;
 			this.criaCaminhoSeNaoExiste(pathDestino);
 			this.limpaCaminho(pathDestino);
-			this.copiaArquivo(pathOrigem + "componente-tela.css", pathDestino + tela.getNomeArquivoComponente() + "-tela.component.scss");
-			this.copiaArquivo(pathOrigem + "componente-tela.html", pathDestino + tela.getNomeArquivoComponente() + "-tela.component.html");
+			
+			
+			this.copiaArquivo(pathOrigem + "componente-tela.css", pathDestino + arquivo + ".scss");
+			this.copiaArquivo(pathOrigem + "componente-tela.html", pathDestino + arquivo + ".html");
 
-			String nomeArquivo = pathDestino + tela.getNomeArquivoComponente() + "-tela.component.ts";
+			String nomeArquivo = pathDestino + arquivo + ".ts";
 			String conteudo = ComponenteTsTela.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
-			nomeArquivo = pathDestino + tela.getNomeArquivoComponente() + "-tela.component.spec.ts";
-			conteudo = ComponenteSpecTela.create("\n").generate(recurso);
+
+			nomeArquivo = pathDestino + arquivo + ".spec.ts";
+			conteudo = ComponenteSpec.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 		}
 	}
@@ -89,20 +94,25 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 			this.criaCaminhoSeNaoExiste(pathDestino);
 			this.limpaCaminho(pathDestino);
 			
-			String nomeArquivo = pathDestino + classe.getNomeParaClasse().toLowerCase() + "-lista.component.ts";
+			String objeto = classe.getNomeParaClasse() + "ListaComponent";
+			String arquivo =  classe.getNomeParaClasse().toLowerCase() + "-lista.component";
+			ComponenteAngular comp = new ComponenteAngular(objeto,arquivo);
+			recurso.setComponente(comp);
+			
+			String nomeArquivo = pathDestino + arquivo + ".ts";
 			String conteudo = ComponenteTsLista.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 
-			nomeArquivo = pathDestino + classe.getNomeParaClasse().toLowerCase() + "-lista.component.html";
+			nomeArquivo = pathDestino + arquivo + ".html";
 			conteudo = ComponenteHtmlLista.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 
-			nomeArquivo = pathDestino + classe.getNomeParaClasse().toLowerCase() + "-lista.component.scss";
+			nomeArquivo = pathDestino + arquivo + ".scss";
 			conteudo = ComponenteScssVazio.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 
-			nomeArquivo = pathDestino + classe.getNomeParaClasse().toLowerCase() + "-lista.component.spec.ts";
-			conteudo = ComponenteSpecLista.create("\n").generate(recurso);
+			nomeArquivo = pathDestino + arquivo + ".spec.ts";
+			conteudo = ComponenteSpec.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 		}
 	}

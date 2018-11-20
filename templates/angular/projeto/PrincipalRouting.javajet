@@ -47,28 +47,37 @@ while (iterador.hasNext()) {
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(principalRotas),
-    FormsModule
-  ],
-  exports: [
-    RouterModule
-  ],
-  declarations: [
-    LoginComponent,
-    PrincipalComponent,
-    AdmHomeComponent,
-    SidebarComponent,
+	imports: [
+		CommonModule,
+		RouterModule.forRoot(principalRotas),
+		FormsModule
+	],
+	exports: [
+		RouterModule,
 <%
 iterador = telas.iterator();
 while (iterador.hasNext()) {
 	TelaWebWrapper tela = iterador.next();
 %>
-	<%= tela.getNomeComponente() %>TelaComponent,
+		<%= tela.getNomeComponente() %>TelaComponent,
 <%
 	}
 %>
-  ]
+	],
+	declarations: [
+		LoginComponent,
+		PrincipalComponent,
+		AdmHomeComponent,
+		SidebarComponent,
+<%
+iterador = telas.iterator();
+while (iterador.hasNext()) {
+	TelaWebWrapper tela = iterador.next();
+%>
+		<%= tela.getNomeComponente() %>TelaComponent,
+<%
+	}
+%>
+	]
 })
 export class PrincipalRoutingModule { }

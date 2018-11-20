@@ -1,5 +1,7 @@
 package gerapp.app;
 
+import gerapp.modelo.ComponenteTela;
+
 import java.util.List;
 
 import jet.wrappers.base.ClasseWrapper;
@@ -13,6 +15,7 @@ public class Recursos {
 	private List<TelaWebWrapper> listaTelaWeb;
 	
 	private TelaWebWrapper telaWeb;
+	private ComponenteTela componente;
 	
 	public TelaWebWrapper getTelaWebCorrente() {
 		return telaWeb;
@@ -21,6 +24,12 @@ public class Recursos {
 		this.telaWeb = tela;
 	}
 	
+	public ComponenteTela getComponente() {
+		return componente;
+	}
+	public void setComponente(ComponenteTela componente) {
+		this.componente = componente;
+	}
 	public List<TelaWebWrapper> getListaTelaWeb() {
 		return listaTelaWeb;
 	}

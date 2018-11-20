@@ -29,11 +29,14 @@ public class PrincipalRouting
   protected final String TEXT_8 = NL + "\t\t{path:'";
   protected final String TEXT_9 = "' , component: ";
   protected final String TEXT_10 = "TelaComponent },";
-  protected final String TEXT_11 = NL + "    ]" + NL + "  }" + NL + "]" + NL + "" + NL + "" + NL + "@NgModule({" + NL + "  imports: [" + NL + "    CommonModule," + NL + "    RouterModule.forRoot(principalRotas)," + NL + "    FormsModule" + NL + "  ]," + NL + "  exports: [" + NL + "    RouterModule" + NL + "  ]," + NL + "  declarations: [" + NL + "    LoginComponent," + NL + "    PrincipalComponent," + NL + "    AdmHomeComponent," + NL + "    SidebarComponent,";
-  protected final String TEXT_12 = NL + "\t";
+  protected final String TEXT_11 = NL + "    ]" + NL + "  }" + NL + "]" + NL + "" + NL + "" + NL + "@NgModule({" + NL + "\timports: [" + NL + "\t\tCommonModule," + NL + "\t\tRouterModule.forRoot(principalRotas)," + NL + "\t\tFormsModule" + NL + "\t]," + NL + "\texports: [" + NL + "\t\tRouterModule,";
+  protected final String TEXT_12 = NL + "\t\t";
   protected final String TEXT_13 = "TelaComponent,";
-  protected final String TEXT_14 = NL + "  ]" + NL + "})" + NL + "export class PrincipalRoutingModule { }";
-  protected final String TEXT_15 = NL;
+  protected final String TEXT_14 = NL + "\t]," + NL + "\tdeclarations: [" + NL + "\t\tLoginComponent," + NL + "\t\tPrincipalComponent," + NL + "\t\tAdmHomeComponent," + NL + "\t\tSidebarComponent,";
+  protected final String TEXT_15 = NL + "\t\t";
+  protected final String TEXT_16 = "TelaComponent,";
+  protected final String TEXT_17 = NL + "\t]" + NL + "})" + NL + "export class PrincipalRoutingModule { }";
+  protected final String TEXT_18 = NL;
 
   public String generate(Object argument)
   {
@@ -87,7 +90,19 @@ while (iterador.hasNext()) {
 	}
 
     stringBuffer.append(TEXT_14);
+    
+iterador = telas.iterator();
+while (iterador.hasNext()) {
+	TelaWebWrapper tela = iterador.next();
+
     stringBuffer.append(TEXT_15);
+    stringBuffer.append( tela.getNomeComponente() );
+    stringBuffer.append(TEXT_16);
+    
+	}
+
+    stringBuffer.append(TEXT_17);
+    stringBuffer.append(TEXT_18);
     return stringBuffer.toString();
   }
 }
