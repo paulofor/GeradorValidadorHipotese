@@ -28,8 +28,9 @@ public class ModuloSpec
   protected final String TEXT_7 = ";" + NL + "" + NL + "  beforeEach(() => {";
   protected final String TEXT_8 = NL + "    ";
   protected final String TEXT_9 = " = new ";
-  protected final String TEXT_10 = "();" + NL + "  });" + NL + "" + NL + "  it('should create an instance', () => {" + NL + "    expect(listaModule).toBeTruthy();" + NL + "  });" + NL + "});" + NL;
-  protected final String TEXT_11 = NL;
+  protected final String TEXT_10 = "();" + NL + "  });" + NL + "" + NL + "  it('should create an instance', () => {" + NL + "    expect(";
+  protected final String TEXT_11 = ").toBeTruthy();" + NL + "  });" + NL + "});" + NL;
+  protected final String TEXT_12 = NL;
 
   public String generate(Object argument)
   {
@@ -37,7 +38,7 @@ public class ModuloSpec
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-ComponenteAngular comp = (ComponenteAngular) recursos.getComponente();
+ModuloComponente comp = (ModuloComponente) recursos.getComponente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
@@ -56,7 +57,9 @@ Configuracao conf = recursos.getConfiguracao();
     stringBuffer.append(TEXT_9);
     stringBuffer.append( comp.getNome() );
     stringBuffer.append(TEXT_10);
+    stringBuffer.append( comp.getNomeVariavel() );
     stringBuffer.append(TEXT_11);
+    stringBuffer.append(TEXT_12);
     return stringBuffer.toString();
   }
 }

@@ -1,6 +1,8 @@
 package gerapp.app;
 
+import gerapp.modelo.ComponenteTela;
 import gerapp.modelo.Entidade;
+import gerapp.modelo.ModuloComponente;
 import gerapp.modelo.node.ComponenteAngular;
 
 import java.io.IOException;
@@ -8,9 +10,11 @@ import java.util.List;
 
 import jet.angular.ComponenteScssVazio;
 import jet.angular.ComponenteSpec;
+import jet.angular.ModuloSpec;
 import jet.angular.componente.aplicacao.SidebarHtml;
 import jet.angular.componente.lista.ComponenteHtmlLista;
 import jet.angular.componente.lista.ComponenteTsLista;
+import jet.angular.componente.lista.ModuloTsLista;
 import jet.angular.componente.tela.ComponenteTsTela;
 import jet.angular.loopback.IndexModel;
 import jet.angular.loopback.IndexPrincipal;
@@ -63,29 +67,42 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 
 	private void criaComponentesTela(Recursos recurso) throws IOException {
 		String pathOrigem = ".//fixos//angular//componente-tela//";
-		for (TelaWebWrapper tela : recurso.getListaTelaWeb()) {
-			recurso.setTelaWebCorrente(tela);
-			String objeto = tela.getNomeComponente() + "TelaComponent";
-			String arquivo =  tela.getNomeArquivoComponente() + "-tela.component";
-			ComponenteAngular comp = new ComponenteAngular(objeto,arquivo);
-			recurso.setComponente(comp);
+		for (ComponenteTela tela : recurso.getListaTelaWeb()) {
+			recurso.setTelaWebCorrente((TelaWebWrapper) tela);
+			recurso.setComponente(tela);
 			
-			String pathDestino = getDiretorioAngular(recurso) + "//tela//" + tela.getNomeArquivoComponente() + "-tela//" ;
+			String pathDestino = getDiretorioAngular(recurso) + "//tela//" + tela.getArquivo() + "//" ;
 			this.criaCaminhoSeNaoExiste(pathDestino);
 			this.limpaCaminho(pathDestino);
 			
 			
-			this.copiaArquivo(pathOrigem + "componente-tela.css", pathDestino + arquivo + ".scss");
-			this.copiaArquivo(pathOrigem + "componente-tela.html", pathDestino + arquivo + ".html");
+			this.copiaArquivo(pathOrigem + "componente-tela.css", pathDestino + tela.getArquivo() + ".scss");
+			this.copiaArquivo(pathOrigem + "componente-tela.html", pathDestino + tela.getArquivo() + ".html");
 
-			String nomeArquivo = pathDestino + arquivo + ".ts";
+			String nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			String conteudo = ComponenteTsTela.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 
-			nomeArquivo = pathDestino + arquivo + ".spec.ts";
+			nomeArquivo = pathDestino + tela.getArquivo() + ".spec.ts";
 			conteudo = ComponenteSpec.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
+	
 		}
+		
+		// Modulo
+		String pathDestinoModulo = getDiretorioAngular(recurso) + "//tela//" ;
+		
+		ModuloComponente modulo = new ModuloComponente("ComponenteTelaModule");
+		modulo.setListaComponente(recurso.getListaTelaWeb());
+		recurso.setModulo(modulo);
+		
+		String nomeArquivo = pathDestinoModulo + "componente-tela.module.ts";
+		String conteudo = ModuloTsLista.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		nomeArquivo = pathDestinoModulo + "componente-tela.module.ts";
+		conteudo = ModuloSpec.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
 	}
 	private void criaComponentesLista(Recursos recurso) throws IOException {
 		for (ClasseWrapper classe : recurso.getListaClasse()) {

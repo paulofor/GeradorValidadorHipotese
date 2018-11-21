@@ -44,21 +44,21 @@ public class PrincipalRouting
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-List<TelaWebWrapper> telas = recursos.getListaTelaWeb();
+List<ComponenteTela> telas = recursos.getListaTelaWeb();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
     
-Iterator<TelaWebWrapper> iterador = telas.iterator();
+Iterator<ComponenteTela> iterador = telas.iterator();
 while (iterador.hasNext()) {
-	TelaWebWrapper tela = iterador.next();
+	ComponenteTela tela = iterador.next();
 
     stringBuffer.append(TEXT_3);
-    stringBuffer.append( tela.getNomeComponente() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_4);
-    stringBuffer.append( tela.getNomeArquivoComponente() );
+    stringBuffer.append( tela.getArquivo() );
     stringBuffer.append(TEXT_5);
-    stringBuffer.append( tela.getNomeArquivoComponente() );
+    stringBuffer.append( tela.getArquivo() );
     stringBuffer.append(TEXT_6);
     
 	}
@@ -67,12 +67,12 @@ while (iterador.hasNext()) {
     
 iterador = telas.iterator();
 while (iterador.hasNext()) {
-	TelaWebWrapper tela = iterador.next();
+	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 
     stringBuffer.append(TEXT_8);
     stringBuffer.append( tela.getNomeUrl() );
     stringBuffer.append(TEXT_9);
-    stringBuffer.append( tela.getNomeComponente() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_10);
     
 	}
@@ -81,10 +81,10 @@ while (iterador.hasNext()) {
     
 iterador = telas.iterator();
 while (iterador.hasNext()) {
-	TelaWebWrapper tela = iterador.next();
+	ComponenteTela tela = iterador.next();
 
     stringBuffer.append(TEXT_12);
-    stringBuffer.append( tela.getNomeComponente() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_13);
     
 	}
@@ -93,10 +93,10 @@ while (iterador.hasNext()) {
     
 iterador = telas.iterator();
 while (iterador.hasNext()) {
-	TelaWebWrapper tela = iterador.next();
+	ComponenteTela tela = iterador.next();
 
     stringBuffer.append(TEXT_15);
-    stringBuffer.append( tela.getNomeComponente() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_16);
     
 	}

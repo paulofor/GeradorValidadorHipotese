@@ -32,14 +32,14 @@ public class SidebarHtml
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-List<TelaWebWrapper> telas = recursos.getListaTelaWeb();
+List<ComponenteTela> telas = recursos.getListaTelaWeb();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
     
-Iterator<TelaWebWrapper> iterador = telas.iterator();
+Iterator<ComponenteTela> iterador = telas.iterator();
 while (iterador.hasNext()) {
-	TelaWebWrapper tela = iterador.next();
+	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 
     stringBuffer.append(TEXT_3);
     stringBuffer.append( tela.getNomeUrl() );

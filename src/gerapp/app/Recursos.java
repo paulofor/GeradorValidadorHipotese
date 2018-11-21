@@ -1,6 +1,7 @@
 package gerapp.app;
 
 import gerapp.modelo.ComponenteTela;
+import gerapp.modelo.ModuloComponente;
 
 import java.util.List;
 
@@ -12,10 +13,11 @@ public class Recursos {
 	private ClasseWrapper classe;
 	private Configuracao configuracao;
 	private List<ClasseWrapper> listaClasse;
-	private List<TelaWebWrapper> listaTelaWeb;
+	private List<ComponenteTela> listaTelaWeb;
 	
 	private TelaWebWrapper telaWeb;
 	private ComponenteTela componente;
+	private ModuloComponente modulo;
 	
 	public TelaWebWrapper getTelaWebCorrente() {
 		return telaWeb;
@@ -24,16 +26,24 @@ public class Recursos {
 		this.telaWeb = tela;
 	}
 	
+	
+	
+	public ModuloComponente getModulo() {
+		return modulo;
+	}
+	public void setModulo(ModuloComponente modulo) {
+		this.modulo = modulo;
+	}
 	public ComponenteTela getComponente() {
 		return componente;
 	}
 	public void setComponente(ComponenteTela componente) {
 		this.componente = componente;
 	}
-	public List<TelaWebWrapper> getListaTelaWeb() {
+	public List<ComponenteTela> getListaTelaWeb() {
 		return listaTelaWeb;
 	}
-	public void setListaTelaWeb(List<TelaWebWrapper> listaTelaWeb) {
+	public void setListaTelaWeb(List<ComponenteTela> listaTelaWeb) {
 		this.listaTelaWeb = listaTelaWeb;
 	}
 	public void setListaClasse(List<ClasseWrapper> listaClasse) {

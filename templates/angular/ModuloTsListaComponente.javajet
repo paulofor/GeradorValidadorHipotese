@@ -1,0 +1,50 @@
+<%@ jet package="jet.angular.componente.lista" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
+class="ModuloTsLista" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+ModuloComponente modulo =  recursos.getModulo();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+<% 
+Iterator it = modulo.getListaComponente().iterator();
+while (it.hasNext()) {
+	ComponenteTela comp = (ComponenteTela) it.next(); 
+%>  
+import { <%= comp.getNome() %> } from './<%= comp.getArquivo() %>/<%= comp.getArquivo() %>';
+<%
+}
+%>
+
+
+@NgModule({
+  imports: [
+    CommonModule
+  ],
+  declarations: [
+<% 
+it = modulo.getListaComponente().iterator();
+while (it.hasNext()) {
+	ComponenteTela comp = (ComponenteTela) it.next(); 
+%>  
+    <%= comp.getNome() %>,
+<%
+}
+%>
+  ],
+  exports: [
+<% 
+it = modulo.getListaComponente().iterator();
+while (it.hasNext()) {
+	ComponenteTela comp = (ComponenteTela) it.next(); 
+%>  
+    <%= comp.getNome() %>,
+<%
+}
+%>
+  ]
+})
+export class <%= modulo.getNome() %> { }

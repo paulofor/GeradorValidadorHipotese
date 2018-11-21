@@ -1,8 +1,9 @@
 package jet.wrappers.base.node;
 
+import gerapp.modelo.ComponenteTela;
 import loopback.cliente.modelo.TelaWebRest;
 
-public class TelaWebWrapper {
+public class TelaWebWrapper implements ComponenteTela{
 
 	private TelaWebRest principal = null;
 	
@@ -18,12 +19,16 @@ public class TelaWebWrapper {
 		String nome = principal.getNome();
 		return nome.toLowerCase();
 	}
-	public String getNomeArquivoComponente() {
-		String nome = principal.getNome();
-		return nome.toLowerCase();
-	}
 	
-	public String getNomeComponente() {
-		return principal.getNome();
+
+	@Override
+	public String getArquivo() {
+		String nome = principal.getNome();
+		return nome.toLowerCase() + "-tela";
+	}
+
+	@Override
+	public String getNome() {
+		return principal.getNome() + "TelaComponent";
 	}
 }

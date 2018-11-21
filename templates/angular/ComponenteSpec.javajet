@@ -4,7 +4,7 @@ class="ComponenteSpec" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
-ComponenteAngular comp = (ComponenteAngular) recursos.getComponente();
+ComponenteTela comp = (ComponenteTela) recursos.getComponente();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
