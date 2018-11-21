@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { SDKBrowserModule } from './shared/sdk';
 import { SocketDriver } from './shared/sdk/sockets/socket.driver';
 import { PrincipalRoutingModule } from './principal-routing/principal-routing.module';
-import { ListaModule } from './lista/lista.module';
+import { ComponenteTelaModule } from './tela/componente-tela.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { ListaModule } from './lista/lista.module';
     BrowserModule,
     PrincipalRoutingModule,
     SDKBrowserModule.forRoot(),
-    ListaModule
+    ComponenteTelaModule
   ],
   providers: [
     SocketDriver

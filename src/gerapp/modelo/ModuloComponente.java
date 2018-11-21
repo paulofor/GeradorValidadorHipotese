@@ -2,15 +2,16 @@ package gerapp.modelo;
 
 import java.util.List;
 
-public class ModuloComponente {
+public class ModuloComponente implements ComponenteTela{
 
 	
 	private String nomeModulo;
 	private List<ComponenteTela> listaComponente;
 	private String nomeArquivo;
 	
-	public ModuloComponente(String nome) {
+	public ModuloComponente(String nome, String arquivo) {
 		nomeModulo = nome;
+		nomeArquivo = arquivo;
 	}
 
 	public List<ComponenteTela> getListaComponente() {
@@ -21,7 +22,7 @@ public class ModuloComponente {
 		this.listaComponente = listaComponente;
 	}
 	
-	public String getNomeArquivo() {
+	public String getArquivo() {
 		return nomeArquivo;
 	}
 	

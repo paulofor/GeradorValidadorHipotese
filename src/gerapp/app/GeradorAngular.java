@@ -6,6 +6,7 @@ import gerapp.modelo.ModuloComponente;
 import gerapp.modelo.node.ComponenteAngular;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import jet.angular.ComponenteScssVazio;
@@ -92,19 +93,20 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		// Modulo
 		String pathDestinoModulo = getDiretorioAngular(recurso) + "//tela//" ;
 		
-		ModuloComponente modulo = new ModuloComponente("ComponenteTelaModule");
+		ModuloComponente modulo = new ModuloComponente("ComponenteTelaModule", "componente-tela.module");
 		modulo.setListaComponente(recurso.getListaTelaWeb());
-		recurso.setModulo(modulo);
+		recurso.setComponente(modulo);
 		
-		String nomeArquivo = pathDestinoModulo + "componente-tela.module.ts";
+		String nomeArquivo = pathDestinoModulo + modulo.getArquivo() + ".ts";
 		String conteudo = ModuloTsLista.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 		
-		nomeArquivo = pathDestinoModulo + "componente-tela.module.ts";
+		nomeArquivo = pathDestinoModulo + modulo.getArquivo() + ".spec.ts";
 		conteudo = ModuloSpec.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 	}
 	private void criaComponentesLista(Recursos recurso) throws IOException {
+		List<ComponenteTela> listaAngular = new ArrayList<ComponenteTela>();
 		for (ClasseWrapper classe : recurso.getListaClasse()) {
 			recurso.setClasse(classe);
 			String pathDestino = getDiretorioAngular(recurso) + "//lista//" + classe.getNomeParaClasse().toLowerCase() + "-lista//" ;
@@ -115,6 +117,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 			String arquivo =  classe.getNomeParaClasse().toLowerCase() + "-lista.component";
 			ComponenteAngular comp = new ComponenteAngular(objeto,arquivo);
 			recurso.setComponente(comp);
+			listaAngular.add(comp);
 			
 			String nomeArquivo = pathDestino + arquivo + ".ts";
 			String conteudo = ComponenteTsLista.create("\n").generate(recurso);
@@ -132,6 +135,20 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 			conteudo = ComponenteSpec.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 		}
+		
+		String pathDestinoModulo = getDiretorioAngular(recurso) + "//lista//" ;
+		
+		ModuloComponente modulo = new ModuloComponente("ComponenteListaModule", "componente-lista.module");
+		modulo.setListaComponente(listaAngular);
+		recurso.setComponente(modulo);
+		
+		String nomeArquivo = pathDestinoModulo + modulo.getArquivo() + ".ts";
+		String conteudo = ModuloTsLista.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		nomeArquivo = pathDestinoModulo + modulo.getArquivo() + ".spec.ts";
+		conteudo = ModuloSpec.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
 	}
 	
 	private void principalRouting(Recursos recurso) throws IOException {

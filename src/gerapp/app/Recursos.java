@@ -28,12 +28,7 @@ public class Recursos {
 	
 	
 	
-	public ModuloComponente getModulo() {
-		return modulo;
-	}
-	public void setModulo(ModuloComponente modulo) {
-		this.modulo = modulo;
-	}
+	
 	public ComponenteTela getComponente() {
 		return componente;
 	}

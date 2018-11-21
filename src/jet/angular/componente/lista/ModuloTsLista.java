@@ -41,7 +41,7 @@ public class ModuloTsLista
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-ModuloComponente modulo =  recursos.getModulo();
+ModuloComponente modulo =  (ModuloComponente) recursos.getComponente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
