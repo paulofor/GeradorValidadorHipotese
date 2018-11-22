@@ -14,7 +14,7 @@ Iterator it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
 	ComponenteTela comp = (ComponenteTela) it.next(); 
 %>  
-import { <%= comp.getNome() %> } from './<%= comp.getArquivo() %>/<%= comp.getArquivo() %>';
+import { <%= comp.getNome() %> } from './<%= comp.getPathArquivo() %>/<%= comp.getArquivo() %>';
 <%
 }
 %>

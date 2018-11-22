@@ -104,6 +104,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		nomeArquivo = pathDestinoModulo + modulo.getArquivo() + ".spec.ts";
 		conteudo = ModuloSpec.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
+		
 	}
 	private void criaComponentesLista(Recursos recurso) throws IOException {
 		List<ComponenteTela> listaAngular = new ArrayList<ComponenteTela>();

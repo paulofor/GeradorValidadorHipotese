@@ -53,7 +53,7 @@ while (it.hasNext()) {
     stringBuffer.append(TEXT_3);
     stringBuffer.append( comp.getNome() );
     stringBuffer.append(TEXT_4);
-    stringBuffer.append( comp.getArquivo() );
+    stringBuffer.append( comp.getPathArquivo() );
     stringBuffer.append(TEXT_5);
     stringBuffer.append( comp.getArquivo() );
     stringBuffer.append(TEXT_6);
