@@ -1,10 +1,10 @@
-<%@ jet package="jet.angular.componente.lista" 
-imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
-class="ModuloTsLista" %>
+<%@ jet package="jet.angular.modulo" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* " 
+class="ModuloTsGrupoComponente" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
-ModuloComponente modulo =  (ModuloComponente) recursos.getComponente();
+ModuloComponente modulo =  (ModuloComponente) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { NgModule } from '@angular/core';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 <% 
 Iterator it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ComponenteTela comp = (ComponenteTela) it.next(); 
+	ItemAngular comp = (ItemAngular) it.next(); 
 %>  
 import { <%= comp.getNome() %> } from './<%= comp.getPathArquivo() %>/<%= comp.getArquivo() %>';
 <%
@@ -28,7 +28,7 @@ import { <%= comp.getNome() %> } from './<%= comp.getPathArquivo() %>/<%= comp.g
 <% 
 it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ComponenteTela comp = (ComponenteTela) it.next(); 
+	ItemAngular comp = (ItemAngular) it.next(); 
 %>  
     <%= comp.getNome() %>,
 <%
@@ -39,7 +39,7 @@ while (it.hasNext()) {
 <% 
 it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ComponenteTela comp = (ComponenteTela) it.next(); 
+	ItemAngular comp = (ItemAngular) it.next(); 
 %>  
     <%= comp.getNome() %>,
 <%

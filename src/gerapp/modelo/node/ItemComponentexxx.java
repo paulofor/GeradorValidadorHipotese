@@ -1,13 +1,12 @@
 package gerapp.modelo.node;
 
-import gerapp.modelo.ComponenteTela;
 
-public class ComponenteAngular implements ComponenteTela{
+public class ItemComponentexxx implements ItemAngular{
 
 	private String nome;
 	private String arquivo;
 	
-	public ComponenteAngular(String nome, String arquivo) {
+	public ItemComponentexxx(String nome, String arquivo) {
 		this.nome = nome;
 		this.arquivo = arquivo;
 	}

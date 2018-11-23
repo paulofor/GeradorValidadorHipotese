@@ -1,12 +1,13 @@
-package gerapp.modelo;
+package gerapp.modelo.node;
+
 
 import java.util.List;
 
-public class ModuloComponente implements ComponenteTela{
+public class ModuloComponente implements ItemAngular{
 
 	
 	private String nomeModulo;
-	private List<ComponenteTela> listaComponente;
+	private List<ItemComponente> listaComponente;
 	private String nomeArquivo;
 	
 	public ModuloComponente(String nome, String arquivo) {
@@ -14,11 +15,11 @@ public class ModuloComponente implements ComponenteTela{
 		nomeArquivo = arquivo;
 	}
 
-	public List<ComponenteTela> getListaComponente() {
+	public List<ItemComponente> getListaComponente() {
 		return listaComponente;
 	}
 
-	public void setListaComponente(List<ComponenteTela> listaComponente) {
+	public void setListaComponente(List<ItemComponente> listaComponente) {
 		this.listaComponente = listaComponente;
 	}
 	

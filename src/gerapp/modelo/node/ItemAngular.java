@@ -1,6 +1,6 @@
-package gerapp.modelo;
+package gerapp.modelo.node;
 
-public interface ComponenteTela {
+public interface ItemAngular {
 	
 	public String getNome();
 	

@@ -32,7 +32,7 @@ public class ComponenteTsTela
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-TelaWebWrapper tela = (TelaWebWrapper) recursos.getTelaWebCorrente();
+TelaWebWrapper tela = (TelaWebWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);

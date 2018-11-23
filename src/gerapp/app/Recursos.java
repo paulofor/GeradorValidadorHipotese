@@ -1,7 +1,7 @@
 package gerapp.app;
 
-import gerapp.modelo.ComponenteTela;
-import gerapp.modelo.ModuloComponente;
+import gerapp.modelo.node.ItemAngular;
+import gerapp.modelo.node.ModuloComponente;
 
 import java.util.List;
 
@@ -12,35 +12,29 @@ public class Recursos {
 
 	private ClasseWrapper classe;
 	private Configuracao configuracao;
+	
+	// Vem do banco de dados
 	private List<ClasseWrapper> listaClasse;
-	private List<ComponenteTela> listaTelaWeb;
-	
-	private TelaWebWrapper telaWeb;
-	private ComponenteTela componente;
-	private ModuloComponente modulo;
-	
-	public TelaWebWrapper getTelaWebCorrente() {
-		return telaWeb;
-	}
-	public void setTelaWebCorrente(TelaWebWrapper tela) {
-		this.telaWeb = tela;
-	}
-	
-	
-	
-	
-	public ComponenteTela getComponente() {
+	private List<ItemAngular> listaTelaWeb;
+
+	// Item de Trabalho - passar do Java para os templates
+	private ItemAngular componente;
+		
+	public ItemAngular getItemCorrente() {
 		return componente;
 	}
-	public void setComponente(ComponenteTela componente) {
+	public void setItemCorrente(ItemAngular componente) {
 		this.componente = componente;
 	}
-	public List<ComponenteTela> getListaTelaWeb() {
+	public List<ItemAngular> getListaTelaWeb() {
 		return listaTelaWeb;
 	}
-	public void setListaTelaWeb(List<ComponenteTela> listaTelaWeb) {
+	public void setListaTelaWeb(List<ItemAngular> listaTelaWeb) {
 		this.listaTelaWeb = listaTelaWeb;
 	}
+	
+	
+	
 	public void setListaClasse(List<ClasseWrapper> listaClasse) {
 		this.listaClasse = listaClasse;
 	}

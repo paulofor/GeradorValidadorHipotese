@@ -1,4 +1,4 @@
-package jet.angular;
+package jet.angular.modulo;
 
 import java.util.*;
 import gerapp.app.*;
@@ -38,7 +38,7 @@ public class ModuloSpec
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-ModuloComponente comp = (ModuloComponente) recursos.getComponente();
+ModuloComponente comp = (ModuloComponente) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);

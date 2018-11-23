@@ -1,18 +1,19 @@
-package jet.angular.componente.lista;
+package jet.angular.modulo;
 
 import java.util.*;
 import gerapp.app.*;
 import jet.wrappers.base.*;
 import jet.wrappers.angular.*;
 import gerapp.modelo.*;
+import gerapp.modelo.node.*;
 
-public class ModuloTsLista
+public class ModuloTsGrupoComponente
 {
   protected static String nl;
-  public static synchronized ModuloTsLista create(String lineSeparator)
+  public static synchronized ModuloTsGrupoComponente create(String lineSeparator)
   {
     nl = lineSeparator;
-    ModuloTsLista result = new ModuloTsLista();
+    ModuloTsGrupoComponente result = new ModuloTsGrupoComponente();
     nl = null;
     return result;
   }
@@ -41,14 +42,14 @@ public class ModuloTsLista
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-ModuloComponente modulo =  (ModuloComponente) recursos.getComponente();
+ModuloComponente modulo =  (ModuloComponente) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
      
 Iterator it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ComponenteTela comp = (ComponenteTela) it.next(); 
+	ItemAngular comp = (ItemAngular) it.next(); 
 
     stringBuffer.append(TEXT_3);
     stringBuffer.append( comp.getNome() );
@@ -64,7 +65,7 @@ while (it.hasNext()) {
      
 it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ComponenteTela comp = (ComponenteTela) it.next(); 
+	ItemAngular comp = (ItemAngular) it.next(); 
 
     stringBuffer.append(TEXT_8);
     stringBuffer.append(TEXT_9);
@@ -77,7 +78,7 @@ while (it.hasNext()) {
      
 it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ComponenteTela comp = (ComponenteTela) it.next(); 
+	ItemAngular comp = (ItemAngular) it.next(); 
 
     stringBuffer.append(TEXT_12);
     stringBuffer.append(TEXT_13);

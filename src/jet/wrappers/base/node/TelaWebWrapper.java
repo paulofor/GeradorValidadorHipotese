@@ -1,9 +1,9 @@
 package jet.wrappers.base.node;
 
-import gerapp.modelo.ComponenteTela;
+import gerapp.modelo.node.ItemComponente;
 import loopback.cliente.modelo.TelaWebRest;
 
-public class TelaWebWrapper implements ComponenteTela{
+public class TelaWebWrapper implements ItemComponente{
 
 	private TelaWebRest principal = null;
 	

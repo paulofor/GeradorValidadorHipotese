@@ -1,4 +1,4 @@
-package jet.angular;
+package jet.angular.componente;
 
 import java.util.*;
 import gerapp.app.*;
@@ -35,7 +35,7 @@ public class ComponenteSpec
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-ComponenteTela comp = (ComponenteTela) recursos.getComponente();
+ItemAngular comp = (ItemAngular) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);

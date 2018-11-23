@@ -1,10 +1,10 @@
-<%@ jet package="jet.angular" 
+<%@ jet package="jet.angular.modulo" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
 class="ModuloSpec" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
-ModuloComponente comp = (ModuloComponente) recursos.getComponente();
+ModuloComponente comp = (ModuloComponente) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { <%= comp.getNome() %> } from './<%= comp.getArquivo() %>';
