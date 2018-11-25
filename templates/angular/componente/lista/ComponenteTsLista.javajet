@@ -4,7 +4,7 @@ class="ComponenteTsLista" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
-ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { Component, OnInit } from '@angular/core';
@@ -12,11 +12,11 @@ import { <%= classe.getNomeParaClasse() %>, <%= classe.getNomeParaClasse() %>Api
 
 
 @Component({
-  selector: 'app-<%= classe.getNomeParaArquivo() %>-lista',
-  templateUrl: './<%= classe.getNomeParaArquivo() %>-lista.component.html',
-  styleUrls: ['./<%= classe.getNomeParaArquivo() %>-lista.component.scss']
+  selector: '<%= classe.getNomeControle() %>',
+  templateUrl: './<%= classe.getArquivo() %>.html',
+  styleUrls: ['./<%= classe.getArquivo() %>.scss']
 })
-export class <%= classe.getNomeParaClasse() %>ListaComponent implements OnInit {
+export class <%= classe.getNome() %> implements OnInit {
 
 
   itens: <%= classe.getNomeParaClasse() %>[];

@@ -31,4 +31,9 @@ public class TelaWebWrapper implements ItemComponente{
 	public String getNome() {
 		return principal.getNome() + "TelaComponent";
 	}
+
+	@Override
+	public String getPathArquivo() {
+		return getArquivo();
+	}
 }

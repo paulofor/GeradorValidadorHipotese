@@ -49,7 +49,7 @@ Configuracao conf = recursos.getConfiguracao();
      
 Iterator it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ItemAngular comp = (ItemAngular) it.next(); 
+	ItemComponente comp = (ItemComponente) it.next(); 
 
     stringBuffer.append(TEXT_3);
     stringBuffer.append( comp.getNome() );
@@ -65,7 +65,7 @@ while (it.hasNext()) {
      
 it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ItemAngular comp = (ItemAngular) it.next(); 
+	ItemComponente comp = (ItemComponente) it.next(); 
 
     stringBuffer.append(TEXT_8);
     stringBuffer.append(TEXT_9);
@@ -78,7 +78,7 @@ while (it.hasNext()) {
      
 it = modulo.getListaComponente().iterator();
 while (it.hasNext()) {
-	ItemAngular comp = (ItemAngular) it.next(); 
+	ItemComponente comp = (ItemComponente) it.next(); 
 
     stringBuffer.append(TEXT_12);
     stringBuffer.append(TEXT_13);

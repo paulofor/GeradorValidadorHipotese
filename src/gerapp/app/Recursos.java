@@ -1,12 +1,11 @@
 package gerapp.app;
 
 import gerapp.modelo.node.ItemAngular;
-import gerapp.modelo.node.ModuloComponente;
+import gerapp.modelo.node.ItemComponente;
 
 import java.util.List;
 
 import jet.wrappers.base.ClasseWrapper;
-import jet.wrappers.base.node.TelaWebWrapper;
 
 public class Recursos {
 
@@ -15,7 +14,7 @@ public class Recursos {
 	
 	// Vem do banco de dados
 	private List<ClasseWrapper> listaClasse;
-	private List<ItemAngular> listaTelaWeb;
+	private List<ItemComponente> listaTelaWeb;
 
 	// Item de Trabalho - passar do Java para os templates
 	private ItemAngular componente;
@@ -26,10 +25,10 @@ public class Recursos {
 	public void setItemCorrente(ItemAngular componente) {
 		this.componente = componente;
 	}
-	public List<ItemAngular> getListaTelaWeb() {
+	public List<ItemComponente> getListaTelaWeb() {
 		return listaTelaWeb;
 	}
-	public void setListaTelaWeb(List<ItemAngular> listaTelaWeb) {
+	public void setListaTelaWeb(List<ItemComponente> listaTelaWeb) {
 		this.listaTelaWeb = listaTelaWeb;
 	}
 	

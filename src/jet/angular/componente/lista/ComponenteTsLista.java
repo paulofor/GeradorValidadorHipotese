@@ -21,11 +21,11 @@ public class ComponenteTsLista
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL + "import { Component, OnInit } from '@angular/core';" + NL + "import { ";
   protected final String TEXT_3 = ", ";
-  protected final String TEXT_4 = "Api } from '../../shared/sdk';" + NL + "" + NL + "" + NL + "@Component({" + NL + "  selector: 'app-";
-  protected final String TEXT_5 = "-lista'," + NL + "  templateUrl: './";
-  protected final String TEXT_6 = "-lista.component.html'," + NL + "  styleUrls: ['./";
-  protected final String TEXT_7 = "-lista.component.scss']" + NL + "})" + NL + "export class ";
-  protected final String TEXT_8 = "ListaComponent implements OnInit {" + NL + "" + NL + "" + NL + "  itens: ";
+  protected final String TEXT_4 = "Api } from '../../shared/sdk';" + NL + "" + NL + "" + NL + "@Component({" + NL + "  selector: '";
+  protected final String TEXT_5 = "'," + NL + "  templateUrl: './";
+  protected final String TEXT_6 = ".html'," + NL + "  styleUrls: ['./";
+  protected final String TEXT_7 = ".scss']" + NL + "})" + NL + "export class ";
+  protected final String TEXT_8 = " implements OnInit {" + NL + "" + NL + "" + NL + "  itens: ";
   protected final String TEXT_9 = "[];" + NL + "  errMess: string;" + NL + "" + NL + "  constructor(private srv: ";
   protected final String TEXT_10 = "Api) {" + NL + "" + NL + "  }" + NL + "" + NL + "  ngOnInit() {" + NL + "    this.srv.find()" + NL + "      .subscribe((result: ";
   protected final String TEXT_11 = "[]) =>" + NL + "        this.itens = result" + NL + "      );" + NL + "  }" + NL + "" + NL + "" + NL + "" + NL + "}";
@@ -36,7 +36,7 @@ public class ComponenteTsLista
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
@@ -44,13 +44,13 @@ Configuracao conf = recursos.getConfiguracao();
     stringBuffer.append(TEXT_3);
     stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_4);
-    stringBuffer.append( classe.getNomeParaArquivo() );
+    stringBuffer.append( classe.getNomeControle() );
     stringBuffer.append(TEXT_5);
-    stringBuffer.append( classe.getNomeParaArquivo() );
+    stringBuffer.append( classe.getArquivo() );
     stringBuffer.append(TEXT_6);
-    stringBuffer.append( classe.getNomeParaArquivo() );
+    stringBuffer.append( classe.getArquivo() );
     stringBuffer.append(TEXT_7);
-    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append( classe.getNome() );
     stringBuffer.append(TEXT_8);
     stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_9);

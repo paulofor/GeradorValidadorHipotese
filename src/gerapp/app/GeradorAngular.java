@@ -2,7 +2,7 @@ package gerapp.app;
 
 import gerapp.modelo.Entidade;
 import gerapp.modelo.node.ItemAngular;
-import gerapp.modelo.node.ItemComponentexxx;
+import gerapp.modelo.node.ItemComponente;
 import gerapp.modelo.node.ModuloComponente;
 
 import java.io.IOException;
@@ -105,39 +105,43 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		
 	}
 	private void criaComponentesLista(Recursos recurso) throws IOException {
-		List<ItemAngular> listaAngular = new ArrayList<ItemAngular>();
+		List<ItemComponente> listaAngular = new ArrayList<ItemComponente>();
+		String tipo = "Lista";
+		String tipoPath = "lista";
+		recurso.setClasse(null);
+		
 		for (ClasseWrapper classe : recurso.getListaClasse()) {
-			recurso.setClasse(classe);
-			String pathDestino = getDiretorioAngular(recurso) + "//lista//" + classe.getNomeParaClasse().toLowerCase() + "-lista//" ;
+			ClasseWrapperAngular classeAngular = (ClasseWrapperAngular) classe;
+			classeAngular.setTipo(tipo);
+
+			recurso.setItemCorrente(classeAngular);
+
+			String pathDestino = getDiretorioAngular(recurso) + "//" + tipoPath +"//" + classeAngular.getPathArquivo() + "//" ;
 			this.criaCaminhoSeNaoExiste(pathDestino);
 			this.limpaCaminho(pathDestino);
 			
-			String objeto = classe.getNomeParaClasse() + "ListaComponent";
-			String arquivo =  classe.getNomeParaClasse().toLowerCase() + "-lista.component";
-			ItemComponentexxx comp = new ItemComponentexxx(objeto,arquivo);
-			recurso.setItemCorrente(comp);
-			listaAngular.add(comp);
+			listaAngular.add(classeAngular);
 			
-			String nomeArquivo = pathDestino + arquivo + ".ts";
+			String nomeArquivo = pathDestino + classeAngular.getArquivo() + ".ts";
 			String conteudo = ComponenteTsLista.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 
-			nomeArquivo = pathDestino + arquivo + ".html";
+			nomeArquivo = pathDestino + classeAngular.getArquivo() + ".html";
 			conteudo = ComponenteHtmlLista.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 
-			nomeArquivo = pathDestino + arquivo + ".scss";
+			nomeArquivo = pathDestino + classeAngular.getArquivo() + ".scss";
 			conteudo = ComponenteScssVazio.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 
-			nomeArquivo = pathDestino + arquivo + ".spec.ts";
+			nomeArquivo = pathDestino + classeAngular.getArquivo() + ".spec.ts";
 			conteudo = ComponenteSpec.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 		}
 		
-		String pathDestinoModulo = getDiretorioAngular(recurso) + "//lista//" ;
+		String pathDestinoModulo = getDiretorioAngular(recurso) + "//" + tipoPath + "//" ;
 		
-		ModuloComponente modulo = new ModuloComponente("ComponenteListaModule", "componente-lista.module");
+		ModuloComponente modulo = new ModuloComponente("Componente" + tipo + "Module", "componente-" + tipoPath + ".module");
 		modulo.setListaComponente(listaAngular);
 		recurso.setItemCorrente(modulo);
 		

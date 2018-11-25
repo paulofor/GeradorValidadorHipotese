@@ -1,10 +1,10 @@
 <%@ jet package="jet.angular.projeto" 
-imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* " 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* " 
 class="PrincipalRouting" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
-List<ComponenteTela> telas = recursos.getListaTelaWeb();
+List<ItemComponente> telas = recursos.getListaTelaWeb();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { NgModule } from '@angular/core';
@@ -16,11 +16,11 @@ import { AdmHomeComponent } from '../adm-home/adm-home.component';
 import { FormsModule }   from '@angular/forms';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 <%
-Iterator<ComponenteTela> iterador = telas.iterator();
+Iterator<ItemComponente> iterador = telas.iterator();
 while (iterador.hasNext()) {
-	ComponenteTela tela = iterador.next();
+	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 %>
-import { <%= tela.getNome() %>TelaComponent } from '../tela/<%= tela.getArquivo() %>-tela/<%= tela.getArquivo() %>-tela.component';
+import { <%= tela.getNome() %> } from '../tela/<%= tela.getArquivo() %>/<%= tela.getArquivo() %>';
 <%
 	}
 %>
@@ -37,7 +37,7 @@ iterador = telas.iterator();
 while (iterador.hasNext()) {
 	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 %>
-		{path:'<%= tela.getNomeUrl() %>' , component: <%= tela.getNome() %>TelaComponent },
+		{path:'<%= tela.getNomeUrl() %>' , component: <%= tela.getNome() %> },
 <%
 	}
 %>
@@ -57,9 +57,9 @@ while (iterador.hasNext()) {
 <%
 iterador = telas.iterator();
 while (iterador.hasNext()) {
-	ComponenteTela tela = iterador.next();
+	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 %>
-		<%= tela.getNome() %>TelaComponent,
+		<%= tela.getNome() %>,
 <%
 	}
 %>
@@ -72,9 +72,9 @@ while (iterador.hasNext()) {
 <%
 iterador = telas.iterator();
 while (iterador.hasNext()) {
-	ComponenteTela tela = iterador.next();
+	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 %>
-		<%= tela.getNome() %>TelaComponent,
+		<%= tela.getNome() %>,
 <%
 	}
 %>

@@ -1,10 +1,10 @@
 <%@ jet package="jet.angular.componente.aplicacao" 
-imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* " 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
 class="SidebarHtml" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
-List<ComponenteTela> telas = recursos.getListaTelaWeb();
+List<ItemComponente> telas = recursos.getListaTelaWeb();
 Configuracao conf = recursos.getConfiguracao();
 %>
 <div class="sidebar" data-color="purple" data-image="../../assets-lbd/img/sidebar-5.jpg">
@@ -23,7 +23,7 @@ Configuracao conf = recursos.getConfiguracao();
 
     <ul class="nav">
 <%
-Iterator<ComponenteTela> iterador = telas.iterator();
+Iterator<ItemComponente> iterador = telas.iterator();
 while (iterador.hasNext()) {
 	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 %>

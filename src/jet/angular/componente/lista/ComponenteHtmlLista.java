@@ -27,7 +27,7 @@ public class ComponenteHtmlLista
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);

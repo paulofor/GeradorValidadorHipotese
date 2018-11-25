@@ -6,6 +6,7 @@ import jet.wrappers.base.*;
 import jet.wrappers.base.node.*;
 import jet.wrappers.angular.*;
 import gerapp.modelo.*;
+import gerapp.modelo.node.*;
 
 public class PrincipalRouting
 {
@@ -22,19 +23,19 @@ public class PrincipalRouting
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL + "import { NgModule } from '@angular/core';" + NL + "import { CommonModule } from '@angular/common';" + NL + "import { Routes, RouterModule } from '@angular/router';" + NL + "import { PrincipalComponent } from '../principal/principal.component';" + NL + "import { LoginComponent } from '../login/login.component';" + NL + "import { AdmHomeComponent } from '../adm-home/adm-home.component';" + NL + "import { FormsModule }   from '@angular/forms';" + NL + "import { SidebarComponent } from '../sidebar/sidebar.component';";
   protected final String TEXT_3 = NL + "import { ";
-  protected final String TEXT_4 = "TelaComponent } from '../tela/";
-  protected final String TEXT_5 = "-tela/";
-  protected final String TEXT_6 = "-tela.component';";
+  protected final String TEXT_4 = " } from '../tela/";
+  protected final String TEXT_5 = "/";
+  protected final String TEXT_6 = "';";
   protected final String TEXT_7 = NL + NL + NL + "const principalRotas: Routes = [" + NL + "  { path : '' , component: LoginComponent  }," + NL + "  { " + NL + "    path : 'home' , component: PrincipalComponent, " + NL + "    children : [" + NL + "      \t{path:'', component: AdmHomeComponent},";
   protected final String TEXT_8 = NL + "\t\t{path:'";
   protected final String TEXT_9 = "' , component: ";
-  protected final String TEXT_10 = "TelaComponent },";
+  protected final String TEXT_10 = " },";
   protected final String TEXT_11 = NL + "    ]" + NL + "  }" + NL + "]" + NL + "" + NL + "" + NL + "@NgModule({" + NL + "\timports: [" + NL + "\t\tCommonModule," + NL + "\t\tRouterModule.forRoot(principalRotas)," + NL + "\t\tFormsModule" + NL + "\t]," + NL + "\texports: [" + NL + "\t\tRouterModule,";
   protected final String TEXT_12 = NL + "\t\t";
-  protected final String TEXT_13 = "TelaComponent,";
+  protected final String TEXT_13 = ",";
   protected final String TEXT_14 = NL + "\t]," + NL + "\tdeclarations: [" + NL + "\t\tLoginComponent," + NL + "\t\tPrincipalComponent," + NL + "\t\tAdmHomeComponent," + NL + "\t\tSidebarComponent,";
   protected final String TEXT_15 = NL + "\t\t";
-  protected final String TEXT_16 = "TelaComponent,";
+  protected final String TEXT_16 = ",";
   protected final String TEXT_17 = NL + "\t]" + NL + "})" + NL + "export class PrincipalRoutingModule { }";
   protected final String TEXT_18 = NL;
 
@@ -44,14 +45,14 @@ public class PrincipalRouting
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-List<ComponenteTela> telas = recursos.getListaTelaWeb();
+List<ItemComponente> telas = recursos.getListaTelaWeb();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
     
-Iterator<ComponenteTela> iterador = telas.iterator();
+Iterator<ItemComponente> iterador = telas.iterator();
 while (iterador.hasNext()) {
-	ComponenteTela tela = iterador.next();
+	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 
     stringBuffer.append(TEXT_3);
     stringBuffer.append( tela.getNome() );
@@ -81,7 +82,7 @@ while (iterador.hasNext()) {
     
 iterador = telas.iterator();
 while (iterador.hasNext()) {
-	ComponenteTela tela = iterador.next();
+	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 
     stringBuffer.append(TEXT_12);
     stringBuffer.append( tela.getNome() );
@@ -93,7 +94,7 @@ while (iterador.hasNext()) {
     
 iterador = telas.iterator();
 while (iterador.hasNext()) {
-	ComponenteTela tela = iterador.next();
+	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 
     stringBuffer.append(TEXT_15);
     stringBuffer.append( tela.getNome() );

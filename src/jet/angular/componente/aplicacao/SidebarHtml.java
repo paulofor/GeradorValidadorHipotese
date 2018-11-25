@@ -6,6 +6,7 @@ import jet.wrappers.base.*;
 import jet.wrappers.base.node.*;
 import jet.wrappers.angular.*;
 import gerapp.modelo.*;
+import gerapp.modelo.node.*;
 
 public class SidebarHtml
 {
@@ -32,12 +33,12 @@ public class SidebarHtml
     stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
-List<ComponenteTela> telas = recursos.getListaTelaWeb();
+List<ItemComponente> telas = recursos.getListaTelaWeb();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
     
-Iterator<ComponenteTela> iterador = telas.iterator();
+Iterator<ItemComponente> iterador = telas.iterator();
 while (iterador.hasNext()) {
 	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 

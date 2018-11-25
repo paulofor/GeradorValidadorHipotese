@@ -4,7 +4,7 @@ class="ComponenteHtmlLista" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
-ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
 <div class="main-content">
