@@ -92,7 +92,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		listaEntidade = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		TelaWebRepositorio rep = adapter.createRepository(TelaWebRepositorio.class);
-
+		System.out.println("Chamada TelaWeb...");
 		rep.findByIdAplicacao(aplicacao.getId(),new ListCallback<TelaWebRest>() {
 			@Override
 			public void onError(Throwable t) {
@@ -101,6 +101,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 			@Override
 			public void onSuccess(List<TelaWebRest> lista) {
+				System.out.println("Resposta TelaWeb");
 				List listaSaida = new ArrayList();
 				for (TelaWebRest item : lista) {
 					listaSaida.add(new TelaWebWrapper(item));
@@ -109,7 +110,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			System.out.println("aguardando listaTelaWeb");
+			System.out.print("-");
 		} while (listaTelaWeb == null);
 		return listaTelaWeb;
 	}
@@ -118,7 +119,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		listaAtributo = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		AtributoEntidadeRepositorio rep = adapter.createRepository(AtributoEntidadeRepositorio.class);
-
+		System.out.println("Chamada Atributos");
 		rep.findByIdEntidade(idEntidade, new ListCallback<AtributoEntidadeRest>() {
 			@Override
 			public void onError(Throwable t) {
@@ -127,6 +128,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 			@Override
 			public void onSuccess(List<AtributoEntidadeRest> lista) {
+				System.out.println("Respostsa Atributos");
 				List listaSaida = new ArrayList();
 				for (AtributoEntidadeRest item : lista) {
 					System.out.println("ID:" + item.getNome());
@@ -136,7 +138,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			System.out.println("aguardando listaAtributo");
+			//System.out.println("");
 		} while (listaAtributo == null);
 		return listaAtributo;
 	}
@@ -145,7 +147,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		listaRelacionamento = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		RelacionamentoEntidadeRepositorio rep = adapter.createRepository(RelacionamentoEntidadeRepositorio.class);
-
+		
 		rep.findByIdEntidade(idEntidade, new ListCallback<RelacionamentoEntidadeRest>() {
 
 			@Override
@@ -164,7 +166,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			System.out.println("aguardando listaRelacionamento");
+			//System.out.print("-");
 		} while (listaRelacionamento == null);
 		return listaRelacionamento;
 	}

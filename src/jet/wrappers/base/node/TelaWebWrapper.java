@@ -24,7 +24,7 @@ public class TelaWebWrapper implements ItemComponente{
 	@Override
 	public String getArquivo() {
 		String nome = principal.getNome();
-		return nome.toLowerCase() + "-tela";
+		return nome.toLowerCase() + "-tela.component";
 	}
 
 	@Override
@@ -34,6 +34,7 @@ public class TelaWebWrapper implements ItemComponente{
 
 	@Override
 	public String getPathArquivo() {
-		return getArquivo();
+		String nome = principal.getNome();
+		return nome.toLowerCase() + "-tela";
 	}
 }
