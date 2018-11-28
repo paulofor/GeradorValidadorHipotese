@@ -37,4 +37,10 @@ public class TelaWebWrapper implements ItemComponente{
 		String nome = principal.getNome();
 		return nome.toLowerCase() + "-tela";
 	}
+
+	@Override
+	public String getNomeControle() {
+		String nome = principal.getNome();
+		return nome.toLowerCase() + "-tela";
+	}
 }

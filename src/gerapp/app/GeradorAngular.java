@@ -70,7 +70,8 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		for (ItemAngular tela : recurso.getListaTelaWeb()) {
 			recurso.setItemCorrente(tela);
 			
-			String pathDestino = getDiretorioAngular(recurso) + "//tela//" + tela.getArquivo() + "//" ;
+			String pathDestino = getDiretorioAngular(recurso) + "//tela//" + 
+					((ItemComponente)tela).getPathArquivo() + "//" ;
 			this.criaCaminhoSeNaoExiste(pathDestino);
 			this.limpaCaminho(pathDestino);
 			

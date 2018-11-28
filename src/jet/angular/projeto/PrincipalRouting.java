@@ -30,14 +30,8 @@ public class PrincipalRouting
   protected final String TEXT_8 = NL + "\t\t{path:'";
   protected final String TEXT_9 = "' , component: ";
   protected final String TEXT_10 = " },";
-  protected final String TEXT_11 = NL + "    ]" + NL + "  }" + NL + "]" + NL + "" + NL + "" + NL + "@NgModule({" + NL + "\timports: [" + NL + "\t\tCommonModule," + NL + "\t\tRouterModule.forRoot(principalRotas)," + NL + "\t\tFormsModule" + NL + "\t]," + NL + "\texports: [" + NL + "\t\tRouterModule,";
-  protected final String TEXT_12 = NL + "\t\t";
-  protected final String TEXT_13 = ",";
-  protected final String TEXT_14 = NL + "\t]," + NL + "\tdeclarations: [" + NL + "\t\tLoginComponent," + NL + "\t\tPrincipalComponent," + NL + "\t\tAdmHomeComponent," + NL + "\t\tSidebarComponent,";
-  protected final String TEXT_15 = NL + "\t\t";
-  protected final String TEXT_16 = ",";
-  protected final String TEXT_17 = NL + "\t]" + NL + "})" + NL + "export class PrincipalRoutingModule { }";
-  protected final String TEXT_18 = NL;
+  protected final String TEXT_11 = NL + "    ]" + NL + "  }" + NL + "]" + NL + "" + NL + "" + NL + "@NgModule({" + NL + "\timports: [" + NL + "\t\tCommonModule," + NL + "\t\tRouterModule.forRoot(principalRotas)," + NL + "\t\tFormsModule" + NL + "\t]," + NL + "\texports: [" + NL + "\t\tRouterModule" + NL + "\t]," + NL + "\tdeclarations: [" + NL + "\t\tLoginComponent," + NL + "\t\tPrincipalComponent," + NL + "\t\tAdmHomeComponent," + NL + "\t\tSidebarComponent" + NL + "\t]" + NL + "})" + NL + "export class PrincipalRoutingModule { }";
+  protected final String TEXT_12 = NL;
 
   public String generate(Object argument)
   {
@@ -57,7 +51,7 @@ while (iterador.hasNext()) {
     stringBuffer.append(TEXT_3);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_4);
-    stringBuffer.append( tela.getArquivo() );
+    stringBuffer.append( tela.getPathArquivo() );
     stringBuffer.append(TEXT_5);
     stringBuffer.append( tela.getArquivo() );
     stringBuffer.append(TEXT_6);
@@ -79,31 +73,7 @@ while (iterador.hasNext()) {
 	}
 
     stringBuffer.append(TEXT_11);
-    
-iterador = telas.iterator();
-while (iterador.hasNext()) {
-	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
-
     stringBuffer.append(TEXT_12);
-    stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_13);
-    
-	}
-
-    stringBuffer.append(TEXT_14);
-    
-iterador = telas.iterator();
-while (iterador.hasNext()) {
-	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
-
-    stringBuffer.append(TEXT_15);
-    stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_16);
-    
-	}
-
-    stringBuffer.append(TEXT_17);
-    stringBuffer.append(TEXT_18);
     return stringBuffer.toString();
   }
 }

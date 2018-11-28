@@ -22,8 +22,8 @@ public class ComponenteTsTela
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL + "import { Component, OnInit } from '@angular/core';" + NL + "" + NL + "@Component({" + NL + "  selector: 'app-";
   protected final String TEXT_3 = "'," + NL + "  templateUrl: './";
-  protected final String TEXT_4 = ".component.html'," + NL + "  styleUrls: ['./";
-  protected final String TEXT_5 = ".component.scss']" + NL + "})" + NL + "export class ";
+  protected final String TEXT_4 = ".html'," + NL + "  styleUrls: ['./";
+  protected final String TEXT_5 = ".scss']" + NL + "})" + NL + "export class ";
   protected final String TEXT_6 = " implements OnInit {" + NL + "" + NL + "  constructor() {" + NL + "  }" + NL + "" + NL + "  ngOnInit() {" + NL + "  }" + NL + "" + NL + "" + NL + "" + NL + "}";
 
   public String generate(Object argument)
@@ -36,7 +36,7 @@ TelaWebWrapper tela = (TelaWebWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
-    stringBuffer.append( tela.getArquivo() );
+    stringBuffer.append( tela.getNomeControle() );
     stringBuffer.append(TEXT_3);
     stringBuffer.append( tela.getArquivo() );
     stringBuffer.append(TEXT_4);

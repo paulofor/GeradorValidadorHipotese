@@ -20,7 +20,7 @@ Iterator<ItemComponente> iterador = telas.iterator();
 while (iterador.hasNext()) {
 	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
 %>
-import { <%= tela.getNome() %> } from '../tela/<%= tela.getArquivo() %>/<%= tela.getArquivo() %>';
+import { <%= tela.getNome() %> } from '../tela/<%= tela.getPathArquivo() %>/<%= tela.getArquivo() %>';
 <%
 	}
 %>
@@ -53,31 +53,13 @@ while (iterador.hasNext()) {
 		FormsModule
 	],
 	exports: [
-		RouterModule,
-<%
-iterador = telas.iterator();
-while (iterador.hasNext()) {
-	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
-%>
-		<%= tela.getNome() %>,
-<%
-	}
-%>
+		RouterModule
 	],
 	declarations: [
 		LoginComponent,
 		PrincipalComponent,
 		AdmHomeComponent,
-		SidebarComponent,
-<%
-iterador = telas.iterator();
-while (iterador.hasNext()) {
-	TelaWebWrapper tela = (TelaWebWrapper) iterador.next();
-%>
-		<%= tela.getNome() %>,
-<%
-	}
-%>
+		SidebarComponent
 	]
 })
 export class PrincipalRoutingModule { }

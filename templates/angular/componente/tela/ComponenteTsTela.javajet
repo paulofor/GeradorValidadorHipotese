@@ -10,9 +10,9 @@ Configuracao conf = recursos.getConfiguracao();
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-<%= tela.getArquivo() %>',
-  templateUrl: './<%= tela.getArquivo() %>.component.html',
-  styleUrls: ['./<%= tela.getArquivo() %>.component.scss']
+  selector: 'app-<%= tela.getNomeControle() %>',
+  templateUrl: './<%= tela.getArquivo() %>.html',
+  styleUrls: ['./<%= tela.getArquivo() %>.scss']
 })
 export class <%= tela.getNome() %> implements OnInit {
 

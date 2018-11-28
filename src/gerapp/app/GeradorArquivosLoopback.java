@@ -110,7 +110,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			System.out.print("-");
+			System.out.println("aguardando tela...");
 		} while (listaTelaWeb == null);
 		return listaTelaWeb;
 	}
@@ -138,7 +138,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			//System.out.println("");
+			System.out.println("aguardando atributo");
 		} while (listaAtributo == null);
 		return listaAtributo;
 	}
@@ -166,7 +166,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			//System.out.print("-");
+			System.out.println("aguardando relacionamento");
 		} while (listaRelacionamento == null);
 		return listaRelacionamento;
 	}
