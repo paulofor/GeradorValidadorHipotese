@@ -1,7 +1,6 @@
 <%@ jet package="jet.angular.componente.lista" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
 class="ComponenteHtmlLista" %>
-
 <%
 Recursos recursos = (Recursos) argument;  
 ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getItemCorrente();

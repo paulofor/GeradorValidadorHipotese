@@ -18,19 +18,17 @@ public class ComponenteHtmlLista
   }
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-  protected final String TEXT_1 = "";
-  protected final String TEXT_2 = NL + "<p>Componente Lista</p>";
+  protected final String TEXT_1 = "<p>Componente Lista</p>";
 
   public String generate(Object argument)
   {
     final StringBuffer stringBuffer = new StringBuffer();
-    stringBuffer.append(TEXT_1);
     
 Recursos recursos = (Recursos) argument;  
 ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
-    stringBuffer.append(TEXT_2);
+    stringBuffer.append(TEXT_1);
     return stringBuffer.toString();
   }
 }

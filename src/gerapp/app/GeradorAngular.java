@@ -41,10 +41,13 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
 		this.arquivosLoopbackClient(recurso);
+		this.arquivosPrincipalFixo(recurso);
+		
 		this.criaComponentesTela(recurso);
+		this.criaComponentesLista(recurso);
 
 		//this.arquivosLoginFixo(recurso);
-		this.arquivosPrincipalFixo(recurso);
+		
 		//this.arquivosApp(recurso);
 		
 		//this.arquivosProjeto(recurso);
