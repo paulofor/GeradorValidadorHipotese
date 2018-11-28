@@ -35,7 +35,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	protected ClasseWrapper entidade = null;
 
 	private String getDiretorioAngular(Recursos recurso) {
-		return PATH + recurso.getConfiguracao().getNamespace() + "//front//src//app//";
+		return PATH + recurso.getConfiguracao().getNamespace() + "//front3//src//app//";
 	}
 
 	@Override
@@ -43,16 +43,16 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		this.arquivosLoopbackClient(recurso);
 		this.criaComponentesTela(recurso);
 
-		this.arquivosLoginFixo(recurso);
+		//this.arquivosLoginFixo(recurso);
 		this.arquivosPrincipalFixo(recurso);
-		this.arquivosApp(recurso);
+		//this.arquivosApp(recurso);
 		
-		this.arquivosProjeto(recurso);
-		this.principalRouting(recurso);
-		this.arquivosAdmHome(recurso);
-		this.arquivosSidebar(recurso);
+		//this.arquivosProjeto(recurso);
+		//this.principalRouting(recurso);
+		//this.arquivosAdmHome(recurso);
+		//this.arquivosSidebar(recurso);
 	
-		this.criaComponentesLista(recurso);
+		//this.criaComponentesLista(recurso);
 	}
 
 	@Override
