@@ -42,26 +42,28 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
 		this.arquivosLoopbackClient(recurso);
 		this.arquivosPrincipalFixo(recurso);
+		this.principalApp(recurso);
 		
 		this.criaComponentesTela(recurso);
 		this.criaComponentesLista(recurso);
+		this.arquivosSidebar(recurso);
+		this.arquivosAdmHome(recurso);
 
-		//this.arquivosLoginFixo(recurso);
+		this.arquivosLoginFixo(recurso);
+		this.principalRouting(recurso);
 		
-		//this.arquivosApp(recurso);
 		
+		this.arquivosApp(recurso);
 		//this.arquivosProjeto(recurso);
-		//this.principalRouting(recurso);
-		//this.arquivosAdmHome(recurso);
-		//this.arquivosSidebar(recurso);
-	
-		//this.criaComponentesLista(recurso);
+		
+
 	}
 
 	@Override
 	public void criaArquivoEntidade(Recursos recurso) throws IOException {
 	}
 
+	
 	/*
 	 * Customizados:
 	 * 
@@ -168,8 +170,18 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		String conteudo = PrincipalRouting.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 
-		this.copiaArquivo("principal.css", pathOrigem, pathDestino, recurso);
+		
 		this.copiaArquivo("principal-routing.module.spec.ts", pathOrigem, pathDestino, recurso);
+
+	}
+	
+	private void principalApp(Recursos recurso) throws IOException {
+		String pathDestino = getDiretorioAngular(recurso);
+		this.criaCaminhoSeNaoExiste(pathDestino);
+
+		String pathOrigem = ".//fixos//angular//app-src//";
+
+		this.copiaArquivo("principal.css", pathOrigem, pathDestino, recurso);
 
 	}
 

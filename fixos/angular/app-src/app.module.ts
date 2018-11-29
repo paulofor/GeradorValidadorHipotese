@@ -6,6 +6,8 @@ import { SDKBrowserModule } from './shared/sdk';
 import { SocketDriver } from './shared/sdk/sockets/socket.driver';
 import { PrincipalRoutingModule } from './principal-routing/principal-routing.module';
 import { ComponenteTelaModule } from './tela/componente-tela.module';
+import { ServicoModule } from './servico/servico.module';
+import { ComponenteListaModule } from './lista/componente-lista.module';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,12 @@ import { ComponenteTelaModule } from './tela/componente-tela.module';
   imports: [
     BrowserModule,
     PrincipalRoutingModule,
-    SDKBrowserModule.forRoot(),
-    ComponenteTelaModule
+    ComponenteTelaModule,
+    ServicoModule,
+    ComponenteListaModule
   ],
   providers: [
-    SocketDriver
+    
   ],
   bootstrap: [AppComponent]
 })
