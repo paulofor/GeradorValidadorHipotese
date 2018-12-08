@@ -93,7 +93,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		TelaWebRepositorio rep = adapter.createRepository(TelaWebRepositorio.class);
 		System.out.println("Chamada TelaWeb...");
-		rep.findByIdAplicacao(aplicacao.getId(),new ListCallback<TelaWebRest>() {
+		rep.findByIdAplicacaoGerador(aplicacao.getId(),new ListCallback<TelaWebRest>() {
 			@Override
 			public void onError(Throwable t) {
 				t.printStackTrace();
@@ -110,7 +110,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			System.out.println("aguardando tela...");
+			//System.out.println("aguardando tela...");
 		} while (listaTelaWeb == null);
 		return listaTelaWeb;
 	}

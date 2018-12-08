@@ -24,5 +24,13 @@ public class TelaWebRepositorio extends ModelRepository<TelaWebRest>{
 		params.put("id", id);
 		invokeStaticMethod("findByIdAplicacao", params, new JsonArrayParser<TelaWebRest>(this, callback));
 	}
+	
+	public void findByIdAplicacaoGerador(Object id, final ListCallback<TelaWebRest> callback) {
+		RestContractItem contrato = new RestContractItem("TelaWebs/obtemPorIdAplicacaoParaGerador","GET");
+		this.getRestAdapter().getContract().addItem(contrato, "TelaWeb.findByIdAplicacaoGerador");
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idAplicacao", id);
+		invokeStaticMethod("findByIdAplicacaoGerador", params, new JsonArrayParser<TelaWebRest>(this, callback));
+	}
 
 }
