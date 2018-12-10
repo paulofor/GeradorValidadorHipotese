@@ -42,6 +42,7 @@ public class BeanUtil {
 						setter = objectClass.getDeclaredMethod(setterName,value.getClass());
 					}
 				} catch (Exception ex) {
+					System.out.println("Erro-setter: " + ex.getMessage());
 				}
 			}
 			

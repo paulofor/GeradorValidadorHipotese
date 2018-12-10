@@ -1,6 +1,6 @@
 package loopback.cliente.modelo;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import loopback.android.Model;
@@ -33,9 +33,12 @@ public class TelaComponenteWebRest extends Model{
 	public ComponenteWebRest getComponenteWeb() {
 		return componenteWeb;
 	}
-	public void setComponenteWeb(Map componenteWeb) {
+	
+	
+	public void setComponenteWeb(HashMap componenteWeb) {
 		Object objeto = new ComponenteWebRest();
 		BeanUtil.setProperties(objeto, (Map<String, ? extends Object>) componenteWeb, true);
+		System.out.println("Componente: " + ((ComponenteWebRest) objeto).)
 	}
 	
 	
