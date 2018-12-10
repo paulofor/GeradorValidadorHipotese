@@ -9,7 +9,7 @@ import loopback.android.remoting.BeanUtil;
 
 public class TelaWebRest extends Model{
 	
-	private Long id;
+
 	private String objetivo;
 	private String nome;
 	private String nomeMenu;
@@ -21,7 +21,7 @@ public class TelaWebRest extends Model{
 	public List<TelaComponenteWebRest> getTelaComponenteWebs() {
 		return telaComponenteWebs;
 	}
-	public void setTelaComponenteWebs(List<TelaComponenteWebRest> telaComponenteWebs) {
+	public void setTelaComponenteWebs(ArrayList telaComponenteWebs) {
 		this.telaComponenteWebs = new ArrayList<TelaComponenteWebRest>();
 		for (int i=0; i<telaComponenteWebs.size(); i++) {
 			Object objeto = new TelaComponenteWebRest();
@@ -32,12 +32,6 @@ public class TelaWebRest extends Model{
 	}
 	
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getObjetivo() {
 		return objetivo;
 	}

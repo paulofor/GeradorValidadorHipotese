@@ -6,6 +6,7 @@ import jet.wrappers.base.*;
 import jet.wrappers.base.node.*;
 import jet.wrappers.angular.*;
 import gerapp.modelo.*;
+import gerapp.modelo.node.*;
 
 public class ComponenteHtmlTela
 {
@@ -21,6 +22,9 @@ public class ComponenteHtmlTela
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL;
+  protected final String TEXT_3 = NL + "\t<";
+  protected final String TEXT_4 = "></";
+  protected final String TEXT_5 = ">";
 
   public String generate(Object argument)
   {
@@ -32,6 +36,19 @@ TelaWebWrapper tela = (TelaWebWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
+    
+Iterator<ItemComponente> iterador = tela.getComponenteIterator();
+while (iterador.hasNext()) {
+	ComponenteWebWrapper comp = (ComponenteWebWrapper) iterador.next();
+
+    stringBuffer.append(TEXT_3);
+    stringBuffer.append( comp.getNomeControle() );
+    stringBuffer.append(TEXT_4);
+    stringBuffer.append( comp.getNomeControle() );
+    stringBuffer.append(TEXT_5);
+    
+	}
+
     return stringBuffer.toString();
   }
 }

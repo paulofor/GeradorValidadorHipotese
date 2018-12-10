@@ -14,6 +14,7 @@ import jet.angular.componente.ComponenteSpec;
 import jet.angular.componente.aplicacao.SidebarHtml;
 import jet.angular.componente.lista.ComponenteHtmlLista;
 import jet.angular.componente.lista.ComponenteTsLista;
+import jet.angular.componente.tela.ComponenteHtmlTela;
 import jet.angular.componente.tela.ComponenteTsTela;
 import jet.angular.loopback.IndexModel;
 import jet.angular.loopback.IndexPrincipal;
@@ -82,7 +83,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 			
 			
 			this.copiaArquivo(pathOrigem + "componente-tela.css", pathDestino + tela.getArquivo() + ".scss");
-			this.copiaArquivo(pathOrigem + "componente-tela.html", pathDestino + tela.getArquivo() + ".html");
+			//this.copiaArquivo(pathOrigem + "componente-tela.html", pathDestino + tela.getArquivo() + ".html");
 
 			String nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			String conteudo = ComponenteTsTela.create("\n").generate(recurso);
@@ -92,6 +93,10 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 			conteudo = ComponenteSpec.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 	
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			conteudo = ComponenteHtmlTela.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+			
 		}
 		
 		// Modulo

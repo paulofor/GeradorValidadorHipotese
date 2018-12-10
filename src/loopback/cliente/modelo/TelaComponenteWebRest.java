@@ -12,6 +12,8 @@ public class TelaComponenteWebRest extends Model{
 	private Integer componenteWebId;
 	private Integer telaWebId;
 	private ComponenteWebRest componenteWeb;
+	
+	
 	public Integer getOrdenacao() {
 		return ordenacao;
 	}
@@ -38,7 +40,8 @@ public class TelaComponenteWebRest extends Model{
 	public void setComponenteWeb(HashMap componenteWeb) {
 		Object objeto = new ComponenteWebRest();
 		BeanUtil.setProperties(objeto, (Map<String, ? extends Object>) componenteWeb, true);
-		System.out.println("Componente: " + ((ComponenteWebRest) objeto).)
+		this.componenteWeb = (ComponenteWebRest) objeto;
+		System.out.println("Componente: " + this.componenteWeb.getNome());
 	}
 	
 	
