@@ -6,7 +6,9 @@ public class ConversorNome {
 		String saida = "app";
 		for (int i=0;i<nomeComponente.length();i++) {
 			if (Character.isUpperCase(nomeComponente.charAt(i))) {
-				saida += "-" + nomeComponente.charAt(i).toLowerCase();
+				saida += "-" + Character.toLowerCase(nomeComponente.charAt(i));
+			} else {
+				saida += nomeComponente.charAt(i);
 			}
 		}
 		return saida;

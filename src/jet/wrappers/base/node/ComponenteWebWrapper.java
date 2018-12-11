@@ -1,6 +1,7 @@
 package jet.wrappers.base.node;
 
 import gerapp.modelo.node.ItemComponente;
+import gerapp.padrao.node.ConversorNome;
 import loopback.cliente.modelo.ComponenteWebRest;
 
 public class ComponenteWebWrapper implements ItemComponente{
@@ -15,7 +16,7 @@ public class ComponenteWebWrapper implements ItemComponente{
 
 	@Override
 	public String getNomeControle() {
-		return "meu-controle";
+		return ConversorNome.getNomeControle(principal.getNome());
 	}
 
 	@Override
