@@ -24,6 +24,7 @@ import jet.angular.loopback.LoopbackService;
 import jet.angular.loopback.SDKModel;
 import jet.angular.modulo.ModuloSpec;
 import jet.angular.modulo.ModuloTsGrupoComponente;
+import jet.angular.projeto.ModuloServicoTs;
 import jet.angular.projeto.PackageJson;
 import jet.angular.projeto.PrincipalRouting;
 import jet.wrappers.angular.ClasseWrapperAngular;
@@ -36,7 +37,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	protected ClasseWrapper entidade = null;
 
 	private String getDiretorioAngular(Recursos recurso) {
-		return PATH + recurso.getConfiguracao().getNamespace() + "//front4//src//app//";
+		return PATH + recurso.getConfiguracao().getNamespace() + "//front3//src//app//";
 	}
 
 	@Override
@@ -45,19 +46,37 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		this.arquivosPrincipalFixo(recurso);
 		this.principalApp(recurso);
 		
-		//this.criaComponentesTela(recurso);
+		this.criaComponentesTela(recurso);
 		this.criaComponentesLista(recurso);
-		//this.arquivosSidebar(recurso);
-		//this.arquivosAdmHome(recurso);
+		this.criaModuloServico(recurso);
+		this.arquivosSidebar(recurso);
+		this.arquivosAdmHome(recurso);
 
-		//this.arquivosLoginFixo(recurso);
-		//this.principalRouting(recurso);
+		this.arquivosLoginFixo(recurso);
+		this.principalRouting(recurso);
 		
 		
 		this.arquivosApp(recurso);
 		//this.arquivosProjeto(recurso);
 		
 
+	}
+	
+	private void criaModuloServico(Recursos recurso) throws IOException {
+		String pathDestino = getDiretorioAngular(recurso) + "//servico//"; 
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.limpaCaminho(pathDestino);
+		
+		String nomeArquivo = pathDestino + "servico.module.ts";
+		String conteudo = ModuloServicoTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		ModuloComponente modulo = new ModuloComponente("ServicoModule", "servico.module");
+		recurso.setItemCorrente(modulo);
+		nomeArquivo = pathDestino + modulo.getArquivo() + ".spec.ts";
+		conteudo = ModuloSpec.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		
 	}
 
 	@Override

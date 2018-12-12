@@ -1,0 +1,53 @@
+<%@ jet package="jet.angular.projeto" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* " 
+class="ModuloServicoTs" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+List<ClasseWrapper> classes = recursos.getListaClasse();
+Configuracao conf = recursos.getConfiguracao();
+%>
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from 'src/app/shared/sdk';
+import { HttpClientModule } from '@angular/common/http';
+import { SocketDriver } from '../shared/sdk/sockets/socket.driver';
+
+<%
+Iterator iterador = classes.iterator();
+while (iterador.hasNext()) {
+	ClasseWrapper classe = (ClasseWrapper) iterador.next();
+%>
+import { <%= classe.getNomeParaClasse() %>Api } from 'src/app/shared/sdk';
+<%
+}
+%>
+
+
+@NgModule({
+	imports: [
+		CommonModule,
+		HttpClientModule,
+		SDKBrowserModule.forRoot(),
+	],
+	providers: [
+		SocketDriver,
+		SDKModels,
+		LoopBackAuth,
+		InternalStorage,
+<%
+iterador = classes.iterator();
+while (iterador.hasNext()) {
+	ClasseWrapper classe = (ClasseWrapper) iterador.next();
+%>
+		<%= classe.getNomeParaClasse() %>Api,
+<%
+}
+%>
+	],
+	declarations: 
+	[
+	]
+})
+export class ServicoModule { }
