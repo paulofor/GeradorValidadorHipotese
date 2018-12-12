@@ -18,11 +18,29 @@ import { <%= comp.getNome() %> } from './<%= comp.getPathArquivo() %>/<%= comp.g
 <%
 }
 %>
+<% 
+it = modulo.getListaModuloImportado().iterator();
+while (it.hasNext()) {
+	ModuloComponente comp = (ModuloComponente) it.next(); 
+%>  
+import { <%= comp.getNome() %> } from '../<%= comp.getPathArquivo() %>/<%= comp.getArquivo() %>';
+<%
+}
+%>
 
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+<% 
+it = modulo.getListaModuloImportado().iterator();
+while (it.hasNext()) {
+	ModuloComponente comp = (ModuloComponente) it.next(); 
+%>  
+    <%= comp.getNome() %>,
+<%
+}
+%>
   ],
   declarations: [
 <% 

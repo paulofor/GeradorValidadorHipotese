@@ -37,7 +37,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 	protected ClasseWrapper entidade = null;
 
 	private String getDiretorioAngular(Recursos recurso) {
-		return PATH + recurso.getConfiguracao().getNamespace() + "//front3//src//app//";
+		return PATH + recurso.getConfiguracao().getNamespace() + "//front//src//app//";
 	}
 
 	@Override
@@ -123,6 +123,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 		
 		ModuloComponente modulo = new ModuloComponente("ComponenteTelaModule", "componente-tela.module");
 		modulo.setListaComponente(recurso.getListaTelaWeb());
+		modulo.adicionaModuloImportado(new ModuloComponente("ComponenteListaModule","componente-lista.module","lista"));
 		recurso.setItemCorrente(modulo);
 		
 		String nomeArquivo = pathDestinoModulo + modulo.getArquivo() + ".ts";

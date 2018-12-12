@@ -25,16 +25,24 @@ public class ModuloTsGrupoComponente
   protected final String TEXT_4 = " } from './";
   protected final String TEXT_5 = "/";
   protected final String TEXT_6 = "';";
-  protected final String TEXT_7 = NL + NL + NL + "@NgModule({" + NL + "  imports: [" + NL + "    CommonModule" + NL + "  ]," + NL + "  declarations: [";
-  protected final String TEXT_8 = "  ";
-  protected final String TEXT_9 = NL + "    ";
-  protected final String TEXT_10 = ",";
-  protected final String TEXT_11 = NL + "  ]," + NL + "  exports: [";
+  protected final String TEXT_7 = "  " + NL + "import { ";
+  protected final String TEXT_8 = " } from '../";
+  protected final String TEXT_9 = "/";
+  protected final String TEXT_10 = "';";
+  protected final String TEXT_11 = NL + NL + NL + "@NgModule({" + NL + "  imports: [" + NL + "    CommonModule,";
   protected final String TEXT_12 = "  ";
   protected final String TEXT_13 = NL + "    ";
   protected final String TEXT_14 = ",";
-  protected final String TEXT_15 = NL + "  ]" + NL + "})" + NL + "export class ";
-  protected final String TEXT_16 = " { }";
+  protected final String TEXT_15 = NL + "  ]," + NL + "  declarations: [";
+  protected final String TEXT_16 = "  ";
+  protected final String TEXT_17 = NL + "    ";
+  protected final String TEXT_18 = ",";
+  protected final String TEXT_19 = NL + "  ]," + NL + "  exports: [";
+  protected final String TEXT_20 = "  ";
+  protected final String TEXT_21 = NL + "    ";
+  protected final String TEXT_22 = ",";
+  protected final String TEXT_23 = NL + "  ]" + NL + "})" + NL + "export class ";
+  protected final String TEXT_24 = " { }";
 
   public String generate(Object argument)
   {
@@ -61,24 +69,26 @@ while (it.hasNext()) {
     
 }
 
-    stringBuffer.append(TEXT_7);
      
-it = modulo.getListaComponente().iterator();
+it = modulo.getListaModuloImportado().iterator();
 while (it.hasNext()) {
-	ItemComponente comp = (ItemComponente) it.next(); 
+	ModuloComponente comp = (ModuloComponente) it.next(); 
 
-    stringBuffer.append(TEXT_8);
-    stringBuffer.append(TEXT_9);
+    stringBuffer.append(TEXT_7);
     stringBuffer.append( comp.getNome() );
+    stringBuffer.append(TEXT_8);
+    stringBuffer.append( comp.getPathArquivo() );
+    stringBuffer.append(TEXT_9);
+    stringBuffer.append( comp.getArquivo() );
     stringBuffer.append(TEXT_10);
     
 }
 
     stringBuffer.append(TEXT_11);
      
-it = modulo.getListaComponente().iterator();
+it = modulo.getListaModuloImportado().iterator();
 while (it.hasNext()) {
-	ItemComponente comp = (ItemComponente) it.next(); 
+	ModuloComponente comp = (ModuloComponente) it.next(); 
 
     stringBuffer.append(TEXT_12);
     stringBuffer.append(TEXT_13);
@@ -88,8 +98,34 @@ while (it.hasNext()) {
 }
 
     stringBuffer.append(TEXT_15);
-    stringBuffer.append( modulo.getNome() );
+     
+it = modulo.getListaComponente().iterator();
+while (it.hasNext()) {
+	ItemComponente comp = (ItemComponente) it.next(); 
+
     stringBuffer.append(TEXT_16);
+    stringBuffer.append(TEXT_17);
+    stringBuffer.append( comp.getNome() );
+    stringBuffer.append(TEXT_18);
+    
+}
+
+    stringBuffer.append(TEXT_19);
+     
+it = modulo.getListaComponente().iterator();
+while (it.hasNext()) {
+	ItemComponente comp = (ItemComponente) it.next(); 
+
+    stringBuffer.append(TEXT_20);
+    stringBuffer.append(TEXT_21);
+    stringBuffer.append( comp.getNome() );
+    stringBuffer.append(TEXT_22);
+    
+}
+
+    stringBuffer.append(TEXT_23);
+    stringBuffer.append( modulo.getNome() );
+    stringBuffer.append(TEXT_24);
     return stringBuffer.toString();
   }
 }

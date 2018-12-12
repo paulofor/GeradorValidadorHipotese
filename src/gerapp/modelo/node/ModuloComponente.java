@@ -11,13 +11,26 @@ public class ModuloComponente implements ItemAngular{
 	private List<ItemComponente> listaComponente;
 	private String nomeArquivo;
 	private List<ModuloComponente> listaImportado;
+	private String pathArquivo;
 	
-	public ModuloComponente(String nome, String arquivo) {
+	
+	public ModuloComponente(String nome, String arquivo, String path) {
 		nomeModulo = nome;
 		nomeArquivo = arquivo;
+		pathArquivo = path;
 		listaImportado = new ArrayList<ModuloComponente>();
 	}
+	
 
+	public ModuloComponente(String nome, String arquivo) {
+		this(nome,arquivo,"");
+	}
+
+	public String getPathArquivo() {
+		return this.pathArquivo;
+	}
+	
+	
 	public List<ModuloComponente> getListaModuloImportado() {
 		return listaImportado;
 	}
