@@ -8,15 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jet.wrappers.base.ClasseWrapper;
+import jet.wrappers.base.node.TelaAppWrapper;
 import jet.wrappers.base.node.TelaWebWrapper;
 import loopback.android.callback.ListCallback;
 import loopback.cliente.modelo.AtributoEntidadeRest;
 import loopback.cliente.modelo.EntidadeRest;
 import loopback.cliente.modelo.RelacionamentoEntidadeRest;
+import loopback.cliente.modelo.TelaAppRest;
 import loopback.cliente.modelo.TelaWebRest;
 import loopback.cliente.repositorio.AtributoEntidadeRepositorio;
 import loopback.cliente.repositorio.EntidadeRepositorio;
 import loopback.cliente.repositorio.RelacionamentoEntidadeRepositorio;
+import loopback.cliente.repositorio.TelaAppRepositorio;
 import loopback.cliente.repositorio.TelaWebRepositorio;
 import loopback.remoting.adapters.RestAdapter;
 import br.com.digicom.lib.dao.DaoException;
@@ -29,6 +32,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	// Listas novas com objetos rest
 	protected List<TelaWebRest> listaTelaWeb = null;
+	protected List<TelaAppRest> listaTelaApp = null;
 
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
@@ -48,8 +52,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	@Override
 	protected ClasseWrapper criaWrapper(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("Metodo precisa ser implementado");
 	}
 
 	@Override
@@ -61,6 +64,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	@Override
 	protected void montaListasNovas(Recursos recursos) {
 		recursos.setListaTelaWeb(getListaTelaWeb());
+		recursos.setListaTelaApp(this.getListaTelaApp());
 	}
 
 	public synchronized List getListaEntidade() throws DaoException {
@@ -89,7 +93,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	}
 
 	public synchronized List getListaTelaWeb() {
-		listaEntidade = null;
+		listaTelaWeb = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		TelaWebRepositorio rep = adapter.createRepository(TelaWebRepositorio.class);
 		System.out.println("Chamada TelaWeb...");
@@ -113,6 +117,33 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			//System.out.println("aguardando tela...");
 		} while (listaTelaWeb == null);
 		return listaTelaWeb;
+	}
+	
+	public synchronized List getListaTelaApp() {
+		listaTelaApp = null;
+		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		TelaAppRepositorio rep = adapter.createRepository(TelaAppRepositorio.class);
+		System.out.println("Chamada TelaApp...");
+		rep.findByIdAplicacaoGerador(aplicacao.getId(),new ListCallback<TelaAppRest>() {
+			@Override
+			public void onError(Throwable t) {
+				t.printStackTrace();
+			}
+
+			@Override
+			public void onSuccess(List<TelaAppRest> lista) {
+				System.out.println("Resposta TelaApp");
+				List listaSaida = new ArrayList();
+				for (TelaAppRest item : lista) {
+					listaSaida.add(new TelaAppWrapper(item));
+				}
+				listaTelaApp = listaSaida;
+			}
+		});
+		do {
+			//System.out.println("aguardando tela...");
+		} while (listaTelaApp == null);
+		return listaTelaApp;
 	}
 
 	public synchronized List getListaAtributos(long idEntidade) throws DaoException {

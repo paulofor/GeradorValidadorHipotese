@@ -15,6 +15,7 @@ public class Recursos {
 	// Vem do banco de dados
 	private List<ClasseWrapper> listaClasse;
 	private List<ItemComponente> listaTelaWeb;
+	private List<ItemComponente> listaTelaApp;
 
 	// Item de Trabalho - passar do Java para os templates
 	private ItemAngular componente;
@@ -34,6 +35,12 @@ public class Recursos {
 	
 	
 	
+	public List<ItemComponente> getListaTelaApp() {
+		return listaTelaApp;
+	}
+	public void setListaTelaApp(List<ItemComponente> listaTelaApp) {
+		this.listaTelaApp = listaTelaApp;
+	}
 	public void setListaClasse(List<ClasseWrapper> listaClasse) {
 		this.listaClasse = listaClasse;
 	}

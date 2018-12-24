@@ -52,10 +52,8 @@ public class HttpClient extends AsyncHttpClient {
 		addHeader("User-Agent", userAgent);
 	}
 
-	public void request(String method, String path,
-			Map<String, ? extends Object> parameters,
-			ParameterEncoding parameterEncoding,
-			final AsyncCompletionHandler<Response> httpCallback) {
+	public void request(String method, String path, Map<String, ? extends Object> parameters,
+			ParameterEncoding parameterEncoding, final AsyncCompletionHandler<Response> httpCallback) {
 
 		// TODO: Test extensively to make sure this URI works in tandem with
 		// the Android one
@@ -72,16 +70,14 @@ public class HttpClient extends AsyncHttpClient {
 
 		if (parameters != null) {
 			// Encodes a GET, HEAD or DELETE request
-			if ("GET".equalsIgnoreCase(method)
-					|| "HEAD".equalsIgnoreCase(method)
-					|| "DELETE".equalsIgnoreCase(method)) {
+			if ("GET".equalsIgnoreCase(method) || "HEAD".equalsIgnoreCase(method) || "DELETE".equalsIgnoreCase(method)) {
 
 				Set chaves = parameters.keySet();
 				for (Object chave : chaves) {
 					String chaveStr = ":" + chave;
 					String valor = "" + parameters.get(chave);
-					//url = url.replaceAll(chaveStr, valor);
-					request.addQueryParam("" + chave,valor);
+					// url = url.replaceAll(chaveStr, valor);
+					request.addQueryParam("" + chave, valor);
 				}
 				// for (Map.Entry<String, ? extends Object> entry :
 				// flattenParameters(parameters).entrySet()) {
@@ -94,8 +90,7 @@ public class HttpClient extends AsyncHttpClient {
 
 				// NOTE: Code for "x-www-form-urlencoded" is not used
 				// and is untested.
-				contentType = "application/x-www-form-urlencoded; charset="
-						+ charset;
+				contentType = "application/x-www-form-urlencoded; charset=" + charset;
 
 				Set chaves = parameters.keySet();
 				for (Object chave : chaves) {
@@ -113,22 +108,20 @@ public class HttpClient extends AsyncHttpClient {
 			} else if (parameterEncoding == RestAdapter.ParameterEncoding.FORM_MULTIPART) {
 
 				if (!"POST".equalsIgnoreCase(method)) {
-					throw new UnsupportedOperationException(
-							"RestAdapter does not support multipart PUT requests");
+					throw new UnsupportedOperationException("RestAdapter does not support multipart PUT requests");
 				}
 
 				/*
 				 * for (Map.Entry<String, ? extends Object> entry :
-				 * parameters.entrySet()) { Object value = entry.getValue();
-				 * if (value != null) { if (value instanceof java.io.File) {
+				 * parameters.entrySet()) { Object value = entry.getValue(); if
+				 * (value != null) { if (value instanceof java.io.File) {
 				 * request.addBodyPart(new FilePart(entry.getKey(), (File)
 				 * value)); } else if (value instanceof StreamParam) { try {
-				 * ((StreamParam) value).putTo(request, entry.getKey()); }
-				 * catch (IOException e) { // TODO: Handle this in a better
-				 * way. Should not continue. e.printStackTrace(); } } else
-				 * if (value instanceof String) {
-				 * request.addFormParam(entry.getKey(), (String)
-				 * entry.getValue()); } else { throw new
+				 * ((StreamParam) value).putTo(request, entry.getKey()); } catch
+				 * (IOException e) { // TODO: Handle this in a better way.
+				 * Should not continue. e.printStackTrace(); } } else if (value
+				 * instanceof String) { request.addFormParam(entry.getKey(),
+				 * (String) entry.getValue()); } else { throw new
 				 * IllegalArgumentException( "Unknown param type for
 				 * RequestParams: " + value.getClass().getName()); } } }
 				 */
@@ -156,9 +149,8 @@ public class HttpClient extends AsyncHttpClient {
 			request.addHeader(header, getHeader(header));
 		}
 
-		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987",
-				"mclaren3");
-		request.setProxyServer(proxy);
+		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987", "mclaren3");
+		//request.setProxyServer(proxy);
 
 		System.out.println("Request:" + request.toString());
 
@@ -176,8 +168,7 @@ public class HttpClient extends AsyncHttpClient {
 			request.addHeader("Content-Type", contentType);
 			request.execute(httpCallback);
 		} else {
-			throw new IllegalArgumentException("Illegal method: " + method
-					+ ". Only GET, POST, PUT, DELETE supported.");
+			throw new IllegalArgumentException("Illegal method: " + method + ". Only GET, POST, PUT, DELETE supported.");
 		}
 	}
 
@@ -202,23 +193,21 @@ public class HttpClient extends AsyncHttpClient {
 
 	/*
 	 * private void logRequest(String method, String url, HttpEntity body,
-	 * RequestParams requestParams) { Log.getLogger().info(method + " " +
-	 * url); if (requestParams != null)
+	 * RequestParams requestParams) { Log.getLogger().info(method + " " + url);
+	 * if (requestParams != null)
 	 * Log.getLogger().info(requestParams.toString()); else if (body != null &&
-	 * body.isRepeatable()) { try { // Convert body stream to string //
-	 * Based on http://stackoverflow.com/a/5445161/69868 Scanner s = new
+	 * body.isRepeatable()) { try { // Convert body stream to string // Based on
+	 * http://stackoverflow.com/a/5445161/69868 Scanner s = new
 	 * Scanner(body.getContent()).useDelimiter("\\A"); if (s.hasNext())
 	 * Log.getLogger().info(s.next()); } catch (IOException e) { } } }
 	 */
 
-	private Map<String, Object> flattenParameters(
-			final Map<String, ? extends Object> parameters) {
+	private Map<String, Object> flattenParameters(final Map<String, ? extends Object> parameters) {
 		return flattenParameters(null, parameters);
 	}
 
 	@SuppressWarnings("unchecked")
-	private Map<String, Object> flattenParameters(final String keyPrefix,
-			final Map<String, ? extends Object> parameters) {
+	private Map<String, Object> flattenParameters(final String keyPrefix, final Map<String, ? extends Object> parameters) {
 
 		// This method converts nested maps into a flat list
 		// Input: { "here": { "lat": 10, "lng": 20 }
