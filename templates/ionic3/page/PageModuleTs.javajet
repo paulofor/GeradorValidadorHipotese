@@ -1,0 +1,29 @@
+<%@ jet package="jet.ionic3.page" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="PageModuleTs" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { IonicPageModule } from 'ionic-angular';
+
+import { <%= tela.getNome() %> } from './<%= tela.getPathArquivo() %>';
+
+@NgModule({
+  declarations: [
+    <%= tela.getNome() %>,
+  ],
+  imports: [
+    IonicPageModule.forChild(<%= tela.getNome() %>),
+    TranslateModule.forChild()
+  ],
+  exports: [
+    <%= tela.getNome() %>
+  ]
+})
+export class <%= tela.getNome() %>Module { }

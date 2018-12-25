@@ -363,10 +363,7 @@ public class GeradorAngular extends GeradorArquivosLoopback {
 
 	}
 
-	private void copiaArquivo(String arquivo, String pathOrigem, String pathDestino, Recursos recurso)
-			throws IOException {
-		this.copiaArquivo(pathOrigem + arquivo, pathDestino + arquivo);
-	}
+	
 
 	/*
 	private void componenteListaSimples(Recursos recurso) throws IOException {

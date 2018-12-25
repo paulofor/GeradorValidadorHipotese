@@ -1,3 +1,4 @@
 <%@ jet package="jet.angular" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
 class="ComponenteScssVazio" %>
+

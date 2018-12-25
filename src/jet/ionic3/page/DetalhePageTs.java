@@ -1,19 +1,20 @@
-package jet.angular;
+package jet.ionic3.page;
 
 import java.util.*;
 import gerapp.app.*;
 import jet.wrappers.base.*;
+import jet.wrappers.base.node.*;
 import jet.wrappers.angular.*;
 import gerapp.modelo.*;
 import gerapp.modelo.node.*;
 
-public class ComponenteScssVazio
+public class DetalhePageTs
 {
   protected static String nl;
-  public static synchronized ComponenteScssVazio create(String lineSeparator)
+  public static synchronized DetalhePageTs create(String lineSeparator)
   {
     nl = lineSeparator;
-    ComponenteScssVazio result = new ComponenteScssVazio();
+    DetalhePageTs result = new DetalhePageTs();
     nl = null;
     return result;
   }
@@ -26,6 +27,11 @@ public class ComponenteScssVazio
   {
     final StringBuffer stringBuffer = new StringBuffer();
     stringBuffer.append(TEXT_1);
+    
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+
     stringBuffer.append(TEXT_2);
     return stringBuffer.toString();
   }

@@ -97,10 +97,11 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		TelaWebRepositorio rep = adapter.createRepository(TelaWebRepositorio.class);
 		System.out.println("Chamada TelaWeb...");
-		rep.findByIdAplicacaoGerador(aplicacao.getId(),new ListCallback<TelaWebRest>() {
+		rep.findByIdAplicacaoGerador(aplicacao.getId(), new ListCallback<TelaWebRest>() {
 			@Override
 			public void onError(Throwable t) {
 				t.printStackTrace();
+				System.exit(1);
 			}
 
 			@Override
@@ -114,17 +115,17 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			//System.out.println("aguardando tela...");
+			System.out.println("aguardando tela web...");
 		} while (listaTelaWeb == null);
 		return listaTelaWeb;
 	}
-	
+
 	public synchronized List getListaTelaApp() {
 		listaTelaApp = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		TelaAppRepositorio rep = adapter.createRepository(TelaAppRepositorio.class);
 		System.out.println("Chamada TelaApp...");
-		rep.findByIdAplicacaoGerador(aplicacao.getId(),new ListCallback<TelaAppRest>() {
+		rep.findByIdAplicacaoGerador(aplicacao.getId(), new ListCallback<TelaAppRest>() {
 			@Override
 			public void onError(Throwable t) {
 				t.printStackTrace();
@@ -141,7 +142,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			//System.out.println("aguardando tela...");
+			System.out.println("aguardando tela app...");
 		} while (listaTelaApp == null);
 		return listaTelaApp;
 	}
@@ -178,7 +179,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		listaRelacionamento = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		RelacionamentoEntidadeRepositorio rep = adapter.createRepository(RelacionamentoEntidadeRepositorio.class);
-		
+
 		rep.findByIdEntidade(idEntidade, new ListCallback<RelacionamentoEntidadeRest>() {
 
 			@Override
@@ -212,5 +213,10 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	public List getListaProcValor(long idEntidade) {
 		return new ArrayList();
+	}
+
+	protected void copiaArquivo(String arquivo, String pathOrigem, String pathDestino, Recursos recurso)
+			throws IOException {
+		this.copiaArquivo(pathOrigem + arquivo, pathDestino + arquivo);
 	}
 }

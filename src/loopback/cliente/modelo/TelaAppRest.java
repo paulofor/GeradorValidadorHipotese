@@ -6,8 +6,8 @@ public class TelaAppRest extends Model{
 
 	private String nome;
 	private String tipo;
-	private Long entidadeId;
-	private Long conceitoProdutoId;
+	private Integer entidadeId;
+	private Integer conceitoProdutoId;
 	public String getNome() {
 		return nome;
 	}
@@ -20,16 +20,16 @@ public class TelaAppRest extends Model{
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public Long getEntidadeId() {
+	public Integer getEntidadeId() {
 		return entidadeId;
 	}
-	public void setEntidadeId(Long entidadeId) {
+	public void setEntidadeId(Integer entidadeId) {
 		this.entidadeId = entidadeId;
 	}
-	public Long getConceitoProdutoId() {
+	public Integer getConceitoProdutoId() {
 		return conceitoProdutoId;
 	}
-	public void setConceitoProdutoId(Long conceitoProdutoId) {
+	public void setConceitoProdutoId(Integer conceitoProdutoId) {
 		this.conceitoProdutoId = conceitoProdutoId;
 	}
 	

@@ -1,39 +1,98 @@
 package jet.wrappers.base.node;
 
 import gerapp.modelo.node.ItemComponente;
+import gerapp.padrao.node.ConversorNome;
+import jet.wrappers.base.ClasseWrapper;
 import loopback.cliente.modelo.TelaAppRest;
-import loopback.cliente.modelo.TelaWebRest;
 
 public class TelaAppWrapper implements ItemComponente{
 
+	/*
+	 * O que vai ser usado:
+	 * 
+	 * 1- Nome da classe Page
+	 * getNome()
+	 * 
+	 * 2- Diretorio em que vai ficar dentro do diretorio Pages
+	 * getPathArquivo()
+	 * 
+	 * 3- Nome principal dos arquivos
+	 * getArquivo()
+	 * 
+	 * 4- Nome do seletor/controle
+	 * getNomeControle()
+	 * 
+	 */
+	
+	
 	
 	private TelaAppRest principal = null;
+	
+	private ClasseWrapper entidade = null;
+	
+	
+	public boolean tipoLista() {
+		return ("LISTA".equals(this.principal.getTipo()));
+	}
+	public boolean possuiEntidade() {
+		return (entidade!=null);
+	}
+	
+	
+	public long getIdEntidade() {
+		return (principal.getEntidadeId()!=null?principal.getEntidadeId():0);
+	}
+	public void setClasseWrapper(ClasseWrapper entidade) {
+		this.entidade = entidade;
+	}
 	
 	public TelaAppWrapper(TelaAppRest principal) {
 		this.principal = principal;
 	}
 	
 	
-	@Override
-	public String getNomeControle() {
-		return "nome-controle";
+	
+	private String getNomeBase() {
+		if (this.entidade!=null) {
+			return entidade.getNomeParaClasse() + getSufixo();
+		} else {
+			return "SemNome";
+		}
 	}
-
-	@Override
-	public String getPathArquivo() {
-		return "path-arquivo";
+	
+	
+	private String getSufixo() {
+		String saida = "";
+		if (this.tipoLista()) saida = "Lista";
+		return saida;
 	}
-
+	
+	// *** Metodos Principais *** 
+	
+	
 	@Override
 	public String getArquivo() {
-		// TODO Auto-generated method stub
-		return null;
+		return getPathArquivo();
 	}
-
 	@Override
 	public String getNome() {
-		// TODO Auto-generated method stub
-		return null;
+		return getNomeBase() + "Page";
+	}
+	@Override
+	public String getNomeControle() {
+		if (this.entidade!=null) {
+			return ConversorNome.getIonicNomeControle(getNomeBase());
+		} else {
+			return "sem-nome";
+		}
+	}
+	@Override
+	public String getPathArquivo() {
+		if (this.entidade!=null) {
+			return ConversorNome.getNomePathIonicPage(getNomeBase());
+		} else {
+			return "sem-nome";
+		}
 	}
 
 }
