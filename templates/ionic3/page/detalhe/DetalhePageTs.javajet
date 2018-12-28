@@ -1,17 +1,13 @@
-<%@ jet package="jet.ionic3.page.lista" 
+<%@ jet package="jet.ionic3.page.detalhe" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
-class="ListaPageTs" %>
-
+class="DetalhePageTs" %>
 <%
 Recursos recursos = (Recursos) argument;  
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
-
-
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
-
 
 import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api } from '../../shared/sdk';
 
@@ -21,25 +17,25 @@ import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().g
   templateUrl: '<%= tela.getArquivo() %>.html'
 })
 export class <%= tela.getNome() %> {
-  listaItem: <%= tela.getEntidade().getNomeParaClasse() %>[];
+  item: <%= tela.getEntidade().getNomeParaClasse() %>;
 
   constructor(public navCtrl: NavController, public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, public modalCtrl: ModalController) {
   }
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter <%= tela.getNome() %>');
-    this.carregaLista();
+    this.carregaItem();
   }
 
   ionViewDidLoad() {
   	console.log('ionViewDidLoad <%= tela.getNome() %>');
   }
   
-  carregaLista() {
-    this.srv.obtemLista()
-      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
+  carregaItem() {
+    this.srv.obtemPrimeiro()
+      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
         console.log('Result', JSON.stringify(result));
-        this.listaItem = result;
+        this.item = result;
       });
   }
 

@@ -34,8 +34,18 @@ public class TelaAppWrapper implements ItemComponente{
 	public boolean tipoLista() {
 		return ("LISTA".equals(this.principal.getTipo()));
 	}
+	public boolean tipoEdita() {
+		return ("EDITA".equals(this.principal.getTipo()));
+	}
+	public boolean tipoDetalhe() {
+		return ("DETALHE".equals(this.principal.getTipo()));
+	}
+	
 	public boolean possuiEntidade() {
 		return (entidade!=null);
+	}
+	public ClasseWrapper getEntidade() {
+		return this.entidade;
 	}
 	
 	
@@ -64,6 +74,8 @@ public class TelaAppWrapper implements ItemComponente{
 	private String getSufixo() {
 		String saida = "";
 		if (this.tipoLista()) saida = "Lista";
+		if (this.tipoDetalhe()) saida = "Detalhe";
+		if (this.tipoEdita()) saida = "Edita";
 		return saida;
 	}
 	

@@ -20,8 +20,10 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { <%= classe.getNomeParaClasse() %> } from '../../models/<%= classe.getNomeParaClasse() %>';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { <%= classe.getNomeParaConstante() %> } from 'src/app/dados/<%= classe.getNomeParaVariavel() %>';
-import { of } from 'rxjs';
+import { <%= classe.getNomeParaConstante() %> } from '../../../../dados/<%= classe.getNomeParaVariavel() %>';
+//import { of } from 'rxjs';
+//Versao Ionic
+import { of } from 'rxjs/observable/of';
 
 /**
  * Api services for the `Aplicacao` model.
@@ -95,5 +97,8 @@ export class <%= classe.getNomeParaClasse() %>Api extends BaseLoopBackApi {
   
   obtemPrimeiro(filter: LoopBackFilter = {}, customHeaders?: Function) : Observable<<%= classe.getNomeParaClasse() %>> {
     return of(<%= classe.getNomeParaConstante() %>[0]);
+  }
+  obtemLista(filter: LoopBackFilter = {}, customHeaders?: Function) : Observable<<%= classe.getNomeParaClasse() %>[]> {
+    return of(<%= classe.getNomeParaConstante() %>);
   }
 }

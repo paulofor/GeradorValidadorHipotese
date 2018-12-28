@@ -159,6 +159,16 @@ public abstract class RelacionamentoWrapper implements AtributoTotalI{
 		return saida;
 	}
 	
+	public String getVariavelAngular() {
+		String saida = entidadeOposta.getNomeParaVariavel();
+		return saida;
+	}
+	public String getTipoAngular() {
+		String saida = entidadeOposta.getNomeParaClasse();
+		return saida;
+	}
+	
+	
 	// Nome da propriedade na entidade oposta
 	public String getNomePropriedadeEntidadeOposta() {
 		String saida = entidade.getChaveW().getNomePropriedade();

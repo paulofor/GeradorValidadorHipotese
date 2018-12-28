@@ -9,30 +9,82 @@ Configuracao conf = recursos.getConfiguracao();
 %>
 /* tslint:disable */
 import {
- 
+<%
+	Iterator<RelacionamentoWrapper> iteradorRel = classe.obtemListaComChaveEstrangeira().iterator();
+	while (iteradorRel.hasNext()) {
+		RelacionamentoWrapper rel = iteradorRel.next();
+%>
+	<%= rel.getTipoAngular() %>,
+<%
+}
+%>
+<%
+	iteradorRel = classe.obtemListaSemChaveEstrangeira().iterator();
+	while (iteradorRel.hasNext()) {
+		RelacionamentoWrapper rel = iteradorRel.next();
+%>
+	<%= rel.getTipoAngular() %>,
+<%
+}
+%>
 } from '../index';
 
 declare var Object: any;
 export interface <%= classe.getNomeParaClasse() %>Interface {
 <%
-	Iterator<AtributoTotalI> iterador = classe.getListaAtributoTotal().iterator();
+	Iterator<AtributoWrapper> iterador = classe.getListaAtributoEntidadeW().iterator();
 	while (iterador.hasNext()) {
-		AtributoTotalI atributo = iterador.next();
+		AtributoWrapper atributo = iterador.next();
 %>
-  "<%= atributo.getNomeVariavel() %>": <%= atributo.getTipo() %>;
+	"<%= atributo.getNomeVariavel() %>"<%= (atributo.ehObrigatorio()?"":"?") %>: <%= atributo.getTipo() %>;
 <%
 	}
 %>
-
+<%
+	iteradorRel = classe.obtemListaSemChaveEstrangeira().iterator();
+	while (iteradorRel.hasNext()) {
+		RelacionamentoWrapper rel = iteradorRel.next();
+%>
+	<%= rel.getVariavelAngular() %>?: <%= rel.getTipoAngular() %>;
+<%
+	}
+%>
+<%
+	iteradorRel = classe.obtemListaComChaveEstrangeira().iterator();
+	while (iteradorRel.hasNext()) {
+		RelacionamentoWrapper rel = iteradorRel.next();
+%>
+	lista<%= rel.getTipoAngular() %>?: <%= rel.getTipoAngular() %>[];
+<%
+	}
+%>
 }
 
 export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomeParaClasse() %>Interface {
 <%
-	iterador = classe.getListaAtributoTotal().iterator();
+	iterador = classe.getListaAtributoEntidadeW().iterator();
 	while (iterador.hasNext()) {
-		AtributoTotalI atributo = iterador.next();
+		AtributoWrapper atributo = iterador.next();
 %>
-  "<%= atributo.getNomeVariavel() %>": <%= atributo.getTipo() %>;
+	<%= atributo.getNomeVariavel() %><%= (atributo.ehObrigatorio()?"":"?") %>: <%= atributo.getTipo() %>;
+<%
+	}
+%>
+<%
+	iteradorRel = classe.obtemListaSemChaveEstrangeira().iterator();
+	while (iteradorRel.hasNext()) {
+		RelacionamentoWrapper rel = iteradorRel.next();
+%>
+	<%= rel.getVariavelAngular() %>?: <%= rel.getTipoAngular() %>;
+<%
+	}
+%>
+<%
+	iteradorRel = classe.obtemListaComChaveEstrangeira().iterator();
+	while (iteradorRel.hasNext()) {
+		RelacionamentoWrapper rel = iteradorRel.next();
+%>
+	lista<%= rel.getTipoAngular() %>?: <%= rel.getTipoAngular() %>[];
 <%
 	}
 %>
@@ -48,7 +100,7 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
   }
   /**
   * @method factory
-  * @author Paulo 
+  * @author Gerador Java 
   * @license MIT
   * This method creates an instance of <%= classe.getNomeParaClasse() %> for dynamic purposes.
   **/
@@ -57,7 +109,7 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
   }
   /**
   * @method getModelDefinition
-  * @author Paulo
+  * @author Gerador Java
   * @license MIT
   * This method returns an object that represents some of the model
   * definitions.
@@ -70,9 +122,9 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
       idName: 'id',
       properties: {
 		<%
-		iterador = classe.getListaAtributoTotal().iterator();
+		iterador = classe.getListaAtributoEntidadeW().iterator();
 		while (iterador.hasNext()) {
-			AtributoTotalI atributo = iterador.next();
+			AtributoWrapper atributo = iterador.next();
 		%>
         "<%= atributo.getNomeVariavel() %>" : {
         	name : "<%= atributo.getNomeVariavel() %>",

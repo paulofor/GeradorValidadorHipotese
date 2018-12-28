@@ -189,6 +189,7 @@ public abstract class GeradorArquivosBase {
 				criaArquivoEntidade(recurso);
 			}
 			System.out.println("Geracao de arquivos concluida.");
+			System.exit(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -17,7 +17,7 @@ public class TelaAppRepositorio extends ModelRepository<TelaAppRest>{
 	}
 	
 	public void findByIdAplicacaoGerador(Object id, final ListCallback<TelaAppRest> callback) {
-		RestContractItem contrato = new RestContractItem("TelaApps/obtemPorIdAplicacaoParaGerador","GET");
+		RestContractItem contrato = new RestContractItem("TelaApps/telasAppPorIdAplicacaoParaGerador","GET");
 		this.getRestAdapter().getContract().addItem(contrato, "TelaApp.findByIdAplicacaoGerador");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idAplicacao", id);

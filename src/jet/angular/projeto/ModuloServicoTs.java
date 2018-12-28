@@ -21,9 +21,9 @@ public class ModuloServicoTs
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
-  protected final String TEXT_2 = NL + NL + "import { NgModule } from '@angular/core';" + NL + "import { CommonModule } from '@angular/common';" + NL + "import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from 'src/app/shared/sdk';" + NL + "import { HttpClientModule } from '@angular/common/http';" + NL + "import { SocketDriver } from '../shared/sdk/sockets/socket.driver';" + NL;
+  protected final String TEXT_2 = NL + NL + "import { NgModule } from '@angular/core';" + NL + "import { CommonModule } from '@angular/common';" + NL + "import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../shared/sdk';" + NL + "import { HttpClientModule } from '@angular/common/http';" + NL + "import { SocketDriver } from '../shared/sdk/sockets/socket.driver';" + NL;
   protected final String TEXT_3 = NL + "import { ";
-  protected final String TEXT_4 = "Api } from 'src/app/shared/sdk';";
+  protected final String TEXT_4 = "Api } from '../shared/sdk';";
   protected final String TEXT_5 = NL + NL + NL + "@NgModule({" + NL + "\timports: [" + NL + "\t\tCommonModule," + NL + "\t\tHttpClientModule," + NL + "\t\tSDKBrowserModule.forRoot()," + NL + "\t]," + NL + "\tproviders: [" + NL + "\t\tSocketDriver," + NL + "\t\tSDKModels," + NL + "\t\tLoopBackAuth," + NL + "\t\tInternalStorage,";
   protected final String TEXT_6 = NL + "\t\t";
   protected final String TEXT_7 = "Api,";

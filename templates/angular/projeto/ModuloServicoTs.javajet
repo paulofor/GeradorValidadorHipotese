@@ -10,7 +10,7 @@ Configuracao conf = recursos.getConfiguracao();
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from 'src/app/shared/sdk';
+import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../shared/sdk';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketDriver } from '../shared/sdk/sockets/socket.driver';
 
@@ -19,7 +19,7 @@ Iterator iterador = classes.iterator();
 while (iterador.hasNext()) {
 	ClasseWrapper classe = (ClasseWrapper) iterador.next();
 %>
-import { <%= classe.getNomeParaClasse() %>Api } from 'src/app/shared/sdk';
+import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
 <%
 }
 %>

@@ -1,6 +1,7 @@
 package gerapp.app;
 
 import gerapp.modelo.Entidade;
+import gerapp.modelo.node.ItemAngular;
 import gerapp.modelo.node.ItemComponente;
 import gerapp.modelo.node.ModuloComponente;
 
@@ -14,9 +15,12 @@ import jet.angular.loopback.LoopbackModel;
 import jet.angular.loopback.LoopbackService;
 import jet.angular.loopback.SDKModel;
 import jet.angular.modulo.ModuloSpec;
+import jet.angular.projeto.ItemDados;
 import jet.angular.projeto.ModuloServicoTs;
 import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
+import jet.ionic3.page.detalhe.DetalhePageHtml;
+import jet.ionic3.page.detalhe.DetalhePageTs;
 import jet.ionic3.page.lista.ListaPageHtml;
 import jet.ionic3.page.lista.ListaPageTs;
 import jet.wrappers.angular.ClasseWrapperAngular;
@@ -31,7 +35,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 	protected ClasseWrapper entidade = null;
 
 	private String getDiretorioAngular(Recursos recurso) {
-		return PATH + recurso.getConfiguracao().getNamespace() + "/template-super/src/";
+		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3/src/";
 	}
 	
 	
@@ -45,6 +49,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		}
 		this.arquivosLoopbackClient(recurso);
 		this.criaModuloServico(recurso);
+		this.criaDadosPrototipo(recurso);
 	}
 	
 	private void criaTelaApp(Recursos recurso, TelaAppWrapper tela) throws IOException {
@@ -53,15 +58,17 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		
 		String pathDestino = getDiretorioAngular(recurso) + "/pages/" + tela.getPathArquivo() + "/" ;
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.limpaCaminho(pathDestino);
+		//this.limpaCaminho(pathDestino);
 		
 		String nomeArquivo = pathDestino + tela.getArquivo() + ".module.ts";
 		String conteudo = PageModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 		
 		nomeArquivo = pathDestino + tela.getArquivo() + ".scss";
-		conteudo = PageScss.create("\n").generate(recurso);
-		geraArquivoFonte(conteudo, nomeArquivo);
+		if (!this.existe(nomeArquivo)) {
+			conteudo = PageScss.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+		}
 		
 		if (tela.tipoLista()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
@@ -69,8 +76,21 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
-			conteudo = ListaPageHtml.create("\n").generate(recurso);
+			if (!this.existe(nomeArquivo)) {
+				conteudo = ListaPageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
+		if (tela.tipoDetalhe()) {
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			conteudo = DetalhePageTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo)) {
+				conteudo = DetalhePageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
 		}
 	}
 
@@ -100,6 +120,8 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 	}
 	
 	
+	
+	//***   Esse pedaço todo pode ser passado para uma classe geral 
 	
 	private void arquivosLoopbackClient(Recursos recurso) throws IOException {
 		String pathDestino = getDiretorioAngular(recurso) + "/shared/sdk/";
@@ -145,9 +167,11 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.criaCaminhoSeNaoExiste(pathDestino + "//models//");
+		this.limpaCaminho(pathDestino + "//models//");
 		this.criaCaminhoSeNaoExiste(pathDestino + "//services//");
 		this.criaCaminhoSeNaoExiste(pathDestino + "//services//core//");
 		this.criaCaminhoSeNaoExiste(pathDestino + "//services//custom//");
+		this.limpaCaminho(pathDestino + "//services//custom//");
 		this.criaCaminhoSeNaoExiste(pathDestino + "//sockets//");
 		this.criaCaminhoSeNaoExiste(pathDestino + "//storage//");
 
@@ -202,5 +226,21 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		conteudo = ModuloSpec.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 		
+	}
+	
+	
+	private void criaDadosPrototipo(Recursos recurso) throws IOException {
+		String pathDestino = getDiretorioAngular(recurso) + "/dados/"; 
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		//this.limpaCaminho(pathDestino);
+		for (ClasseWrapper corrente : listaClasse) {
+			recurso.setItemCorrente((ItemAngular)corrente);
+			// Modelo
+			String nomeArquivo = pathDestino + corrente.getNomeParaVariavel() + ".ts";
+			if (!this.existe(nomeArquivo)) {
+				String conteudo = ItemDados.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
 	}
 }

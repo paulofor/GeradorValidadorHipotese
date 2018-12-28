@@ -11,6 +11,10 @@ public abstract class AtributoWrapper implements AtributoTotalI{
 	public boolean ehEditavel() {
 		return base.getEditavel();
 	}
+	public boolean ehObrigatorio() {
+		return base.getObrigatorio();
+	}
+	
 	
 	public AtributoWrapper(AtributoEntidade atributo) {
 		base = atributo;

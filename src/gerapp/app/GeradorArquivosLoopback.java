@@ -115,7 +115,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			}
 		});
 		do {
-			System.out.println("aguardando tela web...");
+			//System.out.println("aguardando tela web...");
 		} while (listaTelaWeb == null);
 		return listaTelaWeb;
 	}

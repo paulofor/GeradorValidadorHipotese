@@ -1,0 +1,13 @@
+<%@ jet package="jet.angular.projeto" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ItemDados" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+ClasseWrapper classe = (ClasseWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { <%= classe.getNomeParaClasse() %> } from "../shared/sdk/models";
+
+export const  <%= classe.getNomeParaConstante() %> : <%= classe.getNomeParaClasse() %>[] = [
+]
