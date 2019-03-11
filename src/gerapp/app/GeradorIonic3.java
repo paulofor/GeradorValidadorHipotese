@@ -35,7 +35,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 	protected ClasseWrapper entidade = null;
 
 	private String getDiretorioAngular(Recursos recurso) {
-		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3/src/";
+		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger/src/";
 	}
 	
 	
