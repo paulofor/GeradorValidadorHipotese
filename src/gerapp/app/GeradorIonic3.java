@@ -5,7 +5,9 @@ import gerapp.modelo.node.ItemAngular;
 import gerapp.modelo.node.ItemComponente;
 import gerapp.modelo.node.ModuloComponente;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import jet.angular.loopback.IndexModel;
@@ -33,9 +35,29 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 	private String PATH = "../../../../ProdutosNode/";
 	protected Configuracao configuracao = null;
 	protected ClasseWrapper entidade = null;
+	
+	
 
 	private String getDiretorioAngular(Recursos recurso) {
 		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger/src/";
+	}
+	
+	private void criaProjeto(Recursos recurso) {
+		String pathApp = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger";
+		try {
+			Process processo = Runtime.getRuntime().exec("cd " + pathApp);
+			StringBuilder output = new StringBuilder();
+
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(processo.getInputStream()));
+
+			String line;
+			while ((line = reader.readLine()) != null) {
+				output.append(line + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 	}
 	
 	
