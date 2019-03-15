@@ -48,7 +48,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		
 		String pathDestino = raizDestino;
 		String pathOrigem = raizOrigem;
-		
+		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.copiaArquivo("ionic.config.json", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("package.json", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("package-lock.json", pathOrigem, pathDestino, recurso);
@@ -66,12 +66,12 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		pathOrigem = raizOrigem + "www/assets/fonts/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		// ionicons
-		this.copiaArquivo("ionicons.eot", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("ionicons.eot", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("ionicons.scss", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("ionicons.ttf", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("ionicons.svg", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("ionicons.woff", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("ionicons.woff2", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("ionicons.ttf", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("ionicons.svg", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("ionicons.woff", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("ionicons.woff2", pathOrigem, pathDestino, recurso);
 		// noto-sans
 		this.copiaArquivo("noto-sans.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("noto-sans-bold.ttf", pathOrigem, pathDestino, recurso);
