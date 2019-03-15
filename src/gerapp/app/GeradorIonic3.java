@@ -42,23 +42,115 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger/src/";
 	}
 	
-	private void criaProjeto(Recursos recurso) {
-		String pathApp = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger";
-		try {
-			Process processo = Runtime.getRuntime().exec("cd " + pathApp);
-			StringBuilder output = new StringBuilder();
+	protected void criaArquivoProjeto(Recursos recurso) throws IOException {
+		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger/";
+		String raizOrigem =  "./fixos/ionic3/";
+		
+		String pathDestino = raizDestino;
+		String pathOrigem = raizOrigem;
+		
+		this.copiaArquivo("ionic.config.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("package.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("package-lock.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("tsconfig.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("tslint.json", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "www/";
+		pathOrigem = raizOrigem + "www/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("index.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("manifest.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("service-worker.js", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "www/assets/fonts/";
+		pathOrigem = raizOrigem + "www/assets/fonts/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		// ionicons
+		this.copiaArquivo("ionicons.eot", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("ionicons.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("ionicons.ttf", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("ionicons.svg", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("ionicons.woff", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("ionicons.woff2", pathOrigem, pathDestino, recurso);
+		// noto-sans
+		this.copiaArquivo("noto-sans.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("noto-sans-bold.ttf", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("noto-sans-bold.woff", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("noto-sans-regular.ttf", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("noto-sans-regular.woff", pathOrigem, pathDestino, recurso);
+		// roboto
+		this.copiaArquivo("roboto.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-bold.ttf", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-bold.woff", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-bold.woff2", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-light.ttf", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-light.woff", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-light.woff2", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-medium.ttf", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-medium.woff", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-medium.woff2", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-regular.ttf", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-regular.woff", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("roboto-regular.woff2", pathOrigem, pathDestino, recurso);
 
-			BufferedReader reader = new BufferedReader(
-					new InputStreamReader(processo.getInputStream()));
+		pathDestino = raizDestino + "www/assets/icon/";
+		pathOrigem = raizOrigem + "www/assets/icon/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("favicon.ico", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "www/assets/imgs/";
+		pathOrigem = raizOrigem + "www/assets/imgs/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("logo.png", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "src/";
+		pathOrigem = raizOrigem + "src/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("index.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("manifest.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("service-worker.js", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "src/app/";
+		pathOrigem = raizOrigem + "src/app/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("app.component.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("app.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("main.ts", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "src/assets/icon/";
+		pathOrigem = raizOrigem + "src/assets/icon/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("favicon.ico", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "src/assets/imgs/";
+		pathOrigem = raizOrigem + "src/assets/imgs/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("logo.png", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "src/pages/home/";
+		pathOrigem = raizOrigem + "src/pages/home/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("home.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("home.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("home.ts", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "src/pages/list/";
+		pathOrigem = raizOrigem + "src/pages/list/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("list.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("list.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("list.ts", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "src/theme/";
+		pathOrigem = raizOrigem + "src/theme/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("variables.scss", pathOrigem, pathDestino, recurso);
 
-			String line;
-			while ((line = reader.readLine()) != null) {
-				output.append(line + "\n");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}	
 	}
+	
+
 	
 	
 	@Override

@@ -94,10 +94,12 @@ public abstract class GeradorArquivosBase {
 		}
 	}
 
-	protected void criaCaminhoSeNaoExiste(String caminho) throws IOException {
-		if (!existe(caminho)) {
+	protected boolean criaCaminhoSeNaoExiste(String caminho) throws IOException {
+		boolean existe = existe(caminho);
+		if (!existe) {
 			criaCaminho(caminho);
 		}
+		return existe;
 	}
 
 	protected void criaCaminho(String caminhoArquivo) throws IOException {
@@ -180,6 +182,7 @@ public abstract class GeradorArquivosBase {
 			montaListasNovas(recurso);
 			verificaDiretorios(recurso);
 			limpaArquivos(recurso);
+			criaArquivoProjeto(recurso);
 			criaArquivoUnico(recurso);
 			Iterator<ClasseWrapper> iterador = listaClasse.iterator();
 			while (iterador.hasNext()) {
@@ -195,6 +198,9 @@ public abstract class GeradorArquivosBase {
 		}
 	}
 
+	protected abstract void criaArquivoProjeto(Recursos recurso) throws IOException;
+	
+	
 	public abstract void limpaArquivos(Recursos recurso) throws IOException;
 
 	public abstract void criaArquivoUnico(Recursos recurso) throws IOException;
