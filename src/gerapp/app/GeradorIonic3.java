@@ -42,9 +42,10 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger/src/";
 	}
 	
+	
 	protected void criaArquivoProjeto(Recursos recurso) throws IOException {
 		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger/";
-		String raizOrigem =  "./fixos/ionic3/";
+		String raizOrigem =  "./fixos/fixoIonic3/";
 		
 		String pathDestino = raizDestino;
 		String pathOrigem = raizOrigem;
@@ -55,53 +56,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		this.copiaArquivo("tsconfig.json", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("tslint.json", pathOrigem, pathDestino, recurso);
 		
-		pathDestino = raizDestino + "www/";
-		pathOrigem = raizOrigem + "www/";
-		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo("index.html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("manifest.json", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("service-worker.js", pathOrigem, pathDestino, recurso);
 		
-		pathDestino = raizDestino + "www/assets/fonts/";
-		pathOrigem = raizOrigem + "www/assets/fonts/";
-		this.criaCaminhoSeNaoExiste(pathDestino);
-		// ionicons
-		//this.copiaArquivo("ionicons.eot", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("ionicons.scss", pathOrigem, pathDestino, recurso);
-		//this.copiaArquivo("ionicons.ttf", pathOrigem, pathDestino, recurso);
-		//this.copiaArquivo("ionicons.svg", pathOrigem, pathDestino, recurso);
-		//this.copiaArquivo("ionicons.woff", pathOrigem, pathDestino, recurso);
-		//this.copiaArquivo("ionicons.woff2", pathOrigem, pathDestino, recurso);
-		// noto-sans
-		this.copiaArquivo("noto-sans.scss", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("noto-sans-bold.ttf", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("noto-sans-bold.woff", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("noto-sans-regular.ttf", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("noto-sans-regular.woff", pathOrigem, pathDestino, recurso);
-		// roboto
-		this.copiaArquivo("roboto.scss", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-bold.ttf", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-bold.woff", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-bold.woff2", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-light.ttf", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-light.woff", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-light.woff2", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-medium.ttf", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-medium.woff", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-medium.woff2", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-regular.ttf", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-regular.woff", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("roboto-regular.woff2", pathOrigem, pathDestino, recurso);
-
-		pathDestino = raizDestino + "www/assets/icon/";
-		pathOrigem = raizOrigem + "www/assets/icon/";
-		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo("favicon.ico", pathOrigem, pathDestino, recurso);
-		
-		pathDestino = raizDestino + "www/assets/imgs/";
-		pathOrigem = raizOrigem + "www/assets/imgs/";
-		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo("logo.png", pathOrigem, pathDestino, recurso);
 		
 		pathDestino = raizDestino + "src/";
 		pathOrigem = raizOrigem + "src/";
@@ -149,8 +104,8 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		this.copiaArquivo("variables.scss", pathOrigem, pathDestino, recurso);
 
 	}
-	
 
+	
 	
 	
 	@Override
@@ -159,7 +114,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		for (ItemComponente tela : listaTela) {
 			carregaEntidade((TelaAppWrapper) tela,recurso);
 			recurso.setItemCorrente(tela);
-			criaTelaApp(recurso, (TelaAppWrapper) tela);
+			//criaTelaApp(recurso, (TelaAppWrapper) tela);
 		}
 		this.arquivosLoopbackClient(recurso);
 		this.criaModuloServico(recurso);
