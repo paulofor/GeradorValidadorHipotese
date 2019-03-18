@@ -174,6 +174,17 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
+		if (tela.tipoEdita()) {
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			conteudo = DetalhePageTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo)) {
+				conteudo = DetalhePageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
 	}
 
 

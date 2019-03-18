@@ -32,7 +32,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	// Listas novas com objetos rest
 	protected List<TelaWebRest> listaTelaWeb = null;
-	protected List<TelaAppRest> listaTelaApp = null;
+	protected List<TelaAppWrapper> listaTelaApp = null;
 
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
@@ -120,6 +120,14 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		return listaTelaWeb;
 	}
 
+	
+	private void mostraTelaApp() {
+		for (TelaAppWrapper app : this.listaTelaApp) {
+			
+		}
+	}
+	
+	
 	public synchronized List getListaTelaApp() {
 		listaTelaApp = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");

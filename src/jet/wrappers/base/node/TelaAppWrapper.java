@@ -22,9 +22,47 @@ public class TelaAppWrapper implements ItemComponente{
 	 * 4- Nome do seletor/controle
 	 * getNomeControle()
 	 * 
+	 *
 	 */
+
 	
+	@Override
+	public String getArquivo() {
+		return getNomeParaArquivo();
+	}
+
+	@Override
+	public String getNome() {
+		return principal.getNome() + "Page";
+	}
+
+	@Override
+	public String getPathArquivo() {
+		return getNomeParaArquivo();
+	}
+
+	@Override
+	public String getNomeControle() {
+		return "page-" + getNomeParaArquivo();
+	}
 	
+	public String getMenuPrototipo() {
+		return principal.getNome();
+	}
+	
+	private String getNomeParaArquivo() {
+		String nome = principal.getNome();
+		String saida = "";
+		for (int i=0;i < nome.length(); i++) {
+			if (Character.isUpperCase(nome.charAt(i))) {
+				if (i==0) saida += ("" + nome.charAt(i)).toLowerCase();
+				else saida += "-" + ("" + nome.charAt(i)).toLowerCase();
+			} else {
+				saida += ("" + nome.charAt(i));
+			}
+		}
+		return saida;
+	}
 	
 	private TelaAppRest principal = null;
 	
@@ -62,13 +100,6 @@ public class TelaAppWrapper implements ItemComponente{
 	
 	
 	
-	private String getNomeBase() {
-		if (this.entidade!=null) {
-			return entidade.getNomeParaClasse() + getSufixo();
-		} else {
-			return "SemNome";
-		}
-	}
 	
 	
 	private String getSufixo() {
@@ -81,31 +112,6 @@ public class TelaAppWrapper implements ItemComponente{
 	
 	// *** Metodos Principais *** 
 	
-	
-	@Override
-	public String getArquivo() {
-		return getPathArquivo();
-	}
-	@Override
-	public String getNome() {
-		return getNomeBase() + "Page";
-	}
-	@Override
-	public String getNomeControle() {
-		if (this.entidade!=null) {
-			return ConversorNome.getIonicNomeControle(getNomeBase());
-		} else {
-			return "sem-nome";
-		}
-	}
-	@Override
-	public String getPathArquivo() {
-		if (this.entidade!=null) {
-			return ConversorNome.getNomePathIonicPage(getNomeBase());
-		} else {
-			return "sem-nome";
-		}
-	}
 
 	
 	public String toString() {
