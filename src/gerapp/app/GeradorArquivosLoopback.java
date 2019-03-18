@@ -136,6 +136,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 				System.out.println("Resposta TelaApp");
 				List listaSaida = new ArrayList();
 				for (TelaAppRest item : lista) {
+					
 					listaSaida.add(new TelaAppWrapper(item));
 				}
 				listaTelaApp = listaSaida;

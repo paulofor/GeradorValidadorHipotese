@@ -1,0 +1,70 @@
+<%@ jet package="jet.ionic3.app" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="AppComponentTs" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+List<ItemComponente> listaTela = recursos.getListaTelaApp();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
+import { HomePage } from '../pages/home/home';
+<%
+Iterator<ItemComponente> iterador = listaTela.iterator();
+while (iterador.hasNext()) {
+	TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+%>
+import { <%= tela.getNome() %> } from '../pages/<%= tela.getPathArquivo() %>/<%= tela.getPathArquivo() %>';
+<%
+}
+%>
+
+
+@Component({
+  templateUrl: 'app.html'
+})
+export class MyApp {
+  @ViewChild(Nav) nav: Nav;
+
+  rootPage: any = HomePage;
+
+  pages: Array<{title: string, component: any}>;
+
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    this.initializeApp();
+
+    // used for an example of ngFor and navigation
+    this.pages = [
+      { title: 'Home', component: HomePage },
+	<%
+	iterador = listaTela.iterator();
+	while (iterador.hasNext()) {
+		TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+	%>
+      { title: '' , component: <%= tela.getNome() %>},
+	<%
+	}
+	%>
+     ];
+
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
+
+  openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(page.component);
+  }
+}

@@ -107,4 +107,8 @@ public class TelaAppWrapper implements ItemComponente{
 		}
 	}
 
+	
+	public String toString() {
+		return "Nome: " + this.getNome() + ", PathArquivo: " + this.getPathArquivo() + ", NomeControle: " + this.getNomeControle();
+	}
 }

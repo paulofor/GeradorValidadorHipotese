@@ -5,9 +5,7 @@ import gerapp.modelo.node.ItemAngular;
 import gerapp.modelo.node.ItemComponente;
 import gerapp.modelo.node.ModuloComponente;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import jet.angular.loopback.IndexModel;
@@ -19,6 +17,7 @@ import jet.angular.loopback.SDKModel;
 import jet.angular.modulo.ModuloSpec;
 import jet.angular.projeto.ItemDados;
 import jet.angular.projeto.ModuloServicoTs;
+import jet.ionic3.app.AppComponentTs;
 import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
@@ -41,6 +40,8 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 	private String getDiretorioAngular(Recursos recurso) {
 		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_ger/src/";
 	}
+	
+	
 	
 	
 	protected void criaArquivoProjeto(Recursos recurso) throws IOException {
@@ -68,7 +69,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		pathDestino = raizDestino + "src/app/";
 		pathOrigem = raizOrigem + "src/app/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo("app.component.ts", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("app.component.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("app.html", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
@@ -104,7 +105,6 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		this.copiaArquivo("variables.scss", pathOrigem, pathDestino, recurso);
 
 	}
-
 	
 	
 	
@@ -114,14 +114,27 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		for (ItemComponente tela : listaTela) {
 			carregaEntidade((TelaAppWrapper) tela,recurso);
 			recurso.setItemCorrente(tela);
-			//criaTelaApp(recurso, (TelaAppWrapper) tela);
+			criaTelaApp(recurso, (TelaAppWrapper) tela);
 		}
 		this.arquivosLoopbackClient(recurso);
 		this.criaModuloServico(recurso);
 		this.criaDadosPrototipo(recurso);
+		this.criaArquivoAplicacao(recurso);
 	}
 	
+	private void criaArquivoAplicacao(Recursos recurso) throws IOException {
+		String pathDestino = getDiretorioAngular(recurso) + "/app/";
+		
+		String nomeArquivo = pathDestino +  "app.component.ts";
+		String conteudo = AppComponentTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+	}
+	
+	
 	private void criaTelaApp(Recursos recurso, TelaAppWrapper tela) throws IOException {
+		
+		System.out.println("Tela: " + tela.getNome());
+		System.out.println("Item Tela: " + tela);
 		
 		if (!tela.possuiEntidade()) return;
 		
