@@ -20,18 +20,19 @@ public class DetalhePageTs
   }
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-  protected final String TEXT_1 = "import { Component } from '@angular/core';" + NL + "import { IonicPage, ModalController, NavController } from 'ionic-angular';" + NL + "" + NL + "import { ";
+  protected final String TEXT_1 = "import { Component } from '@angular/core';" + NL + "import { IonicPage, ModalController, NavController } from 'ionic-angular';" + NL + "import { Screenshot } from '@ionic-native/screenshot';" + NL + "" + NL + "import { ";
   protected final String TEXT_2 = ", ";
   protected final String TEXT_3 = "Api } from '../../shared/sdk';" + NL + "" + NL + "@IonicPage()" + NL + "@Component({" + NL + "  selector: '";
   protected final String TEXT_4 = "'," + NL + "  templateUrl: '";
   protected final String TEXT_5 = ".html'" + NL + "})" + NL + "export class ";
   protected final String TEXT_6 = " {" + NL + "  item: ";
   protected final String TEXT_7 = ";" + NL + "" + NL + "  constructor(public navCtrl: NavController, public srv: ";
-  protected final String TEXT_8 = "Api, public modalCtrl: ModalController) {" + NL + "  }" + NL + "" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
+  protected final String TEXT_8 = "Api, " + NL + "  \t\t\t\tprivate screenshot: Screenshot, public modalCtrl: ModalController) {" + NL + "  }" + NL + "" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
   protected final String TEXT_9 = "');" + NL + "    this.carregaItem();" + NL + "  }" + NL + "" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
   protected final String TEXT_10 = "');" + NL + "  }" + NL + "  " + NL + "  carregaItem() {" + NL + "    this.srv.obtemPrimeiro()" + NL + "      .subscribe((result: ";
-  protected final String TEXT_11 = ") => {" + NL + "        console.log('Result', JSON.stringify(result));" + NL + "        this.item = result;" + NL + "      });" + NL + "  }" + NL + "" + NL + "  " + NL + "}";
-  protected final String TEXT_12 = NL;
+  protected final String TEXT_11 = ") => {" + NL + "        console.log('Result', JSON.stringify(result));" + NL + "        this.item = result;" + NL + "      });" + NL + "  }" + NL + "" + NL + "  testaFoto() {" + NL + "    this.screenshot.save('jpg', 100, '";
+  protected final String TEXT_12 = "');" + NL + "  }" + NL + "  " + NL + "}";
+  protected final String TEXT_13 = NL;
 
   public String generate(Object argument)
   {
@@ -62,7 +63,9 @@ Configuracao conf = recursos.getConfiguracao();
     stringBuffer.append(TEXT_10);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_11);
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_12);
+    stringBuffer.append(TEXT_13);
     return stringBuffer.toString();
   }
 }

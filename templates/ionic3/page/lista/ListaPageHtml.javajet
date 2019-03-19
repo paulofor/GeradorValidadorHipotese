@@ -10,7 +10,7 @@ Configuracao conf = recursos.getConfiguracao();
 
 <ion-header *ngIf="listaItem">
   <ion-navbar color="primary">
-    <ion-title>Titulo</ion-title>
+    <ion-title (click)="testaFoto()">Titulo</ion-title>
   </ion-navbar>
 </ion-header>
 

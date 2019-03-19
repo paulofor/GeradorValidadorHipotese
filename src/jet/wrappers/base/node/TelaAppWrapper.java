@@ -72,6 +72,18 @@ public class TelaAppWrapper implements ItemComponente{
 	public boolean tipoLista() {
 		return ("LISTA".equals(this.principal.getTipo()));
 	}
+	public boolean tipoListaVitrine() {
+		return ("LISTA_VITRINE".equals(this.principal.getTipo()));
+	}
+	public boolean tipoListaGrid() {
+		return ("LISTA_GRID".equals(this.principal.getTipo()));
+	}
+	public boolean tipoListaItem() {
+		return ("LISTA_ITEM".equals(this.principal.getTipo()));
+	}
+	public boolean tipoItemLista() {
+		return ("ITEM_LISTA".equals(this.principal.getTipo()));
+	}
 	public boolean tipoEdita() {
 		return ("EDITA".equals(this.principal.getTipo()));
 	}
@@ -99,7 +111,9 @@ public class TelaAppWrapper implements ItemComponente{
 	}
 	
 	
-	
+	public boolean sobrescreveHtml() {
+		return this.principal.getSobrescreveHtml() == 1;
+	}
 	
 	
 	private String getSufixo() {

@@ -30,7 +30,7 @@ public class AppComponentTs
   protected final String TEXT_8 = NL + "      { title: '";
   protected final String TEXT_9 = "' , component: ";
   protected final String TEXT_10 = "}," + NL + "\t";
-  protected final String TEXT_11 = NL + "     ];" + NL + "" + NL + "  }" + NL + "" + NL + "  initializeApp() {" + NL + "    this.platform.ready().then(() => {" + NL + "      // Okay, so the platform is ready and our plugins are available." + NL + "      // Here you can do any higher level native things you might need." + NL + "      this.statusBar.styleDefault();" + NL + "      this.splashScreen.hide();" + NL + "    });" + NL + "  }" + NL + "" + NL + "  openPage(page) {" + NL + "    // Reset the content nav to have just this page" + NL + "    // we wouldn't want the back button to show in this scenario" + NL + "    this.nav.setRoot(page.component);" + NL + "  }" + NL + "}";
+  protected final String TEXT_11 = NL + "     ];" + NL + "" + NL + "  }" + NL + "" + NL + "  initializeApp() {" + NL + "    this.platform.ready().then(() => {" + NL + "      // Okay, so the platform is ready and our plugins are available." + NL + "      // Here you can do any higher level native things you might need." + NL + "      this.statusBar.styleDefault();" + NL + "      this.splashScreen.hide();" + NL + "    });" + NL + "  }" + NL + "" + NL + "  openPage(page) {" + NL + "    // Reset the content nav to have just this page" + NL + "    // we wouldn't want the back button to show in this scenario" + NL + "    this.nav.push(page.component);" + NL + "  }" + NL + "}";
   protected final String TEXT_12 = NL;
 
   public String generate(Object argument)

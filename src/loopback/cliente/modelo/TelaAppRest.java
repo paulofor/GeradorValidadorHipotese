@@ -8,6 +8,15 @@ public class TelaAppRest extends Model{
 	private String tipo;
 	private Integer entidadeId;
 	private Integer conceitoProdutoId;
+	private Integer sobrescreveHtml;
+	
+	
+	public Integer getSobrescreveHtml() {
+		return sobrescreveHtml;
+	}
+	public void setSobrescreveHtml(Integer sobrescreveHtml) {
+		this.sobrescreveHtml = sobrescreveHtml;
+	}
 	public String getNome() {
 		return nome;
 	}

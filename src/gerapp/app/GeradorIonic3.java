@@ -158,7 +158,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
-			if (!this.existe(nomeArquivo)) {
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = ListaPageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
@@ -169,7 +169,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
-			if (!this.existe(nomeArquivo)) {
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = DetalhePageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
@@ -180,7 +180,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
-			if (!this.existe(nomeArquivo)) {
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = DetalhePageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
