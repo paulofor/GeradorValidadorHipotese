@@ -1,25 +1,20 @@
-<%@ jet package="jet.ionic3.page.lista" 
+<%@ jet package="jet.ionic3.page.form" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
-class="ListaPageHtml" %>
+class="FormPageHtml" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
-
-<ion-header *ngIf="listaItem">
+<ion-header >
   <ion-navbar color="primary">
     <ion-title (click)="testaFoto()"><%= tela.getNome() %></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="quadroBase">
-	<ng-container *ngIf="listaItem">
-   	<ion-list>
-      <ion-item *ngFor="let item of listaItem">
+	<ng-container *ngIf="item">
 
-      </ion-item>
-    </ion-list>
 	</ng-container>
 </ion-content>

@@ -1,6 +1,6 @@
-<%@ jet package="jet.ionic3.page.lista" 
+<%@ jet package="jet.ionic3.page.listaVitrine" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
-class="ListaPageHtml" %>
+class="ListaVitrinePageHtml" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
@@ -8,7 +8,7 @@ TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
 
-<ion-header *ngIf="listaItem">
+<ion-header>
   <ion-navbar color="primary">
     <ion-title (click)="testaFoto()"><%= tela.getNome() %></ion-title>
   </ion-navbar>

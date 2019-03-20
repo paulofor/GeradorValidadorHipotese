@@ -9,12 +9,12 @@ Configuracao conf = recursos.getConfiguracao();
 %>
 <ion-header >
   <ion-navbar color="primary">
-    <ion-title (click)="testaFoto()">Titulo</ion-title>
+    <ion-title (click)="testaFoto()"><%= tela.getNome() %></ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-	<ng-container *ngIf="item">
+<ion-content padding class="quadroBase">
+	<ng-container>
 
 	</ng-container>
 </ion-content>

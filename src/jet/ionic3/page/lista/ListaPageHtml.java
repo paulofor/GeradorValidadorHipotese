@@ -21,7 +21,8 @@ public class ListaPageHtml
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
-  protected final String TEXT_2 = NL + NL + "<ion-header *ngIf=\"listaItem\">" + NL + "  <ion-navbar color=\"primary\">" + NL + "    <ion-title (click)=\"testaFoto()\">Titulo</ion-title>" + NL + "  </ion-navbar>" + NL + "</ion-header>" + NL + "" + NL + "<ion-content padding>" + NL + "\t<ng-container *ngIf=\"listaItem\">" + NL + "   \t<ion-list>" + NL + "      <ion-item *ngFor=\"let item of listaItem\">" + NL + "" + NL + "      </ion-item>" + NL + "    </ion-list>" + NL + "\t</ng-container>" + NL + "</ion-content>";
+  protected final String TEXT_2 = NL + NL + "<ion-header *ngIf=\"listaItem\">" + NL + "  <ion-navbar color=\"primary\">" + NL + "    <ion-title (click)=\"testaFoto()\">";
+  protected final String TEXT_3 = "</ion-title>" + NL + "  </ion-navbar>" + NL + "</ion-header>" + NL + "" + NL + "<ion-content padding class=\"quadroBase\">" + NL + "\t<ng-container *ngIf=\"listaItem\">" + NL + "   \t<ion-list>" + NL + "      <ion-item *ngFor=\"let item of listaItem\">" + NL + "" + NL + "      </ion-item>" + NL + "    </ion-list>" + NL + "\t</ng-container>" + NL + "</ion-content>";
 
   public String generate(Object argument)
   {
@@ -33,6 +34,8 @@ TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 
     stringBuffer.append(TEXT_2);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_3);
     return stringBuffer.toString();
   }
 }

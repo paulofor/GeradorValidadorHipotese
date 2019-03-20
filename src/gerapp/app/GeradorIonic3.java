@@ -23,8 +23,14 @@ import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
 import jet.ionic3.page.detalhe.DetalhePageTs;
+import jet.ionic3.page.form.FormPageHtml;
+import jet.ionic3.page.form.FormPageTs;
 import jet.ionic3.page.lista.ListaPageHtml;
 import jet.ionic3.page.lista.ListaPageTs;
+import jet.ionic3.page.listaGrid.ListaGridPageHtml;
+import jet.ionic3.page.listaGrid.ListaGridPageTs;
+import jet.ionic3.page.listaItem.ListaItemPageHtml;
+import jet.ionic3.page.listaItem.ListaItemPageTs;
 import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
@@ -182,35 +188,35 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		}
 		if (tela.tipoEdita()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
-			conteudo = DetalhePageTs.create("\n").generate(recurso);
+			conteudo = FormPageTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
-				conteudo = DetalhePageHtml.create("\n").generate(recurso);
+				conteudo = FormPageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
 		
 		if (tela.tipoListaGrid()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
-			conteudo = DetalhePageTs.create("\n").generate(recurso);
+			conteudo = ListaGridPageTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
-				conteudo = DetalhePageHtml.create("\n").generate(recurso);
+				conteudo = ListaGridPageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
 		if (tela.tipoListaItem()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
-			conteudo = DetalhePageTs.create("\n").generate(recurso);
+			conteudo = ListaItemPageTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
-				conteudo = DetalhePageHtml.create("\n").generate(recurso);
+				conteudo = ListaItemPageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
