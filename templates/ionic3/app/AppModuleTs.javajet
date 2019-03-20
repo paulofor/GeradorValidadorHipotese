@@ -5,37 +5,94 @@ class="AppModuleTs" %>
 <%
 Recursos recursos = (Recursos) argument;  
 List<ItemComponente> listaTela = recursos.getListaTelaApp();
+List<ClasseWrapper> classes = recursos.getListaClasse();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { HttpClientModule } from '@angular/common/http';
+import { SocketDriver } from '../shared/sdk/sockets/socket.driver';
+import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../shared/sdk';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { Screenshot } from '@ionic-native/screenshot';
+<%
+Iterator<ItemComponente> iterador = listaTela.iterator();
+while (iterador.hasNext()) {
+	TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+%>
+import { <%= tela.getNome() %> } from '../pages/<%= tela.getPathArquivo() %>/<%= tela.getPathArquivo() %>';
+<%
+}
+%>
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+<%
+Iterator iteradorCl = classes.iterator();
+while (iteradorCl.hasNext()) {
+	ClasseWrapper classe = (ClasseWrapper) iteradorCl.next();
+%>
+import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
+<%
+}
+%>
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    <%
+	iterador = listaTela.iterator();
+	while (iterador.hasNext()) {
+		TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+	%>
+    <%= tela.getNome() %>,
+	<%
+	}
+	%>
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule,
+    SDKBrowserModule.forRoot()
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
+    <%
+	iterador = listaTela.iterator();
+	while (iterador.hasNext()) {
+		TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+	%>
+    <%= tela.getNome() %>,
+	<%
+	}
+	%>
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SocketDriver,
+    SDKModels,
+    LoopBackAuth,
+    InternalStorage,
+    <%
+	iteradorCl = classes.iterator();
+	while (iteradorCl.hasNext()) {
+		ClasseWrapper classe = (ClasseWrapper) iteradorCl.next();
+	%>
+	<%= classe.getNomeParaClasse() %>Api,
+	<%
+	}
+	%>
+    Screenshot
   ]
 })
 export class AppModule {}

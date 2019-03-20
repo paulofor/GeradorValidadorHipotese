@@ -21,7 +21,7 @@ public class DetalhePageHtml
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
-  protected final String TEXT_2 = NL + "<ion-header *ngIf=\"item\">" + NL + "  <ion-navbar color=\"primary\">" + NL + "    <ion-title (click)=\"testaFoto()\">Titulo</ion-title>" + NL + "  </ion-navbar>" + NL + "</ion-header>" + NL + "" + NL + "<ion-content padding>" + NL + "\t<ng-container *ngIf=\"item\">" + NL + "" + NL + "\t</ng-container>" + NL + "</ion-content>";
+  protected final String TEXT_2 = NL + "<ion-header >" + NL + "  <ion-navbar color=\"primary\">" + NL + "    <ion-title (click)=\"testaFoto()\">Titulo</ion-title>" + NL + "  </ion-navbar>" + NL + "</ion-header>" + NL + "" + NL + "<ion-content padding>" + NL + "\t<ng-container *ngIf=\"item\">" + NL + "" + NL + "\t</ng-container>" + NL + "</ion-content>";
 
   public String generate(Object argument)
   {

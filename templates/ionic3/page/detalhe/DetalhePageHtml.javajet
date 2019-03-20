@@ -7,7 +7,7 @@ Recursos recursos = (Recursos) argument;
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
-<ion-header *ngIf="item">
+<ion-header >
   <ion-navbar color="primary">
     <ion-title (click)="testaFoto()">Titulo</ion-title>
   </ion-navbar>

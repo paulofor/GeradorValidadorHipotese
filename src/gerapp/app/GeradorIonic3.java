@@ -18,6 +18,7 @@ import jet.angular.modulo.ModuloSpec;
 import jet.angular.projeto.ItemDados;
 import jet.angular.projeto.ModuloServicoTs;
 import jet.ionic3.app.AppComponentTs;
+import jet.ionic3.app.AppModuleTs;
 import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
@@ -71,7 +72,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		//this.copiaArquivo("app.component.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("app.html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("main.ts", pathOrigem, pathDestino, recurso);
 		
@@ -128,6 +129,11 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		String nomeArquivo = pathDestino +  "app.component.ts";
 		String conteudo = AppComponentTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
+
+		nomeArquivo = pathDestino +  "app.module.ts";
+		conteudo = AppModuleTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+
 	}
 	
 	
@@ -175,6 +181,40 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 			}
 		}
 		if (tela.tipoEdita()) {
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			conteudo = DetalhePageTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+				conteudo = DetalhePageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
+		
+		if (tela.tipoListaGrid()) {
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			conteudo = DetalhePageTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+				conteudo = DetalhePageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
+		if (tela.tipoListaItem()) {
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			conteudo = DetalhePageTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+				conteudo = DetalhePageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
+		if (tela.tipoListaVitrine()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			conteudo = DetalhePageTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
