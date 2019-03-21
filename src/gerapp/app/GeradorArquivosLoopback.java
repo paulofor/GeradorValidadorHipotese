@@ -11,13 +11,16 @@ import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 import jet.wrappers.base.node.TelaWebWrapper;
 import loopback.android.callback.ListCallback;
+import loopback.android.callback.ObjectCallback;
 import loopback.cliente.modelo.AtributoEntidadeRest;
 import loopback.cliente.modelo.EntidadeRest;
+import loopback.cliente.modelo.PaletaCorRest;
 import loopback.cliente.modelo.RelacionamentoEntidadeRest;
 import loopback.cliente.modelo.TelaAppRest;
 import loopback.cliente.modelo.TelaWebRest;
 import loopback.cliente.repositorio.AtributoEntidadeRepositorio;
 import loopback.cliente.repositorio.EntidadeRepositorio;
+import loopback.cliente.repositorio.PaletaCorRepositorio;
 import loopback.cliente.repositorio.RelacionamentoEntidadeRepositorio;
 import loopback.cliente.repositorio.TelaAppRepositorio;
 import loopback.cliente.repositorio.TelaWebRepositorio;
@@ -33,6 +36,8 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	// Listas novas com objetos rest
 	protected List<TelaWebRest> listaTelaWeb = null;
 	protected List<TelaAppWrapper> listaTelaApp = null;
+	
+	protected PaletaCorRest paletaCor = null;
 
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
@@ -66,6 +71,27 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		recursos.setListaTelaWeb(getListaTelaWeb());
 		recursos.setListaTelaApp(this.getListaTelaApp());
 	}
+	
+	public synchronized PaletaCorRest obtemPaletaCor() throws DaoException {
+		paletaCor = null;
+		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		PaletaCorRepositorio rep = adapter.createRepository(PaletaCorRepositorio.class);
+		rep.findByIdAplicacao(aplicacao.getId(), new ObjectCallback<PaletaCorRest>() {
+			@Override
+			public void onError(Throwable t) {
+				t.printStackTrace();
+			}
+
+			@Override
+			public void onSuccess(PaletaCorRest item) {
+				paletaCor = item;
+			}
+		});
+		do {
+		} while (paletaCor == null);
+		return paletaCor;
+	}
+	
 
 	public synchronized List getListaEntidade() throws DaoException {
 		listaEntidade = null;
