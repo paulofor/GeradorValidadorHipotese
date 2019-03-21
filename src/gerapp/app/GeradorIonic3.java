@@ -19,6 +19,7 @@ import jet.angular.projeto.ItemDados;
 import jet.angular.projeto.ModuloServicoTs;
 import jet.ionic3.app.AppComponentTs;
 import jet.ionic3.app.AppModuleTs;
+import jet.ionic3.app.AppScss;
 import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
@@ -139,6 +140,10 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		nomeArquivo = pathDestino +  "app.module.ts";
 		conteudo = AppModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		//nomeArquivo = pathDestino +  "app.scss";
+		//conteudo = AppScss.create("\n").generate(recurso);
+		//geraArquivoFonte(conteudo, nomeArquivo);
 
 	}
 	

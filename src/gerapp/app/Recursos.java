@@ -6,6 +6,7 @@ import gerapp.modelo.node.ItemComponente;
 import java.util.List;
 
 import jet.wrappers.base.ClasseWrapper;
+import loopback.cliente.modelo.PaletaCorRest;
 
 public class Recursos {
 
@@ -16,6 +17,8 @@ public class Recursos {
 	private List<ClasseWrapper> listaClasse;
 	private List<ItemComponente> listaTelaWeb;
 	private List<ItemComponente> listaTelaApp;
+	
+	private PaletaCorRest paletaCor;
 
 	// Item de Trabalho - passar do Java para os templates
 	private ItemAngular componente;
@@ -31,6 +34,12 @@ public class Recursos {
 	}
 	public void setListaTelaWeb(List<ItemComponente> listaTelaWeb) {
 		this.listaTelaWeb = listaTelaWeb;
+	}
+	public void setPaletaCor(PaletaCorRest paleta) {
+		this.paletaCor = paleta;
+	}
+	public PaletaCorRest getPaletaCor() {
+		return this.paletaCor;
 	}
 	
 	

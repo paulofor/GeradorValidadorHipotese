@@ -70,9 +70,10 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	protected void montaListasNovas(Recursos recursos) {
 		recursos.setListaTelaWeb(getListaTelaWeb());
 		recursos.setListaTelaApp(this.getListaTelaApp());
+		recursos.setPaletaCor(this.obtemPaletaCor());
 	}
 	
-	public synchronized PaletaCorRest obtemPaletaCor() throws DaoException {
+	public synchronized PaletaCorRest obtemPaletaCor()  {
 		paletaCor = null;
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		PaletaCorRepositorio rep = adapter.createRepository(PaletaCorRepositorio.class);
