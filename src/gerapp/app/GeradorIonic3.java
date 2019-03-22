@@ -20,6 +20,7 @@ import jet.angular.projeto.ModuloServicoTs;
 import jet.ionic3.app.AppComponentTs;
 import jet.ionic3.app.AppModuleTs;
 import jet.ionic3.app.AppScss;
+import jet.ionic3.app.ThemeVariables;
 import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
@@ -80,7 +81,7 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		//this.copiaArquivo("app.component.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("app.html", pathOrigem, pathDestino, recurso);
 		//this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("main.ts", pathOrigem, pathDestino, recurso);
 		
 		pathDestino = raizDestino + "src/assets/icon/";
@@ -107,10 +108,10 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		this.copiaArquivo("list.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.ts", pathOrigem, pathDestino, recurso);
 		
-		pathDestino = raizDestino + "src/theme/";
-		pathOrigem = raizOrigem + "src/theme/";
-		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo("variables.scss", pathOrigem, pathDestino, recurso);
+		//pathDestino = raizDestino + "src/theme/";
+		//pathOrigem = raizOrigem + "src/theme/";
+		//this.criaCaminhoSeNaoExiste(pathDestino);
+		//this.copiaArquivo("variables.scss", pathOrigem, pathDestino, recurso);
 
 	}
 	
@@ -131,19 +132,22 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 	}
 	
 	private void criaArquivoAplicacao(Recursos recurso) throws IOException {
-		String pathDestino = getDiretorioAngular(recurso) + "/app/";
 		
-		String nomeArquivo = pathDestino +  "app.component.ts";
+		String nomeArquivo = getDiretorioAngular(recurso) + "/app/app.component.ts";
 		String conteudo = AppComponentTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 
-		nomeArquivo = pathDestino +  "app.module.ts";
+		nomeArquivo = getDiretorioAngular(recurso) + "/app/app.module.ts";
 		conteudo = AppModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 		
-		//nomeArquivo = pathDestino +  "app.scss";
-		//conteudo = AppScss.create("\n").generate(recurso);
-		//geraArquivoFonte(conteudo, nomeArquivo);
+		nomeArquivo = getDiretorioAngular(recurso) + "/app/app.scss";
+		conteudo = AppScss.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		nomeArquivo = getDiretorioAngular(recurso) + "/theme/variables.scss";
+		conteudo = ThemeVariables.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
 
 	}
 	

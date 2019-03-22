@@ -1,5 +1,5 @@
 <%@ jet package="jet.ionic3.app" 
-imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* " 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* loopback.cliente.modelo.*" 
 class="AppScss" %>
 
 <%
@@ -8,7 +8,7 @@ PaletaCorRest paleta = recursos.getPaletaCor();
 Configuracao conf = recursos.getConfiguracao();
 %>
 .quadroBase {
-    background-color:<%= paleta.getCor1() %>
+    background-color:<%= paleta.getCor2() %>
 }
 .quadroTitulo {
     background-color:<%= paleta.getCor2() %>

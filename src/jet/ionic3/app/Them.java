@@ -9,13 +9,13 @@ import gerapp.modelo.*;
 import gerapp.modelo.node.*;
 import loopback.cliente.modelo.*;
 
-public class AppScss
+public class Them
 {
   protected static String nl;
-  public static synchronized AppScss create(String lineSeparator)
+  public static synchronized Them create(String lineSeparator)
   {
     nl = lineSeparator;
-    AppScss result = new AppScss();
+    Them result = new Them();
     nl = null;
     return result;
   }

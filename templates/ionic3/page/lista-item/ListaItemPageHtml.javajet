@@ -9,7 +9,7 @@ Configuracao conf = recursos.getConfiguracao();
 %>
 
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="titulo">
     <ion-title (click)="testaFoto()"><%= tela.getNome() %></ion-title>
   </ion-navbar>
 </ion-header>
