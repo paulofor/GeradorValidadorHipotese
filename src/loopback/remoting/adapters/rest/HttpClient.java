@@ -18,6 +18,10 @@ import com.ning.http.client.Response;
 public class HttpClient extends AsyncHttpClient {
 
 	private Map<String, String> headers = new HashMap<String, String>();
+	
+	private String url;
+	private String param;
+	private String metodo;
 
 	private static String getVersionName() {
 		String appVersion = null;
@@ -63,6 +67,9 @@ public class HttpClient extends AsyncHttpClient {
 			}
 		}
 
+		this.url = baseUrl + path;
+		this.metodo = method;
+		this.param = "";
 		BoundRequestBuilder request = prepareRequest(method, baseUrl + path);
 
 		String contentType = null;
@@ -78,6 +85,7 @@ public class HttpClient extends AsyncHttpClient {
 					String valor = "" + parameters.get(chave);
 					// url = url.replaceAll(chaveStr, valor);
 					request.addQueryParam("" + chave, valor);
+					this.param += "" + chave + "=" + valor;
 				}
 				// for (Map.Entry<String, ? extends Object> entry :
 				// flattenParameters(parameters).entrySet()) {
@@ -152,7 +160,7 @@ public class HttpClient extends AsyncHttpClient {
 		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987", "Jenlop01");
 		request.setProxyServer(proxy);
 
-		System.out.println("Request:" + request.toString());
+		System.out.println("Url:" + this.url + "?" + this.param);
 
 		if ("GET".equalsIgnoreCase(method)) {
 
@@ -173,7 +181,7 @@ public class HttpClient extends AsyncHttpClient {
 	}
 
 	private BoundRequestBuilder prepareRequest(String method, String url) {
-		System.out.println("Url:" + url);
+		//
 		if ("GET".equalsIgnoreCase(method)) {
 			return prepareGet(url);
 		} else if ("HEAD".equalsIgnoreCase(method)) {
@@ -241,5 +249,10 @@ public class HttpClient extends AsyncHttpClient {
 
 	public void removeHeader(String key) {
 		headers.remove(key);
+	}
+	
+	
+	private String debugRequest(BoundRequestBuilder request) {
+		return request.;
 	}
 }

@@ -17,7 +17,7 @@ public class CriaIonic3 {
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 		
-		rep.findById(29, new ObjectCallback<AplicacaoRest>() { 
+		rep.findById(27, new ObjectCallback<AplicacaoRest>() { 
             @Override 
             public void onSuccess(AplicacaoRest model) { 
             	System.out.println("Sucesso: " + model);

@@ -18,6 +18,7 @@ public class CallbackHandler extends AsyncCompletionHandlerWithStatusCorrection 
 	public Response onCompleted(Response response) throws Exception {
 		try {
 			String responseBody = response.getResponseBody();
+			System.out.println("ResponseBody: " + responseBody);
 			// Log.getLogger().info("Success (string): " + response);
 			callback.onSuccess(responseBody);
 		} catch (Throwable t) {
