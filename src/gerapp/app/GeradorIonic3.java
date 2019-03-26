@@ -108,9 +108,9 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		this.copiaArquivo("list.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.ts", pathOrigem, pathDestino, recurso);
 		
-		//pathDestino = raizDestino + "src/theme/";
-		//pathOrigem = raizOrigem + "src/theme/";
-		//this.criaCaminhoSeNaoExiste(pathDestino);
+		pathDestino = raizDestino + "src/theme/";
+		pathOrigem = raizOrigem + "src/theme/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
 		//this.copiaArquivo("variables.scss", pathOrigem, pathDestino, recurso);
 
 	}
