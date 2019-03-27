@@ -65,6 +65,8 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 		this.copiaArquivo("package-lock.json", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("tsconfig.json", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("tslint.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("tslint.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo(".gitignore", pathOrigem, pathDestino, recurso);
 		
 		
 		
