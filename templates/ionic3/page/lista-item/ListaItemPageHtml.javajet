@@ -18,9 +18,10 @@ Configuracao conf = recursos.getConfiguracao();
 	<ng-container *ngIf="listaItem">
    	<ion-list>
       <ion-item *ngFor="let item of listaItem">
- 			<ion-label>linha1</ion-label>
- 			<ion-label>linha2</ion-label>
- 			<ion-label>linha3</ion-label>
+ 		<h2>titulo</h2>
+        <h3>subtitulo</h3>
+        <button ion-button clear item-end>inciar</button>
+  
       </ion-item>
     </ion-list>
 	</ng-container>
