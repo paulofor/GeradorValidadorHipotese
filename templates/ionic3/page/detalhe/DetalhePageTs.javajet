@@ -34,7 +34,8 @@ export class <%= tela.getNome() %> {
   }
   
   carregaItem() {
-    this.srv.obtemPrimeiro()
+    var filtro = { 'where' : { 'id' : 1 }} ;
+    this.srv.obtemElemento(filtro)
       .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
         console.log('Result', JSON.stringify(result));
         this.item = result;

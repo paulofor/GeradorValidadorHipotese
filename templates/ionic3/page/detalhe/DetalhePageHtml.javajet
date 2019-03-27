@@ -14,7 +14,12 @@ Configuracao conf = recursos.getConfiguracao();
 </ion-header>
 
 <ion-content padding class="quadroBase">
-	<ng-container>
+  <ng-container *ngIf="item">
+    <ion-card>
+      <div class="card-title"></div>
+      <div class="card-subtitle"></div>
+    </ion-card>
 
-	</ng-container>
+
+  </ng-container>
 </ion-content>

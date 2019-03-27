@@ -29,7 +29,7 @@ public class DetalhePageTs
   protected final String TEXT_7 = ";" + NL + "" + NL + "  constructor(public navCtrl: NavController, public srv: ";
   protected final String TEXT_8 = "Api, " + NL + "  \t\t\t\tprivate screenshot: Screenshot, public modalCtrl: ModalController) {" + NL + "  }" + NL + "" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
   protected final String TEXT_9 = "');" + NL + "    this.carregaItem();" + NL + "  }" + NL + "" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
-  protected final String TEXT_10 = "');" + NL + "  }" + NL + "  " + NL + "  carregaItem() {" + NL + "    this.srv.obtemPrimeiro()" + NL + "      .subscribe((result: ";
+  protected final String TEXT_10 = "');" + NL + "  }" + NL + "  " + NL + "  carregaItem() {" + NL + "    var filtro = { 'where' : { 'id' : 1 }} ;" + NL + "    this.srv.obtemElemento(filtro)" + NL + "      .subscribe((result: ";
   protected final String TEXT_11 = ") => {" + NL + "        console.log('Result', JSON.stringify(result));" + NL + "        this.item = result;" + NL + "      });" + NL + "  }" + NL + "" + NL + "  testaFoto() {" + NL + "    this.screenshot.save('jpg', 100, '";
   protected final String TEXT_12 = "');" + NL + "  }" + NL + "  " + NL + "}";
   protected final String TEXT_13 = NL;
