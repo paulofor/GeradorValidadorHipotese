@@ -31,8 +31,9 @@ public class LoopbackService
   protected final String TEXT_11 = "> {" + NL + "    return of(";
   protected final String TEXT_12 = "[0]);" + NL + "  }" + NL + "  obtemLista(filter: LoopBackFilter = {}, customHeaders?: Function) : Observable<";
   protected final String TEXT_13 = "[]> {" + NL + "    return of(";
-  protected final String TEXT_14 = ");" + NL + "  }" + NL + "  obtemElemento(filter: LoopBackFilter = {}, customHeaders?: Function) : Observable<ItemSerie> {" + NL + "    return of(";
-  protected final String TEXT_15 = "[filter.where.id]);" + NL + "  }" + NL + "}";
+  protected final String TEXT_14 = ");" + NL + "  }" + NL + "  obtemElemento(filter: LoopBackFilter = {}, customHeaders?: Function) : Observable<";
+  protected final String TEXT_15 = "> {" + NL + "    return of(";
+  protected final String TEXT_16 = "[filter.where.id]);" + NL + "  }" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -68,8 +69,10 @@ Configuracao conf = recursos.getConfiguracao();
     stringBuffer.append(TEXT_13);
     stringBuffer.append( classe.getNomeParaConstante() );
     stringBuffer.append(TEXT_14);
-    stringBuffer.append( classe.getNomeParaConstante() );
+    stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_15);
+    stringBuffer.append( classe.getNomeParaConstante() );
+    stringBuffer.append(TEXT_16);
     return stringBuffer.toString();
   }
 }
