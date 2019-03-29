@@ -1,6 +1,6 @@
-<%@ jet package="jet.ionic3.page.listaVitrine" 
+<%@ jet package="jet.ionic3.page.listaItem" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
-class="ListaVitrinePageTs" %>
+class="ListaItemPageBaseTs" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
@@ -16,36 +16,33 @@ import { Screenshot } from '@ionic-native/screenshot';
 
 import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api } from '../../shared/sdk';
 
-@IonicPage()
-@Component({
-  selector: '<%= tela.getNomeControle() %>',
-  templateUrl: '<%= tela.getArquivo() %>.html'
-})
-export class <%= tela.getNome() %> {
-  listaItem: <%= tela.getEntidade().getNomeParaClasse() %>[];
 
-  constructor(public navCtrl: NavController, public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
-  				 private screenshot: Screenshot, public modalCtrl: ModalController) {
+export abstract class <%= tela.getNome() %>Base {
+  protected listaItem: <%= tela.getEntidade().getNomeParaClasse() %>[];
+
+  constructor(protected navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
+  				 protected screenshot: Screenshot) {
   }
 
-  ionViewWillEnter() {
-    console.log('ionViewWillEnter <%= tela.getNome() %>');
-    this.carregaLista();
-  }
-
-  ionViewDidLoad() {
-  	console.log('ionViewDidLoad <%= tela.getNome() %>');
-  }
   
-  carregaLista() {
-    this.srv.obtemLista()
+  protected carregaLista() {
+    this.srv.<%= tela.getMetodoCarga() %>()
       .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
         console.log('Result', JSON.stringify(result));
         this.listaItem = result;
       });
   }
   
-  testaFoto() {
+   
+  protected carregaListaPrototipo() {
+    this.srv.<%= tela.getMetodoCarga() %>()
+      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
+        console.log('Result-Prototipo', JSON.stringify(result));
+        this.listaItem = result;
+      });
+  }
+  
+  protected testaFoto() {
     this.screenshot.save('jpg', 100, '<%= tela.getNome() %>');
   }
 

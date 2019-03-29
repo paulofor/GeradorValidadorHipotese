@@ -25,6 +25,10 @@ public class TelaAppWrapper implements ItemComponente{
 	 *
 	 */
 
+	public String getMetodoCarga() {
+		return principal.getNome() + "Load";
+	}
+	
 	
 	@Override
 	public String getArquivo() {

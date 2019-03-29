@@ -39,6 +39,9 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	
 	protected PaletaCorRest paletaCor = null;
 
+	
+	RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+	
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
 	}
@@ -71,11 +74,20 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		recursos.setListaTelaWeb(getListaTelaWeb());
 		recursos.setListaTelaApp(this.getListaTelaApp());
 		recursos.setPaletaCor(this.obtemPaletaCor());
+		for (Object entidade : listaEntidade) {
+			carregaTelaParaEntidade((Entidade)entidade);
+		}
+		
 	}
+	
+	private void carregaTelaParaEntidade(Entidade entidade) {
+		
+	}
+	
 	
 	public synchronized PaletaCorRest obtemPaletaCor()  {
 		paletaCor = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		
 		PaletaCorRepositorio rep = adapter.createRepository(PaletaCorRepositorio.class);
 		rep.findByIdAplicacao(aplicacao.getId(), new ObjectCallback<PaletaCorRest>() {
 			@Override
@@ -96,7 +108,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	public synchronized List getListaEntidade() throws DaoException {
 		listaEntidade = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		//RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		EntidadeRepositorio rep = adapter.createRepository(EntidadeRepositorio.class);
 		rep.findByIdAplicacao(aplicacao.getId(), new ListCallback<EntidadeRest>() {
 			@Override
@@ -121,7 +133,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	public synchronized List getListaTelaWeb() {
 		listaTelaWeb = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		//RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		TelaWebRepositorio rep = adapter.createRepository(TelaWebRepositorio.class);
 		System.out.println("Chamada TelaWeb...");
 		rep.findByIdAplicacaoGerador(aplicacao.getId(), new ListCallback<TelaWebRest>() {
@@ -157,7 +169,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	
 	public synchronized List getListaTelaApp() {
 		listaTelaApp = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		//RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		TelaAppRepositorio rep = adapter.createRepository(TelaAppRepositorio.class);
 		System.out.println("Chamada TelaApp...");
 		rep.findByIdAplicacaoGerador(aplicacao.getId(), new ListCallback<TelaAppRest>() {
@@ -185,7 +197,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	public synchronized List getListaAtributos(long idEntidade) throws DaoException {
 		listaAtributo = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		//RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		AtributoEntidadeRepositorio rep = adapter.createRepository(AtributoEntidadeRepositorio.class);
 		System.out.println("Chamada Atributos");
 		rep.findByIdEntidade(idEntidade, new ListCallback<AtributoEntidadeRest>() {
@@ -213,7 +225,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	public synchronized List getListaRelacionamento(long idEntidade) throws DaoException {
 		listaRelacionamento = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		//RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		RelacionamentoEntidadeRepositorio rep = adapter.createRepository(RelacionamentoEntidadeRepositorio.class);
 
 		rep.findByIdEntidade(idEntidade, new ListCallback<RelacionamentoEntidadeRest>() {

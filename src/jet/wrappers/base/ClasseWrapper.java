@@ -12,6 +12,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import jet.wrappers.base.node.TelaAppWrapper;
+
 
 
 public abstract class ClasseWrapper {
@@ -25,6 +27,8 @@ public abstract class ClasseWrapper {
 	private AtributoEntidade chave;
 	private AtributoEntidade identificador;
 	private List<String> listaHtml;
+	
+	private List<TelaAppWrapper> listaTelaAappW;
 	
 	protected abstract RelacionamentoWrapper criaRelacionamentoWrapper(RelacionamentoEntidade item);
 	protected abstract AtributoWrapper criaAtributoWrapper(AtributoEntidade item);

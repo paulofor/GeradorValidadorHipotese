@@ -31,6 +31,7 @@ import jet.ionic3.page.lista.ListaPageHtml;
 import jet.ionic3.page.lista.ListaPageTs;
 import jet.ionic3.page.listaGrid.ListaGridPageHtml;
 import jet.ionic3.page.listaGrid.ListaGridPageTs;
+import jet.ionic3.page.listaItem.ListaItemPageBaseTs;
 import jet.ionic3.page.listaItem.ListaItemPageHtml;
 import jet.ionic3.page.listaItem.ListaItemPageTs;
 import jet.wrappers.angular.ClasseWrapperAngular;
@@ -229,8 +230,11 @@ public class GeradorIonic3 extends GeradorArquivosLoopback{
 			}
 		}
 		if (tela.tipoListaItem()) {
-			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
+			conteudo = ListaItemPageBaseTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
 			
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
 				conteudo = ListaItemPageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
