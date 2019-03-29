@@ -17,6 +17,7 @@ import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../s
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Screenshot } from '@ionic-native/screenshot';
+import { ChartsModule } from 'ng2-charts';
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
 while (iterador.hasNext()) {
@@ -58,8 +59,8 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    SDKBrowserModule.forRoot()
-    
+    SDKBrowserModule.forRoot(),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

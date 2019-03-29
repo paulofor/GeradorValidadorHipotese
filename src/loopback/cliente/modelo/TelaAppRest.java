@@ -9,8 +9,15 @@ public class TelaAppRest extends Model{
 	private Integer entidadeId;
 	private Integer conceitoProdutoId;
 	private Integer sobrescreveHtml;
+	private Integer sobrescreveTs;
 	
 	
+	public Integer getSobrescreveTs() {
+		return sobrescreveTs;
+	}
+	public void setSobrescreveTs(Integer sobrescreveTs) {
+		this.sobrescreveTs = sobrescreveTs;
+	}
 	public Integer getSobrescreveHtml() {
 		return sobrescreveHtml;
 	}

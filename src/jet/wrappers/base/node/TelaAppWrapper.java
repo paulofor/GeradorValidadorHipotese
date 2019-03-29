@@ -114,6 +114,9 @@ public class TelaAppWrapper implements ItemComponente{
 	public boolean sobrescreveHtml() {
 		return this.principal.getSobrescreveHtml() == 1;
 	}
+	public boolean sobrescreveTs() {
+		return this.principal.getSobrescreveTs() == 1;
+	}
 	
 	
 	private String getSufixo() {
