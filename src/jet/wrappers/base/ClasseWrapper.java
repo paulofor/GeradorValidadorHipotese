@@ -28,7 +28,7 @@ public abstract class ClasseWrapper {
 	private AtributoEntidade identificador;
 	private List<String> listaHtml;
 	
-	private List<TelaAppWrapper> listaTelaAappW;
+	
 	
 	protected abstract RelacionamentoWrapper criaRelacionamentoWrapper(RelacionamentoEntidade item);
 	protected abstract AtributoWrapper criaAtributoWrapper(AtributoEntidade item);
@@ -111,6 +111,36 @@ public abstract class ClasseWrapper {
 		}
 		throw new RuntimeException("Existe mais de dois relacionamentos nessa associação " + this.getNomeParaClasse());
 	}
+	
+	
+	public List<RelacionamentoWrapper> getListaItemN() {
+		List<RelacionamentoWrapper> listaRel = new ArrayList<RelacionamentoWrapper> ();
+		Iterator<RelacionamentoEntidade> itRelac = listaRelacionamento.iterator();
+		while (itRelac.hasNext()) {
+			RelacionamentoEntidade relac = itRelac.next();
+			if (outroLadoN(relac)) {
+				RelacionamentoWrapper relW = criaRelacionamentoWrapper(relac);
+				relW.setEntidadeReferencia(this);
+				listaRel.add(relW);
+			}
+		}
+		return listaRel;
+	}
+	
+	public List<RelacionamentoWrapper> getListaItem1() {
+		List<RelacionamentoWrapper> listaRel = new ArrayList<RelacionamentoWrapper> ();
+		Iterator<RelacionamentoEntidade> itRelac = listaRelacionamento.iterator();
+		while (itRelac.hasNext()) {
+			RelacionamentoEntidade relac = itRelac.next();
+			if (!outroLadoN(relac)) {
+				RelacionamentoWrapper relW = criaRelacionamentoWrapper(relac);
+				relW.setEntidadeReferencia(this);
+				listaRel.add(relW);
+			}
+		}
+		return listaRel;	
+	}
+	
 	
 	private List<RelacionamentoEntidade> getListaRelacionamentoSemUsuario() {
 		List<RelacionamentoEntidade> listaSaida = new LinkedList<RelacionamentoEntidade>();
@@ -340,6 +370,33 @@ public abstract class ClasseWrapper {
 		}
 		if (this.entidade.getIdEntidade()==rel.getIdEntidade2()) {
 			if (rel.getQtdeEntidade1().toUpperCase().equals("1")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean outroLadoN(RelacionamentoEntidade rel) {
+		if (this.entidade.getIdEntidade()==rel.getIdEntidade1()) {
+			if (rel.getQtdeEntidade1().toUpperCase().equals("N")) {
+				return true;
+			}
+		}
+		if (this.entidade.getIdEntidade()==rel.getIdEntidade2()) {
+			if (rel.getQtdeEntidade2().toUpperCase().equals("N")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	private boolean outroLado1(RelacionamentoEntidade rel) {
+		if (this.entidade.getIdEntidade()==rel.getIdEntidade1()) {
+			if (rel.getQtdeEntidade1().toUpperCase().equals("1")) {
+				return true;
+			}
+		}
+		if (this.entidade.getIdEntidade()==rel.getIdEntidade2()) {
+			if (rel.getQtdeEntidade2().toUpperCase().equals("1")) {
 				return true;
 			}
 		}

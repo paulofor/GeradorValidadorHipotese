@@ -32,7 +32,7 @@ export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter <%= tela.getNome() %>');
-    this.carregaListaPrototipo();
+    this.carregaPrototipo();
   }
 
   ionViewDidLoad() {

@@ -31,7 +31,7 @@ public class ListaItemPageTs
   protected final String TEXT_9 = " extends ";
   protected final String TEXT_10 = "Base {" + NL + "" + NL + "" + NL + "" + NL + "  constructor(protected navCtrl: NavController, protected srv: ";
   protected final String TEXT_11 = "Api," + NL + "    protected screenshot: Screenshot) {" + NL + "    super(navCtrl, srv, screenshot);" + NL + "  }" + NL + "" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
-  protected final String TEXT_12 = "');" + NL + "    this.carregaListaPrototipo();" + NL + "  }" + NL + "" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
+  protected final String TEXT_12 = "');" + NL + "    this.carregaPrototipo();" + NL + "  }" + NL + "" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
   protected final String TEXT_13 = "');" + NL + "  }" + NL + "  " + NL + " " + NL + "" + NL + "  " + NL + "}";
   protected final String TEXT_14 = NL;
 

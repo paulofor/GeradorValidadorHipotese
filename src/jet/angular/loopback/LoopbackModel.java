@@ -115,7 +115,7 @@ Configuracao conf = recursos.getConfiguracao();
 	}
 
     
-	iteradorRel = classe.obtemListaSemChaveEstrangeira().iterator();
+	iteradorRel = classe.getListaItem1().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 
@@ -128,7 +128,7 @@ Configuracao conf = recursos.getConfiguracao();
 	}
 
     
-	iteradorRel = classe.obtemListaComChaveEstrangeira().iterator();
+	iteradorRel = classe.getListaItemN().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 
@@ -160,7 +160,7 @@ Configuracao conf = recursos.getConfiguracao();
 	}
 
     
-	iteradorRel = classe.obtemListaSemChaveEstrangeira().iterator();
+	iteradorRel = classe.getListaItem1().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 
@@ -173,7 +173,7 @@ Configuracao conf = recursos.getConfiguracao();
 	}
 
     
-	iteradorRel = classe.obtemListaComChaveEstrangeira().iterator();
+	iteradorRel = classe.getListaItemN().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 

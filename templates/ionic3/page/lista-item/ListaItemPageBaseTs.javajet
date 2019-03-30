@@ -18,27 +18,29 @@ import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().g
 
 
 export abstract class <%= tela.getNome() %>Base {
-  protected listaItem: <%= tela.getEntidade().getNomeParaClasse() %>[];
+
+  protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
 
   constructor(protected navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
   				 protected screenshot: Screenshot) {
   }
 
+  //protected abstract getLista();
   
-  protected carregaLista() {
+  protected carrega() {
     this.srv.<%= tela.getMetodoCarga() %>()
-      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
+      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
         console.log('Result', JSON.stringify(result));
-        this.listaItem = result;
+        this.item = result;
       });
   }
   
    
-  protected carregaListaPrototipo() {
+  protected carregaPrototipo() {
     this.srv.<%= tela.getMetodoCarga() %>()
-      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
+      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
         console.log('Result-Prototipo', JSON.stringify(result));
-        this.listaItem = result;
+        this.item = result;
       });
   }
   

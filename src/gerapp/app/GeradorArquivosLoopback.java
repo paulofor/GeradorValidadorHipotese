@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 import jet.wrappers.base.node.TelaWebWrapper;
@@ -74,14 +75,26 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		recursos.setListaTelaWeb(getListaTelaWeb());
 		recursos.setListaTelaApp(this.getListaTelaApp());
 		recursos.setPaletaCor(this.obtemPaletaCor());
-		for (Object entidade : listaEntidade) {
-			carregaTelaParaEntidade((Entidade)entidade);
+		TelaAppRepositorio rep = adapter.createRepository(TelaAppRepositorio.class);
+		for (Object entidade : listaClasse) {
+			carregaTelaParaEntidade((ClasseWrapperAngular)entidade, rep);
 		}
 		
 	}
 	
-	private void carregaTelaParaEntidade(Entidade entidade) {
-		
+	private void carregaTelaParaEntidade(final ClasseWrapperAngular entidade,TelaAppRepositorio rep) {
+		rep.findByIdEntidadeGerador(entidade.getId(), new ListCallback<TelaAppRest>() {
+			@Override
+			public void onError(Throwable t) {
+				t.printStackTrace();
+			}
+
+			@Override
+			public void onSuccess(List<TelaAppRest> lista) {
+				entidade.setListaTelaApp(lista);
+				System.out.println("*** Adicionou lista com ");
+			}
+		});
 	}
 	
 	

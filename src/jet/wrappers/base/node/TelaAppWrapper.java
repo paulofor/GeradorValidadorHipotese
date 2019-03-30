@@ -26,7 +26,11 @@ public class TelaAppWrapper implements ItemComponente{
 	 */
 
 	public String getMetodoCarga() {
-		return principal.getNome() + "Load";
+		String nome = "get" + this.getNome() + "Load";
+		return nome;
+	}
+	public String getMetodoCargaConstante() {
+		return this.getEntidade().getNomeParaConstante() + "_" + this.getNome().toUpperCase();
 	}
 	
 	

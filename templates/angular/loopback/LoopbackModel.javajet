@@ -41,7 +41,7 @@ export interface <%= classe.getNomeParaClasse() %>Interface {
 	}
 %>
 <%
-	iteradorRel = classe.obtemListaSemChaveEstrangeira().iterator();
+	iteradorRel = classe.getListaItem1().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 %>
@@ -50,7 +50,7 @@ export interface <%= classe.getNomeParaClasse() %>Interface {
 	}
 %>
 <%
-	iteradorRel = classe.obtemListaComChaveEstrangeira().iterator();
+	iteradorRel = classe.getListaItemN().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 %>
@@ -71,7 +71,7 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
 	}
 %>
 <%
-	iteradorRel = classe.obtemListaSemChaveEstrangeira().iterator();
+	iteradorRel = classe.getListaItem1().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 %>
@@ -80,7 +80,7 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
 	}
 %>
 <%
-	iteradorRel = classe.obtemListaComChaveEstrangeira().iterator();
+	iteradorRel = classe.getListaItemN().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 %>
