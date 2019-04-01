@@ -448,7 +448,9 @@ public abstract class ClasseWrapper {
 		Iterator<AtributoEntidade> it = lista.iterator();
 		listaAtributoW = new LinkedList<AtributoWrapper>();
 		while (it.hasNext()) {
-			listaAtributoW.add(criaAtributoWrapper(it.next()));
+			AtributoEntidade att = it.next();
+			att.setEntidade(this.entidade);
+			listaAtributoW.add(criaAtributoWrapper(att));
 		}
 		
 	}

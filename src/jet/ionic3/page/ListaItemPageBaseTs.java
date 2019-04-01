@@ -1,4 +1,4 @@
-package jet.ionic3.page.listaItem;
+package jet.ionic3.page;
 
 import java.util.*;
 import gerapp.app.*;
