@@ -1,24 +1,24 @@
 package app;
 
-import gerapp.app.GeradorIonic3;
+import gerapp.app.GeradorLoopbackServer;
 import gerapp.modelo.Aplicacao;
 import loopback.android.callback.ObjectCallback;
 import loopback.cliente.modelo.AplicacaoRest;
 import loopback.cliente.repositorio.AplicacaoRepositorio;
 import loopback.remoting.adapters.RestAdapter;
 
-public class CriaIonic3 {
+public class CriaLoopbackServer {
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("Ola Mundo");
+		System.out.println("Ola Mundo - Loopback Server");
 		
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 		
-		rep.findById(34, new ObjectCallback<AplicacaoRest>() { 
+		rep.findById(27, new ObjectCallback<AplicacaoRest>() { 
             @Override 
             public void onSuccess(AplicacaoRest model) { 
             	System.out.println("Sucesso: " + model);
@@ -34,7 +34,7 @@ public class CriaIonic3 {
 	
 	public static void executa(AplicacaoRest appRest) {
 		Aplicacao aplicacao = appRest.criaItem();
-		GeradorIonic3 gerador = new GeradorIonic3();
+		GeradorLoopbackServer gerador = new GeradorLoopbackServer();
 		try {
 			gerador.setAplicacao(aplicacao);
 			gerador.criaArquivos();

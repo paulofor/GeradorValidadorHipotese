@@ -38,7 +38,7 @@ import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 
-public class GeradorIonic3 extends GeradorArquivosLoopback{
+public class GeradorIonic3 extends GeradorNodeBase {
 
 	
 	private String PATH = "../../../../ProdutosNode/";
