@@ -263,10 +263,7 @@ public class GeradorIonic3 extends GeradorNodeBase {
 	}
 
 
-	@Override
-	protected ClasseWrapper criaWrapper(Entidade entidade) {
-		return new ClasseWrapperAngular(entidade);
-	}
+	
 	
 	
 	private void carregaEntidade(TelaAppWrapper tela, Recursos recursos) {

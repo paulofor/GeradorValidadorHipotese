@@ -1,0 +1,64 @@
+<%@ jet package="jet.server.app" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ModelConfigJson" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+Configuracao conf = recursos.getConfiguracao();
+List<ClasseWrapper> listaClasse = recursos.getListaClasse();
+%>
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "../common/models/treino",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ExemploModelo": {
+    "dataSource": "mysqlDS",
+    "public": true
+  }
+<%
+Iterator<ClasseWrapper> iterador = listaClasse.iterator();
+while (iterador.hasNext()) {
+	ItemLoopbackServer item = (ItemLoopbackServer) iterador.next();
+%>
+  ,"<%= item.getNomeModeloServer() %>": {
+    "dataSource": "mysqlDS",
+    "public": true
+  }
+<%
+}
+%>
+}

@@ -5,6 +5,7 @@ import gerapp.modelo.Entidade;
 import gerapp.modelo.ProcValor;
 import gerapp.modelo.RelacionamentoEntidade;
 import gerapp.modelo.node.ItemComponente;
+import gerapp.modelo.node.ItemLoopbackServer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import jet.wrappers.base.RelacionamentoWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 import loopback.cliente.modelo.TelaAppRest;
 
-public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponente {
+public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponente, ItemLoopbackServer {
 
 	private List<TelaAppWrapper> listaTelaAppW;
 	
@@ -82,6 +83,7 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 	}
 
 	private String getTipoMinusculo() {
+		if (this.tipo==null) return "";
 		String nome = this.tipo;
 		String saida = "";
 		for (int i=0;i < nome.length(); i++) {
@@ -102,5 +104,22 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 	
 	public String getNomeControle() {
 		return "app-" + getPathArquivo();
+	}
+
+	// Server de Loopback
+
+	@Override
+	public String getNomeModeloServer() {
+		return this.entidade.getNome();
+	}
+
+	@Override
+	public String getNomeParaArquivoServer() {
+		return getNomeParaArquivo();
+	}
+
+	@Override
+	public String getNomeParametroServer() {
+		return this.entidade.getNome();
 	}
 }

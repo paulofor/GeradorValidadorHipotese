@@ -1,0 +1,29 @@
+<%@ jet package="jet.server.model" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* " 
+class="ModelJson" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+Configuracao conf = recursos.getConfiguracao();
+ItemLoopbackServer classe = (ItemLoopbackServer) recursos.getClasse();
+%>
+{
+  "name": "<%= classe.getNomeModeloServer() %>",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nome": {
+      "type": "string"
+    },
+    "valor": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,14 @@
+<%@ jet package="jet.server.model" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ModelJs" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+Configuracao conf = recursos.getConfiguracao();
+ItemLoopbackServer classe = (ItemLoopbackServer) recursos.getClasse();
+%>
+'use strict';
+
+module.exports = function(<%= classe.getNomeParametroServer() %>) {
+
+};
