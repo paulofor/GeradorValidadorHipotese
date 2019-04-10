@@ -7,6 +7,7 @@ import gerapp.modelo.RelacionamentoEntidade;
 import gerapp.modelo.node.ItemComponente;
 import gerapp.modelo.node.ItemLoopbackServer;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,16 +111,36 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 
 	@Override
 	public String getNomeModeloServer() {
-		return this.entidade.getNome();
+		return this.getNamesapaceParaClasse() + this.entidade.getNome();
 	}
 
 	@Override
 	public String getNomeParaArquivoServer() {
-		return getNomeParaArquivo();
+		return this.recursos.getConfiguracao().getNamespace().toLowerCase() + File.separator + getNomeParaArquivo();
 	}
 
 	@Override
 	public String getNomeParametroServer() {
 		return this.entidade.getNome();
+	}
+	
+	
+	private String getNamesapaceParaClasse() {
+		String nome = this.recursos.getConfiguracao().getNamespace();
+		String saida = "";
+		boolean colocaMaiuscula = true;
+		for (int i=0;i < nome.length(); i++) {
+			if (colocaMaiuscula) {
+				saida += ("" + nome.charAt(i)).toUpperCase();
+				colocaMaiuscula = false;
+			} else {
+				if (nome.charAt(i) == '_') {
+					colocaMaiuscula = true;
+				} else {
+					saida += nome.charAt(i);
+				}
+			}
+		}
+		return saida;
 	}
 }

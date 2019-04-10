@@ -15,12 +15,20 @@ ItemLoopbackServer classe = (ItemLoopbackServer) recursos.getClasse();
     "validateUpsert": true
   },
   "properties": {
-    "nome": {
+    "id": {
       "type": "string"
-    },
-    "valor": {
-      "type": "number"
     }
+<%
+Iterator<AtributoWrapper> iteradorAtt = classe.getIteratorAtributo();
+while (iteradorAtt.hasNext()) {
+	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
+%>
+	,"<%= atributo.getNomePropriedade() %>": {
+      "type": "<%= atributo.getTipoNode() %>"
+    }
+<%
+}
+%>
   },
   "validations": [],
   "relations": {},

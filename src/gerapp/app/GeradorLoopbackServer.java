@@ -4,9 +4,9 @@ import gerapp.modelo.node.ItemLoopbackServer;
 
 import java.io.IOException;
 
-import jet.server.ModelJs;
-import jet.server.ModelJson;
 import jet.server.app.ModelConfigJson;
+import jet.server.model.ModelJs;
+import jet.server.model.ModelJson;
 
 public class GeradorLoopbackServer extends GeradorNodeBase {
 	
@@ -15,8 +15,8 @@ public class GeradorLoopbackServer extends GeradorNodeBase {
 	@Override
 	public void criaArquivoEntidade(Recursos recurso) throws IOException {
 		System.out.println("...criaArquivoEntidade");
-		String pathDestino = PATH + "//common//models//" 
-			+ recurso.getConfiguracao().getNamespace() + "//"; 
+		String pathDestino = PATH + "//common//models//"; 
+			
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		
 		

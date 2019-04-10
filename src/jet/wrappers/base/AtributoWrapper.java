@@ -193,5 +193,30 @@ public abstract class AtributoWrapper implements AtributoTotalI{
 		if (this.ehChave()) return "_id";
 		else return getNomeCampoTabela();
 	}
+	
+	public final String getTipoNode() {
+		if (base.getTipo().equals("NInt") ||
+			base.getTipo().equals("Decimal") ||
+			base.getTipo().equals("Logic") ||
+			base.getTipo().equals("") ||
+			base.getTipo().equals("") ) {
+			return "number";
+		}
+		if (base.getTipo().equals("TLbl") ||
+			base.getTipo().equals("TLblLg") ||
+			base.getTipo().equals("") ||
+			base.getTipo().equals("") ||
+			base.getTipo().equals("") ) {
+			return "string";
+		}
+		if (base.getTipo().equals("Data") ||
+			base.getTipo().equals("DTemp") ||
+			base.getTipo().equals("") ||
+			base.getTipo().equals("") ||
+			base.getTipo().equals("") ) {
+			return "date";
+		}
+		return base.getTipo();
+	}
 
 }

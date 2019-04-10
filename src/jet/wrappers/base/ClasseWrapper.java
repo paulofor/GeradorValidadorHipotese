@@ -1,5 +1,6 @@
 package jet.wrappers.base;
 
+import gerapp.app.Recursos;
 import gerapp.modelo.AtributoEntidade;
 import gerapp.modelo.Entidade;
 import gerapp.modelo.FiltroColecao;
@@ -11,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import jet.wrappers.base.node.TelaAppWrapper;
 
 
 
@@ -33,8 +32,14 @@ public abstract class ClasseWrapper {
 	protected abstract RelacionamentoWrapper criaRelacionamentoWrapper(RelacionamentoEntidade item);
 	protected abstract AtributoWrapper criaAtributoWrapper(AtributoEntidade item);
 	protected abstract ProcValorWrapper criaProcValorWrapper(ProcValor item);
+	
+	protected Recursos recursos;
 
 	private ClasseWrapper classeMatriz = null;
+	
+	public void setRecursos(Recursos item) {
+		this.recursos = item;
+	}
 
 	public List<ProcValorWrapper> getListaDerivadaDemanda() {
 		List<ProcValorWrapper> lista = new ArrayList<ProcValorWrapper>();
@@ -477,6 +482,9 @@ public abstract class ClasseWrapper {
 	
 	public List<AtributoWrapper> getListaAtributoEntidadeW() {
 		return listaAtributoW;
+	}
+	public Iterator<AtributoWrapper> getIteratorAtributo() {
+		return listaAtributoW.iterator();
 	}
 	
 	public void setListaProcValor(List<ProcValor> lista) {
