@@ -1,0 +1,32 @@
+<%@ jet package="jet.server.database" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="MySqlCreate" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+Configuracao conf = recursos.getConfiguracao();
+List<ClasseWrapper> listaClasse = recursos.getListaClasse();
+%>
+<%
+Iterator<ClasseWrapper> iterador = listaClasse.iterator();
+while (iterador.hasNext()) {
+	ClasseWrapperAngular item = (ClasseWrapperAngular) iterador.next();
+%>
+drop table if exists <%= item.getNomeModeloServer() %>;
+create table <%= item.getNomeModeloServer() %> (
+<%
+boolean primeiro = true;
+Iterator<AtributoWrapper> iteradorAtt = item.getIteratorAtributo();
+while (iteradorAtt.hasNext()) {
+	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
+%> 
+	<%= atributo.getNomePropriedade() %>  <%= atributo.getTipoSql() %>,
+<%
+}
+%>
+	PRIMARY KEY (<%= item.getChaveW().getNomePropriedade() %>)
+); 
+<%
+}
+%>
+

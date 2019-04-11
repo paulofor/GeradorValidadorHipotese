@@ -111,7 +111,7 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 
 	@Override
 	public String getNomeModeloServer() {
-		return this.getNamesapaceParaClasse() + this.entidade.getNome();
+		return this.getNamesapaceParaClasse() + "_" + this.entidade.getNome();
 	}
 
 	@Override

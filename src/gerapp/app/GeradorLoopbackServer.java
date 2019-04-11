@@ -40,7 +40,7 @@ public class GeradorLoopbackServer extends GeradorNodeBase {
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
 		System.out.println("...criaArquivoUnico");
-		String pathDestino = PATH + "//server/"; 
+		String pathDestino = PATH + "//server//" + recurso.getConfiguracao().getNamespace() + "/"; 
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		
 		String nomeArquivo = pathDestino + "model-config.json";
