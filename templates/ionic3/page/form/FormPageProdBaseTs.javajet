@@ -1,0 +1,35 @@
+<%@ jet package="jet.ionic3.page.form" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="FormPageProdBaseTs" %>
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+ClasseWrapper classe = tela.getEntidade();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api } from '../../shared/sdk';
+
+
+export abstract class <%= tela.getNome() %>PageBase {
+  
+  protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
+
+  constructor(	public navCtrl: NavController, 
+  				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
+  				) {
+  }
+
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter <%= tela.getNome() %>');
+    this.carregaItem();
+  }
+
+  ionViewDidLoad() {
+  	console.log('ionViewDidLoad <%= tela.getNome() %>');
+  }
+  
+<%
+Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaComChaveEstrangeira();
+%>
+  
+}

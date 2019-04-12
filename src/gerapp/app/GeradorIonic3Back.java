@@ -26,6 +26,7 @@ import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
 import jet.ionic3.page.detalhe.DetalhePageTs;
 import jet.ionic3.page.form.FormPageHtml;
+import jet.ionic3.page.form.FormPageProdBaseTs;
 import jet.ionic3.page.form.FormPageTs;
 import jet.ionic3.page.lista.ListaPageHtml;
 import jet.ionic3.page.lista.ListaPageTs;
@@ -201,9 +202,17 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
+		
+		// FORM - PRODUCAO
+		
 		if (tela.tipoEdita()) {
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
+			conteudo = FormPageProdBaseTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
-			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
+			if (!this.existe(nomeArquivo)) {
 				conteudo = FormPageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
