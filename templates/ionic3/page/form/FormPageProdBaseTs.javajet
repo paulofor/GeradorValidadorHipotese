@@ -8,20 +8,41 @@ ClasseWrapper classe = tela.getEntidade();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api } from '../../shared/sdk';
-
+<%
+Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapper oposta = relac.getClasseOposta();
+%>
+import { <%= oposta.getNomeParaClasse() %>, <%= oposta.getNomeParaClasse() %>Api } from '../../shared/sdk';
+<%
+}
+%>
 
 export abstract class <%= tela.getNome() %>PageBase {
   
   protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
+  
+  protected abstract inicializacao();
 
-  constructor(	public navCtrl: NavController, 
-  				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
+  constructor(	
+				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
+<%
+itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapper oposta = relac.getClasseOposta();
+%>
+				public srv<%= oposta.getNomeParaClasse() %> : <%= oposta.getNomeParaClasse() %>Api,
+<%
+}
+%>
   				) {
   }
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter <%= tela.getNome() %>');
-    this.carregaItem();
+    this.inicializacao();
   }
 
   ionViewDidLoad() {
@@ -29,7 +50,29 @@ export abstract class <%= tela.getNome() %>PageBase {
   }
   
 <%
-Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaComChaveEstrangeira();
+itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapper oposta = relac.getClasseOposta();
+%>
+	protected lista<%= oposta.getNomeParaClasse() %> : <%= oposta.getNomeParaClasse() %>[];
+	protected carrega<%= oposta.getNomeParaClasse() %>(){
+		this.srv<%= oposta.getNomeParaClasse() %>.find()
+      		.subscribe((result:<%= oposta.getNomeParaClasse() %>[]) => {
+        		this.lista<%= oposta.getNomeParaClasse() %> = result;
+      	})
+	}
+	
+	protected lista<%= oposta.getNomeParaClasse() %>Usuario : <%= oposta.getNomeParaClasse() %>[];
+	protected carrega<%= oposta.getNomeParaClasse() %>Usuario(idUsuario:number){
+		this.srv<%= oposta.getNomeParaClasse() %>.find({'where' : {'idUsuario' : idUsuario} })
+      		.subscribe((result:<%= oposta.getNomeParaClasse() %>[]) => {
+        		this.lista<%= oposta.getNomeParaClasse() %>Usuario = result;
+      	})
+	}
+
+<%
+}
 %>
   
 }

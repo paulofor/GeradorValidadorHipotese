@@ -25,11 +25,13 @@ public class MySqlCreate
   protected final String TEXT_4 = " (";
   protected final String TEXT_5 = " " + NL + "\t";
   protected final String TEXT_6 = "  ";
-  protected final String TEXT_7 = ",";
-  protected final String TEXT_8 = NL + "\tPRIMARY KEY (";
-  protected final String TEXT_9 = ")" + NL + "); ";
-  protected final String TEXT_10 = NL;
-  protected final String TEXT_11 = NL;
+  protected final String TEXT_7 = " ";
+  protected final String TEXT_8 = "AUTO_INCREMENT";
+  protected final String TEXT_9 = ",";
+  protected final String TEXT_10 = NL + "\tPRIMARY KEY (";
+  protected final String TEXT_11 = ")" + NL + "); ";
+  protected final String TEXT_12 = NL;
+  protected final String TEXT_13 = NL;
 
   public String generate(Object argument)
   {
@@ -61,17 +63,21 @@ while (iteradorAtt.hasNext()) {
     stringBuffer.append(TEXT_6);
     stringBuffer.append( atributo.getTipoSql() );
     stringBuffer.append(TEXT_7);
-    
-}
-
+     if (atributo.ehChave()) {
     stringBuffer.append(TEXT_8);
-    stringBuffer.append( item.getChaveW().getNomePropriedade() );
+     } 
     stringBuffer.append(TEXT_9);
     
 }
 
     stringBuffer.append(TEXT_10);
+    stringBuffer.append( item.getChaveW().getNomePropriedade() );
     stringBuffer.append(TEXT_11);
+    
+}
+
+    stringBuffer.append(TEXT_12);
+    stringBuffer.append(TEXT_13);
     return stringBuffer.toString();
   }
 }

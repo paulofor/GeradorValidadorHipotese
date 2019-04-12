@@ -20,7 +20,7 @@ Iterator<AtributoWrapper> iteradorAtt = item.getIteratorAtributo();
 while (iteradorAtt.hasNext()) {
 	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
 %> 
-	<%= atributo.getNomePropriedade() %>  <%= atributo.getTipoSql() %>,
+	<%= atributo.getNomePropriedade() %>  <%= atributo.getTipoSql() %> <% if (atributo.ehChave()) {%>AUTO_INCREMENT<% } %>,
 <%
 }
 %>
