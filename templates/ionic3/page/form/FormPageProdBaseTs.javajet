@@ -59,6 +59,7 @@ while (itRel.hasNext()) {
 	protected carrega<%= oposta.getNomeParaClasse() %>(){
 		this.srv<%= oposta.getNomeParaClasse() %>.find()
       		.subscribe((result:<%= oposta.getNomeParaClasse() %>[]) => {
+        		console.log('lista<%= oposta.getNomeParaClasse() %>:' , result);
         		this.lista<%= oposta.getNomeParaClasse() %> = result;
       	})
 	}
@@ -74,5 +75,10 @@ while (itRel.hasNext()) {
 <%
 }
 %>
-  
+	protected submit() {
+    	this.srv.upsert(this.item)
+      		.subscribe((resultado) => {
+        	console.log('Resultado-Submit: ' , resultado);
+      	})
+	}
 }

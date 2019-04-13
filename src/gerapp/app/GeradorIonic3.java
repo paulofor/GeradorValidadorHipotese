@@ -1,6 +1,5 @@
 package gerapp.app;
 
-import gerapp.modelo.Entidade;
 import gerapp.modelo.node.ItemAngular;
 import gerapp.modelo.node.ItemComponente;
 import gerapp.modelo.node.ModuloComponente;
@@ -21,7 +20,6 @@ import jet.ionic3.app.AppComponentTs;
 import jet.ionic3.app.AppModuleTs;
 import jet.ionic3.app.AppScss;
 import jet.ionic3.app.ThemeVariables;
-import jet.ionic3.page.ItemPageBaseTs;
 import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
@@ -33,8 +31,8 @@ import jet.ionic3.page.lista.ListaPageTs;
 import jet.ionic3.page.listaGrid.ListaGridPageHtml;
 import jet.ionic3.page.listaGrid.ListaGridPageTs;
 import jet.ionic3.page.listaItem.ListaItemPageHtml;
+import jet.ionic3.page.listaItem.ListaItemPageProtBaseTs;
 import jet.ionic3.page.listaItem.ListaItemPageTs;
-import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 
@@ -231,7 +229,7 @@ public class GeradorIonic3 extends GeradorNodeBase {
 		}
 		if (tela.tipoListaItem()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
-			conteudo = ItemPageBaseTs.create("\n").generate(recurso);
+			conteudo = ListaItemPageProtBaseTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";

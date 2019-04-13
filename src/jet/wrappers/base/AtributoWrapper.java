@@ -199,6 +199,9 @@ public abstract class AtributoWrapper implements AtributoTotalI {
 	}
 
 	public final String getTipoSql() {
+		if (this.ehChave()) {
+			return "BIGINT";
+		}
 		if (base.getTipo().equals("NInt") || base.getTipo().equals("")
 				|| base.getTipo().equals("") || base.getTipo().equals("")
 				|| base.getTipo().equals("")) {

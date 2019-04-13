@@ -1,0 +1,44 @@
+<%@ jet package="jet.ionic3.page.listaItem" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ListaItemPageProdBaseTs" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api } from '../../shared/sdk';
+import { LoopBackFilter } from '../../shared/sdk';
+import { NavController } from 'ionic-angular';
+import { Page } from 'ionic-angular/umd/navigation/nav-util';
+
+export abstract class <%= tela.getNome() %>Base {
+
+	protected listaItem: <%= tela.getEntidade().getNomeParaClasse() %>[];
+	//protected abstract inicializacao();
+	protected abstract getFiltro(): LoopBackFilter;
+	protected abstract getPageEdicao(): Page;
+
+	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
+	}
+
+	ionViewWillEnter() {
+    	console.log('ionViewWillEnter <%= tela.getNome() %>');
+    	//this.inicializacao();
+    	this.carregaLista();
+  	}
+  	
+  	carregaLista() {
+  		this.srv.find(this.getFiltro())
+  			.subscribe((resultado: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
+  				console.log('ListaItem:' , resultado);
+  				this.listaItem = resultado;
+  			})
+  	}
+  
+	protected alterar(item: Exercicio) {
+		this.navCtrl.push(this.getPageEdicao(), {
+      		item: item
+		});
+  	}
+}

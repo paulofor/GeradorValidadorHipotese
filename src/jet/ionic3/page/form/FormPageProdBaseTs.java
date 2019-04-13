@@ -41,16 +41,17 @@ public class FormPageProdBaseTs
   protected final String TEXT_19 = "[];" + NL + "\tprotected carrega";
   protected final String TEXT_20 = "(){" + NL + "\t\tthis.srv";
   protected final String TEXT_21 = ".find()" + NL + "      \t\t.subscribe((result:";
-  protected final String TEXT_22 = "[]) => {" + NL + "        \t\tthis.lista";
-  protected final String TEXT_23 = " = result;" + NL + "      \t})" + NL + "\t}" + NL + "\t" + NL + "\tprotected lista";
-  protected final String TEXT_24 = "Usuario : ";
-  protected final String TEXT_25 = "[];" + NL + "\tprotected carrega";
-  protected final String TEXT_26 = "Usuario(idUsuario:number){" + NL + "\t\tthis.srv";
-  protected final String TEXT_27 = ".find({'where' : {'idUsuario' : idUsuario} })" + NL + "      \t\t.subscribe((result:";
-  protected final String TEXT_28 = "[]) => {" + NL + "        \t\tthis.lista";
-  protected final String TEXT_29 = "Usuario = result;" + NL + "      \t})" + NL + "\t}" + NL;
-  protected final String TEXT_30 = NL + "  " + NL + "}";
-  protected final String TEXT_31 = NL;
+  protected final String TEXT_22 = "[]) => {" + NL + "        \t\tconsole.log('lista";
+  protected final String TEXT_23 = ":' , result);" + NL + "        \t\tthis.lista";
+  protected final String TEXT_24 = " = result;" + NL + "      \t})" + NL + "\t}" + NL + "\t" + NL + "\tprotected lista";
+  protected final String TEXT_25 = "Usuario : ";
+  protected final String TEXT_26 = "[];" + NL + "\tprotected carrega";
+  protected final String TEXT_27 = "Usuario(idUsuario:number){" + NL + "\t\tthis.srv";
+  protected final String TEXT_28 = ".find({'where' : {'idUsuario' : idUsuario} })" + NL + "      \t\t.subscribe((result:";
+  protected final String TEXT_29 = "[]) => {" + NL + "        \t\tthis.lista";
+  protected final String TEXT_30 = "Usuario = result;" + NL + "      \t})" + NL + "\t}" + NL;
+  protected final String TEXT_31 = NL + "\tprotected submit() {" + NL + "    \tthis.srv.upsert(this.item)" + NL + "      \t\t.subscribe((resultado) => {" + NL + "        \tconsole.log('Resultado-Submit: ' , resultado);" + NL + "      \t})" + NL + "\t}" + NL + "}";
+  protected final String TEXT_32 = NL;
 
   public String generate(Object argument)
   {
@@ -137,11 +138,13 @@ while (itRel.hasNext()) {
     stringBuffer.append(TEXT_28);
     stringBuffer.append( oposta.getNomeParaClasse() );
     stringBuffer.append(TEXT_29);
+    stringBuffer.append( oposta.getNomeParaClasse() );
+    stringBuffer.append(TEXT_30);
     
 }
 
-    stringBuffer.append(TEXT_30);
     stringBuffer.append(TEXT_31);
+    stringBuffer.append(TEXT_32);
     return stringBuffer.toString();
   }
 }

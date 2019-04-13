@@ -32,37 +32,39 @@ public class LoopbackModel
   protected final String TEXT_12 = ";";
   protected final String TEXT_13 = NL + "\t";
   protected final String TEXT_14 = "?: ";
-  protected final String TEXT_15 = ";";
-  protected final String TEXT_16 = NL + "\tlista";
-  protected final String TEXT_17 = "?: ";
-  protected final String TEXT_18 = "[];";
-  protected final String TEXT_19 = NL + "}" + NL + "" + NL + "export class ";
-  protected final String TEXT_20 = " implements ";
-  protected final String TEXT_21 = "Interface {";
-  protected final String TEXT_22 = NL + "\t";
-  protected final String TEXT_23 = ": ";
-  protected final String TEXT_24 = ";";
-  protected final String TEXT_25 = NL + "\t";
-  protected final String TEXT_26 = "?: ";
-  protected final String TEXT_27 = ";";
-  protected final String TEXT_28 = NL + "\tlista";
-  protected final String TEXT_29 = "?: ";
-  protected final String TEXT_30 = "[];";
-  protected final String TEXT_31 = NL + "  constructor(data?: ";
-  protected final String TEXT_32 = "Interface) {" + NL + "    Object.assign(this, data);" + NL + "  }" + NL + "  /**" + NL + "   * The name of the model represented by this $resource," + NL + "   * i.e. `GanhoDorCanvasMySql`." + NL + "   */" + NL + "  public static getModelName() {" + NL + "    return \"";
-  protected final String TEXT_33 = "\";" + NL + "  }" + NL + "  /**" + NL + "  * @method factory" + NL + "  * @author Gerador Java " + NL + "  * @license MIT" + NL + "  * This method creates an instance of ";
-  protected final String TEXT_34 = " for dynamic purposes." + NL + "  **/" + NL + "  public static factory(data: ";
-  protected final String TEXT_35 = "Interface): ";
-  protected final String TEXT_36 = "{" + NL + "    return new ";
-  protected final String TEXT_37 = "(data);" + NL + "  }" + NL + "  /**" + NL + "  * @method getModelDefinition" + NL + "  * @author Gerador Java" + NL + "  * @license MIT" + NL + "  * This method returns an object that represents some of the model" + NL + "  * definitions." + NL + "  **/" + NL + "  public static getModelDefinition() {" + NL + "    return {" + NL + "      name: '";
-  protected final String TEXT_38 = "'," + NL + "      plural: '";
-  protected final String TEXT_39 = "s'," + NL + "      path: '";
-  protected final String TEXT_40 = "s'," + NL + "      idName: 'id'," + NL + "      properties: {" + NL + "\t\t";
-  protected final String TEXT_41 = NL + "        \"";
-  protected final String TEXT_42 = "\" : {" + NL + "        \tname : \"";
-  protected final String TEXT_43 = "\"," + NL + "        \ttype : \"";
-  protected final String TEXT_44 = "\"" + NL + "        },";
-  protected final String TEXT_45 = NL + "      }," + NL + "      relations: {" + NL + "      }" + NL + "    }" + NL + "  }" + NL + "}";
+  protected final String TEXT_15 = ";" + NL + "\t";
+  protected final String TEXT_16 = "Id? : number;";
+  protected final String TEXT_17 = NL + "\tlista";
+  protected final String TEXT_18 = "?: ";
+  protected final String TEXT_19 = "[];";
+  protected final String TEXT_20 = NL + "}" + NL + "" + NL + "export class ";
+  protected final String TEXT_21 = " implements ";
+  protected final String TEXT_22 = "Interface {";
+  protected final String TEXT_23 = NL + "\t";
+  protected final String TEXT_24 = ": ";
+  protected final String TEXT_25 = ";";
+  protected final String TEXT_26 = NL + "\t";
+  protected final String TEXT_27 = "?: ";
+  protected final String TEXT_28 = ";" + NL + "\t";
+  protected final String TEXT_29 = "Id? : number;";
+  protected final String TEXT_30 = NL + "\tlista";
+  protected final String TEXT_31 = "?: ";
+  protected final String TEXT_32 = "[];";
+  protected final String TEXT_33 = NL + "  constructor(data?: ";
+  protected final String TEXT_34 = "Interface) {" + NL + "    Object.assign(this, data);" + NL + "  }" + NL + "  /**" + NL + "   * The name of the model represented by this $resource," + NL + "   * i.e. `GanhoDorCanvasMySql`." + NL + "   */" + NL + "  public static getModelName() {" + NL + "    return \"";
+  protected final String TEXT_35 = "\";" + NL + "  }" + NL + "  /**" + NL + "  * @method factory" + NL + "  * @author Gerador Java " + NL + "  * @license MIT" + NL + "  * This method creates an instance of ";
+  protected final String TEXT_36 = " for dynamic purposes." + NL + "  **/" + NL + "  public static factory(data: ";
+  protected final String TEXT_37 = "Interface): ";
+  protected final String TEXT_38 = "{" + NL + "    return new ";
+  protected final String TEXT_39 = "(data);" + NL + "  }" + NL + "  /**" + NL + "  * @method getModelDefinition" + NL + "  * @author Gerador Java" + NL + "  * @license MIT" + NL + "  * This method returns an object that represents some of the model" + NL + "  * definitions." + NL + "  **/" + NL + "  public static getModelDefinition() {" + NL + "    return {" + NL + "      name: '";
+  protected final String TEXT_40 = "'," + NL + "      plural: '";
+  protected final String TEXT_41 = "s'," + NL + "      path: '";
+  protected final String TEXT_42 = "s'," + NL + "      idName: 'id'," + NL + "      properties: {" + NL + "\t\t";
+  protected final String TEXT_43 = NL + "        \"";
+  protected final String TEXT_44 = "\" : {" + NL + "        \tname : \"";
+  protected final String TEXT_45 = "\"," + NL + "        \ttype : \"";
+  protected final String TEXT_46 = "\"" + NL + "        },";
+  protected final String TEXT_47 = NL + "      }," + NL + "      relations: {" + NL + "      }" + NL + "    }" + NL + "  }" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -118,12 +120,15 @@ Configuracao conf = recursos.getConfiguracao();
 	iteradorRel = classe.getListaItem1().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
+		ClasseWrapperAngular oposta = (ClasseWrapperAngular) rel.getClasseOposta();
 
     stringBuffer.append(TEXT_13);
     stringBuffer.append( rel.getVariavelAngular() );
     stringBuffer.append(TEXT_14);
     stringBuffer.append( rel.getTipoAngular() );
     stringBuffer.append(TEXT_15);
+    stringBuffer.append( rel.getVariavelAngular() );
+    stringBuffer.append(TEXT_16);
     
 	}
 
@@ -132,30 +137,30 @@ Configuracao conf = recursos.getConfiguracao();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 
-    stringBuffer.append(TEXT_16);
-    stringBuffer.append( rel.getTipoAngular() );
     stringBuffer.append(TEXT_17);
     stringBuffer.append( rel.getTipoAngular() );
     stringBuffer.append(TEXT_18);
+    stringBuffer.append( rel.getTipoAngular() );
+    stringBuffer.append(TEXT_19);
     
 	}
 
-    stringBuffer.append(TEXT_19);
-    stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_20);
     stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_21);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_22);
     
 	iterador = classe.getListaAtributoEntidadeW().iterator();
 	while (iterador.hasNext()) {
 		AtributoWrapper atributo = iterador.next();
 
-    stringBuffer.append(TEXT_22);
+    stringBuffer.append(TEXT_23);
     stringBuffer.append( atributo.getNomeVariavel() );
     stringBuffer.append( (atributo.ehObrigatorio()?"":"?") );
-    stringBuffer.append(TEXT_23);
-    stringBuffer.append( atributo.getTipo() );
     stringBuffer.append(TEXT_24);
+    stringBuffer.append( atributo.getTipo() );
+    stringBuffer.append(TEXT_25);
     
 	}
 
@@ -164,11 +169,13 @@ Configuracao conf = recursos.getConfiguracao();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 
-    stringBuffer.append(TEXT_25);
-    stringBuffer.append( rel.getVariavelAngular() );
     stringBuffer.append(TEXT_26);
-    stringBuffer.append( rel.getTipoAngular() );
+    stringBuffer.append( rel.getVariavelAngular() );
     stringBuffer.append(TEXT_27);
+    stringBuffer.append( rel.getTipoAngular() );
+    stringBuffer.append(TEXT_28);
+    stringBuffer.append( rel.getVariavelAngular() );
+    stringBuffer.append(TEXT_29);
     
 	}
 
@@ -177,18 +184,14 @@ Configuracao conf = recursos.getConfiguracao();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
 
-    stringBuffer.append(TEXT_28);
-    stringBuffer.append( rel.getTipoAngular() );
-    stringBuffer.append(TEXT_29);
-    stringBuffer.append( rel.getTipoAngular() );
     stringBuffer.append(TEXT_30);
+    stringBuffer.append( rel.getTipoAngular() );
+    stringBuffer.append(TEXT_31);
+    stringBuffer.append( rel.getTipoAngular() );
+    stringBuffer.append(TEXT_32);
     
 	}
 
-    stringBuffer.append(TEXT_31);
-    stringBuffer.append( classe.getNomeParaClasse() );
-    stringBuffer.append(TEXT_32);
-    stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_33);
     stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_34);
@@ -202,22 +205,26 @@ Configuracao conf = recursos.getConfiguracao();
     stringBuffer.append(TEXT_38);
     stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_39);
-    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append( classe.getNomeModeloServer() );
     stringBuffer.append(TEXT_40);
+    stringBuffer.append( classe.getNomeModeloServer() );
+    stringBuffer.append(TEXT_41);
+    stringBuffer.append( classe.getNomeModeloServer() );
+    stringBuffer.append(TEXT_42);
     
 		iterador = classe.getListaAtributoEntidadeW().iterator();
 		while (iterador.hasNext()) {
 			AtributoWrapper atributo = iterador.next();
 		
-    stringBuffer.append(TEXT_41);
-    stringBuffer.append( atributo.getNomeVariavel() );
-    stringBuffer.append(TEXT_42);
-    stringBuffer.append( atributo.getNomeVariavel() );
     stringBuffer.append(TEXT_43);
-    stringBuffer.append( atributo.getTipo() );
+    stringBuffer.append( atributo.getNomeVariavel() );
     stringBuffer.append(TEXT_44);
-     } 
+    stringBuffer.append( atributo.getNomeVariavel() );
     stringBuffer.append(TEXT_45);
+    stringBuffer.append( atributo.getTipo() );
+    stringBuffer.append(TEXT_46);
+     } 
+    stringBuffer.append(TEXT_47);
     return stringBuffer.toString();
   }
 }

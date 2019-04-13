@@ -25,15 +25,14 @@ public class ListaItemPageTs
   protected final String TEXT_3 = "Base } from './";
   protected final String TEXT_4 = "-base';" + NL + "" + NL + "import { ";
   protected final String TEXT_5 = ", ";
-  protected final String TEXT_6 = "Api } from '../../shared/sdk';" + NL + "" + NL + "@IonicPage()" + NL + "@Component({" + NL + "  selector: '";
+  protected final String TEXT_6 = "Api, LoopBackFilter } from '../../shared/sdk';" + NL + "" + NL + "@IonicPage()" + NL + "@Component({" + NL + "  selector: '";
   protected final String TEXT_7 = "'," + NL + "  templateUrl: '";
   protected final String TEXT_8 = ".html'" + NL + "})" + NL + "export class ";
   protected final String TEXT_9 = " extends ";
-  protected final String TEXT_10 = "Base {" + NL + "" + NL + "" + NL + "" + NL + "  constructor(protected navCtrl: NavController, protected srv: ";
-  protected final String TEXT_11 = "Api," + NL + "    protected screenshot: Screenshot) {" + NL + "    super(navCtrl, srv, screenshot);" + NL + "  }" + NL + "" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
-  protected final String TEXT_12 = "');" + NL + "    this.carregaPrototipo();" + NL + "  }" + NL + "" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
-  protected final String TEXT_13 = "');" + NL + "  }" + NL + "  " + NL + " " + NL + "" + NL + "  " + NL + "}";
-  protected final String TEXT_14 = NL;
+  protected final String TEXT_10 = "Base {" + NL + "" + NL + "\tprotected getFiltro():LoopBackFilter {" + NL + "    \treturn {};" + NL + "\t}" + NL + "" + NL + "" + NL + "" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
+  protected final String TEXT_11 = "');" + NL + "    this.carregaPrototipo();" + NL + "  }" + NL + "" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
+  protected final String TEXT_12 = "');" + NL + "  }" + NL + "  " + NL + " " + NL + "" + NL + "  " + NL + "}";
+  protected final String TEXT_13 = NL;
 
   public String generate(Object argument)
   {
@@ -61,13 +60,11 @@ Configuracao conf = recursos.getConfiguracao();
     stringBuffer.append(TEXT_9);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_10);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_11);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_12);
-    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_13);
-    stringBuffer.append(TEXT_14);
     return stringBuffer.toString();
   }
 }

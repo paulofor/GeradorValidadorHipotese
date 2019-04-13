@@ -28,10 +28,13 @@ public class MySqlCreate
   protected final String TEXT_7 = " ";
   protected final String TEXT_8 = "AUTO_INCREMENT";
   protected final String TEXT_9 = ",";
-  protected final String TEXT_10 = NL + "\tPRIMARY KEY (";
-  protected final String TEXT_11 = ")" + NL + "); ";
-  protected final String TEXT_12 = NL;
-  protected final String TEXT_13 = NL;
+  protected final String TEXT_10 = NL;
+  protected final String TEXT_11 = " " + NL + "\t";
+  protected final String TEXT_12 = "Id BIGINT,";
+  protected final String TEXT_13 = "  " + NL + "" + NL + "\tPRIMARY KEY (";
+  protected final String TEXT_14 = ")" + NL + "); ";
+  protected final String TEXT_15 = NL;
+  protected final String TEXT_16 = NL;
 
   public String generate(Object argument)
   {
@@ -53,13 +56,14 @@ while (iterador.hasNext()) {
     stringBuffer.append( item.getNomeModeloServer() );
     stringBuffer.append(TEXT_4);
     
+// Atributos
 boolean primeiro = true;
 Iterator<AtributoWrapper> iteradorAtt = item.getIteratorAtributo();
 while (iteradorAtt.hasNext()) {
 	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
 
     stringBuffer.append(TEXT_5);
-    stringBuffer.append( atributo.getNomePropriedade() );
+    stringBuffer.append( atributo.getNomeVariavel() );
     stringBuffer.append(TEXT_6);
     stringBuffer.append( atributo.getTipoSql() );
     stringBuffer.append(TEXT_7);
@@ -71,13 +75,28 @@ while (iteradorAtt.hasNext()) {
 }
 
     stringBuffer.append(TEXT_10);
-    stringBuffer.append( item.getChaveW().getNomePropriedade() );
+    
+// Chave estrangeira de relacionamentos
+
+Iterator<RelacionamentoWrapper> itRel =  item.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+
     stringBuffer.append(TEXT_11);
+    stringBuffer.append( oposta.getNomeParaVariavel() );
+    stringBuffer.append(TEXT_12);
     
 }
 
-    stringBuffer.append(TEXT_12);
     stringBuffer.append(TEXT_13);
+    stringBuffer.append( item.getChaveW().getNomePropriedade() );
+    stringBuffer.append(TEXT_14);
+    
+}
+
+    stringBuffer.append(TEXT_15);
+    stringBuffer.append(TEXT_16);
     return stringBuffer.toString();
   }
 }

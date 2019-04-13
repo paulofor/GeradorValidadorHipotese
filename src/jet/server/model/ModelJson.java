@@ -26,7 +26,12 @@ public class ModelJson
   protected final String TEXT_5 = " " + NL + "\t\"";
   protected final String TEXT_6 = "\": {" + NL + "      \"type\": \"";
   protected final String TEXT_7 = "\"" + NL + "    }";
-  protected final String TEXT_8 = NL + "  }," + NL + "  \"validations\": []," + NL + "  \"relations\": {}," + NL + "  \"acls\": []," + NL + "  \"methods\": {}" + NL + "}";
+  protected final String TEXT_8 = NL + "  }," + NL + "  \"validations\": []," + NL + "  \"relations\": {";
+  protected final String TEXT_9 = ",";
+  protected final String TEXT_10 = " " + NL + "\t\"";
+  protected final String TEXT_11 = "\": {" + NL + "      \"type\": \"belongsTo\"," + NL + "      \"model\": \"";
+  protected final String TEXT_12 = "\"," + NL + "      \"foreignKey\": \"\"" + NL + "    }";
+  protected final String TEXT_13 = "  " + NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {}" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -35,7 +40,7 @@ public class ModelJson
     
 Recursos recursos = (Recursos) argument;  
 Configuracao conf = recursos.getConfiguracao();
-ItemLoopbackServer classe = (ItemLoopbackServer) recursos.getClasse();
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
 
     stringBuffer.append(TEXT_2);
     stringBuffer.append( classe.getNomeModeloServer() );
@@ -49,7 +54,7 @@ while (iteradorAtt.hasNext()) {
     stringBuffer.append(TEXT_4);
      } 
     stringBuffer.append(TEXT_5);
-    stringBuffer.append( atributo.getNomePropriedade() );
+    stringBuffer.append( atributo.getNomeVariavel() );
     stringBuffer.append(TEXT_6);
     stringBuffer.append( atributo.getTipoNode() );
     stringBuffer.append(TEXT_7);
@@ -57,6 +62,24 @@ while (iteradorAtt.hasNext()) {
 }
 
     stringBuffer.append(TEXT_8);
+    
+primeiro = true;
+Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+	if (primeiro) { primeiro = false; } else {
+    stringBuffer.append(TEXT_9);
+     } 
+    stringBuffer.append(TEXT_10);
+    stringBuffer.append( oposta.getNomeParaVariavel() );
+    stringBuffer.append(TEXT_11);
+    stringBuffer.append( oposta.getNomeModeloServer() );
+    stringBuffer.append(TEXT_12);
+    
+}
+
+    stringBuffer.append(TEXT_13);
     return stringBuffer.toString();
   }
 }

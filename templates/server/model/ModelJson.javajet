@@ -5,7 +5,7 @@ class="ModelJson" %>
 <%
 Recursos recursos = (Recursos) argument;  
 Configuracao conf = recursos.getConfiguracao();
-ItemLoopbackServer classe = (ItemLoopbackServer) recursos.getClasse();
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
 %>
 {
   "name": "<%= classe.getNomeModeloServer() %>",
@@ -21,7 +21,7 @@ Iterator<AtributoWrapper> iteradorAtt = classe.getIteratorAtributo();
 while (iteradorAtt.hasNext()) {
 	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
 	if (primeiro) { primeiro = false; } else {%>,<% } %> 
-	"<%= atributo.getNomePropriedade() %>": {
+	"<%= atributo.getNomeVariavel() %>": {
       "type": "<%= atributo.getTipoNode() %>"
     }
 <%
@@ -29,7 +29,23 @@ while (iteradorAtt.hasNext()) {
 %>
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+<%
+primeiro = true;
+Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+	"<%= oposta.getNomeParaVariavel() %>": {
+      "type": "belongsTo",
+      "model": "<%= oposta.getNomeModeloServer() %>",
+      "foreignKey": ""
+    }
+<%
+}
+%>  
+  },
   "acls": [],
   "methods": {}
 }

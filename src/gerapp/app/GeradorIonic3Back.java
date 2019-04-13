@@ -20,7 +20,6 @@ import jet.ionic3.app.AppComponentTs;
 import jet.ionic3.app.AppModuleTs;
 import jet.ionic3.app.AppScss;
 import jet.ionic3.app.ThemeVariables;
-import jet.ionic3.page.ItemPageBaseTs;
 import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
@@ -33,6 +32,7 @@ import jet.ionic3.page.lista.ListaPageTs;
 import jet.ionic3.page.listaGrid.ListaGridPageHtml;
 import jet.ionic3.page.listaGrid.ListaGridPageTs;
 import jet.ionic3.page.listaItem.ListaItemPageHtml;
+import jet.ionic3.page.listaItem.ListaItemPageProdBaseTs;
 import jet.ionic3.page.listaItem.ListaItemPageTs;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
@@ -239,7 +239,7 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 		}
 		if (tela.tipoListaItem()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
-			conteudo = ItemPageBaseTs.create("\n").generate(recurso);
+			conteudo = ListaItemPageProdBaseTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";

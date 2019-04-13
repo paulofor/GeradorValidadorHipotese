@@ -1,6 +1,6 @@
-<%@ jet package="jet.ionic3.page" 
+<%@ jet package="jet.ionic3.page.listaItem" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
-class="ItemPageBaseTs" %>
+class="ListaItemPageProtBaseTs" %>
 
 <%
 Recursos recursos = (Recursos) argument;  

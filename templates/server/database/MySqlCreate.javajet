@@ -15,15 +15,30 @@ while (iterador.hasNext()) {
 drop table if exists <%= item.getNomeModeloServer() %>;
 create table <%= item.getNomeModeloServer() %> (
 <%
+// Atributos
 boolean primeiro = true;
 Iterator<AtributoWrapper> iteradorAtt = item.getIteratorAtributo();
 while (iteradorAtt.hasNext()) {
 	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
 %> 
-	<%= atributo.getNomePropriedade() %>  <%= atributo.getTipoSql() %> <% if (atributo.ehChave()) {%>AUTO_INCREMENT<% } %>,
+	<%= atributo.getNomeVariavel() %>  <%= atributo.getTipoSql() %> <% if (atributo.ehChave()) {%>AUTO_INCREMENT<% } %>,
 <%
 }
 %>
+
+<%
+// Chave estrangeira de relacionamentos
+
+Iterator<RelacionamentoWrapper> itRel =  item.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+%> 
+	<%= oposta.getNomeParaVariavel() %>Id BIGINT,
+<%
+}
+%>  
+
 	PRIMARY KEY (<%= item.getChaveW().getNomePropriedade() %>)
 ); 
 <%

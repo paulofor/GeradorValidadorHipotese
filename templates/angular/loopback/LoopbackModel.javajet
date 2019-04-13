@@ -44,8 +44,10 @@ export interface <%= classe.getNomeParaClasse() %>Interface {
 	iteradorRel = classe.getListaItem1().iterator();
 	while (iteradorRel.hasNext()) {
 		RelacionamentoWrapper rel = iteradorRel.next();
+		ClasseWrapperAngular oposta = (ClasseWrapperAngular) rel.getClasseOposta();
 %>
 	<%= rel.getVariavelAngular() %>?: <%= rel.getTipoAngular() %>;
+	<%= rel.getVariavelAngular() %>Id? : number;
 <%
 	}
 %>
@@ -76,6 +78,7 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
 		RelacionamentoWrapper rel = iteradorRel.next();
 %>
 	<%= rel.getVariavelAngular() %>?: <%= rel.getTipoAngular() %>;
+	<%= rel.getVariavelAngular() %>Id? : number;
 <%
 	}
 %>
@@ -116,9 +119,9 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
   **/
   public static getModelDefinition() {
     return {
-      name: '<%= classe.getNomeParaClasse() %>',
-      plural: '<%= classe.getNomeParaClasse() %>s',
-      path: '<%= classe.getNomeParaClasse() %>s',
+      name: '<%= classe.getNomeModeloServer() %>',
+      plural: '<%= classe.getNomeModeloServer() %>s',
+      path: '<%= classe.getNomeModeloServer() %>s',
       idName: 'id',
       properties: {
 		<%
