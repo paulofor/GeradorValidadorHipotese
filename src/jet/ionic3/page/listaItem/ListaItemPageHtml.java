@@ -21,8 +21,8 @@ public class ListaItemPageHtml
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
-  protected final String TEXT_2 = NL + NL + "<ion-header>" + NL + "  <ion-navbar color=\"titulo\">" + NL + "    <ion-title (click)=\"testaFoto()\">";
-  protected final String TEXT_3 = "</ion-title>" + NL + "  </ion-navbar>" + NL + "</ion-header>" + NL + "" + NL + "<ion-content padding class=\"quadroBase\">" + NL + "\t<ng-container *ngIf=\"listaItem\">" + NL + "   \t<ion-list>" + NL + "      <ion-item *ngFor=\"let item of listaItem\">" + NL + " \t\t<h2>titulo</h2>" + NL + "        <h3>subtitulo</h3>" + NL + "        <button ion-button clear item-end>inciar</button>" + NL + "  " + NL + "      </ion-item>" + NL + "    </ion-list>" + NL + "\t</ng-container>" + NL + "</ion-content>";
+  protected final String TEXT_2 = NL + NL + "<ion-header>" + NL + "  <ion-navbar color=\"titulo\">" + NL + "    <ion-title>";
+  protected final String TEXT_3 = "</ion-title>" + NL + "  </ion-navbar>" + NL + "</ion-header>" + NL + "" + NL + "<ion-content padding class=\"quadroBase\">" + NL + "  <ng-container *ngIf=\"listaItem\">" + NL + "    <ion-list>" + NL + "      <ion-item *ngFor=\"let item of listaItem\">" + NL + "        <h2>{{item.nome}}</h2>" + NL + "        <button ion-button clear item-end (click)=\"alterar(item)\">alterar</button>" + NL + "      </ion-item>" + NL + "    </ion-list>" + NL + "    <ion-fab right bottom>" + NL + "      <button ion-fab mini (click)=\"novo()\"><ion-icon name=\"add\"></ion-icon></button>" + NL + "    </ion-fab>" + NL + "  </ng-container>" + NL + "</ion-content>";
 
   public String generate(Object argument)
   {

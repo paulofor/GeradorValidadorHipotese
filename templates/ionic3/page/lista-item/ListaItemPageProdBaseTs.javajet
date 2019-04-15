@@ -36,9 +36,13 @@ export abstract class <%= tela.getNome() %>Base {
   			})
   	}
   
-	protected alterar(item: Exercicio) {
+	protected alterar(item: <%= tela.getEntidade().getNomeParaClasse() %>) {
 		this.navCtrl.push(this.getPageEdicao(), {
       		item: item
 		});
   	}
+  	
+  	protected novo() {
+		this.navCtrl.push(this.getPageEdicao());
+	}
 }

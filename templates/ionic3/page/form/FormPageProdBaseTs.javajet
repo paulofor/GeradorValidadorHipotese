@@ -18,6 +18,7 @@ import { <%= oposta.getNomeParaClasse() %>, <%= oposta.getNomeParaClasse() %>Api
 <%
 }
 %>
+import { NavParams, NavController } from 'ionic-angular';
 
 export abstract class <%= tela.getNome() %>PageBase {
   
@@ -25,7 +26,8 @@ export abstract class <%= tela.getNome() %>PageBase {
   
   protected abstract inicializacao();
 
-  constructor(	
+  constructor(	public navParams: NavParams,
+  				public navCtrl: NavController,
 				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
 <%
 itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
@@ -40,9 +42,18 @@ while (itRel.hasNext()) {
   				) {
   }
 
+
+  private inicializaItem() {
+	this.item = this.navParams.get('item');
+	console.log('Item: ', this.item);
+	if (!this.item) this.item = new <%= tela.getEntidade().getNomeParaClasse() %>();
+  }
+
+
   ionViewWillEnter() {
     console.log('ionViewWillEnter <%= tela.getNome() %>');
     this.inicializacao();
+    this.inicializaItem();
   }
 
   ionViewDidLoad() {
@@ -78,7 +89,9 @@ while (itRel.hasNext()) {
 	protected submit() {
     	this.srv.upsert(this.item)
       		.subscribe((resultado) => {
-        	console.log('Resultado-Submit: ' , resultado);
+        		console.log('Resultado-Submit: ' , resultado);
+				console.log('navCtrl:' , this.navCtrl);
+				this.navCtrl.pop();
       	})
 	}
 }
