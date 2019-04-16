@@ -63,13 +63,15 @@ while (iterador.hasNext()) {
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
 		TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+		if (tela.getNomeMenu().length()>0) {
 	
     stringBuffer.append(TEXT_8);
-    stringBuffer.append( tela.getMenuPrototipo() );
+    stringBuffer.append( tela.getNomeMenu() );
     stringBuffer.append(TEXT_9);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_10);
     
+		}
 	}
 	
     stringBuffer.append(TEXT_11);

@@ -25,6 +25,12 @@ public class TelaAppWrapper implements ItemComponente{
 	 *
 	 */
 
+	
+	public String getNomeMenu() {
+		return this.principal.getNomeMenu();
+	}
+	
+	
 	public String getMetodoCarga() {
 		String nome = "get" + this.getNome() + "Load";
 		return nome;
@@ -54,9 +60,7 @@ public class TelaAppWrapper implements ItemComponente{
 		return "page-" + getNomeParaArquivo();
 	}
 	
-	public String getMenuPrototipo() {
-		return principal.getNome();
-	}
+	
 	
 	private String getNomeParaArquivo() {
 		String nome = principal.getNome();

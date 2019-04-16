@@ -21,13 +21,13 @@ import { <%= tela.getEntidade().getNomeParaClasse() %>Api, LoopBackFilter } from
 })
 export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
 
-  constructor(public navCtrl: NavController, protected srv: SerieTreinoApi) {
+  constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
     super(navCtrl, srv);
   }
 
 
   protected getPageEdicao(): Page {
-    throw new Error("Method not implemented.");
+    throw new Error("<%= tela.getNome() %>.getPageEdicao() nao implementado.");
   }
 
   protected getFiltro(): LoopBackFilter {

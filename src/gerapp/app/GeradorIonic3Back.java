@@ -128,6 +128,12 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 			recurso.setItemCorrente(tela);
 			criaTelaApp(recurso, (TelaAppWrapper) tela);
 		}
+		try {
+			System.out.println("wait..");
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.arquivosLoopbackClient(recurso);
 		this.criaModuloServico(recurso);
 		this.criaDadosPrototipo(recurso);

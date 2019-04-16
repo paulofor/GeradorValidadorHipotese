@@ -43,9 +43,11 @@ export class MyApp {
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
 		TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+		if (tela.getNomeMenu().length()>0) {
 	%>
-      { title: '<%= tela.getMenuPrototipo() %>' , component: <%= tela.getNome() %>},
+      { title: '<%= tela.getNomeMenu() %>' , component: <%= tela.getNome() %>},
 	<%
+		}
 	}
 	%>
      ];

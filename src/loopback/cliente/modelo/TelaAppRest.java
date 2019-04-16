@@ -10,8 +10,17 @@ public class TelaAppRest extends Model{
 	private Integer conceitoProdutoId;
 	private Integer sobrescreveHtml;
 	private Integer sobrescreveTs;
+	private String nomeMenu;
 	
 	
+	
+	
+	public String getNomeMenu() {
+		return nomeMenu;
+	}
+	public void setNomeMenu(String nomeMenu) {
+		this.nomeMenu = nomeMenu;
+	}
 	public Integer getSobrescreveTs() {
 		return sobrescreveTs;
 	}
