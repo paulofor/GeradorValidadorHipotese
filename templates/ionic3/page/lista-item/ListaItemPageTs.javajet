@@ -7,14 +7,12 @@ Recursos recursos = (Recursos) argument;
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
-
-
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
-import { Screenshot } from '@ionic-native/screenshot';
+import { IonicPage, NavController } from 'ionic-angular';
+import { Page } from 'ionic-angular/navigation/nav-util';
 import { <%= tela.getNome() %>Base } from './<%= tela.getArquivo() %>-base';
+import { <%= tela.getEntidade().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
 
-import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
 
 @IonicPage()
 @Component({
@@ -23,22 +21,17 @@ import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().g
 })
 export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
 
-	protected getFiltro():LoopBackFilter {
-    	return {};
-	}
-
-
-
-  ionViewWillEnter() {
-    console.log('ionViewWillEnter <%= tela.getNome() %>');
-    this.carregaPrototipo();
+  constructor(public navCtrl: NavController, protected srv: SerieTreinoApi) {
+    super(navCtrl, srv);
   }
 
-  ionViewDidLoad() {
-  	console.log('ionViewDidLoad <%= tela.getNome() %>');
-  }
-  
- 
 
+  protected getPageEdicao(): Page {
+    throw new Error("Method not implemented.");
+  }
+
+  protected getFiltro(): LoopBackFilter {
+    return {};
+  }
   
 }
