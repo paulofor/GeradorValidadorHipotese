@@ -17,32 +17,15 @@ import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().g
   selector: '<%= tela.getNomeControle() %>',
   templateUrl: '<%= tela.getArquivo() %>.html'
 })
-export class <%= tela.getNome() %> {
+export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
   item: <%= tela.getEntidade().getNomeParaClasse() %>;
 
   constructor(public navCtrl: NavController, public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
   				private screenshot: Screenshot, public modalCtrl: ModalController) {
   }
 
-  ionViewWillEnter() {
-    console.log('ionViewWillEnter <%= tela.getNome() %>');
-    this.carregaItem();
-  }
-
-  ionViewDidLoad() {
-  	console.log('ionViewDidLoad <%= tela.getNome() %>');
-  }
+ 
   
-  carregaItem() {
-    this.srv.obtemPrimeiro()
-      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
-        console.log('Result', JSON.stringify(result));
-        this.item = result;
-      });
-  }
-
-  testaFoto() {
-    this.screenshot.save('jpg', 100, '<%= tela.getNome() %>');
-  }
+ 
   
 }

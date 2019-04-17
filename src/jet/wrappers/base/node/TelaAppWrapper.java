@@ -85,6 +85,10 @@ public class TelaAppWrapper implements ItemComponente{
 	
 	private ClasseWrapper entidade = null;
 	
+	public boolean ehTipo(String tipo) {
+		return (this.principal.getTipo().compareTo(tipo)==0);
+	}
+	
 	
 	public boolean tipoLista() {
 		return ("LISTA".equals(this.principal.getTipo()));
