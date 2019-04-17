@@ -28,10 +28,9 @@ public class ListaItemPageTs
   protected final String TEXT_6 = "'," + NL + "  templateUrl: '";
   protected final String TEXT_7 = ".html'" + NL + "})" + NL + "export class ";
   protected final String TEXT_8 = " extends ";
-  protected final String TEXT_9 = "Base {" + NL + "" + NL + "  constructor(public navCtrl: NavController, protected srv: ";
-  protected final String TEXT_10 = "Api) {" + NL + "    super(navCtrl, srv);" + NL + "  }" + NL + "" + NL + "" + NL + "  protected getPageEdicao(): Page {" + NL + "    throw new Error(\"";
-  protected final String TEXT_11 = ".getPageEdicao() nao implementado.\");" + NL + "  }" + NL + "" + NL + "  protected getFiltro(): LoopBackFilter {" + NL + "    return {};" + NL + "  }" + NL + "  " + NL + "}";
-  protected final String TEXT_12 = NL;
+  protected final String TEXT_9 = "Base {" + NL + "" + NL + "  inicializacao() {" + NL + "  }" + NL + "" + NL + "  constructor(public navCtrl: NavController, protected srv: ";
+  protected final String TEXT_10 = "Api) {" + NL + "    super(navCtrl, srv);" + NL + "  }" + NL + "" + NL + "" + NL + "  protected getFiltro(): LoopBackFilter {" + NL + "    return {};" + NL + "  }" + NL + "  " + NL + "}";
+  protected final String TEXT_11 = NL;
 
   public String generate(Object argument)
   {
@@ -59,9 +58,7 @@ Configuracao conf = recursos.getConfiguracao();
     stringBuffer.append(TEXT_9);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_10);
-    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_11);
-    stringBuffer.append(TEXT_12);
     return stringBuffer.toString();
   }
 }

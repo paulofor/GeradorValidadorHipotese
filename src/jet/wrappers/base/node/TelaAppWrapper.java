@@ -26,6 +26,11 @@ public class TelaAppWrapper implements ItemComponente{
 	 */
 
 	
+	public TelaAppWrapper getTelaEdicao() {
+		if (this.principal.getTelaEdicao()==null) return null;
+		else return new TelaAppWrapper(this.principal.getTelaEdicao());
+	}
+	
 	public String getNomeMenu() {
 		return this.principal.getNomeMenu();
 	}

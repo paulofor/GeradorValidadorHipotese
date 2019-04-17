@@ -23,14 +23,24 @@ public class ListaItemPageProdBaseTs
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL + "import { ";
   protected final String TEXT_3 = ", ";
-  protected final String TEXT_4 = "Api } from '../../shared/sdk';" + NL + "import { LoopBackFilter } from '../../shared/sdk';" + NL + "import { NavController } from 'ionic-angular';" + NL + "import { Page } from 'ionic-angular/umd/navigation/nav-util';" + NL + "" + NL + "export abstract class ";
-  protected final String TEXT_5 = "Base {" + NL + "" + NL + "\tprotected listaItem: ";
-  protected final String TEXT_6 = "[];" + NL + "\t//protected abstract inicializacao();" + NL + "\tprotected abstract getFiltro(): LoopBackFilter;" + NL + "\tprotected abstract getPageEdicao(): Page;" + NL + "" + NL + "\tconstructor(public navCtrl: NavController, protected srv: ";
-  protected final String TEXT_7 = "Api) {" + NL + "\t}" + NL + "" + NL + "\tionViewWillEnter() {" + NL + "    \tconsole.log('ionViewWillEnter ";
-  protected final String TEXT_8 = "');" + NL + "    \t//this.inicializacao();" + NL + "    \tthis.carregaLista();" + NL + "  \t}" + NL + "  \t" + NL + "  \tcarregaLista() {" + NL + "  \t\tthis.srv.find(this.getFiltro())" + NL + "  \t\t\t.subscribe((resultado: ";
-  protected final String TEXT_9 = "[]) => {" + NL + "  \t\t\t\tconsole.log('ListaItem:' , resultado);" + NL + "  \t\t\t\tthis.listaItem = resultado;" + NL + "  \t\t\t})" + NL + "  \t}" + NL + "  " + NL + "\tprotected alterar(item: ";
-  protected final String TEXT_10 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao(), {" + NL + "      \t\titem: item" + NL + "\t\t});" + NL + "  \t}" + NL + "  \t" + NL + "  \tprotected novo() {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao());" + NL + "\t}" + NL + "}";
-  protected final String TEXT_11 = NL;
+  protected final String TEXT_4 = "Api } from '../../shared/sdk';" + NL + "import { LoopBackFilter } from '../../shared/sdk';" + NL + "import { NavController } from 'ionic-angular';" + NL + "import { Page } from 'ionic-angular/umd/navigation/nav-util';";
+  protected final String TEXT_5 = NL + "import { ";
+  protected final String TEXT_6 = " } from '../";
+  protected final String TEXT_7 = "/";
+  protected final String TEXT_8 = "';";
+  protected final String TEXT_9 = NL + NL + NL + "export abstract class ";
+  protected final String TEXT_10 = "Base {" + NL + "" + NL + "\tprotected listaItem: ";
+  protected final String TEXT_11 = "[];" + NL + "\tprotected abstract inicializacao();" + NL + "\tprotected abstract getFiltro(): LoopBackFilter;" + NL + "\t" + NL + "\t " + NL + "\tgetPageEdicao(): Page {" + NL + "\t\t";
+  protected final String TEXT_12 = NL + "    \tthrow new Error(\"";
+  protected final String TEXT_13 = " sem tela de edicao.\");" + NL + "    \t";
+  protected final String TEXT_14 = NL + "    \treturn ";
+  protected final String TEXT_15 = ";" + NL + "    \t";
+  protected final String TEXT_16 = NL + "  \t}" + NL + "" + NL + "\tconstructor(public navCtrl: NavController, protected srv: ";
+  protected final String TEXT_17 = "Api) {" + NL + "\t}" + NL + "" + NL + "\tionViewWillEnter() {" + NL + "    \tconsole.log('ionViewWillEnter ";
+  protected final String TEXT_18 = "');" + NL + "    \tthis.inicializacao();" + NL + "    \tthis.carregaLista();" + NL + "  \t}" + NL + "  \t" + NL + "  \tcarregaLista() {" + NL + "  \t\tthis.srv.find(this.getFiltro())" + NL + "  \t\t\t.subscribe((resultado: ";
+  protected final String TEXT_19 = "[]) => {" + NL + "  \t\t\t\tconsole.log('ListaItem:' , resultado);" + NL + "  \t\t\t\tthis.listaItem = resultado;" + NL + "  \t\t\t})" + NL + "  \t}" + NL + "  " + NL + "\tprotected alterar(item: ";
+  protected final String TEXT_20 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao(), {" + NL + "      \t\titem: item" + NL + "\t\t});" + NL + "  \t}" + NL + "  \t" + NL + "  \tprotected novo() {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao());" + NL + "\t}" + NL + "}";
+  protected final String TEXT_21 = NL;
 
   public String generate(Object argument)
   {
@@ -40,25 +50,46 @@ public class ListaItemPageProdBaseTs
 Recursos recursos = (Recursos) argument;  
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
+TelaAppWrapper telaEdicao = tela.getTelaEdicao();
 
     stringBuffer.append(TEXT_2);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_3);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_4);
-    stringBuffer.append( tela.getNome() );
+     if (telaEdicao!=null) { 
     stringBuffer.append(TEXT_5);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append( telaEdicao.getNome() );
     stringBuffer.append(TEXT_6);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append( telaEdicao.getPathArquivo() );
     stringBuffer.append(TEXT_7);
-    stringBuffer.append( tela.getNome() );
+    stringBuffer.append( telaEdicao.getArquivo() );
     stringBuffer.append(TEXT_8);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+     } 
     stringBuffer.append(TEXT_9);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_10);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_11);
+     if (telaEdicao==null) { 
+    stringBuffer.append(TEXT_12);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_13);
+     } else { 
+    stringBuffer.append(TEXT_14);
+    stringBuffer.append( telaEdicao.getNome() );
+    stringBuffer.append(TEXT_15);
+     } 
+    stringBuffer.append(TEXT_16);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append(TEXT_17);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_18);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append(TEXT_19);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append(TEXT_20);
+    stringBuffer.append(TEXT_21);
     return stringBuffer.toString();
   }
 }

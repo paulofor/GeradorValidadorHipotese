@@ -1,6 +1,9 @@
 package loopback.cliente.modelo;
 
+import java.util.Map;
+
 import loopback.android.Model;
+import loopback.android.remoting.BeanUtil;
 
 public class TelaAppRest extends Model{
 
@@ -12,9 +15,25 @@ public class TelaAppRest extends Model{
 	private Integer sobrescreveTs;
 	private String nomeMenu;
 	
+	private Integer telaEdicaoId;
+	private TelaAppRest telaEdicao;
+	
+	public void setTelaEdicao(Object telaEdicao) {
+		this.telaEdicao = new TelaAppRest();
+		BeanUtil.setProperties(this.telaEdicao, (Map<String, ? extends Object>) telaEdicao, true);
+	}
+	public TelaAppRest getTelaEdicao() {
+		return this.telaEdicao;
+	}
 	
 	
 	
+	public Integer getTelaEdicaoId() {
+		return telaEdicaoId;
+	}
+	public void setTelaEdicaoId(Integer telaEdicaoId) {
+		this.telaEdicaoId = telaEdicaoId;
+	}
 	public String getNomeMenu() {
 		return nomeMenu;
 	}

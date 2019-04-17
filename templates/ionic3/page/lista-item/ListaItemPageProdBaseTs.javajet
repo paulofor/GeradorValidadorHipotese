@@ -6,25 +6,38 @@ class="ListaItemPageProdBaseTs" %>
 Recursos recursos = (Recursos) argument;  
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
+TelaAppWrapper telaEdicao = tela.getTelaEdicao();
 %>
 import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api } from '../../shared/sdk';
 import { LoopBackFilter } from '../../shared/sdk';
 import { NavController } from 'ionic-angular';
 import { Page } from 'ionic-angular/umd/navigation/nav-util';
+<% if (telaEdicao!=null) { %>
+import { <%= telaEdicao.getNome() %> } from '../<%= telaEdicao.getPathArquivo() %>/<%= telaEdicao.getArquivo() %>';
+<% } %>
+
 
 export abstract class <%= tela.getNome() %>Base {
 
 	protected listaItem: <%= tela.getEntidade().getNomeParaClasse() %>[];
-	//protected abstract inicializacao();
+	protected abstract inicializacao();
 	protected abstract getFiltro(): LoopBackFilter;
-	protected abstract getPageEdicao(): Page;
+	
+	 
+	getPageEdicao(): Page {
+		<% if (telaEdicao==null) { %>
+    	throw new Error("<%= tela.getNome() %> sem tela de edicao.");
+    	<% } else { %>
+    	return <%= telaEdicao.getNome() %>;
+    	<% } %>
+  	}
 
 	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
 	}
 
 	ionViewWillEnter() {
     	console.log('ionViewWillEnter <%= tela.getNome() %>');
-    	//this.inicializacao();
+    	this.inicializacao();
     	this.carregaLista();
   	}
   	
