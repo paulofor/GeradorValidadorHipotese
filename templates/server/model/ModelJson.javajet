@@ -1,5 +1,5 @@
 <%@ jet package="jet.server.model" 
-imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* " 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* jet.wrappers.base.node.*" 
 class="ModelJson" %>
 
 <%
@@ -47,5 +47,40 @@ while (itRel.hasNext()) {
 %>  
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+<%
+primeiro = true;
+Iterator<TelaAppWrapper> itEdita = classe.getListaTelaPorTipo("EDITA").iterator();
+while (itEdita.hasNext()) {
+	TelaAppWrapper tela = itEdita.next();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+      "Submit<%= tela.getNome() %>": {
+      "accepts": [
+        {
+          "arg": "item",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "resultado",
+          "type": "object",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "submit da tela <%= tela.getNome() %>",
+      "http": [
+        {
+          "path": "/submit<%= tela.getNome() %>",
+          "verb": "post"
+        }
+      ]
+    }
+<%
+}
+%>
+  }
 }

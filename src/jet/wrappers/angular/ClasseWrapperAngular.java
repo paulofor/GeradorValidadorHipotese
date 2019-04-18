@@ -26,8 +26,10 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 	
 	public List<TelaAppWrapper> getListaTelaPorTipo(String dado) {
 		List<TelaAppWrapper> listaSaida = new ArrayList<TelaAppWrapper>();
-		for (TelaAppWrapper tela : listaTelaAppW) {
-			if (tela.ehTipo(dado)) listaSaida.add(tela);
+		if (listaTelaAppW!=null) {
+			for (TelaAppWrapper tela : listaTelaAppW) {
+				if (tela.ehTipo(dado)) listaSaida.add(tela);
+			}
 		}
 		return listaSaida;
 	}

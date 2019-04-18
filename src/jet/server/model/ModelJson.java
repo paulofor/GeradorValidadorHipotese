@@ -6,6 +6,7 @@ import jet.wrappers.base.*;
 import jet.wrappers.angular.*;
 import gerapp.modelo.*;
 import gerapp.modelo.node.*;
+import jet.wrappers.base.node.*;
 
 public class ModelJson
 {
@@ -31,7 +32,13 @@ public class ModelJson
   protected final String TEXT_10 = " " + NL + "\t\"";
   protected final String TEXT_11 = "\": {" + NL + "      \"type\": \"belongsTo\"," + NL + "      \"model\": \"";
   protected final String TEXT_12 = "\"," + NL + "      \"foreignKey\": \"\"" + NL + "    }";
-  protected final String TEXT_13 = "  " + NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {}" + NL + "}";
+  protected final String TEXT_13 = "  " + NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {";
+  protected final String TEXT_14 = ",";
+  protected final String TEXT_15 = " " + NL + "      \"Submit";
+  protected final String TEXT_16 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
+  protected final String TEXT_17 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
+  protected final String TEXT_18 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
+  protected final String TEXT_19 = NL + "  }" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -80,6 +87,25 @@ while (itRel.hasNext()) {
 }
 
     stringBuffer.append(TEXT_13);
+    
+primeiro = true;
+Iterator<TelaAppWrapper> itEdita = classe.getListaTelaPorTipo("EDITA").iterator();
+while (itEdita.hasNext()) {
+	TelaAppWrapper tela = itEdita.next();
+	if (primeiro) { primeiro = false; } else {
+    stringBuffer.append(TEXT_14);
+     } 
+    stringBuffer.append(TEXT_15);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_16);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_17);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_18);
+    
+}
+
+    stringBuffer.append(TEXT_19);
     return stringBuffer.toString();
   }
 }

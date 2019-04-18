@@ -48,8 +48,9 @@ public class LoopbackService
   protected final String TEXT_27 = "(item : ";
   protected final String TEXT_28 = " , customHeaders?: Function) : Observable<";
   protected final String TEXT_29 = "> {" + NL + "\t\tlet _method: string = \"POST\";" + NL + "\t\tlet _url: string = LoopBackConfig.getPath() + \"/\" + LoopBackConfig.getApiVersion() +" + NL + "    \t\t\"/";
-  protected final String TEXT_30 = "/:id/projetoCanvasMySqls/\";" + NL + "    \tlet _routeParams: any = {" + NL + "      \t\tid: 0," + NL + "    \t};" + NL + "    \tlet _postBody: any = {" + NL + "      \t\tdata: item" + NL + "    \t};" + NL + "    \tlet _urlParams: any = {};" + NL + "    \tlet result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);" + NL + "    \treturn result;" + NL + "\t}";
-  protected final String TEXT_31 = NL + "  " + NL + "}";
+  protected final String TEXT_30 = "s/submit";
+  protected final String TEXT_31 = "\";" + NL + "    \tlet _routeParams: any = {};" + NL + "    \tlet _postBody: any = {" + NL + "      \t\tdata: item" + NL + "    \t};" + NL + "    \tlet _urlParams: any = {};" + NL + "    \tlet result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);" + NL + "    \treturn result;" + NL + "\t}";
+  protected final String TEXT_32 = NL + "  " + NL + "}";
 
   public String generate(Object argument)
   {
@@ -131,12 +132,14 @@ while (itEdita.hasNext()) {
     stringBuffer.append(TEXT_28);
     stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_29);
-    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append( classe.getNomeModeloServer() );
     stringBuffer.append(TEXT_30);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_31);
     
 }
 
-    stringBuffer.append(TEXT_31);
+    stringBuffer.append(TEXT_32);
     return stringBuffer.toString();
   }
 }

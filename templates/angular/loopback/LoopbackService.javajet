@@ -133,10 +133,8 @@ while (itEdita.hasNext()) {
 	submit<%= tela.getNome() %>(item : <%= classe.getNomeParaClasse() %> , customHeaders?: Function) : Observable<<%= classe.getNomeParaClasse() %>> {
 		let _method: string = "POST";
 		let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    		"/<%= classe.getNomeParaClasse() %>/:id/projetoCanvasMySqls/";
-    	let _routeParams: any = {
-      		id: 0,
-    	};
+    		"/<%= classe.getNomeModeloServer() %>s/submit<%= tela.getNome() %>";
+    	let _routeParams: any = {};
     	let _postBody: any = {
       		data: item
     	};

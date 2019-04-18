@@ -1,12 +1,15 @@
 package gerapp.app;
 
+import gerapp.modelo.node.ItemComponente;
 import gerapp.modelo.node.ItemLoopbackServer;
 
 import java.io.IOException;
+import java.util.List;
 
 import jet.server.app.ModelConfigJson;
 import jet.server.model.ModelJs;
 import jet.server.model.ModelJson;
+import jet.wrappers.base.node.TelaAppWrapper;
 
 public class GeradorLoopbackServer extends GeradorNodeBase {
 	
@@ -39,6 +42,22 @@ public class GeradorLoopbackServer extends GeradorNodeBase {
 
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
+		List<ItemComponente> listaTela = recurso.getListaTelaApp();
+		for (ItemComponente tela : listaTela) {
+			carregaEntidade((TelaAppWrapper) tela,recurso);
+			recurso.setItemCorrente(tela);
+			
+		}
+		try {
+			System.out.println("wait..");
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 		System.out.println("...criaArquivoUnico");
 		String pathDestino = PATH + "//server//" + recurso.getConfiguracao().getNamespace() + "/"; 
 		this.criaCaminhoSeNaoExiste(pathDestino);

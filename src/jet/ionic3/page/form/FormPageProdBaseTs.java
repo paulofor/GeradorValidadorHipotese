@@ -27,15 +27,15 @@ public class FormPageProdBaseTs
   protected final String TEXT_5 = ", ";
   protected final String TEXT_6 = "Api } from '../../shared/sdk';";
   protected final String TEXT_7 = NL + "import { NavParams, NavController } from 'ionic-angular';" + NL + "" + NL + "export abstract class ";
-  protected final String TEXT_8 = "PageBase {" + NL + "  " + NL + "  protected item: ";
-  protected final String TEXT_9 = ";" + NL + "  " + NL + "  protected abstract inicializacao();" + NL + "" + NL + "  constructor(\tpublic navParams: NavParams," + NL + "  \t\t\t\tpublic navCtrl: NavController," + NL + "\t\t\t\tpublic srv: ";
-  protected final String TEXT_10 = "Api, ";
-  protected final String TEXT_11 = NL + "\t\t\t\tpublic srv";
-  protected final String TEXT_12 = " : ";
-  protected final String TEXT_13 = "Api,";
-  protected final String TEXT_14 = NL + "  \t\t\t\t) {" + NL + "  }" + NL + "" + NL + "" + NL + "  private inicializaItem() {" + NL + "\tthis.item = this.navParams.get('item');" + NL + "\tconsole.log('Item: ', this.item);" + NL + "\tif (!this.item) this.item = new ";
-  protected final String TEXT_15 = "();" + NL + "  }" + NL + "" + NL + "" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
-  protected final String TEXT_16 = "');" + NL + "    this.inicializacao();" + NL + "    this.inicializaItem();" + NL + "  }" + NL + "" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
+  protected final String TEXT_8 = "Base {" + NL + "  " + NL + "  protected item: ";
+  protected final String TEXT_9 = ";" + NL + "  " + NL + "  protected abstract inicializacaoComplementos();" + NL + "  protected abstract criaItem() : ";
+  protected final String TEXT_10 = ";" + NL + "" + NL + "  constructor(\tpublic navParams: NavParams," + NL + "  \t\t\t\tpublic navCtrl: NavController," + NL + "\t\t\t\tpublic srv: ";
+  protected final String TEXT_11 = "Api, ";
+  protected final String TEXT_12 = NL + "\t\t\t\tpublic srv";
+  protected final String TEXT_13 = " : ";
+  protected final String TEXT_14 = "Api,";
+  protected final String TEXT_15 = NL + "  \t\t\t\t) {" + NL + "  }" + NL + "" + NL + "" + NL + "  private inicializaItem() {" + NL + "\tthis.item = this.navParams.get('item');" + NL + "\tconsole.log('Item: ', this.item);" + NL + "\tif (!this.item) this.item = this.criaItem();" + NL + "  }" + NL + "" + NL + "" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
+  protected final String TEXT_16 = "');" + NL + "    this.inicializacaoComplementos();" + NL + "    this.inicializaItem();" + NL + "  }" + NL + "" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
   protected final String TEXT_17 = "');" + NL + "  }" + NL + "  ";
   protected final String TEXT_18 = NL + "\tprotected lista";
   protected final String TEXT_19 = " : ";
@@ -51,8 +51,10 @@ public class FormPageProdBaseTs
   protected final String TEXT_29 = ".find({'where' : {'idUsuario' : idUsuario} })" + NL + "      \t\t.subscribe((result:";
   protected final String TEXT_30 = "[]) => {" + NL + "        \t\tthis.lista";
   protected final String TEXT_31 = "Usuario = result;" + NL + "      \t})" + NL + "\t}" + NL;
-  protected final String TEXT_32 = NL + "\tprotected submit() {" + NL + "    \tthis.srv.upsert(this.item)" + NL + "      \t\t.subscribe((resultado) => {" + NL + "        \t\tconsole.log('Resultado-Submit: ' , resultado);" + NL + "\t\t\t\tconsole.log('navCtrl:' , this.navCtrl);" + NL + "\t\t\t\tthis.navCtrl.pop();" + NL + "      \t})" + NL + "\t}" + NL + "}";
-  protected final String TEXT_33 = NL;
+  protected final String TEXT_32 = NL + "\tprotected submit() {" + NL + "    \tthis.srv.submit";
+  protected final String TEXT_33 = "(this.item)" + NL + "      \t\t.subscribe((resultado) => {" + NL + "        \t\tconsole.log('Resultado-Submit";
+  protected final String TEXT_34 = ": ' , resultado);" + NL + "\t\t\t\tthis.navCtrl.pop();" + NL + "      \t})" + NL + "\t}" + NL + "}";
+  protected final String TEXT_35 = NL;
 
   public String generate(Object argument)
   {
@@ -89,22 +91,22 @@ while (itRel.hasNext()) {
     stringBuffer.append(TEXT_9);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_10);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append(TEXT_11);
     
 itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
 while (itRel.hasNext()) {
 	RelacionamentoWrapper relac = itRel.next();
 	ClasseWrapper oposta = relac.getClasseOposta();
 
-    stringBuffer.append(TEXT_11);
-    stringBuffer.append( oposta.getNomeParaClasse() );
     stringBuffer.append(TEXT_12);
     stringBuffer.append( oposta.getNomeParaClasse() );
     stringBuffer.append(TEXT_13);
+    stringBuffer.append( oposta.getNomeParaClasse() );
+    stringBuffer.append(TEXT_14);
     
 }
 
-    stringBuffer.append(TEXT_14);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_15);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_16);
@@ -147,7 +149,11 @@ while (itRel.hasNext()) {
 }
 
     stringBuffer.append(TEXT_32);
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_33);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_34);
+    stringBuffer.append(TEXT_35);
     return stringBuffer.toString();
   }
 }
