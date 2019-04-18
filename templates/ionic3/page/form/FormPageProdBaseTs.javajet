@@ -46,8 +46,9 @@ while (itRel.hasNext()) {
 
   private inicializaItem() {
 	this.item = this.navParams.get('item');
-	console.log('Item: ', this.item);
+	console.log('<%= tela.getNome() %>Base:ItemParametro: ', this.item);
 	if (!this.item) this.item = this.criaItem();
+	console.log('<%= tela.getNome() %>Base:ItemCriado: ', this.item);
   }
 
 
@@ -91,6 +92,15 @@ while (itRel.hasNext()) {
     	this.srv.submit<%= tela.getNome() %>(this.item)
       		.subscribe((resultado) => {
         		console.log('Resultado-Submit<%= tela.getNome() %>: ' , resultado);
+				this.navCtrl.pop();
+      	})
+	}
+	
+	protected submit() {
+		console.log('<%= tela.getNome() %>Base:Submit-Item:' , this.item);
+    	this.srv.submit<%= tela.getNome() %>(this.item)
+      		.subscribe((resultado) => {
+        		console.log('<%= tela.getNome() %>Base:Submit-Result: ' , resultado);
 				this.navCtrl.pop();
       	})
 	}
