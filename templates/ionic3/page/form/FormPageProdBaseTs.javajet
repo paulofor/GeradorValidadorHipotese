@@ -7,7 +7,7 @@ TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 ClasseWrapper classe = tela.getEntidade();
 Configuracao conf = recursos.getConfiguracao();
 %>
-import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api } from '../../shared/sdk';
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter } from '../../shared/sdk';
 <%
 Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
 while (itRel.hasNext()) {
@@ -26,6 +26,9 @@ export abstract class <%= tela.getNome() %>Base {
   
   protected abstract inicializacaoComplementos();
   protected abstract criaItem() : <%= tela.getEntidade().getNomeParaClasse() %>;
+  protected abstract executaNavegacao(navCtrl: NavController, result: <%= tela.getEntidade().getNomeParaClasse() %>);
+  protected abstract filtroLoadId() : LoopBackFilter;
+  protected abstract complementaItem(novo:<%= tela.getEntidade().getNomeParaClasse() %>) : <%= tela.getEntidade().getNomeParaClasse() %>;
 
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
@@ -42,22 +45,31 @@ while (itRel.hasNext()) {
 %>
   				) {
   }
-
-
   private inicializaItem() {
 	this.item = this.navParams.get('item');
 	console.log('<%= tela.getNome() %>Base:ItemParametro: ', this.item);
-	if (!this.item) this.item = this.criaItem();
-	console.log('<%= tela.getNome() %>Base:ItemCriado: ', this.item);
+	if (!this.item) {
+		var id = this.navParams.get('id');
+		if (id) {
+			console.log('<%= tela.getNome() %>Base:Id: ' , id);
+			this.srv.findById(id, this.filtroLoadId())
+				.subscribe((result:<%= tela.getEntidade().getNomeParaClasse() %>) => {
+					this.item = result;
+					console.log('<%= tela.getNome() %>Base:LoadId: ' , this.item);
+				})
+		} else {
+			this.item = this.criaItem();
+			console.log('<%= tela.getNome() %>Base:ItemCriado: ', this.item);
+		}
+	} else {
+		this.item = this.complementaItem(this.item);
+	}
   }
-
-
   ionViewWillEnter() {
     console.log('ionViewWillEnter <%= tela.getNome() %>');
     this.inicializacaoComplementos();
     this.inicializaItem();
   }
-
   ionViewDidLoad() {
   	console.log('ionViewDidLoad <%= tela.getNome() %>');
   }
@@ -76,7 +88,6 @@ while (itRel.hasNext()) {
         		this.lista<%= oposta.getNomeParaClasse() %> = result;
       	})
 	}
-	
 	protected lista<%= oposta.getNomeParaClasse() %>Usuario : <%= oposta.getNomeParaClasse() %>[];
 	protected carrega<%= oposta.getNomeParaClasse() %>Usuario(idUsuario:number){
 		this.srv<%= oposta.getNomeParaClasse() %>.find({'where' : {'idUsuario' : idUsuario} })
@@ -84,24 +95,15 @@ while (itRel.hasNext()) {
         		this.lista<%= oposta.getNomeParaClasse() %>Usuario = result;
       	})
 	}
-
 <%
 }
 %>
 	protected submit() {
-    	this.srv.submit<%= tela.getNome() %>(this.item)
-      		.subscribe((resultado) => {
-        		console.log('Resultado-Submit<%= tela.getNome() %>: ' , resultado);
-				this.navCtrl.pop();
-      	})
-	}
-	
-	protected submit() {
 		console.log('<%= tela.getNome() %>Base:Submit-Item:' , this.item);
     	this.srv.submit<%= tela.getNome() %>(this.item)
-      		.subscribe((resultado) => {
+      		.subscribe((resultado:<%= tela.getEntidade().getNomeParaClasse() %>) => {
         		console.log('<%= tela.getNome() %>Base:Submit-Result: ' , resultado);
-				this.navCtrl.pop();
+				this.executaNavegacao(this.navCtrl,resultado);
       	})
 	}
 }

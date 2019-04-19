@@ -37,10 +37,14 @@ public class ListaItemPageProdBaseTs
   protected final String TEXT_15 = ";" + NL + "    \t";
   protected final String TEXT_16 = NL + "  \t}" + NL + "" + NL + "\tconstructor(public navCtrl: NavController, protected srv: ";
   protected final String TEXT_17 = "Api) {" + NL + "\t}" + NL + "" + NL + "\tionViewWillEnter() {" + NL + "    \tconsole.log('ionViewWillEnter ";
-  protected final String TEXT_18 = "');" + NL + "    \tthis.inicializacao();" + NL + "    \tthis.carregaLista();" + NL + "  \t}" + NL + "  \t" + NL + "  \tcarregaLista() {" + NL + "  \t\tthis.srv.find(this.getFiltro())" + NL + "  \t\t\t.subscribe((resultado: ";
-  protected final String TEXT_19 = "[]) => {" + NL + "  \t\t\t\tconsole.log('ListaItem:' , resultado);" + NL + "  \t\t\t\tthis.listaItem = resultado;" + NL + "  \t\t\t})" + NL + "  \t}" + NL + "  " + NL + "\tprotected alterar(item: ";
-  protected final String TEXT_20 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao(), {" + NL + "      \t\titem: item" + NL + "\t\t});" + NL + "  \t}" + NL + "  \t" + NL + "  \tprotected novo() {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao());" + NL + "\t}" + NL + "}";
-  protected final String TEXT_21 = NL;
+  protected final String TEXT_18 = "');" + NL + "    \tthis.inicializacao();" + NL + "    \tthis.carregaLista();" + NL + "  \t}" + NL + "  \t" + NL + "  \tcarregaLista() {" + NL + "  \t\tconsole.log('";
+  protected final String TEXT_19 = "Base:filtro: ' , JSON.stringify(this.getFiltro()));" + NL + "\t\tconsole.log('";
+  protected final String TEXT_20 = ".find');" + NL + "  \t\tthis.srv.find(this.getFiltro())" + NL + "  \t\t\t.subscribe((resultado: ";
+  protected final String TEXT_21 = "[]) => {" + NL + "  \t\t\t\tconsole.log('";
+  protected final String TEXT_22 = "Base:LoadLista:' , JSON.stringify(resultado));" + NL + "  \t\t\t\tthis.listaItem = resultado;" + NL + "  \t\t\t})" + NL + "  \t}" + NL + "  " + NL + "\tprotected alterar(item: ";
+  protected final String TEXT_23 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao(), {" + NL + "      \t\titem: item" + NL + "\t\t});" + NL + "  \t}" + NL + "  \tprotected alterarId(item: ";
+  protected final String TEXT_24 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao(), {" + NL + "      \t\tid: item.id" + NL + "\t\t});" + NL + "  \t}" + NL + "  \tprotected novo() {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao());" + NL + "\t}" + NL + "}";
+  protected final String TEXT_25 = NL;
 
   public String generate(Object argument)
   {
@@ -85,11 +89,19 @@ TelaAppWrapper telaEdicao = tela.getTelaEdicao();
     stringBuffer.append(TEXT_17);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_18);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_19);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_20);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_21);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_22);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append(TEXT_23);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append(TEXT_24);
+    stringBuffer.append(TEXT_25);
     return stringBuffer.toString();
   }
 }

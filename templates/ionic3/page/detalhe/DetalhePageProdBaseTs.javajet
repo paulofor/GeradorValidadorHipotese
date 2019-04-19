@@ -1,0 +1,57 @@
+<%@ jet package="jet.ionic3.page.detalhe" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="DetalhePageProdBaseTs" %>
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter } from '../../shared/sdk';
+import { NavParams, NavController } from 'ionic-angular';
+
+
+export abstract class <%= tela.getNome() %>Base {
+  
+  protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
+  
+  
+  protected abstract filtroLoadId() : LoopBackFilter;
+ 
+ 
+  constructor(	public navParams: NavParams,
+  				public navCtrl: NavController,
+				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
+  } 
+  
+  private inicializaItem() {
+	this.item = this.navParams.get('item');
+	console.log('<%= tela.getNome() %>Base:ItemParametro: ', this.item);
+	if (!this.item) {
+		var id = this.navParams.get('id');
+		if (id) {
+			console.log('<%= tela.getNome() %>Base:Id: ' , id);
+			console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.filtroLoadId()));
+			console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findById');
+			this.srv.findById(id, this.filtroLoadId())
+					.subscribe(
+						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
+							this.item = result;
+							console.log('<%= tela.getNome() %>Base.item: ' , JSON.stringify(this.item))
+						},
+						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
+					)
+			}
+		} 
+  }
+
+  
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter <%= tela.getNome() %>');
+    this.inicializaItem();
+  }
+  ionViewDidLoad() {
+  	console.log('ionViewDidLoad <%= tela.getNome() %>');
+  }
+}
+    
+    

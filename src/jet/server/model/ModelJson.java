@@ -31,14 +31,21 @@ public class ModelJson
   protected final String TEXT_9 = ",";
   protected final String TEXT_10 = " " + NL + "\t\"";
   protected final String TEXT_11 = "\": {" + NL + "      \"type\": \"belongsTo\"," + NL + "      \"model\": \"";
-  protected final String TEXT_12 = "\"," + NL + "      \"foreignKey\": \"\"" + NL + "    }";
-  protected final String TEXT_13 = "  " + NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {";
-  protected final String TEXT_14 = ",";
-  protected final String TEXT_15 = " " + NL + "      \"Submit";
-  protected final String TEXT_16 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
-  protected final String TEXT_17 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
-  protected final String TEXT_18 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
-  protected final String TEXT_19 = NL + "  }" + NL + "}";
+  protected final String TEXT_12 = "\"," + NL + "      \"foreignKey\": \"";
+  protected final String TEXT_13 = "Id\"" + NL + "    }";
+  protected final String TEXT_14 = "  ";
+  protected final String TEXT_15 = ",";
+  protected final String TEXT_16 = " " + NL + "\t\"lista";
+  protected final String TEXT_17 = "\": {" + NL + "      \"type\": \"hasMany\"," + NL + "      \"model\": \"";
+  protected final String TEXT_18 = "\"," + NL + "      \"foreignKey\": \"";
+  protected final String TEXT_19 = "Id\"" + NL + "    }";
+  protected final String TEXT_20 = NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {";
+  protected final String TEXT_21 = ",";
+  protected final String TEXT_22 = " " + NL + "      \"Submit";
+  protected final String TEXT_23 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
+  protected final String TEXT_24 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
+  protected final String TEXT_25 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
+  protected final String TEXT_26 = NL + "  }" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -83,29 +90,50 @@ while (itRel.hasNext()) {
     stringBuffer.append(TEXT_11);
     stringBuffer.append( oposta.getNomeModeloServer() );
     stringBuffer.append(TEXT_12);
+    stringBuffer.append( oposta.getNomeParaVariavel() );
+    stringBuffer.append(TEXT_13);
     
 }
 
-    stringBuffer.append(TEXT_13);
+    stringBuffer.append(TEXT_14);
+    
+itRel =  classe.obtemListaComChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+	if (primeiro) { primeiro = false; } else {
+    stringBuffer.append(TEXT_15);
+     } 
+    stringBuffer.append(TEXT_16);
+    stringBuffer.append( oposta.getNomeParaClasse() );
+    stringBuffer.append(TEXT_17);
+    stringBuffer.append( oposta.getNomeModeloServer() );
+    stringBuffer.append(TEXT_18);
+    stringBuffer.append( classe.getNomeParaVariavel() );
+    stringBuffer.append(TEXT_19);
+    
+}
+
+    stringBuffer.append(TEXT_20);
     
 primeiro = true;
 Iterator<TelaAppWrapper> itEdita = classe.getListaTelaPorTipo("EDITA").iterator();
 while (itEdita.hasNext()) {
 	TelaAppWrapper tela = itEdita.next();
 	if (primeiro) { primeiro = false; } else {
-    stringBuffer.append(TEXT_14);
+    stringBuffer.append(TEXT_21);
      } 
-    stringBuffer.append(TEXT_15);
+    stringBuffer.append(TEXT_22);
     stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_16);
+    stringBuffer.append(TEXT_23);
     stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_17);
+    stringBuffer.append(TEXT_24);
     stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_18);
+    stringBuffer.append(TEXT_25);
     
 }
 
-    stringBuffer.append(TEXT_19);
+    stringBuffer.append(TEXT_26);
     return stringBuffer.toString();
   }
 }

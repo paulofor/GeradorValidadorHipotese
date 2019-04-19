@@ -42,9 +42,11 @@ export abstract class <%= tela.getNome() %>Base {
   	}
   	
   	carregaLista() {
+  		console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.getFiltro()));
+		console.log('<%= tela.getEntidade().getNomeParaClasse() %>.find');
   		this.srv.find(this.getFiltro())
   			.subscribe((resultado: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
-  				console.log('ListaItem:' , resultado);
+  				console.log('<%= tela.getNome() %>Base:LoadLista:' , JSON.stringify(resultado));
   				this.listaItem = resultado;
   			})
   	}
@@ -54,7 +56,11 @@ export abstract class <%= tela.getNome() %>Base {
       		item: item
 		});
   	}
-  	
+  	protected alterarId(item: <%= tela.getEntidade().getNomeParaClasse() %>) {
+		this.navCtrl.push(this.getPageEdicao(), {
+      		id: item.id
+		});
+  	}
   	protected novo() {
 		this.navCtrl.push(this.getPageEdicao());
 	}

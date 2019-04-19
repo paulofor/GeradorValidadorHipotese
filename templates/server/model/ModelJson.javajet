@@ -40,11 +40,25 @@ while (itRel.hasNext()) {
 	"<%= oposta.getNomeParaVariavel() %>": {
       "type": "belongsTo",
       "model": "<%= oposta.getNomeModeloServer() %>",
-      "foreignKey": ""
+      "foreignKey": "<%= oposta.getNomeParaVariavel() %>Id"
     }
 <%
 }
 %>  
+<%
+itRel =  classe.obtemListaComChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+	"lista<%= oposta.getNomeParaClasse() %>": {
+      "type": "hasMany",
+      "model": "<%= oposta.getNomeModeloServer() %>",
+      "foreignKey": "<%= classe.getNomeParaVariavel() %>Id"
+    }
+<%
+}
+%>
   },
   "acls": [],
   "methods": {

@@ -23,6 +23,7 @@ import jet.ionic3.app.ThemeVariables;
 import jet.ionic3.page.PageModuleTs;
 import jet.ionic3.page.PageScss;
 import jet.ionic3.page.detalhe.DetalhePageHtml;
+import jet.ionic3.page.detalhe.DetalhePageProdBaseTs;
 import jet.ionic3.page.detalhe.DetalhePageTs;
 import jet.ionic3.page.form.FormPageHtml;
 import jet.ionic3.page.form.FormPageProdBaseTs;
@@ -196,8 +197,13 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 			}
 		}
 		if (tela.tipoDetalhe()) {
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
+			conteudo = DetalhePageProdBaseTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
-			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
+			if (!this.existe(nomeArquivo)) {
 				conteudo = DetalhePageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
