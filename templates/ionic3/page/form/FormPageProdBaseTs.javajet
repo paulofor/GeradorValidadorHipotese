@@ -63,6 +63,7 @@ while (itRel.hasNext()) {
 		}
 	} else {
 		this.item = this.complementaItem(this.item);
+		console.log('<%= tela.getNome() %>Base:ItemComComplemento: ', this.item);
 	}
   }
   ionViewWillEnter() {
@@ -99,10 +100,10 @@ while (itRel.hasNext()) {
 }
 %>
 	protected submit() {
-		console.log('<%= tela.getNome() %>Base:Submit-Item:' , this.item);
+		console.log('<%= tela.getNome() %>Base:Submit-Item:' , JSON.stringify(this.item));
     	this.srv.submit<%= tela.getNome() %>(this.item)
       		.subscribe((resultado:<%= tela.getEntidade().getNomeParaClasse() %>) => {
-        		console.log('<%= tela.getNome() %>Base:Submit-Result: ' , resultado);
+        		console.log('<%= tela.getNome() %>Base:Submit-Result: ' , JSON.stringify(resultado));
 				this.executaNavegacao(this.navCtrl,resultado);
       	})
 	}
