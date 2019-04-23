@@ -13,3 +13,11 @@ Configuracao conf = recursos.getConfiguracao();
 .quadroTitulo {
     background-color:<%= paleta.getCor2() %>
 }
+
+
+.linha1 {
+    padding-top: 3px
+}
+.linhan {
+    padding-top: 1px; 
+}

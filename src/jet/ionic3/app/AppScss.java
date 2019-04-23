@@ -24,7 +24,7 @@ public class AppScss
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL + ".quadroBase {" + NL + "    background-color:";
   protected final String TEXT_3 = NL + "}" + NL + ".quadroTitulo {" + NL + "    background-color:";
-  protected final String TEXT_4 = NL + "}";
+  protected final String TEXT_4 = NL + "}" + NL + "" + NL + "" + NL + ".linha1 {" + NL + "    padding-top: 3px" + NL + "}" + NL + ".linhan {" + NL + "    padding-top: 1px; " + NL + "}";
 
   public String generate(Object argument)
   {
