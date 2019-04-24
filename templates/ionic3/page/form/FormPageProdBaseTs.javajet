@@ -20,15 +20,28 @@ import { <%= oposta.getNomeParaClasse() %>, <%= oposta.getNomeParaClasse() %>Api
 %>
 import { NavParams, NavController } from 'ionic-angular';
 
+// Tipo: EDITA
 export abstract class <%= tela.getNome() %>Base {
   
+  // Objeto principal para a edicao
   protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
   
+  // chamar os metodos de carga de combos
   protected abstract inicializacaoComplementos();
+  
+  // se nao tiver nem parametro item nem id
   protected abstract criaItem() : <%= tela.getEntidade().getNomeParaClasse() %>;
+  
+  // chamada apos o submit
   protected abstract executaNavegacao(navCtrl: NavController, result: <%= tela.getEntidade().getNomeParaClasse() %>);
-  protected abstract filtroLoadId() : LoopBackFilter;
+  
+  // filtro para ser usado quando temos o parametro id
+  protected abstract filtroLoadId(id:any) : LoopBackFilter;
+  
+  // quando existe parametro item
   protected abstract complementaItem(novo:<%= tela.getEntidade().getNomeParaClasse() %>) : <%= tela.getEntidade().getNomeParaClasse() %>;
+
+
 
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
@@ -52,7 +65,7 @@ while (itRel.hasNext()) {
 		var id = this.navParams.get('id');
 		if (id) {
 			console.log('<%= tela.getNome() %>Base:Id: ' , id);
-			this.srv.findById(id, this.filtroLoadId())
+			this.srv.findById(id, this.filtroLoadId(id))
 				.subscribe((result:<%= tela.getEntidade().getNomeParaClasse() %>) => {
 					this.item = result;
 					console.log('<%= tela.getNome() %>Base:LoadId: ' , this.item);

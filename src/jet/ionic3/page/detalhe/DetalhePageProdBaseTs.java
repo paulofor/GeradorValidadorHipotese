@@ -22,14 +22,14 @@ public class DetalhePageProdBaseTs
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "import { ";
   protected final String TEXT_2 = ", ";
-  protected final String TEXT_3 = "Api , LoopBackFilter } from '../../shared/sdk';" + NL + "import { NavParams, NavController } from 'ionic-angular';" + NL + "" + NL + "" + NL + "export abstract class ";
+  protected final String TEXT_3 = "Api , LoopBackFilter } from '../../shared/sdk';" + NL + "import { NavParams, NavController } from 'ionic-angular';" + NL + "" + NL + "// Tipo: DETALHE" + NL + "export abstract class ";
   protected final String TEXT_4 = "Base {" + NL + "  " + NL + "  protected item: ";
-  protected final String TEXT_5 = ";" + NL + "  " + NL + "  " + NL + "  protected abstract filtroLoadId() : LoopBackFilter;" + NL + "  protected abstract filtroLoadOne() : LoopBackFilter;" + NL + " " + NL + "  constructor(\tpublic navParams: NavParams," + NL + "  \t\t\t\tpublic navCtrl: NavController," + NL + "\t\t\t\tpublic srv: ";
+  protected final String TEXT_5 = ";" + NL + "  " + NL + "  // filtro com parametro id" + NL + "  protected abstract filtroLoadId(id:any) : LoopBackFilter;" + NL + "  // filtro sem parametro id" + NL + "  protected abstract filtroLoadOne() : LoopBackFilter;" + NL + " " + NL + "  constructor(\tpublic navParams: NavParams," + NL + "  \t\t\t\tpublic navCtrl: NavController," + NL + "\t\t\t\tpublic srv: ";
   protected final String TEXT_6 = "Api) {" + NL + "  } " + NL + "  " + NL + "\tprivate inicializaItem() {" + NL + "\t\tthis.item = this.navParams.get('item');" + NL + "\t\tconsole.log('";
   protected final String TEXT_7 = "Base:ItemParametro: ', this.item);" + NL + "\t\tif (!this.item) {" + NL + "\t\t\tvar id = this.navParams.get('id');" + NL + "\t\t\tconsole.log('";
   protected final String TEXT_8 = "Base:Id: ' , id);" + NL + "\t\t\tif (id) {" + NL + "\t\t\t\tconsole.log('";
-  protected final String TEXT_9 = "Base:filtro: ' , JSON.stringify(this.filtroLoadId()));" + NL + "\t\t\t\tconsole.log('";
-  protected final String TEXT_10 = ".findById');" + NL + "\t\t\t\tthis.srv.findById(id, this.filtroLoadId())" + NL + "\t\t\t\t\t.subscribe(" + NL + "\t\t\t\t\t\t(result: ";
+  protected final String TEXT_9 = "Base:filtro: ' , JSON.stringify(this.filtroLoadId(id)));" + NL + "\t\t\t\tconsole.log('";
+  protected final String TEXT_10 = ".findById');" + NL + "\t\t\t\tthis.srv.findById(id, this.filtroLoadId(id))" + NL + "\t\t\t\t\t.subscribe(" + NL + "\t\t\t\t\t\t(result: ";
   protected final String TEXT_11 = ") => {" + NL + "\t\t\t\t\t\t\tthis.item = result;" + NL + "\t\t\t\t\t\t\tconsole.log('";
   protected final String TEXT_12 = "Base.item: ' , JSON.stringify(this.item))" + NL + "\t\t\t\t\t\t}," + NL + "\t\t\t\t\t\t(erro: any) => console.log('";
   protected final String TEXT_13 = "Base:LoadId(Erro): ' , JSON.stringify(erro))" + NL + "\t\t\t\t\t)" + NL + "\t\t\t} else  {" + NL + "\t\t\t\tconsole.log('";

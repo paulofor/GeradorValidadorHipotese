@@ -31,6 +31,13 @@ export abstract class <%= tela.getNome() %>Base {
     	return <%= telaEdicao.getNome() %>;
     	<% } %>
   	}
+  	getPageDetalhe(): Page {
+		<% if (telaEdicao==null) { %>
+    	throw new Error("<%= tela.getNome() %> sem tela de detalhe.");
+    	<% } else { %>
+    	return <%= telaEdicao.getNome() %>;
+    	<% } %>
+  	}
 
 	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
 	}
@@ -46,18 +53,18 @@ export abstract class <%= tela.getNome() %>Base {
 		console.log('<%= tela.getEntidade().getNomeParaClasse() %>.find');
   		this.srv.find(this.getFiltro())
   			.subscribe((resultado: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
-  				console.log('<%= tela.getNome() %>Base:LoadLista:' , JSON.stringify(resultado));
+  				console.log('<%= tela.getNome() %>Base:LoadLista:' , resultado);
   				this.listaItem = resultado;
   			})
   	}
   
-	protected alterar(item: <%= tela.getEntidade().getNomeParaClasse() %>) {
+	protected detalheId(item: <%= tela.getEntidade().getNomeParaClasse() %>) {
 		this.navCtrl.push(this.getPageEdicao(), {
-      		item: item
+      		id: item.id
 		});
   	}
   	protected alterarId(item: <%= tela.getEntidade().getNomeParaClasse() %>) {
-		this.navCtrl.push(this.getPageEdicao(), {
+		this.navCtrl.push(this.getPageDetalhe(), {
       		id: item.id
 		});
   	}
