@@ -37,7 +37,7 @@ export abstract class <%= tela.getNome() %>Base {
 					.subscribe(
 						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
 							this.item = result;
-							console.log('<%= tela.getNome() %>Base.item: ' , JSON.stringify(this.item))
+							console.log('<%= tela.getNome() %>Base.item: ' , this.item)
 						},
 						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
 					)
@@ -48,7 +48,7 @@ export abstract class <%= tela.getNome() %>Base {
 					.subscribe(
 						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
 							this.item = result;
-							console.log('<%= tela.getNome() %>Base.item: ' , JSON.stringify(this.item))
+							console.log('<%= tela.getNome() %>Base.item: ' , this.item)
 						},
 						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
 					)
