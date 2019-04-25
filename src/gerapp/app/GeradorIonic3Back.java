@@ -203,7 +203,7 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 			geraArquivoFonte(conteudo, nomeArquivo);
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
-			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
+			if (!this.existe(nomeArquivo)) {
 				conteudo = DetalhePageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}

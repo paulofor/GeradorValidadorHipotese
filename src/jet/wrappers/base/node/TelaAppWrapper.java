@@ -54,6 +54,10 @@ public class TelaAppWrapper implements ItemComponente{
 	public String getNome() {
 		return principal.getNome() + "Page";
 	}
+	
+	public String getTipo() {
+		return principal.getTipo();
+	}
 
 	@Override
 	public String getPathArquivo() {

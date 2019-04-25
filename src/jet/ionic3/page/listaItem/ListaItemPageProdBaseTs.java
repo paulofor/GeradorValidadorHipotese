@@ -42,14 +42,15 @@ public class ListaItemPageProdBaseTs
   protected final String TEXT_20 = ";" + NL + "    \t";
   protected final String TEXT_21 = NL + "  \t}" + NL + "" + NL + "\tconstructor(public navCtrl: NavController, protected srv: ";
   protected final String TEXT_22 = "Api) {" + NL + "\t}" + NL + "" + NL + "\tionViewWillEnter() {" + NL + "    \tconsole.log('ionViewWillEnter ";
-  protected final String TEXT_23 = "');" + NL + "    \tthis.inicializacao();" + NL + "    \tthis.carregaLista();" + NL + "  \t}" + NL + "  \t" + NL + "  \tcarregaLista() {" + NL + "  \t\tconsole.log('";
-  protected final String TEXT_24 = "Base:filtro: ' , JSON.stringify(this.getFiltro()));" + NL + "\t\tconsole.log('";
-  protected final String TEXT_25 = ".find');" + NL + "  \t\tthis.srv.find(this.getFiltro())" + NL + "  \t\t\t.subscribe((resultado: ";
-  protected final String TEXT_26 = "[]) => {" + NL + "  \t\t\t\tconsole.log('";
-  protected final String TEXT_27 = "Base:LoadLista:' , resultado);" + NL + "  \t\t\t\tthis.listaItem = resultado;" + NL + "  \t\t\t})" + NL + "  \t}" + NL + "  " + NL + "\tprotected detalheId(item: ";
-  protected final String TEXT_28 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao(), {" + NL + "      \t\tid: item.id" + NL + "\t\t});" + NL + "  \t}" + NL + "  \tprotected alterarId(item: ";
-  protected final String TEXT_29 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageDetalhe(), {" + NL + "      \t\tid: item.id" + NL + "\t\t});" + NL + "  \t}" + NL + "  \tprotected novo() {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao());" + NL + "\t}" + NL + "}";
-  protected final String TEXT_30 = NL;
+  protected final String TEXT_23 = "<<";
+  protected final String TEXT_24 = ">>');" + NL + "    \tthis.inicializacao();" + NL + "    \tthis.carregaLista();" + NL + "  \t}" + NL + "  \t" + NL + "  \tcarregaLista() {" + NL + "  \t\tconsole.log('";
+  protected final String TEXT_25 = "Base:filtro: ' , JSON.stringify(this.getFiltro()));" + NL + "\t\tconsole.log('";
+  protected final String TEXT_26 = ".find');" + NL + "  \t\tthis.srv.find(this.getFiltro())" + NL + "  \t\t\t.subscribe((resultado: ";
+  protected final String TEXT_27 = "[]) => {" + NL + "  \t\t\t\tconsole.log('";
+  protected final String TEXT_28 = "Base:LoadLista:' , resultado);" + NL + "  \t\t\t\tthis.listaItem = resultado;" + NL + "  \t\t\t})" + NL + "  \t}" + NL + "  " + NL + "\tprotected detalheId(item: ";
+  protected final String TEXT_29 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao(), {" + NL + "      \t\tid: item.id" + NL + "\t\t});" + NL + "  \t}" + NL + "  \tprotected alterarId(item: ";
+  protected final String TEXT_30 = ") {" + NL + "\t\tthis.navCtrl.push(this.getPageDetalhe(), {" + NL + "      \t\tid: item.id" + NL + "\t\t});" + NL + "  \t}" + NL + "  \tprotected novo() {" + NL + "\t\tthis.navCtrl.push(this.getPageEdicao());" + NL + "\t}" + NL + "}";
+  protected final String TEXT_31 = NL;
 
   public String generate(Object argument)
   {
@@ -104,19 +105,21 @@ TelaAppWrapper telaEdicao = tela.getTelaEdicao();
     stringBuffer.append(TEXT_22);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_23);
-    stringBuffer.append( tela.getNome() );
+    stringBuffer.append( tela.getTipo() );
     stringBuffer.append(TEXT_24);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_25);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_26);
-    stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_27);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append(TEXT_27);
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_28);
     stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_29);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_30);
+    stringBuffer.append(TEXT_31);
     return stringBuffer.toString();
   }
 }

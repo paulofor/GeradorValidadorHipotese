@@ -43,7 +43,7 @@ export abstract class <%= tela.getNome() %>Base {
 	}
 
 	ionViewWillEnter() {
-    	console.log('ionViewWillEnter <%= tela.getNome() %>');
+    	console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
     	this.inicializacao();
     	this.carregaLista();
   	}

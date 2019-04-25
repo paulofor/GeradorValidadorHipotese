@@ -44,28 +44,30 @@ public class FormPageProdBaseTs
   protected final String TEXT_22 = "Base:LoadId: ' , this.item);" + NL + "\t\t\t\t})" + NL + "\t\t} else {" + NL + "\t\t\tthis.item = this.criaItem();" + NL + "\t\t\tconsole.log('";
   protected final String TEXT_23 = "Base:ItemCriado: ', this.item);" + NL + "\t\t}" + NL + "\t} else {" + NL + "\t\tthis.item = this.complementaItem(this.item);" + NL + "\t\tconsole.log('";
   protected final String TEXT_24 = "Base:ItemComComplemento: ', this.item);" + NL + "\t}" + NL + "  }" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
-  protected final String TEXT_25 = "');" + NL + "    this.inicializacaoComplementos();" + NL + "    this.inicializaItem();" + NL + "  }" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
-  protected final String TEXT_26 = "');" + NL + "  }" + NL + "  ";
-  protected final String TEXT_27 = NL + "\tprotected lista";
-  protected final String TEXT_28 = " : ";
-  protected final String TEXT_29 = "[];" + NL + "\tprotected carrega";
-  protected final String TEXT_30 = "(){" + NL + "\t\tthis.srv";
-  protected final String TEXT_31 = ".find()" + NL + "      \t\t.subscribe((result:";
-  protected final String TEXT_32 = "[]) => {" + NL + "        \t\tconsole.log('lista";
-  protected final String TEXT_33 = ":' , result);" + NL + "        \t\tthis.lista";
-  protected final String TEXT_34 = " = result;" + NL + "      \t})" + NL + "\t}" + NL + "\tprotected lista";
-  protected final String TEXT_35 = "Usuario : ";
-  protected final String TEXT_36 = "[];" + NL + "\tprotected carrega";
-  protected final String TEXT_37 = "Usuario(idUsuario:number){" + NL + "\t\tthis.srv";
-  protected final String TEXT_38 = ".find({'where' : {'idUsuario' : idUsuario} })" + NL + "      \t\t.subscribe((result:";
-  protected final String TEXT_39 = "[]) => {" + NL + "        \t\tthis.lista";
-  protected final String TEXT_40 = "Usuario = result;" + NL + "      \t})" + NL + "\t}";
-  protected final String TEXT_41 = NL + "\tprotected submit() {" + NL + "\t\tconsole.log('";
-  protected final String TEXT_42 = "Base:Submit-Item:' , JSON.stringify(this.item));" + NL + "    \tthis.srv.submit";
-  protected final String TEXT_43 = "(this.item)" + NL + "      \t\t.subscribe((resultado:";
-  protected final String TEXT_44 = ") => {" + NL + "        \t\tconsole.log('";
-  protected final String TEXT_45 = "Base:Submit-Result: ' , JSON.stringify(resultado));" + NL + "\t\t\t\tthis.executaNavegacao(this.navCtrl,resultado);" + NL + "      \t})" + NL + "\t}" + NL + "}";
-  protected final String TEXT_46 = NL;
+  protected final String TEXT_25 = "<<";
+  protected final String TEXT_26 = ">>');" + NL + "    this.inicializacaoComplementos();" + NL + "    this.inicializaItem();" + NL + "  }" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
+  protected final String TEXT_27 = "<<";
+  protected final String TEXT_28 = ">>');" + NL + "  }" + NL + "  ";
+  protected final String TEXT_29 = NL + "\tprotected lista";
+  protected final String TEXT_30 = " : ";
+  protected final String TEXT_31 = "[];" + NL + "\tprotected carrega";
+  protected final String TEXT_32 = "(){" + NL + "\t\tthis.srv";
+  protected final String TEXT_33 = ".find()" + NL + "      \t\t.subscribe((result:";
+  protected final String TEXT_34 = "[]) => {" + NL + "        \t\tconsole.log('lista";
+  protected final String TEXT_35 = ":' , result);" + NL + "        \t\tthis.lista";
+  protected final String TEXT_36 = " = result;" + NL + "      \t})" + NL + "\t}" + NL + "\tprotected lista";
+  protected final String TEXT_37 = "Usuario : ";
+  protected final String TEXT_38 = "[];" + NL + "\tprotected carrega";
+  protected final String TEXT_39 = "Usuario(idUsuario:number){" + NL + "\t\tthis.srv";
+  protected final String TEXT_40 = ".find({'where' : {'idUsuario' : idUsuario} })" + NL + "      \t\t.subscribe((result:";
+  protected final String TEXT_41 = "[]) => {" + NL + "        \t\tthis.lista";
+  protected final String TEXT_42 = "Usuario = result;" + NL + "      \t})" + NL + "\t}";
+  protected final String TEXT_43 = NL + "\tprotected submit() {" + NL + "\t\tconsole.log('";
+  protected final String TEXT_44 = "Base:Submit-Item:' , JSON.stringify(this.item));" + NL + "    \tthis.srv.submit";
+  protected final String TEXT_45 = "(this.item)" + NL + "      \t\t.subscribe((resultado:";
+  protected final String TEXT_46 = ") => {" + NL + "        \t\tconsole.log('";
+  protected final String TEXT_47 = "Base:Submit-Result: ' , JSON.stringify(resultado));" + NL + "\t\t\t\tthis.executaNavegacao(this.navCtrl,resultado);" + NL + "      \t})" + NL + "\t}" + NL + "}";
+  protected final String TEXT_48 = NL;
 
   public String generate(Object argument)
   {
@@ -139,18 +141,18 @@ while (itRel.hasNext()) {
     stringBuffer.append(TEXT_24);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_25);
-    stringBuffer.append( tela.getNome() );
+    stringBuffer.append( tela.getTipo() );
     stringBuffer.append(TEXT_26);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_27);
+    stringBuffer.append( tela.getTipo() );
+    stringBuffer.append(TEXT_28);
     
 itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
 while (itRel.hasNext()) {
 	RelacionamentoWrapper relac = itRel.next();
 	ClasseWrapper oposta = relac.getClasseOposta();
 
-    stringBuffer.append(TEXT_27);
-    stringBuffer.append( oposta.getNomeParaClasse() );
-    stringBuffer.append(TEXT_28);
-    stringBuffer.append( oposta.getNomeParaClasse() );
     stringBuffer.append(TEXT_29);
     stringBuffer.append( oposta.getNomeParaClasse() );
     stringBuffer.append(TEXT_30);
@@ -174,19 +176,23 @@ while (itRel.hasNext()) {
     stringBuffer.append(TEXT_39);
     stringBuffer.append( oposta.getNomeParaClasse() );
     stringBuffer.append(TEXT_40);
+    stringBuffer.append( oposta.getNomeParaClasse() );
+    stringBuffer.append(TEXT_41);
+    stringBuffer.append( oposta.getNomeParaClasse() );
+    stringBuffer.append(TEXT_42);
     
 }
 
-    stringBuffer.append(TEXT_41);
-    stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_42);
-    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_43);
-    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
+    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_44);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_45);
+    stringBuffer.append( tela.getEntidade().getNomeParaClasse() );
     stringBuffer.append(TEXT_46);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_47);
+    stringBuffer.append(TEXT_48);
     return stringBuffer.toString();
   }
 }

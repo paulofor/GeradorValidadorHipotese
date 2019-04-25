@@ -9,7 +9,7 @@ Configuracao conf = recursos.getConfiguracao();
 import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter } from '../../shared/sdk';
 import { NavParams, NavController } from 'ionic-angular';
 
-// Tipo: DETALHE
+// Tipo: <%= tela.getTipo() %>
 export abstract class <%= tela.getNome() %>Base {
   
   protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
@@ -58,11 +58,11 @@ export abstract class <%= tela.getNome() %>Base {
 
   
   ionViewWillEnter() {
-    console.log('ionViewWillEnter <%= tela.getNome() %>');
+    console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
     this.inicializaItem();
   }
   ionViewDidLoad() {
-  	console.log('ionViewDidLoad <%= tela.getNome() %>');
+  	console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
   }
 }
     
