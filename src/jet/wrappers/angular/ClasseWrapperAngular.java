@@ -21,6 +21,7 @@ import loopback.cliente.modelo.TelaAppRest;
 public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponente, ItemLoopbackServer {
 
 	private List<TelaAppWrapper> listaTelaAppW;
+	private List<TelaAppWrapper> listaTelaAppWPut;
 	
 	private String tipo;
 	
@@ -33,7 +34,15 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 		}
 		return listaSaida;
 	}
-	
+	public List<TelaAppWrapper> getListaTelaPutPorTipo(String dado) {
+		List<TelaAppWrapper> listaSaida = new ArrayList<TelaAppWrapper>();
+		if (listaTelaAppWPut!=null) {
+			for (TelaAppWrapper tela : listaTelaAppWPut) {
+				if (tela.ehTipo(dado)) listaSaida.add(tela);
+			}
+		}
+		return listaSaida;
+	}
 	
 	public ClasseWrapperAngular(Entidade ent) {
 		super(ent);
@@ -50,8 +59,20 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 			this.listaTelaAppW.add(telaW);
 		}
 	}
+	public void setListaTelaAppPut(List<TelaAppRest> lista) {
+		this.listaTelaAppWPut = new ArrayList<TelaAppWrapper>();
+		for (TelaAppRest tela : lista) {
+			TelaAppWrapper telaW = new TelaAppWrapper(tela);
+			telaW.setClasseWrapperPut(this);
+			this.listaTelaAppWPut.add(telaW);
+		}
+	}
+	
 	public List<TelaAppWrapper> getListaTelaApp() {
 		return listaTelaAppW;
+	}
+	public List<TelaAppWrapper> getListaTelaAppPut() {
+		return listaTelaAppWPut;
 	}
 
 	@Override

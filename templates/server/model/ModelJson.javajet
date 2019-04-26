@@ -95,6 +95,37 @@ while (itEdita.hasNext()) {
     }
 <%
 }
+Iterator<TelaAppWrapper> itGetPut = classe.getListaTelaPorTipo("GETPUT").iterator();
+while (itGetPut.hasNext()) {
+	TelaAppWrapper tela = itGetPut.next();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+      "Submit<%= tela.getNome() %>": {
+      "accepts": [
+        {
+          "arg": "item",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "resultado",
+          "type": "object",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "submit da tela <%= tela.getNome() %>",
+      "http": [
+        {
+          "path": "/submit<%= tela.getNome() %>",
+          "verb": "post"
+        }
+      ]
+    }
+<%
+}
 %>
   }
 }

@@ -219,7 +219,7 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 		}
 		
 		
-		if (tela.tipoDetalhe()) {
+		if (tela.tipoGetPut()) {
 			
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
 			conteudo = GetPutPageProdBaseTs.create("\n").generate(recurso);

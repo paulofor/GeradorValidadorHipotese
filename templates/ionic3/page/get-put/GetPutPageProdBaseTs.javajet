@@ -6,7 +6,7 @@ Recursos recursos = (Recursos) argument;
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
-import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter } from '../../shared/sdk';
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , <%= tela.getEntidadePut().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
 import { NavParams, NavController } from 'ionic-angular';
 
 // Tipo: <%= tela.getTipo() %>
@@ -21,7 +21,8 @@ export abstract class <%= tela.getNome() %>Base {
  
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
-				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
+				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
+				public srv: <%= tela.getEntidadePut().getNomeParaClasse() %>Api) {
   } 
   
 	private inicializaItem() {

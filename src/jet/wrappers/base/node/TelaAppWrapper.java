@@ -89,6 +89,8 @@ public class TelaAppWrapper implements ItemComponente{
 	
 	private ClasseWrapper entidade = null;
 	
+	private ClasseWrapper entidadePut = null;
+	
 	public boolean ehTipo(String tipo) {
 		return (this.principal.getTipo().compareTo(tipo)==0);
 	}
@@ -126,9 +128,22 @@ public class TelaAppWrapper implements ItemComponente{
 		return this.entidade;
 	}
 	
+	public boolean possuiEntidadePut() {
+		return (entidadePut!=null);
+	}
+	public ClasseWrapper getEntidadePut() {
+		return this.entidadePut;
+	}
+	public void setClasseWrapperPut(ClasseWrapper entidade) {
+		this.entidadePut = entidade;
+	}
+	
 	
 	public long getIdEntidade() {
 		return (principal.getEntidadeId()!=null?principal.getEntidadeId():0);
+	}
+	public long getIdEntidadePut() {
+		return (principal.getEntidadePutId()!=null?principal.getEntidadePutId():0);
 	}
 	public void setClasseWrapper(ClasseWrapper entidade) {
 		this.entidade = entidade;

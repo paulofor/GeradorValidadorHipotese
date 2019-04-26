@@ -263,13 +263,16 @@ public class GeradorIonic3 extends GeradorNodeBase {
 
 	
 	
-	
+	/*
+	 * passou para classe superior
+	 * 
 	private void carregaEntidade(TelaAppWrapper tela, Recursos recursos) {
 		if (tela.getIdEntidade()!=0) {
 			ClasseWrapper entidade = obtemEntidadePorId(tela.getIdEntidade(),recursos);
 			tela.setClasseWrapper(entidade);
 		}
 	}
+	*/
 	
 	private ClasseWrapper obtemEntidadePorId(long id, Recursos recurso) {
 		ClasseWrapper saida = null;

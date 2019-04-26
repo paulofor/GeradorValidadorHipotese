@@ -45,7 +45,12 @@ public class ModelJson
   protected final String TEXT_23 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
   protected final String TEXT_24 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
   protected final String TEXT_25 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
-  protected final String TEXT_26 = NL + "  }" + NL + "}";
+  protected final String TEXT_26 = ",";
+  protected final String TEXT_27 = " " + NL + "      \"Submit";
+  protected final String TEXT_28 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
+  protected final String TEXT_29 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
+  protected final String TEXT_30 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
+  protected final String TEXT_31 = NL + "  }" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -132,8 +137,23 @@ while (itEdita.hasNext()) {
     stringBuffer.append(TEXT_25);
     
 }
-
+Iterator<TelaAppWrapper> itGetPut = classe.getListaTelaPorTipo("GETPUT").iterator();
+while (itGetPut.hasNext()) {
+	TelaAppWrapper tela = itGetPut.next();
+	if (primeiro) { primeiro = false; } else {
     stringBuffer.append(TEXT_26);
+     } 
+    stringBuffer.append(TEXT_27);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_28);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_29);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_30);
+    
+}
+
+    stringBuffer.append(TEXT_31);
     return stringBuffer.toString();
   }
 }

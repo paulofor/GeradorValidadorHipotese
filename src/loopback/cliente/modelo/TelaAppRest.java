@@ -10,6 +10,7 @@ public class TelaAppRest extends Model{
 	private String nome;
 	private String tipo;
 	private Integer entidadeId;
+	private Integer entidadePutId;
 	private Integer conceitoProdutoId;
 	private Integer sobrescreveHtml;
 	private Integer sobrescreveTs;
@@ -75,6 +76,12 @@ public class TelaAppRest extends Model{
 	}
 	public void setConceitoProdutoId(Integer conceitoProdutoId) {
 		this.conceitoProdutoId = conceitoProdutoId;
+	}
+	public Integer getEntidadePutId() {
+		return entidadePutId;
+	}
+	public void setEntidadePutId(Integer entidadePutId) {
+		this.entidadePutId = entidadePutId;
 	}
 	
 	

@@ -19,6 +19,10 @@ public abstract class GeradorNodeBase extends GeradorArquivosLoopback {
 			ClasseWrapper entidade = obtemEntidadePorId(tela.getIdEntidade(),recursos);
 			tela.setClasseWrapper(entidade);
 		}
+		if (tela.getIdEntidadePut() != 0 ) {
+			ClasseWrapper entidade = obtemEntidadePorId(tela.getIdEntidadePut(),recursos);
+			tela.setClasseWrapperPut(entidade);
+		}
 	}
 	
 	private final ClasseWrapper obtemEntidadePorId(long id, Recursos recurso) {
