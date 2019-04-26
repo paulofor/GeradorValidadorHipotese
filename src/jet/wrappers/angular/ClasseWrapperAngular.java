@@ -25,6 +25,12 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 	
 	private String tipo;
 	
+	private void paradaDebug() {
+		if ("ExecucaoItemSerie".equals(this.entidade.getNome())) {
+			System.out.println("aqui");
+		}
+	}
+	
 	public List<TelaAppWrapper> getListaTelaPorTipo(String dado) {
 		List<TelaAppWrapper> listaSaida = new ArrayList<TelaAppWrapper>();
 		if (listaTelaAppW!=null) {
@@ -36,6 +42,7 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 	}
 	public List<TelaAppWrapper> getListaTelaPutPorTipo(String dado) {
 		List<TelaAppWrapper> listaSaida = new ArrayList<TelaAppWrapper>();
+		this.paradaDebug();
 		if (listaTelaAppWPut!=null) {
 			for (TelaAppWrapper tela : listaTelaAppWPut) {
 				if (tela.ehTipo(dado)) listaSaida.add(tela);
@@ -60,12 +67,14 @@ public class ClasseWrapperAngular extends ClasseWrapper implements ItemComponent
 		}
 	}
 	public void setListaTelaAppPut(List<TelaAppRest> lista) {
+		
 		this.listaTelaAppWPut = new ArrayList<TelaAppWrapper>();
 		for (TelaAppRest tela : lista) {
 			TelaAppWrapper telaW = new TelaAppWrapper(tela);
 			telaW.setClasseWrapperPut(this);
 			this.listaTelaAppWPut.add(telaW);
 		}
+		//this.paradaDebug();
 	}
 	
 	public List<TelaAppWrapper> getListaTelaApp() {

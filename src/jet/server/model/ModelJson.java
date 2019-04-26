@@ -137,7 +137,7 @@ while (itEdita.hasNext()) {
     stringBuffer.append(TEXT_25);
     
 }
-Iterator<TelaAppWrapper> itGetPut = classe.getListaTelaPorTipo("GETPUT").iterator();
+Iterator<TelaAppWrapper> itGetPut = classe.getListaTelaPutPorTipo("GETPUT").iterator();
 while (itGetPut.hasNext()) {
 	TelaAppWrapper tela = itGetPut.next();
 	if (primeiro) { primeiro = false; } else {

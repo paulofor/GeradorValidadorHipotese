@@ -32,11 +32,13 @@ public class TelaAppRepositorio extends ModelRepository<TelaAppRest>{
 		invokeStaticMethod("findByIdEntidadeGerador", params, new JsonArrayParser<TelaAppRest>(this, callback));
 	}
 	
-	public void findByIdEntidadeGerador(Object id, final ListCallback<TelaAppRest> callback) {
-		RestContractItem contrato = new RestContractItem("TelaApps/telasAppPorIdEntidadeParaGerador","GET");
-		this.getRestAdapter().getContract().addItem(contrato, "TelaApp.findByIdEntidadeGerador");
+
+	public void findByIdEntidadePutGerador(Object id, final ListCallback<TelaAppRest> callback) {
+		RestContractItem contrato = new RestContractItem("TelaApps/telasAppPorIdEntidadePutParaGerador","GET");
+		this.getRestAdapter().getContract().addItem(contrato, "TelaApp.findByIdEntidadePutGerador");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idEntidade", id);
-		invokeStaticMethod("findByIdEntidadeGerador", params, new JsonArrayParser<TelaAppRest>(this, callback));
+		invokeStaticMethod("findByIdEntidadePutGerador", params, new JsonArrayParser<TelaAppRest>(this, callback));
 	}
+
 }

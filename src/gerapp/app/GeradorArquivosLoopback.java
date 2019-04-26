@@ -78,6 +78,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		TelaAppRepositorio rep = adapter.createRepository(TelaAppRepositorio.class);
 		for (Object entidade : listaClasse) {
 			carregaTelaParaEntidade((ClasseWrapperAngular)entidade, rep);
+			carregaTelaParaEntidadePut((ClasseWrapperAngular)entidade, rep);
 		}
 		
 	}
@@ -93,6 +94,20 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 			public void onSuccess(List<TelaAppRest> lista) {
 				entidade.setListaTelaApp(lista);
 				System.out.println("*** Adicionou lista com ");
+			}
+		});
+	}
+	private void carregaTelaParaEntidadePut(final ClasseWrapperAngular entidade,TelaAppRepositorio rep) {
+		rep.findByIdEntidadePutGerador(entidade.getId(), new ListCallback<TelaAppRest>() {
+			@Override
+			public void onError(Throwable t) {
+				t.printStackTrace();
+			}
+
+			@Override
+			public void onSuccess(List<TelaAppRest> lista) {
+				entidade.setListaTelaAppPut(lista);
+				System.out.println("*** Adicionou lista tela put com ");
 			}
 		});
 	}

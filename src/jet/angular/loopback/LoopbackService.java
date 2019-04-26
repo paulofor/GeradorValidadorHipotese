@@ -49,7 +49,13 @@ public class LoopbackService
   protected final String TEXT_28 = "> {" + NL + "\t\tlet _method: string = \"POST\";" + NL + "\t\tlet _url: string = LoopBackConfig.getPath() + \"/\" + LoopBackConfig.getApiVersion() +" + NL + "    \t\t\"/";
   protected final String TEXT_29 = "s/submit";
   protected final String TEXT_30 = "\";" + NL + "    \tlet _routeParams: any = {};" + NL + "    \tlet _postBody: any = {};" + NL + "    \tlet _urlParams: any = {};" + NL + "    \tif (typeof item !== 'undefined' && item !== null) _urlParams.item = item;" + NL + "    \tlet result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);" + NL + "    \treturn result;" + NL + "\t}";
-  protected final String TEXT_31 = NL + "  " + NL + "}";
+  protected final String TEXT_31 = NL + "  ";
+  protected final String TEXT_32 = NL + "\tpublic submit";
+  protected final String TEXT_33 = "(item : any , customHeaders?: Function) : Observable<";
+  protected final String TEXT_34 = "> {" + NL + "\t\tlet _method: string = \"POST\";" + NL + "\t\tlet _url: string = LoopBackConfig.getPath() + \"/\" + LoopBackConfig.getApiVersion() +" + NL + "    \t\t\"/";
+  protected final String TEXT_35 = "s/submit";
+  protected final String TEXT_36 = "\";" + NL + "    \tlet _routeParams: any = {};" + NL + "    \tlet _postBody: any = {};" + NL + "    \tlet _urlParams: any = {};" + NL + "    \tif (typeof item !== 'undefined' && item !== null) _urlParams.item = item;" + NL + "    \tlet result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);" + NL + "    \treturn result;" + NL + "\t}";
+  protected final String TEXT_37 = NL + "}";
 
   public String generate(Object argument)
   {
@@ -137,6 +143,24 @@ while (itEdita.hasNext()) {
 }
 
     stringBuffer.append(TEXT_31);
+    
+Iterator<TelaAppWrapper> itGetPut = classe.getListaTelaPutPorTipo("GETPUT").iterator();
+while (itGetPut.hasNext()) {
+	TelaAppWrapper tela = itGetPut.next();
+
+    stringBuffer.append(TEXT_32);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_33);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_34);
+    stringBuffer.append( classe.getNomeModeloServer() );
+    stringBuffer.append(TEXT_35);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_36);
+    
+}
+
+    stringBuffer.append(TEXT_37);
     return stringBuffer.toString();
   }
 }
