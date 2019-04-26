@@ -28,6 +28,9 @@ import jet.ionic3.page.detalhe.DetalhePageTs;
 import jet.ionic3.page.form.FormPageHtml;
 import jet.ionic3.page.form.FormPageProdBaseTs;
 import jet.ionic3.page.form.FormPageTs;
+import jet.ionic3.page.getPut.GetPutPageHtml;
+import jet.ionic3.page.getPut.GetPutPageProdBaseTs;
+import jet.ionic3.page.getPut.GetPutPageTs;
 import jet.ionic3.page.lista.ListaPageHtml;
 import jet.ionic3.page.lista.ListaPageTs;
 import jet.ionic3.page.listaGrid.ListaGridPageHtml;
@@ -215,6 +218,25 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 			}
 		}
 		
+		
+		if (tela.tipoDetalhe()) {
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
+			conteudo = GetPutPageProdBaseTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			if (!this.existe(nomeArquivo)) {
+				conteudo = GetPutPageTs.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+			
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+				conteudo = GetPutPageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
 		// FORM - PRODUCAO
 		
 		if (tela.tipoEdita()) {
