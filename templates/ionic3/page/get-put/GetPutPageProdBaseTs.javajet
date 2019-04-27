@@ -69,14 +69,15 @@ export abstract class <%= tela.getNome() %>Base {
   }
   
   
-  	protected submit(item:<%= tela.getEntidadePut().getNomeParaClasse() %> ) {
-		console.log('<%= tela.getNome() %>Base:Submit-Item:' , JSON.stringify(this.item));
-    	this.srvPut.submit<%= tela.getNome() %>(this.item)
-      		.subscribe((resultado:<%= tela.getEntidadePut().getNomeParaClasse() %>) => {
-        		console.log('<%= tela.getNome() %>Base:Submit-Result: ' , JSON.stringify(resultado));
+	protected submit(itemSubmit:<%= tela.getEntidadePut().getNomeParaClasse() %> ) {
+		console.log('<%= tela.getNome() %>Base:Submit-Item:' , itemSubmit);
+		console.log('<%= tela.getNome() %>Base:Submit-ItemJson:' , JSON.stringify(itemSubmit));
+		this.srvPut.submit<%= tela.getNome() %>(itemSubmit)
+			.subscribe((resultado:<%= tela.getEntidadePut().getNomeParaClasse() %>) => {
+				console.log('<%= tela.getNome() %>Base:Submit-Result: ' , resultado);
 				this.resultadoSubmit(resultado);
 				this.inicializaItem();
-      	})
+			})
 	}
 }
     
