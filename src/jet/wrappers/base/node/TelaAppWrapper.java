@@ -118,7 +118,7 @@ public class TelaAppWrapper implements ItemComponente{
 		return ("DETALHE".equals(this.principal.getTipo()));
 	}
 	public boolean tipoGetPut() {
-		return ("GET-PUT".equals(this.principal.getTipo()));
+		return ("GETPUT".equals(this.principal.getTipo()));
 	}
 	
 	public boolean possuiEntidade() {

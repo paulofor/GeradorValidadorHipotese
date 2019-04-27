@@ -6,7 +6,7 @@ Recursos recursos = (Recursos) argument;
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
-import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , <%= tela.getEntidadePut().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidadePut().getNomeParaClasse() %>,  <%= tela.getEntidade().getNomeParaClasse() %>Api , <%= tela.getEntidadePut().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
 import { NavParams, NavController } from 'ionic-angular';
 
 // Tipo: <%= tela.getTipo() %>
@@ -18,11 +18,13 @@ export abstract class <%= tela.getNome() %>Base {
   protected abstract filtroLoadId(id:any) : LoopBackFilter;
   // filtro sem parametro id
   protected abstract filtroLoadOne() : LoopBackFilter;
+  // chamada depois do submit e de nova inicializacao
+  protected abstract resultadoSubmit(result:<%= tela.getEntidadePut().getNomeParaClasse() %>)
  
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
 				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
-				public srv: <%= tela.getEntidadePut().getNomeParaClasse() %>Api) {
+				public srvPut: <%= tela.getEntidadePut().getNomeParaClasse() %>Api) {
   } 
   
 	private inicializaItem() {
@@ -65,6 +67,17 @@ export abstract class <%= tela.getNome() %>Base {
   ionViewDidLoad() {
   	console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
   }
+  
+  
+  	protected submit(item:<%= tela.getEntidadePut().getNomeParaClasse() %> ) {
+		console.log('<%= tela.getNome() %>Base:Submit-Item:' , JSON.stringify(this.item));
+    	this.srvPut.submit<%= tela.getNome() %>(this.item)
+      		.subscribe((resultado:<%= tela.getEntidadePut().getNomeParaClasse() %>) => {
+        		console.log('<%= tela.getNome() %>Base:Submit-Result: ' , JSON.stringify(resultado));
+				this.resultadoSubmit(resultado);
+				this.inicializaItem();
+      	})
+	}
 }
     
     
