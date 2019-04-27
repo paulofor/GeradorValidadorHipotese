@@ -25,7 +25,7 @@ public class DetalhePageProdBaseTs
   protected final String TEXT_3 = "Api , LoopBackFilter } from '../../shared/sdk';" + NL + "import { NavParams, NavController } from 'ionic-angular';" + NL + "" + NL + "// Tipo: ";
   protected final String TEXT_4 = NL + "export abstract class ";
   protected final String TEXT_5 = "Base {" + NL + "  " + NL + "  protected item: ";
-  protected final String TEXT_6 = ";" + NL + "  " + NL + "  // filtro com parametro id" + NL + "  protected abstract filtroLoadId(id:any) : LoopBackFilter;" + NL + "  // filtro sem parametro id" + NL + "  protected abstract filtroLoadOne() : LoopBackFilter;" + NL + " " + NL + "  constructor(\tpublic navParams: NavParams," + NL + "  \t\t\t\tpublic navCtrl: NavController," + NL + "\t\t\t\tpublic srv: ";
+  protected final String TEXT_6 = ";" + NL + "  " + NL + "  // filtro com parametro id" + NL + "  protected abstract filtroLoadId(id:any) : LoopBackFilter;" + NL + "  // filtro sem parametro id" + NL + "  protected abstract filtroLoadOne() : LoopBackFilter;" + NL + "  // chamada caso item nao tenha sido encontrado" + NL + "  //protected abstract itemNaoEncontrado();" + NL + "  " + NL + "  // chamada antes e depois da inicializacao" + NL + "  protected abstract posInicializaItem();" + NL + "  protected abstract preInicializaItem();" + NL + "  " + NL + " " + NL + "  constructor(\tpublic navParams: NavParams," + NL + "  \t\t\t\tpublic navCtrl: NavController," + NL + "\t\t\t\tpublic srv: ";
   protected final String TEXT_7 = "Api) {" + NL + "  } " + NL + "  " + NL + "\tprivate inicializaItem() {" + NL + "\t\tthis.item = this.navParams.get('item');" + NL + "\t\tconsole.log('";
   protected final String TEXT_8 = "Base:ItemParametro: ', this.item);" + NL + "\t\tif (!this.item) {" + NL + "\t\t\tvar id = this.navParams.get('id');" + NL + "\t\t\tconsole.log('";
   protected final String TEXT_9 = "Base:Id: ' , id);" + NL + "\t\t\tif (id) {" + NL + "\t\t\t\tconsole.log('";
@@ -35,14 +35,14 @@ public class DetalhePageProdBaseTs
   protected final String TEXT_13 = "Base.item: ' , this.item)" + NL + "\t\t\t\t\t\t}," + NL + "\t\t\t\t\t\t(erro: any) => console.log('";
   protected final String TEXT_14 = "Base:LoadId(Erro): ' , JSON.stringify(erro))" + NL + "\t\t\t\t\t)" + NL + "\t\t\t} else  {" + NL + "\t\t\t\tconsole.log('";
   protected final String TEXT_15 = "Base:filtro: ' , JSON.stringify(this.filtroLoadOne()));" + NL + "\t\t\t\tconsole.log('";
-  protected final String TEXT_16 = ".findOne');" + NL + "\t\t\t\tthis.srv.findOne(this.filtroLoadOne())" + NL + "\t\t\t\t\t.subscribe(" + NL + "\t\t\t\t\t\t(result: ";
+  protected final String TEXT_16 = ".findOne');" + NL + "\t\t\t\t// se nao encontrar vai pro erro -> 404" + NL + "\t\t\t\tthis.srv.findOne(this.filtroLoadOne())" + NL + "\t\t\t\t\t.subscribe(" + NL + "\t\t\t\t\t\t(result: ";
   protected final String TEXT_17 = ") => {" + NL + "\t\t\t\t\t\t\tthis.item = result;" + NL + "\t\t\t\t\t\t\tconsole.log('";
-  protected final String TEXT_18 = "Base.item: ' , this.item)" + NL + "\t\t\t\t\t\t}," + NL + "\t\t\t\t\t\t(erro: any) => console.log('";
-  protected final String TEXT_19 = "Base:LoadId(Erro): ' , JSON.stringify(erro))" + NL + "\t\t\t\t\t)" + NL + "\t\t\t}" + NL + "\t\t}  " + NL + "\t}" + NL + "" + NL + "  " + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
+  protected final String TEXT_18 = "Base.item: ' , this.item);" + NL + "\t\t\t\t\t\t\t//if (!this.item) this.itemNaoEncontrado();" + NL + "\t\t\t\t\t\t}," + NL + "\t\t\t\t\t\t(erro: any) => console.log('";
+  protected final String TEXT_19 = "Base:LoadId(Erro): ' , JSON.stringify(erro))" + NL + "\t\t\t\t\t)" + NL + "\t\t\t}" + NL + "\t\t}  " + NL + "\t}" + NL + "" + NL + "  " + NL + "\tionViewWillEnter() {" + NL + "\t\tconsole.log('ionViewWillEnter ";
   protected final String TEXT_20 = "<<";
-  protected final String TEXT_21 = ">>');" + NL + "    this.inicializaItem();" + NL + "  }" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
+  protected final String TEXT_21 = ">>');" + NL + "\t\tthis.preInicializaItem();" + NL + "\t\tthis.inicializaItem();" + NL + "\t\tthis.posInicializaItem();" + NL + "\t}" + NL + "  " + NL + "\tionViewDidLoad() {" + NL + "\t\tconsole.log('ionViewDidLoad ";
   protected final String TEXT_22 = "<<";
-  protected final String TEXT_23 = ">>');" + NL + "  }" + NL + "}" + NL + "    ";
+  protected final String TEXT_23 = ">>');" + NL + "\t}" + NL + "}" + NL + "    ";
   protected final String TEXT_24 = NL + "    ";
 
   public String generate(Object argument)
