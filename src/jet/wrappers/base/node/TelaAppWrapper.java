@@ -120,6 +120,9 @@ public class TelaAppWrapper implements ItemComponente{
 	public boolean tipoGetPut() {
 		return ("GETPUT".equals(this.principal.getTipo()));
 	}
+	public boolean tipoGraficoBarra() {
+		return ("GRAFICO_BARRA".equals(this.principal.getTipo()));
+	}
 	
 	public boolean possuiEntidade() {
 		return (entidade!=null);

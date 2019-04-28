@@ -1,0 +1,124 @@
+<%@ jet package="jet.ionic3.page.graficoBarra" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="GraficoBarraPageProdBaseTs" %>
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter } from '../../shared/sdk';
+import { NavParams, NavController } from 'ionic-angular';
+
+// Tipo: <%= tela.getTipo() %>
+export abstract class <%= tela.getNome() %>Base {
+  
+  protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
+  
+  // filtro com parametro id
+  protected abstract filtroLoadId(id:any) : LoopBackFilter;
+  // filtro sem parametro id
+  protected abstract filtroLoadOne() : LoopBackFilter;
+  // chamada caso item nao tenha sido encontrado
+  //protected abstract itemNaoEncontrado();
+  
+  // chamada antes e depois da inicializacao
+  protected abstract posInicializaItem();
+  protected abstract preInicializaItem();
+  
+ 
+  constructor(	public navParams: NavParams,
+  				public navCtrl: NavController,
+				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
+  } 
+  
+	private inicializaItem() {
+		this.item = this.navParams.get('item');
+		console.log('<%= tela.getNome() %>Base:ItemParametro: ', this.item);
+		if (!this.item) {
+			var id = this.navParams.get('id');
+			console.log('<%= tela.getNome() %>Base:Id: ' , id);
+			if (id) {
+				console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.filtroLoadId(id)));
+				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findById');
+				this.srv.findById(id, this.filtroLoadId(id))
+					.subscribe(
+						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
+							this.item = result;
+							console.log('<%= tela.getNome() %>Base.item: ' , this.item)
+						},
+						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
+					)
+			} else  {
+				console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.filtroLoadOne()));
+				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findOne');
+				// se nao encontrar vai pro erro -> 404
+				this.srv.findOne(this.filtroLoadOne())
+					.subscribe(
+						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
+							this.item = result;
+							console.log('<%= tela.getNome() %>Base.item: ' , this.item);
+							//if (!this.item) this.itemNaoEncontrado();
+						},
+						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
+					)
+			}
+		}  
+	}
+
+  
+	ionViewWillEnter() {
+		console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+		this.preInicializaItem();
+		this.inicializaItem();
+		this.posInicializaItem();
+	}
+  
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+	}
+	
+  protected criaImagem() {
+  }
+  
+  public barChartType: string = 'bar';
+  public barChartLegend: boolean = true;
+  
+  public barChartOptions: any = {
+    legend: {
+      display: true,
+      labels: {
+        boxWidth: 20,
+        boxHeight: 2
+      }
+    },
+    animation: {
+      onComplete: this.criaImagem
+    },
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  };
+  
+  
+  	/*
+	public barChartLabels: string[] = ['22/12', '28/12', '02/01', '04/01', '06/01', '08/01', '10/01'];
+
+  public barChartData: any[] = [
+    { data: [30, 30, 30, 30, 30, 35, 35], label: 'Repetição 1' },
+    { data: [25, 25, 25, 25, 25, 30, 30], label: 'Repetição 2' },
+    { data: [20, 20, 20, 20, 20, 25, 25], label: 'Repetição 3' }
+	];
+	*/
+	protected abstract getRotulos() : string[];
+	public barChartLabels : string[] = this.getRotulos();
+
+	protected abstract getDataLabel(): any[];
+	public barChartData: any[] = this.getDataLabel();
+}
+    
+    

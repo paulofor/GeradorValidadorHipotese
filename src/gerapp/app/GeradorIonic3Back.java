@@ -31,6 +31,9 @@ import jet.ionic3.page.form.FormPageTs;
 import jet.ionic3.page.getPut.GetPutPageHtml;
 import jet.ionic3.page.getPut.GetPutPageProdBaseTs;
 import jet.ionic3.page.getPut.GetPutPageTs;
+import jet.ionic3.page.graficoBarra.GraficoBarraPageHtml;
+import jet.ionic3.page.graficoBarra.GraficoBarraPageProdBaseTs;
+import jet.ionic3.page.graficoBarra.GraficoBarraPageTs;
 import jet.ionic3.page.lista.ListaPageHtml;
 import jet.ionic3.page.lista.ListaPageTs;
 import jet.ionic3.page.listaGrid.ListaGridPageHtml;
@@ -41,27 +44,20 @@ import jet.ionic3.page.listaItem.ListaItemPageTs;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 
-public class GeradorIonic3Back extends GeradorNodeBase{
+public class GeradorIonic3Back extends GeradorNodeBase {
 
-
-	
 	private String PATH = "../../../../ProdutosNode/";
 	protected Configuracao configuracao = null;
 	protected ClasseWrapper entidade = null;
-	
-	
 
 	private String getDiretorioAngular(Recursos recurso) {
 		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/src/";
 	}
-	
-	
-	
-	
+
 	protected void criaArquivoProjeto(Recursos recurso) throws IOException {
 		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/";
-		String raizOrigem =  "./fixos/fixoIonic3/";
-		
+		String raizOrigem = "./fixos/fixoIonic3/";
+
 		String pathDestino = raizDestino;
 		String pathOrigem = raizOrigem;
 		this.criaCaminhoSeNaoExiste(pathDestino);
@@ -72,63 +68,61 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 		this.copiaArquivo("tslint.json", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("tslint.json", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo(".gitignore", pathOrigem, pathDestino, recurso);
-		
-		
-		
+
 		pathDestino = raizDestino + "src/";
 		pathOrigem = raizOrigem + "src/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.copiaArquivo("index.html", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("manifest.json", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("service-worker.js", pathOrigem, pathDestino, recurso);
-		
+
 		pathDestino = raizDestino + "src/app/";
 		pathOrigem = raizOrigem + "src/app/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		//this.copiaArquivo("app.component.ts", pathOrigem, pathDestino, recurso);
+		// this.copiaArquivo("app.component.ts", pathOrigem, pathDestino,
+		// recurso);
 		this.copiaArquivo("app.html", pathOrigem, pathDestino, recurso);
-		//this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
-		//this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
+		// this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
+		// this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("main.ts", pathOrigem, pathDestino, recurso);
-		
+
 		pathDestino = raizDestino + "src/assets/icon/";
 		pathOrigem = raizOrigem + "src/assets/icon/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.copiaArquivo("favicon.ico", pathOrigem, pathDestino, recurso);
-		
+
 		pathDestino = raizDestino + "src/assets/imgs/";
 		pathOrigem = raizOrigem + "src/assets/imgs/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.copiaArquivo("logo.png", pathOrigem, pathDestino, recurso);
-		
+
 		pathDestino = raizDestino + "src/pages/home/";
 		pathOrigem = raizOrigem + "src/pages/home/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.copiaArquivo("home.html", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("home.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("home.ts", pathOrigem, pathDestino, recurso);
-		
+
 		pathDestino = raizDestino + "src/pages/list/";
 		pathOrigem = raizOrigem + "src/pages/list/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.copiaArquivo("list.html", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.ts", pathOrigem, pathDestino, recurso);
-		
+
 		pathDestino = raizDestino + "src/theme/";
 		pathOrigem = raizOrigem + "src/theme/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		//this.copiaArquivo("variables.scss", pathOrigem, pathDestino, recurso);
+		// this.copiaArquivo("variables.scss", pathOrigem, pathDestino,
+		// recurso);
 
 	}
-	
-	
-	
+
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
 		List<ItemComponente> listaTela = recurso.getListaTelaApp();
 		for (ItemComponente tela : listaTela) {
-			carregaEntidade((TelaAppWrapper) tela,recurso);
+			carregaEntidade((TelaAppWrapper) tela, recurso);
 			recurso.setItemCorrente(tela);
 			criaTelaApp(recurso, (TelaAppWrapper) tela);
 		}
@@ -143,9 +137,9 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 		this.criaDadosPrototipo(recurso);
 		this.criaArquivoAplicacao(recurso);
 	}
-	
+
 	private void criaArquivoAplicacao(Recursos recurso) throws IOException {
-		
+
 		String nomeArquivo = getDiretorioAngular(recurso) + "/app/app.component.ts";
 		String conteudo = AppComponentTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
@@ -153,46 +147,46 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 		nomeArquivo = getDiretorioAngular(recurso) + "/app/app.module.ts";
 		conteudo = AppModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		
+
 		nomeArquivo = getDiretorioAngular(recurso) + "/app/app.scss";
 		conteudo = AppScss.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		
+
 		nomeArquivo = getDiretorioAngular(recurso) + "/theme/variables.scss";
 		conteudo = ThemeVariables.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 
 	}
-	
-	
+
 	private void criaTelaApp(Recursos recurso, TelaAppWrapper tela) throws IOException {
-		
+
 		System.out.println("Tela: " + tela.getNome());
 		System.out.println("Item Tela: " + tela);
-		
-		if (!tela.possuiEntidade()) return;
-		
-		String pathDestino = getDiretorioAngular(recurso) + "/pages/" + tela.getPathArquivo() + "/" ;
+
+		if (!tela.possuiEntidade())
+			return;
+
+		String pathDestino = getDiretorioAngular(recurso) + "/pages/" + tela.getPathArquivo() + "/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		//this.limpaCaminho(pathDestino);
-		
+		// this.limpaCaminho(pathDestino);
+
 		String nomeArquivo = pathDestino + tela.getArquivo() + ".module.ts";
 		String conteudo = PageModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		
+
 		nomeArquivo = pathDestino + tela.getArquivo() + ".scss";
 		if (!this.existe(nomeArquivo)) {
 			conteudo = PageScss.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 		}
-		
+
 		if (tela.tipoLista()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
 				conteudo = ListaPageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = ListaPageHtml.create("\n").generate(recurso);
@@ -200,71 +194,89 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 			}
 		}
 		if (tela.tipoDetalhe()) {
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
 			conteudo = DetalhePageProdBaseTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			if (!this.existe(nomeArquivo)) {
 				conteudo = DetalhePageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
-			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+			if (!this.existe(nomeArquivo)) {
 				conteudo = DetalhePageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
 		
-		
+		if (tela.tipoGraficoBarra()) {
+
+			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
+			conteudo = GraficoBarraPageProdBaseTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			if (!this.existe(nomeArquivo)) {
+				conteudo = GraficoBarraPageTs.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo)) {
+				conteudo = GraficoBarraPageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
+
 		if (tela.tipoGetPut()) {
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
 			conteudo = GetPutPageProdBaseTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			if (!this.existe(nomeArquivo)) {
 				conteudo = GetPutPageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
-			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+			if (!this.existe(nomeArquivo)) {
 				conteudo = GetPutPageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
 		// FORM - PRODUCAO
-		
+
 		if (tela.tipoEdita()) {
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
 			conteudo = FormPageProdBaseTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			if (!this.existe(nomeArquivo)) {
 				conteudo = FormPageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = FormPageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
-		
+
 		if (tela.tipoListaGrid()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
 				conteudo = ListaGridPageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = ListaGridPageHtml.create("\n").generate(recurso);
@@ -275,13 +287,13 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
 			conteudo = ListaItemPageProdBaseTs.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
 				conteudo = ListaItemPageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = ListaItemPageHtml.create("\n").generate(recurso);
@@ -290,12 +302,12 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 		}
 		if (tela.tipoListaVitrine()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
-			
+
 			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
 				conteudo = DetalhePageTs.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
-			
+
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = DetalhePageHtml.create("\n").generate(recurso);
@@ -304,18 +316,8 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 		}
 	}
 
+	// *** Esse pedaço todo pode ser passado para uma classe geral
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//***   Esse pedaço todo pode ser passado para uma classe geral 
-	
 	private void arquivosLoopbackClient(Recursos recurso) throws IOException {
 		String pathDestino = getDiretorioAngular(recurso) + "/shared/sdk/";
 		String conteudo = "";
@@ -403,31 +405,29 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 
 	}
 
-	
 	private void criaModuloServico(Recursos recurso) throws IOException {
-		String pathDestino = getDiretorioAngular(recurso) + "/servico/"; 
+		String pathDestino = getDiretorioAngular(recurso) + "/servico/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.limpaCaminho(pathDestino);
-		
+
 		String nomeArquivo = pathDestino + "servico.module.ts";
 		String conteudo = ModuloServicoTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		
+
 		ModuloComponente modulo = new ModuloComponente("ServicoModule", "servico.module");
 		recurso.setItemCorrente(modulo);
 		nomeArquivo = pathDestino + modulo.getArquivo() + ".spec.ts";
 		conteudo = ModuloSpec.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		
+
 	}
-	
-	
+
 	private void criaDadosPrototipo(Recursos recurso) throws IOException {
-		String pathDestino = getDiretorioAngular(recurso) + "/dados/"; 
+		String pathDestino = getDiretorioAngular(recurso) + "/dados/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		//this.limpaCaminho(pathDestino);
+		// this.limpaCaminho(pathDestino);
 		for (ClasseWrapper corrente : listaClasse) {
-			recurso.setItemCorrente((ItemAngular)corrente);
+			recurso.setItemCorrente((ItemAngular) corrente);
 			// Modelo
 			String nomeArquivo = pathDestino + corrente.getNomeParaVariavel() + ".ts";
 			if (!this.existe(nomeArquivo)) {
@@ -436,5 +436,5 @@ public class GeradorIonic3Back extends GeradorNodeBase{
 			}
 		}
 	}
-	
+
 }
