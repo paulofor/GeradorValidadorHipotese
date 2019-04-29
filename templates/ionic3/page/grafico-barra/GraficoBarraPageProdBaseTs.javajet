@@ -72,19 +72,51 @@ export abstract class <%= tela.getNome() %>Base {
 		}  
 	}
 	
-	protected abstract getListaGrafico() : Array<any>;
-	protected abstract extraiRotulo(detalhe:any) : string;
+	protected abstract getListaGrafico(): Array<any>;
+	protected abstract extraiRotulo(detalhe: any): string;
+	protected abstract extraiValores(detalhe: any): number[];
+	protected abstract obtemTituloSerie(): string[];
+	
 
-    private trataGrafico() {
-    	var listaGrafico = this.getListaGrafico();
-    	var saida:string[] = [];
-    	for (let i=0; i< listaGrafico.length; i++) {
-      		//var dado = new DatePipe('pt-BR').transform(this.item.listaExecucaoItemSerie[i].dataHoraFinalizacao, 'dd/MM');
-      		var dado = this.extraiRotulo(listaGrafico[i]);
-      		saida.push(dado);
-    	}
-    	this.rotulos=  saida;
-    }
+	private trataGrafico() {
+		this.trataRotuloSerieGrafico();
+		this.trataDadosGrafico();
+	}
+
+	private trataRotuloSerieGrafico() {
+		var listaGrafico = this.getListaGrafico();
+		var saida: string[] = [];
+		for (let i = 0; i < listaGrafico.length; i++) {
+			var dado = this.extraiRotulo(listaGrafico[i]);
+			saida.push(dado);
+		}
+		this.rotulos = saida;
+	}
+
+	private trataDadosGrafico() {
+		var listaGrafico = this.getListaGrafico()
+		var saida: any[] = [];
+		var titulos: string[] = this.obtemTituloSerie();
+		for (let i = 0; i < listaGrafico.length; i++) {
+			var dados: number[] = this.extraiValores(listaGrafico[i]);
+			if (i == 0) {
+				// inicializando os dados
+				for (let x = 0; x < titulos.length; x++) {
+					if (!dados[x]) dados[x] = 0;
+					var novoDado = { 'data': [dados[x]], 'label': titulos[x] };
+					saida.push(novoDado);
+				}
+			} else {
+				// obtendo cada serie e colocando mais um dado no vetor
+				for (let x = 0; x < titulos.length; x++) {
+					if (!dados[x]) dados[x] = 0;
+					var itemDado: any = saida[x];
+					itemDado.data.push(dados[x]);
+				}
+			}
+		}
+		this.dados = saida;
+	}
   
   
 	ionViewWillEnter() {
