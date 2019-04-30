@@ -109,6 +109,24 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("list.html", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.ts", pathOrigem, pathDestino, recurso);
+		
+		// login
+		pathDestino = raizDestino + "src/pages/login/";
+		pathOrigem = raizOrigem + "src/pages/login/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("login.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
+		
+		// signup
+		pathDestino = raizDestino + "src/pages/signup/";
+		pathOrigem = raizOrigem + "src/pages/signup/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("signup.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("signup.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("signup.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("signup-base.ts", pathOrigem, pathDestino, recurso);
 
 		pathDestino = raizDestino + "src/theme/";
 		pathOrigem = raizOrigem + "src/theme/";

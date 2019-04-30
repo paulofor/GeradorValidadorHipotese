@@ -21,7 +21,7 @@ public class AppModuleTs
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
-  protected final String TEXT_2 = NL + "import { BrowserModule } from '@angular/platform-browser';" + NL + "import { ErrorHandler, NgModule } from '@angular/core';" + NL + "import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';" + NL + "import { HttpClientModule } from '@angular/common/http';" + NL + "import { SocketDriver } from '../shared/sdk/sockets/socket.driver';" + NL + "import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../shared/sdk';" + NL + "import { MyApp } from './app.component';" + NL + "import { HomePage } from '../pages/home/home';" + NL + "import { Screenshot } from '@ionic-native/screenshot';" + NL + "import { ChartsModule } from 'ng2-charts';";
+  protected final String TEXT_2 = NL + "import { BrowserModule } from '@angular/platform-browser';" + NL + "import { ErrorHandler, NgModule } from '@angular/core';" + NL + "import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';" + NL + "import { HttpClientModule } from '@angular/common/http';" + NL + "import { SocketDriver } from '../shared/sdk/sockets/socket.driver';" + NL + "import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../shared/sdk';" + NL + "import { MyApp } from './app.component';" + NL + "import { HomePage } from '../pages/home/home';" + NL + "import { Screenshot } from '@ionic-native/screenshot';" + NL + "import { ChartsModule } from 'ng2-charts';" + NL + "import { SignupPage } from '../pages/signup/signup';" + NL + "import { LoginPage } from '../pages/login/login';" + NL;
   protected final String TEXT_3 = NL + "import { ";
   protected final String TEXT_4 = " } from '../pages/";
   protected final String TEXT_5 = "/";
@@ -29,7 +29,7 @@ public class AppModuleTs
   protected final String TEXT_7 = NL + NL + "import { StatusBar } from '@ionic-native/status-bar';" + NL + "import { SplashScreen } from '@ionic-native/splash-screen';";
   protected final String TEXT_8 = NL + "import { ";
   protected final String TEXT_9 = "Api } from '../shared/sdk';";
-  protected final String TEXT_10 = NL + NL + NL + "@NgModule({" + NL + "  declarations: [" + NL + "    MyApp," + NL + "    HomePage,";
+  protected final String TEXT_10 = NL + NL + NL + "@NgModule({" + NL + "  declarations: [" + NL + "    MyApp," + NL + "    HomePage," + NL + "    LoginPage," + NL + "    SignupPage,";
   protected final String TEXT_11 = NL + "    ";
   protected final String TEXT_12 = "," + NL + "\t";
   protected final String TEXT_13 = NL + "  ]," + NL + "  imports: [" + NL + "    BrowserModule," + NL + "    IonicModule.forRoot(MyApp)," + NL + "    HttpClientModule," + NL + "    SDKBrowserModule.forRoot()," + NL + "    ChartsModule" + NL + "  ]," + NL + "  bootstrap: [IonicApp]," + NL + "  entryComponents: [" + NL + "    MyApp," + NL + "    HomePage,";

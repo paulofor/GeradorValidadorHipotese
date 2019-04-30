@@ -18,6 +18,9 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Screenshot } from '@ionic-native/screenshot';
 import { ChartsModule } from 'ng2-charts';
+import { SignupPage } from '../pages/signup/signup';
+import { LoginPage } from '../pages/login/login';
+
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
 while (iterador.hasNext()) {
@@ -45,6 +48,8 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
   declarations: [
     MyApp,
     HomePage,
+    LoginPage,
+    SignupPage,
     <%
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
