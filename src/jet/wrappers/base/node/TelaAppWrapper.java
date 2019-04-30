@@ -155,6 +155,11 @@ public class TelaAppWrapper implements ItemComponente{
 	public TelaAppWrapper(TelaAppRest principal) {
 		this.principal = principal;
 	}
+	public TelaAppWrapper(String nomeTela) {
+		TelaAppRest tela = new TelaAppRest();
+		tela.setNome(nomeTela);
+		this.principal = tela;
+	}
 	
 	
 	public boolean sobrescreveHtml() {

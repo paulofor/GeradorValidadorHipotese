@@ -111,21 +111,31 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("list.ts", pathOrigem, pathDestino, recurso);
 		
 		// login
+		TelaAppWrapper tela = new TelaAppWrapper("Login");
+		recurso.setItemCorrente(tela);
 		pathDestino = raizDestino + "src/pages/login/";
 		pathOrigem = raizOrigem + "src/pages/login/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo("login.html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("login.scss", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("login.ts", pathOrigem, pathDestino, recurso);
+		String nomeArquivo = pathDestino + "login.module.ts";
+		String conteudo = PageModuleTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		this.copiaArquivoSeNaoExiste("login.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("login.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("login.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
 		
 		// signup
+		tela = new TelaAppWrapper("Signup");
+		recurso.setItemCorrente(tela);
 		pathDestino = raizDestino + "src/pages/signup/";
 		pathOrigem = raizOrigem + "src/pages/signup/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo("signup.html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("signup.scss", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("signup.ts", pathOrigem, pathDestino, recurso);
+		nomeArquivo = pathDestino + "signup.module.ts";
+		conteudo = PageModuleTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		this.copiaArquivoSeNaoExiste("signup.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("signup.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("signup.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("signup-base.ts", pathOrigem, pathDestino, recurso);
 
 		pathDestino = raizDestino + "src/theme/";

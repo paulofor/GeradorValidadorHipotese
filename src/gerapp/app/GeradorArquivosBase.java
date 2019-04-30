@@ -68,6 +68,11 @@ public abstract class GeradorArquivosBase {
 		geraArquivoFonte(texto, destino);
 	}
 
+	protected void copiaArquivoSeNaoExiste(String origem, String destino) throws IOException {
+		if (!this.existe(destino)) copiaArquivo(origem,destino);
+	}
+	
+	
 	public String leArquivoTexto(String fileName) throws IOException {
 		String returnValue = "";
 		FileReader file;

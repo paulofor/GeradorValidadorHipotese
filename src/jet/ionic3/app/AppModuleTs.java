@@ -32,7 +32,7 @@ public class AppModuleTs
   protected final String TEXT_10 = NL + NL + NL + "@NgModule({" + NL + "  declarations: [" + NL + "    MyApp," + NL + "    HomePage," + NL + "    LoginPage," + NL + "    SignupPage,";
   protected final String TEXT_11 = NL + "    ";
   protected final String TEXT_12 = "," + NL + "\t";
-  protected final String TEXT_13 = NL + "  ]," + NL + "  imports: [" + NL + "    BrowserModule," + NL + "    IonicModule.forRoot(MyApp)," + NL + "    HttpClientModule," + NL + "    SDKBrowserModule.forRoot()," + NL + "    ChartsModule" + NL + "  ]," + NL + "  bootstrap: [IonicApp]," + NL + "  entryComponents: [" + NL + "    MyApp," + NL + "    HomePage,";
+  protected final String TEXT_13 = NL + "  ]," + NL + "  imports: [" + NL + "    BrowserModule," + NL + "    IonicModule.forRoot(MyApp)," + NL + "    HttpClientModule," + NL + "    SDKBrowserModule.forRoot()," + NL + "    ChartsModule" + NL + "  ]," + NL + "  bootstrap: [IonicApp]," + NL + "  entryComponents: [" + NL + "    MyApp," + NL + "    HomePage," + NL + "    LoginPage,";
   protected final String TEXT_14 = NL + "    ";
   protected final String TEXT_15 = "," + NL + "\t";
   protected final String TEXT_16 = NL + "  ]," + NL + "  providers: [" + NL + "    StatusBar," + NL + "    SplashScreen," + NL + "    {provide: ErrorHandler, useClass: IonicErrorHandler}," + NL + "    SocketDriver," + NL + "    SDKModels," + NL + "    LoopBackAuth," + NL + "    InternalStorage,";

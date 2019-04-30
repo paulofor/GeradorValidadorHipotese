@@ -1,9 +1,15 @@
-import { LoginPageBase } from './login-base';
-import { IonicPage } from 'ionic-angular';
 import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Usuario } from '../../shared/sdk/index';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { LoginPageBase } from './login-base';
 
-
-
+/**
+ * Generated class for the LoginPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
@@ -14,5 +20,12 @@ export class LoginPage extends LoginPageBase {
 
 
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, protected formBuilder: FormBuilder) {
+    super(navCtrl, navParams, formBuilder);
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad LoginPage');
+  }
 
 }

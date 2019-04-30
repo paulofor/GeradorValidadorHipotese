@@ -71,6 +71,7 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
   entryComponents: [
     MyApp,
     HomePage,
+    LoginPage,
     <%
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
