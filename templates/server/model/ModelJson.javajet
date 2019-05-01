@@ -22,7 +22,13 @@ while (iteradorAtt.hasNext()) {
 	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
 	if (primeiro) { primeiro = false; } else {%>,<% } %> 
 	"<%= atributo.getNomeVariavel() %>": {
+	<% if (!atributo.ehChave()) { %>
       "type": "<%= atributo.getTipoNode() %>"
+    <% } else { %>
+      "id": true,
+      "type": "string",
+      "defaultFn": "uuid"
+    <% } %>
     }
 <%
 }

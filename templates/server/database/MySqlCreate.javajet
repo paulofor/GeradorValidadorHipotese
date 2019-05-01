@@ -12,6 +12,7 @@ Iterator<ClasseWrapper> iterador = listaClasse.iterator();
 while (iterador.hasNext()) {
 	ClasseWrapperAngular item = (ClasseWrapperAngular) iterador.next();
 %>
+repair table <%= item.getNomeModeloServer() %>;
 drop table if exists <%= item.getNomeModeloServer() %>;
 create table <%= item.getNomeModeloServer() %> (
 <%
@@ -21,7 +22,7 @@ Iterator<AtributoWrapper> iteradorAtt = item.getIteratorAtributo();
 while (iteradorAtt.hasNext()) {
 	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
 %> 
-	<%= atributo.getNomeVariavel() %>  <%= atributo.getTipoSql() %> <% if (atributo.ehChave()) {%>AUTO_INCREMENT<% } %>,
+	<%= atributo.getNomeVariavel() %>  <% if (atributo.ehChave()) {%> VARCHAR(50) <% } else {%> <%= atributo.getTipoSql() %>  <% } %>,
 <%
 }
 %>
@@ -34,14 +35,40 @@ while (itRel.hasNext()) {
 	RelacionamentoWrapper relac = itRel.next();
 	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
 %> 
-	<%= oposta.getNomeParaVariavel() %>Id BIGINT,
-<%
+	<%= oposta.getNomeParaVariavel() %>Id VARCHAR(50),
+	 <%
 }
 %>  
 
-	PRIMARY KEY (<%= item.getChaveW().getNomePropriedade() %>)
+	PRIMARY KEY (<%= item.getChaveW().getNomeVariavel() %>)
+	
+	
+	
 ); 
 <%
 }
 %>
+
+<%
+// Alterando para colocar chave estrangeira
+iterador = listaClasse.iterator();
+while (iterador.hasNext()) {
+	ClasseWrapperAngular item = (ClasseWrapperAngular) iterador.next();
+%>
+alter table <%= item.getNomeModeloServer() %>
+<%
+Iterator<RelacionamentoWrapper> itRel =  item.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+%> 
+ADD FOREIGN KEY (<%= oposta.getNomeParaVariavel() %>Id) REFERENCES <%= oposta.getNomeModeloServer() %>(<%= oposta.getChaveW().getNomeVariavel()%>) ON DELETE CASCADE,
+<%
+}
+%> 
+
+<%
+}
+%>
+
 

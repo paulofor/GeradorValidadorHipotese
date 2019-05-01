@@ -25,32 +25,35 @@ public class ModelJson
   protected final String TEXT_3 = "\"," + NL + "  \"base\": \"PersistedModel\"," + NL + "  \"idInjection\": true," + NL + "  \"options\": {" + NL + "    \"validateUpsert\": true" + NL + "  }," + NL + "  \"properties\": {";
   protected final String TEXT_4 = ",";
   protected final String TEXT_5 = " " + NL + "\t\"";
-  protected final String TEXT_6 = "\": {" + NL + "      \"type\": \"";
-  protected final String TEXT_7 = "\"" + NL + "    }";
-  protected final String TEXT_8 = NL + "  }," + NL + "  \"validations\": []," + NL + "  \"relations\": {";
-  protected final String TEXT_9 = ",";
-  protected final String TEXT_10 = " " + NL + "\t\"";
-  protected final String TEXT_11 = "\": {" + NL + "      \"type\": \"belongsTo\"," + NL + "      \"model\": \"";
-  protected final String TEXT_12 = "\"," + NL + "      \"foreignKey\": \"";
-  protected final String TEXT_13 = "Id\"" + NL + "    }";
-  protected final String TEXT_14 = "  ";
-  protected final String TEXT_15 = ",";
-  protected final String TEXT_16 = " " + NL + "\t\"lista";
-  protected final String TEXT_17 = "\": {" + NL + "      \"type\": \"hasMany\"," + NL + "      \"model\": \"";
-  protected final String TEXT_18 = "\"," + NL + "      \"foreignKey\": \"";
-  protected final String TEXT_19 = "Id\"" + NL + "    }";
-  protected final String TEXT_20 = NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {";
-  protected final String TEXT_21 = ",";
-  protected final String TEXT_22 = " " + NL + "      \"Submit";
-  protected final String TEXT_23 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
-  protected final String TEXT_24 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
-  protected final String TEXT_25 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
-  protected final String TEXT_26 = ",";
-  protected final String TEXT_27 = " " + NL + "      \"Submit";
-  protected final String TEXT_28 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
-  protected final String TEXT_29 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
-  protected final String TEXT_30 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
-  protected final String TEXT_31 = NL + "  }" + NL + "}";
+  protected final String TEXT_6 = "\": {" + NL + "\t";
+  protected final String TEXT_7 = NL + "      \"type\": \"";
+  protected final String TEXT_8 = "\"";
+  protected final String TEXT_9 = NL + "      \"id\": true," + NL + "      \"type\": \"string\"," + NL + "      \"defaultFn\": \"uuid\"";
+  protected final String TEXT_10 = NL + "    }";
+  protected final String TEXT_11 = NL + "  }," + NL + "  \"validations\": []," + NL + "  \"relations\": {";
+  protected final String TEXT_12 = ",";
+  protected final String TEXT_13 = " " + NL + "\t\"";
+  protected final String TEXT_14 = "\": {" + NL + "      \"type\": \"belongsTo\"," + NL + "      \"model\": \"";
+  protected final String TEXT_15 = "\"," + NL + "      \"foreignKey\": \"";
+  protected final String TEXT_16 = "Id\"" + NL + "    }";
+  protected final String TEXT_17 = "  ";
+  protected final String TEXT_18 = ",";
+  protected final String TEXT_19 = " " + NL + "\t\"lista";
+  protected final String TEXT_20 = "\": {" + NL + "      \"type\": \"hasMany\"," + NL + "      \"model\": \"";
+  protected final String TEXT_21 = "\"," + NL + "      \"foreignKey\": \"";
+  protected final String TEXT_22 = "Id\"" + NL + "    }";
+  protected final String TEXT_23 = NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {";
+  protected final String TEXT_24 = ",";
+  protected final String TEXT_25 = " " + NL + "      \"Submit";
+  protected final String TEXT_26 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
+  protected final String TEXT_27 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
+  protected final String TEXT_28 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
+  protected final String TEXT_29 = ",";
+  protected final String TEXT_30 = " " + NL + "      \"Submit";
+  protected final String TEXT_31 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
+  protected final String TEXT_32 = "\"," + NL + "      \"http\": [" + NL + "        {" + NL + "          \"path\": \"/submit";
+  protected final String TEXT_33 = "\"," + NL + "          \"verb\": \"post\"" + NL + "        }" + NL + "      ]" + NL + "    }";
+  protected final String TEXT_34 = NL + "  }" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -75,12 +78,18 @@ while (iteradorAtt.hasNext()) {
     stringBuffer.append(TEXT_5);
     stringBuffer.append( atributo.getNomeVariavel() );
     stringBuffer.append(TEXT_6);
-    stringBuffer.append( atributo.getTipoNode() );
+     if (!atributo.ehChave()) { 
     stringBuffer.append(TEXT_7);
+    stringBuffer.append( atributo.getTipoNode() );
+    stringBuffer.append(TEXT_8);
+     } else { 
+    stringBuffer.append(TEXT_9);
+     } 
+    stringBuffer.append(TEXT_10);
     
 }
 
-    stringBuffer.append(TEXT_8);
+    stringBuffer.append(TEXT_11);
     
 primeiro = true;
 Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
@@ -88,72 +97,72 @@ while (itRel.hasNext()) {
 	RelacionamentoWrapper relac = itRel.next();
 	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
 	if (primeiro) { primeiro = false; } else {
-    stringBuffer.append(TEXT_9);
-     } 
-    stringBuffer.append(TEXT_10);
-    stringBuffer.append( oposta.getNomeParaVariavel() );
-    stringBuffer.append(TEXT_11);
-    stringBuffer.append( oposta.getNomeModeloServer() );
     stringBuffer.append(TEXT_12);
-    stringBuffer.append( oposta.getNomeParaVariavel() );
+     } 
     stringBuffer.append(TEXT_13);
+    stringBuffer.append( oposta.getNomeParaVariavel() );
+    stringBuffer.append(TEXT_14);
+    stringBuffer.append( oposta.getNomeModeloServer() );
+    stringBuffer.append(TEXT_15);
+    stringBuffer.append( oposta.getNomeParaVariavel() );
+    stringBuffer.append(TEXT_16);
     
 }
 
-    stringBuffer.append(TEXT_14);
+    stringBuffer.append(TEXT_17);
     
 itRel =  classe.obtemListaComChaveEstrangeira().iterator();
 while (itRel.hasNext()) {
 	RelacionamentoWrapper relac = itRel.next();
 	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
 	if (primeiro) { primeiro = false; } else {
-    stringBuffer.append(TEXT_15);
-     } 
-    stringBuffer.append(TEXT_16);
-    stringBuffer.append( oposta.getNomeParaClasse() );
-    stringBuffer.append(TEXT_17);
-    stringBuffer.append( oposta.getNomeModeloServer() );
     stringBuffer.append(TEXT_18);
-    stringBuffer.append( classe.getNomeParaVariavel() );
+     } 
     stringBuffer.append(TEXT_19);
+    stringBuffer.append( oposta.getNomeParaClasse() );
+    stringBuffer.append(TEXT_20);
+    stringBuffer.append( oposta.getNomeModeloServer() );
+    stringBuffer.append(TEXT_21);
+    stringBuffer.append( classe.getNomeParaVariavel() );
+    stringBuffer.append(TEXT_22);
     
 }
 
-    stringBuffer.append(TEXT_20);
+    stringBuffer.append(TEXT_23);
     
 primeiro = true;
 Iterator<TelaAppWrapper> itEdita = classe.getListaTelaPorTipo("EDITA").iterator();
 while (itEdita.hasNext()) {
 	TelaAppWrapper tela = itEdita.next();
 	if (primeiro) { primeiro = false; } else {
-    stringBuffer.append(TEXT_21);
-     } 
-    stringBuffer.append(TEXT_22);
-    stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_23);
-    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_24);
-    stringBuffer.append( tela.getNome() );
+     } 
     stringBuffer.append(TEXT_25);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_26);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_27);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_28);
     
 }
 Iterator<TelaAppWrapper> itGetPut = classe.getListaTelaPutPorTipo("GETPUT").iterator();
 while (itGetPut.hasNext()) {
 	TelaAppWrapper tela = itGetPut.next();
 	if (primeiro) { primeiro = false; } else {
-    stringBuffer.append(TEXT_26);
-     } 
-    stringBuffer.append(TEXT_27);
-    stringBuffer.append( tela.getNome() );
-    stringBuffer.append(TEXT_28);
-    stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_29);
-    stringBuffer.append( tela.getNome() );
+     } 
     stringBuffer.append(TEXT_30);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_31);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_32);
+    stringBuffer.append( tela.getNome() );
+    stringBuffer.append(TEXT_33);
     
 }
 
-    stringBuffer.append(TEXT_31);
+    stringBuffer.append(TEXT_34);
     return stringBuffer.toString();
   }
 }
