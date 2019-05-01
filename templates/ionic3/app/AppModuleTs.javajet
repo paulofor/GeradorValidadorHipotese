@@ -21,6 +21,7 @@ import { ChartsModule } from 'ng2-charts';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { IonicStorageModule } from '@ionic/storage';
+import { BrMaskerModule } from 'brmasker-ionic-3';
 
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
@@ -67,7 +68,8 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
     HttpClientModule,
     SDKBrowserModule.forRoot(),
     ChartsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

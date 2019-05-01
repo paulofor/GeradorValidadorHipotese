@@ -7,7 +7,7 @@ TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 ClasseWrapper classe = tela.getEntidade();
 Configuracao conf = recursos.getConfiguracao();
 %>
-import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter } from '../../shared/sdk';
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter, Usuario } from '../../shared/sdk';
 <%
 Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
 while (itRel.hasNext()) {
@@ -19,9 +19,12 @@ import { <%= oposta.getNomeParaClasse() %>, <%= oposta.getNomeParaClasse() %>Api
 }
 %>
 import { NavParams, NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 // Tipo: EDITA
 export abstract class <%= tela.getNome() %>Base {
+
+  protected usuario: Usuario;
   
   // Objeto principal para a edicao
   protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
@@ -46,6 +49,7 @@ export abstract class <%= tela.getNome() %>Base {
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
 				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
+				protected storage: Storage,
 <%
 itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
 while (itRel.hasNext()) {
@@ -81,11 +85,17 @@ while (itRel.hasNext()) {
   }
   ionViewWillEnter() {
     console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+    this.carregaUsuario();
     this.inicializacaoComplementos();
     this.inicializaItem();
   }
   ionViewDidLoad() {
   	console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+  }
+  carregaUsuario() {
+	this.storage.get('user').then((val: Usuario) => {
+		this.usuario = val;
+	})
   }
   
 <%

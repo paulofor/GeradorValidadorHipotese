@@ -47,7 +47,7 @@ export interface <%= classe.getNomeParaClasse() %>Interface {
 		ClasseWrapperAngular oposta = (ClasseWrapperAngular) rel.getClasseOposta();
 %>
 	<%= rel.getVariavelAngular() %>?: <%= rel.getTipoAngular() %>;
-	<%= rel.getVariavelAngular() %>Id? : number;
+	<%= rel.getVariavelAngular() %>Id? : string;
 <%
 	}
 %>
@@ -78,7 +78,7 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
 		RelacionamentoWrapper rel = iteradorRel.next();
 %>
 	<%= rel.getVariavelAngular() %>?: <%= rel.getTipoAngular() %>;
-	<%= rel.getVariavelAngular() %>Id? : number;
+	<%= rel.getVariavelAngular() %>Id? : string;
 <%
 	}
 %>

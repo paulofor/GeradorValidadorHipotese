@@ -33,7 +33,7 @@ public class LoopbackModel
   protected final String TEXT_13 = NL + "\t";
   protected final String TEXT_14 = "?: ";
   protected final String TEXT_15 = ";" + NL + "\t";
-  protected final String TEXT_16 = "Id? : number;";
+  protected final String TEXT_16 = "Id? : string;";
   protected final String TEXT_17 = NL + "\tlista";
   protected final String TEXT_18 = "?: ";
   protected final String TEXT_19 = "[];";
@@ -46,7 +46,7 @@ public class LoopbackModel
   protected final String TEXT_26 = NL + "\t";
   protected final String TEXT_27 = "?: ";
   protected final String TEXT_28 = ";" + NL + "\t";
-  protected final String TEXT_29 = "Id? : number;";
+  protected final String TEXT_29 = "Id? : string;";
   protected final String TEXT_30 = NL + "\tlista";
   protected final String TEXT_31 = "?: ";
   protected final String TEXT_32 = "[];";

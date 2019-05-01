@@ -6,13 +6,16 @@ Recursos recursos = (Recursos) argument;
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
-import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter } from '../../shared/sdk';
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter, Usuario } from '../../shared/sdk';
 import { NavParams, NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 // Tipo: <%= tela.getTipo() %>
 export abstract class <%= tela.getNome() %>Base {
   
   protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
+  
+  protected usuario: Usuario;
   
   // filtro com parametro id
   protected abstract filtroLoadId(id:any) : LoopBackFilter;
@@ -31,7 +34,8 @@ export abstract class <%= tela.getNome() %>Base {
  
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
-				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
+				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,
+				protected storage: Storage) {
   } 
   
 	private inicializaItem() {
@@ -121,6 +125,7 @@ export abstract class <%= tela.getNome() %>Base {
   
 	ionViewWillEnter() {
 		console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+		this.carregaUsuario();
 		this.preInicializaItem();
 		this.inicializaItem();
 		
@@ -129,6 +134,12 @@ export abstract class <%= tela.getNome() %>Base {
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
 	}
+	
+	  	carregaUsuario() {
+		this.storage.get('user').then((val: Usuario) => {
+			this.usuario = val;
+		})
+  	}
 	
   protected criaImagem() {
   }
