@@ -86,8 +86,8 @@ while (itRel.hasNext()) {
   ionViewWillEnter() {
     console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
     this.carregaUsuario();
-    this.inicializacaoComplementos();
-    this.inicializaItem();
+
+
   }
   ionViewDidLoad() {
   	console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
@@ -95,6 +95,8 @@ while (itRel.hasNext()) {
   carregaUsuario() {
 	this.storage.get('user').then((val: Usuario) => {
 		this.usuario = val;
+		this.inicializacaoComplementos();
+		this.inicializaItem();
 	})
   }
   

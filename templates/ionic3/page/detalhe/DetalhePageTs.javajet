@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 import {IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { <%= tela.getNome() %>Base } from './<%= tela.getArquivo() %>-base';
 import { <%= tela.getEntidade().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk/index';
-
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({

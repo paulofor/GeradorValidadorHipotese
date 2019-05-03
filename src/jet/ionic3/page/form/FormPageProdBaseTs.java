@@ -45,9 +45,9 @@ public class FormPageProdBaseTs
   protected final String TEXT_23 = "Base:ItemCriado: ', this.item);" + NL + "\t\t}" + NL + "\t} else {" + NL + "\t\tthis.item = this.complementaItem(this.item);" + NL + "\t\tconsole.log('";
   protected final String TEXT_24 = "Base:ItemComComplemento: ', this.item);" + NL + "\t}" + NL + "  }" + NL + "  ionViewWillEnter() {" + NL + "    console.log('ionViewWillEnter ";
   protected final String TEXT_25 = "<<";
-  protected final String TEXT_26 = ">>');" + NL + "    this.carregaUsuario();" + NL + "    this.inicializacaoComplementos();" + NL + "    this.inicializaItem();" + NL + "  }" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
+  protected final String TEXT_26 = ">>');" + NL + "    this.carregaUsuario();" + NL + "" + NL + "" + NL + "  }" + NL + "  ionViewDidLoad() {" + NL + "  \tconsole.log('ionViewDidLoad ";
   protected final String TEXT_27 = "<<";
-  protected final String TEXT_28 = ">>');" + NL + "  }" + NL + "  carregaUsuario() {" + NL + "\tthis.storage.get('user').then((val: Usuario) => {" + NL + "\t\tthis.usuario = val;" + NL + "\t})" + NL + "  }" + NL + "  ";
+  protected final String TEXT_28 = ">>');" + NL + "  }" + NL + "  carregaUsuario() {" + NL + "\tthis.storage.get('user').then((val: Usuario) => {" + NL + "\t\tthis.usuario = val;" + NL + "\t\tthis.inicializacaoComplementos();" + NL + "\t\tthis.inicializaItem();" + NL + "\t})" + NL + "  }" + NL + "  ";
   protected final String TEXT_29 = NL + "\tprotected lista";
   protected final String TEXT_30 = " : ";
   protected final String TEXT_31 = "[];" + NL + "\tprotected carrega";

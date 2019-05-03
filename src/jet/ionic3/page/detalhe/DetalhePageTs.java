@@ -23,7 +23,7 @@ public class DetalhePageTs
   protected final String TEXT_1 = "import { Component } from '@angular/core';" + NL + "import {IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';" + NL + "import { ";
   protected final String TEXT_2 = "Base } from './";
   protected final String TEXT_3 = "-base';" + NL + "import { ";
-  protected final String TEXT_4 = "Api, LoopBackFilter } from '../../shared/sdk/index';" + NL + "" + NL + "" + NL + "@IonicPage()" + NL + "@Component({" + NL + "  selector: '";
+  protected final String TEXT_4 = "Api, LoopBackFilter } from '../../shared/sdk/index';" + NL + "import { Storage } from '@ionic/storage';" + NL + "" + NL + "@IonicPage()" + NL + "@Component({" + NL + "  selector: '";
   protected final String TEXT_5 = "'," + NL + "  templateUrl: '";
   protected final String TEXT_6 = ".html'" + NL + "})" + NL + "export class ";
   protected final String TEXT_7 = " extends ";
