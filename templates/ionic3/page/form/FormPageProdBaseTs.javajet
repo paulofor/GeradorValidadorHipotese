@@ -90,7 +90,7 @@ while (itRel.hasNext()) {
 
   }
   ionViewDidLoad() {
-  	console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+  	//console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
   }
   carregaUsuario() {
 	this.storage.get('user').then((val: Usuario) => {
