@@ -12,6 +12,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { Page } from 'ionic-angular/navigation/nav-util';
 import { <%= tela.getNome() %>Base } from './<%= tela.getArquivo() %>-base';
 import { <%= tela.getEntidade().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
+import { Storage } from '@ionic/storage';
 
 
 @IonicPage()
@@ -24,8 +25,8 @@ export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
   inicializacao() {
   }
 
-  constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api) {
-    super(navCtrl, srv);
+  constructor(public navCtrl: NavController, protected srv: SerieTreinoApi,protected storage: Storage) {
+    super(navCtrl,srv,storage);
   }
 
 

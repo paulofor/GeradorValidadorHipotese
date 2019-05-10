@@ -19,4 +19,33 @@ export class ComandosZeroPage extends ComandosZeroPageBase {
 
 
 
+  protected getNomeAplicacao(): string {
+    return "Treino 365";
+  }
+
+
+  executaConsulta() {
+    console.log('ExecutaConsulta');
+  }
+  existeConsulta() {
+    return false;
+  }
+
+  executaDiaTreino() {
+    console.log('executaDiaTreino');
+  }
+  existeDiaTreino() {
+    return false;
+  }
+
+  executaSerie() {
+    console.log('executaSerie');
+  }
+  existeSerie() {
+    return false;
+  }
+
+
+
+
 }
