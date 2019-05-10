@@ -119,10 +119,25 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		String nomeArquivo = pathDestino + "login.module.ts";
 		String conteudo = PageModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		this.copiaArquivoSeNaoExiste("login.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.html", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("login.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("login.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
+		
+		
+		// ComandosZero
+		tela = new TelaAppWrapper("ComandosZero");
+		recurso.setItemCorrente(tela);
+		pathDestino = raizDestino + "src/pages/comandos-zero/";
+		pathOrigem = raizOrigem + "src/pagesLab/comandos-zero/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		nomeArquivo = pathDestino + "comandos-zero.module.ts";
+		 conteudo = PageModuleTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		this.copiaArquivo("comandos-zero.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("comandos-zero.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("comandos-zero.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("comandos-zero-base.ts", pathOrigem, pathDestino, recurso);
 		
 		// signup
 		tela = new TelaAppWrapper("Signup");

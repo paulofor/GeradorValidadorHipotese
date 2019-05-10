@@ -50,3 +50,10 @@ Configuracao conf = recursos.getConfiguracao();
 .quadro90 {
     height: 90%;
 }
+
+
+.botaoPrincipal {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+}

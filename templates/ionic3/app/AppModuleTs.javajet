@@ -20,6 +20,7 @@ import { Screenshot } from '@ionic-native/screenshot';
 import { ChartsModule } from 'ng2-charts';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
+import { ComandosZeroPage } from '../pages/comandos-zero/comandos-zero';
 import { IonicStorageModule } from '@ionic/storage';
 import { BrMaskerModule } from 'brmasker-ionic-3';
 
@@ -52,6 +53,7 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
     HomePage,
     LoginPage,
     SignupPage,
+    ComandosZeroPage,
     <%
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
@@ -77,6 +79,7 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
     HomePage,
     LoginPage,
     SignupPage,
+    ComandosZeroPage,
     <%
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
