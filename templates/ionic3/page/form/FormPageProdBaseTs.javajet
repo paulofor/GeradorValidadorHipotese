@@ -128,7 +128,7 @@ while (itRel.hasNext()) {
 }
 %>
 	protected submit() {
-		console.log('<%= tela.getNome() %>Base:Submit-Item:' , JSON.stringify(this.item));
+		console.log('<%= tela.getEntidade().getNomeParaClasse() %>Api.submit<%= tela.getNome() %>:' , JSON.stringify(this.item));
     	this.srv.submit<%= tela.getNome() %>(this.item)
       		.subscribe((resultado:<%= tela.getEntidade().getNomeParaClasse() %>) => {
         		console.log('<%= tela.getNome() %>Base:Submit-Result: ' , JSON.stringify(resultado));

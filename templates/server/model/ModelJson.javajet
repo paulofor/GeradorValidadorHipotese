@@ -66,6 +66,9 @@ while (itRel.hasNext()) {
 }
 %>
   },
+  "mixins": {
+    "Counts": true
+  },
   "acls": [],
   "methods": {
 <%
