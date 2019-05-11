@@ -64,27 +64,30 @@ while (itRel.hasNext()) {
   }
   private inicializaItem() {
 	this.item = this.navParams.get('item');
-	console.log('<%= tela.getNome() %>Base:ItemParametro: ', this.item);
+	
 	if (!this.item) {
 		var id = this.navParams.get('id');
 		if (id) {
-			console.log('<%= tela.getNome() %>Base:Id: ' , id);
+			console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findById: [' + id + ']');
 			this.srv.findById(id, this.filtroLoadId(id))
 				.subscribe((result:<%= tela.getEntidade().getNomeParaClasse() %>) => {
 					this.item = result;
-					console.log('<%= tela.getNome() %>Base:LoadId: ' , this.item);
+					console.log('Result: ' , this.item);
 				})
 		} else {
 			this.item = this.criaItem();
-			console.log('<%= tela.getNome() %>Base:ItemCriado: ', this.item);
+			console.log('Item(posCriaItem): ', this.item);
 		}
 	} else {
+	 		console.log('ItemParametro: ', this.item);
 		this.item = this.complementaItem(this.item);
-		console.log('<%= tela.getNome() %>Base:ItemComComplemento: ', this.item);
+		console.log('ItemPrametro(posComplementaItem): ' , this.item);
 	}
   }
   ionViewWillEnter() {
-    console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+	console.log('');
+	console.log('Tela: <%= tela.getNome() %><<<%= tela.getTipo() %>>> : <%= tela.getEntidade().getNomeParaClasse() %>');
+
     this.carregaUsuario();
 
 
