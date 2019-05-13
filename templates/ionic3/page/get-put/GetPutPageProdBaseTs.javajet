@@ -65,9 +65,10 @@ export abstract class <%= tela.getNome() %>Base {
 
   
   ionViewWillEnter() {
-    console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+	console.log('');
+	console.log('Tela: <%= tela.getNome() %><<<%= tela.getTipo() %>>> : <%= tela.getEntidade().getNomeParaClasse() %>');
     this.carregaUsuario();
-    this.inicializaItem();
+    
   }
   ionViewDidLoad() {
   	//console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
@@ -75,6 +76,7 @@ export abstract class <%= tela.getNome() %>Base {
   carregaUsuario() {
 	this.storage.get('user').then((val: Usuario) => {
 		this.usuario = val;
+		this.inicializaItem();
 	})
   }
   

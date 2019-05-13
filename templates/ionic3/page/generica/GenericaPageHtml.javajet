@@ -1,0 +1,18 @@
+<%@ jet package="jet.ionic3.page.generica" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="GenericaPageHtml" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+<ion-header >
+  <ion-navbar color="titulo">
+    <ion-title><%= tela.getNome() %></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="quadroBase">
+
+</ion-content>

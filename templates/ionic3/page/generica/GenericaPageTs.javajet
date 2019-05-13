@@ -1,0 +1,24 @@
+<%@ jet package="jet.ionic3.page.generica" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="GenericaPageTs" %>
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { Component } from '@angular/core';
+import {IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { <%= tela.getNome() %>Base } from './<%= tela.getArquivo() %>-base';
+import { Storage } from '@ionic/storage';
+
+@IonicPage()
+@Component({
+  selector: '<%= tela.getNomeControle() %>',
+  templateUrl: '<%= tela.getArquivo() %>.html'
+})
+export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
+
+ 
+
+  
+}
