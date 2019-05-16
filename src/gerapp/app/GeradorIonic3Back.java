@@ -28,6 +28,9 @@ import jet.ionic3.page.detalhe.DetalhePageTs;
 import jet.ionic3.page.form.FormPageHtml;
 import jet.ionic3.page.form.FormPageProdBaseTs;
 import jet.ionic3.page.form.FormPageTs;
+import jet.ionic3.page.generica.GenericaPageHtml;
+import jet.ionic3.page.generica.GenericaPageProdBaseTs;
+import jet.ionic3.page.generica.GenericaPageTs;
 import jet.ionic3.page.getPut.GetPutPageHtml;
 import jet.ionic3.page.getPut.GetPutPageProdBaseTs;
 import jet.ionic3.page.getPut.GetPutPageTs;
@@ -119,10 +122,25 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		String nomeArquivo = pathDestino + "login.module.ts";
 		String conteudo = PageModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		this.copiaArquivoSeNaoExiste("login.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.html", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("login.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("login.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
+		
+		
+		// ComandosZero
+		tela = new TelaAppWrapper("ComandosZero");
+		recurso.setItemCorrente(tela);
+		pathDestino = raizDestino + "src/pages/comandos-zero/";
+		pathOrigem = raizOrigem + "src/pagesLab/comandos-zero/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		nomeArquivo = pathDestino + "comandos-zero.module.ts";
+		conteudo = PageModuleTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		this.copiaArquivoSeNaoExiste("comandos-zero.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("comandos-zero.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("comandos-zero.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("comandos-zero-base.ts", pathOrigem, pathDestino, recurso);
 		
 		// signup
 		tela = new TelaAppWrapper("Signup");
@@ -294,6 +312,26 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = FormPageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
+		
+		// Generica
+		if (tela.tipoGenerica()) {
+
+			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
+			conteudo = GenericaPageProdBaseTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			if (!this.existe(nomeArquivo)) {
+				conteudo = GenericaPageTs.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+				conteudo = GenericaPageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}

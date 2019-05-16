@@ -57,6 +57,7 @@ export interface <%= classe.getNomeParaClasse() %>Interface {
 		RelacionamentoWrapper rel = iteradorRel.next();
 %>
 	lista<%= rel.getTipoAngular() %>?: <%= rel.getTipoAngular() %>[];
+	lista<%= rel.getTipoAngular() %>Count?: number;
 <%
 	}
 %>
@@ -88,6 +89,7 @@ export class <%= classe.getNomeParaClasse() %> implements <%= classe.getNomePara
 		RelacionamentoWrapper rel = iteradorRel.next();
 %>
 	lista<%= rel.getTipoAngular() %>?: <%= rel.getTipoAngular() %>[];
+	lista<%= rel.getTipoAngular() %>Count?: number;
 <%
 	}
 %>

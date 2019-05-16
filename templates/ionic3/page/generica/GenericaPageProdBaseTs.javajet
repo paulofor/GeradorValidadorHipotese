@@ -1,0 +1,43 @@
+<%@ jet package="jet.ionic3.page.generica" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="GenericaPageProdBaseTs" %>
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { LoopBackFilter, Usuario } from '../../shared/sdk';
+import { NavParams, NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
+// Tipo: <%= tela.getTipo() %>
+export abstract class <%= tela.getNome() %>Base {
+
+	protected usuario: Usuario;
+  
+	protected abstract inicializacao();
+ 
+	constructor(	public navParams: NavParams,
+  					public navCtrl: NavController,
+					protected storage: Storage) {
+	} 
+  
+	
+	carregaUsuario() {
+		this.storage.get('user').then((val: Usuario) => {
+			this.usuario = val;
+			this.inicializacao();
+		})
+	}
+  
+	ionViewWillEnter() {
+		console.log('');
+		console.log('Tela: <%= tela.getNome() %><<<%= tela.getTipo() %>>> ');
+		this.carregaUsuario();
+	}
+  
+	ionViewDidLoad() {
+	}
+}
+    
+    

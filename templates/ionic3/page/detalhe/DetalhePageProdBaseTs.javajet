@@ -28,6 +28,10 @@ export abstract class <%= tela.getNome() %>Base {
   protected abstract posInicializaItem();
   protected abstract preInicializaItem();
   
+  
+  protected listaLoadOne : <%= tela.getEntidade().getNomeParaClasse() %>[];
+  protected itemNaoEncontrado: boolean;
+  
  
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
@@ -37,31 +41,34 @@ export abstract class <%= tela.getNome() %>Base {
   
 	private inicializaItem() {
 		this.item = this.navParams.get('item');
-		console.log('<%= tela.getNome() %>Base:ItemParametro: ', this.item);
 		if (!this.item) {
 			var id = this.navParams.get('id');
-			console.log('<%= tela.getNome() %>Base:Id: ' , id);
 			if (id) {
-				console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.filtroLoadId(id)));
-				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findById');
+				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findById: [' + id + '] , filtroLoadId:' , JSON.stringify(this.filtroLoadId(id)));
 				this.srv.findById(id, this.filtroLoadId(id))
 					.subscribe(
 						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
 							this.item = result;
-							console.log('<%= tela.getNome() %>Base.item: ' , this.item)
+							console.log('Result: ' , this.item)
 						},
 						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
 					)
 			} else  {
-				console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.filtroLoadOne()));
-				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findOne');
+				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findOne , filtroLoadOne: ' , JSON.stringify(this.filtroLoadOne()));
 				// se nao encontrar vai pro erro -> 404
-				this.srv.findOne(this.filtroLoadOne())
+				this.srv.find(this.filtroLoadOne())
 					.subscribe(
-						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
-							this.item = result;
-							console.log('<%= tela.getNome() %>Base.item: ' , this.item);
-							//if (!this.item) this.itemNaoEncontrado();
+						(result: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
+							console.log('Tam Lista Result: ' , result.length);
+							if (result.length>0) {
+								this.item = result[0];
+								this.listaLoadOne = result;
+								console.log('Result: ' , this.item);
+								this.itemNaoEncontrado = false;
+							} else {
+								this.itemNaoEncontrado = true;
+							}
+								//if (!this.item) this.itemNaoEncontrado();
 						},
 						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
 					)
@@ -78,12 +85,12 @@ export abstract class <%= tela.getNome() %>Base {
 	}
   
 	ionViewWillEnter() {
-		console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+		console.log('');
+		console.log('Tela: <%= tela.getNome() %><<<%= tela.getTipo() %>>> : <%= tela.getEntidade().getNomeParaClasse() %>');
 		this.carregaUsuario();
 	}
   
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
 	}
 }
     

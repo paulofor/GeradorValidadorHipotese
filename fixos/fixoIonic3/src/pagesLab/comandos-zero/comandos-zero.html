@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar hideBackButton color="titulo">
+    <ion-title>{{getNomeAplicacao()}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="quadro30">
+
+  </div>
+
+  <ion-list class="quadro70">
+
+    <ion-item>
+      <button (click)="executaSerie()" [disabled]="!existeSerie()" ion-button block large icon-start>
+        <ion-icon name="create"></ion-icon>&nbsp; Administrar Series
+      </button>
+    </ion-item>
+
+    <ion-item>
+      <button (click)="executaDiaTreino()" [disabled]="!existeDiaTreino()" ion-button block large icon-start>
+        <ion-icon name="body"></ion-icon>&nbsp; Iniciar Dia de Treino
+      </button>
+    </ion-item>
+
+    <ion-item>
+      <button (click)="executaConsulta()" [disabled]="!existeConsulta()"  ion-button block large icon-start>
+        <ion-icon name="stats"></ion-icon>&nbsp; Consultar Performances
+      </button>
+    </ion-item>
+
+
+  </ion-list>
+
+</ion-content>

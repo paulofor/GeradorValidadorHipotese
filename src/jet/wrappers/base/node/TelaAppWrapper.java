@@ -114,6 +114,9 @@ public class TelaAppWrapper implements ItemComponente{
 	public boolean tipoEdita() {
 		return ("EDITA".equals(this.principal.getTipo()));
 	}
+	public boolean tipoGenerica() {
+		return ("GENERICA".equals(this.principal.getTipo()));
+	}
 	public boolean tipoDetalhe() {
 		return ("DETALHE".equals(this.principal.getTipo()));
 	}

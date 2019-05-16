@@ -16,10 +16,10 @@ Configuracao conf = recursos.getConfiguracao();
 
 
 .linha1 {
-    padding-top: 3px
+    padding-top: 5px
 }
 .linhan {
-    padding-top: 1px; 
+    padding-top: 2px; 
 }
 
 
@@ -49,4 +49,11 @@ Configuracao conf = recursos.getConfiguracao();
 }
 .quadro90 {
     height: 90%;
+}
+
+
+.botaoPrincipal {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
 }

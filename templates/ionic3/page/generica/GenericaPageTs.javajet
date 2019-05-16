@@ -1,19 +1,15 @@
-<%@ jet package="jet.ionic3.page.listaItem" 
+<%@ jet package="jet.ionic3.page.generica" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
-class="ListaItemPageTs" %>
-
+class="GenericaPageTs" %>
 <%
 Recursos recursos = (Recursos) argument;  
 TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
 Configuracao conf = recursos.getConfiguracao();
 %>
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
-import { Page } from 'ionic-angular/navigation/nav-util';
+import {IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { <%= tela.getNome() %>Base } from './<%= tela.getArquivo() %>-base';
-import { <%= tela.getEntidade().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
 import { Storage } from '@ionic/storage';
-
 
 @IonicPage()
 @Component({
@@ -22,16 +18,7 @@ import { Storage } from '@ionic/storage';
 })
 export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
 
-  inicializacao() {
-  }
+ 
 
-  constructor(public navCtrl: NavController, protected srv: SerieTreinoApi,protected storage: Storage) {
-    super(navCtrl,srv,storage);
-  }
-
-
-  protected getFiltro(): LoopBackFilter {
-    return {};
-  }
   
 }

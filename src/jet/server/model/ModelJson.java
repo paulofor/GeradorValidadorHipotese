@@ -42,7 +42,7 @@ public class ModelJson
   protected final String TEXT_20 = "\": {" + NL + "      \"type\": \"hasMany\"," + NL + "      \"model\": \"";
   protected final String TEXT_21 = "\"," + NL + "      \"foreignKey\": \"";
   protected final String TEXT_22 = "Id\"" + NL + "    }";
-  protected final String TEXT_23 = NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {";
+  protected final String TEXT_23 = NL + "  }," + NL + "  \"mixins\": {" + NL + "    \"Counts\": true" + NL + "  }," + NL + "  \"acls\": []," + NL + "  \"methods\": {";
   protected final String TEXT_24 = ",";
   protected final String TEXT_25 = " " + NL + "      \"Submit";
   protected final String TEXT_26 = "\": {" + NL + "      \"accepts\": [" + NL + "        {" + NL + "          \"arg\": \"item\"," + NL + "          \"type\": \"object\"," + NL + "          \"required\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"returns\": [" + NL + "        {" + NL + "          \"arg\": \"resultado\"," + NL + "          \"type\": \"object\"," + NL + "          \"root\": true," + NL + "          \"description\": \"\"" + NL + "        }" + NL + "      ]," + NL + "      \"description\": \"submit da tela ";
