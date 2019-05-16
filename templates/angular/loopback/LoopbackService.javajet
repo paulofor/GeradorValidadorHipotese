@@ -1,5 +1,5 @@
 <%@ jet package="jet.angular.loopback" 
-imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* jet.wrappers.base.node.* " 
 class="LoopbackService" %>
 
 <%
@@ -24,7 +24,15 @@ import { <%= classe.getNomeParaConstante() %> } from '../../../../dados/<%= clas
 //import { of } from 'rxjs';
 //Versao Ionic
 import { of } from 'rxjs/observable/of';
-
+<%
+Iterator<TelaAppWrapper> iterador0 = classe.getListaTelaApp().iterator();
+while (iterador0.hasNext()) {
+	TelaAppWrapper tela = iterador0.next();
+%>
+import {<%= tela.getMetodoCargaConstante() %>} from  '../../../../dados/<%= classe.getNomeParaVariavel() %>';
+<%
+}
+%>
 /**
  * Api services for the `Aplicacao` model.
  */
@@ -101,4 +109,59 @@ export class <%= classe.getNomeParaClasse() %>Api extends BaseLoopBackApi {
   obtemLista(filter: LoopBackFilter = {}, customHeaders?: Function) : Observable<<%= classe.getNomeParaClasse() %>[]> {
     return of(<%= classe.getNomeParaConstante() %>);
   }
+  obtemElemento(filter: LoopBackFilter = {}, customHeaders?: Function) : Observable<<%= classe.getNomeParaClasse() %>> {
+    return of(<%= classe.getNomeParaConstante() %>[filter.where.id]);
+  }
+
+<%
+Iterator<TelaAppWrapper> iterador = classe.getListaTelaApp().iterator();
+while (iterador.hasNext()) {
+	TelaAppWrapper tela = iterador.next();
+%>
+	<%= tela.getMetodoCarga() %>(filter: LoopBackFilter = {}) : Observable<<%= classe.getNomeParaClasse() %>> {
+		return of (<%= tela.getMetodoCargaConstante() %>);
+	}
+<%
+}
+%>
+
+<%
+Iterator<TelaAppWrapper> itEdita = classe.getListaTelaPorTipo("EDITA").iterator();
+while (itEdita.hasNext()) {
+	TelaAppWrapper tela = itEdita.next();
+%>
+	public submit<%= tela.getNome() %>(item : any , customHeaders?: Function) : Observable<<%= classe.getNomeParaClasse() %>> {
+		let _method: string = "POST";
+		let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    		"/<%= classe.getNomeModeloServer() %>s/submit<%= tela.getNome() %>";
+    	let _routeParams: any = {};
+    	let _postBody: any = {};
+    	let _urlParams: any = {};
+    	if (typeof item !== 'undefined' && item !== null) _urlParams.item = item;
+    	let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    	return result;
+	}
+<%
+}
+%>
+  
+<%
+Iterator<TelaAppWrapper> itGetPut = classe.getListaTelaPutPorTipo("GETPUT").iterator();
+while (itGetPut.hasNext()) {
+	TelaAppWrapper tela = itGetPut.next();
+%>
+	public submit<%= tela.getNome() %>(item : any , customHeaders?: Function) : Observable<<%= classe.getNomeParaClasse() %>> {
+		let _method: string = "POST";
+		let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    		"/<%= classe.getNomeModeloServer() %>s/submit<%= tela.getNome() %>";
+    	let _routeParams: any = {};
+    	let _postBody: any = {};
+    	let _urlParams: any = {};
+    	if (typeof item !== 'undefined' && item !== null) _urlParams.item = item;
+    	let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    	return result;
+	}
+<%
+}
+%>
 }

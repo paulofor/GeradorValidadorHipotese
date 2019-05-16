@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jet.wrappers.angular.ClasseWrapperAngular;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 import jet.wrappers.base.node.TelaWebWrapper;
@@ -36,8 +37,11 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	// Listas novas com objetos rest
 	protected List<TelaWebRest> listaTelaWeb = null;
 	protected List<TelaAppWrapper> listaTelaApp = null;
-	
+
 	protected PaletaCorRest paletaCor = null;
+
+	RestAdapter adapter = new RestAdapter(
+			"http://validacao.kinghost.net:21101/api");
 
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
@@ -71,49 +75,94 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		recursos.setListaTelaWeb(getListaTelaWeb());
 		recursos.setListaTelaApp(this.getListaTelaApp());
 		recursos.setPaletaCor(this.obtemPaletaCor());
-	}
-	
-	public synchronized PaletaCorRest obtemPaletaCor()  {
-		paletaCor = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
-		PaletaCorRepositorio rep = adapter.createRepository(PaletaCorRepositorio.class);
-		rep.findByIdAplicacao(aplicacao.getId(), new ObjectCallback<PaletaCorRest>() {
-			@Override
-			public void onError(Throwable t) {
-				t.printStackTrace();
-			}
+		TelaAppRepositorio rep = adapter
+				.createRepository(TelaAppRepositorio.class);
+		for (Object entidade : listaClasse) {
+			carregaTelaParaEntidade((ClasseWrapperAngular) entidade, rep);
+			carregaTelaParaEntidadePut((ClasseWrapperAngular) entidade, rep);
+		}
 
-			@Override
-			public void onSuccess(PaletaCorRest item) {
-				paletaCor = item;
-			}
-		});
+	}
+
+	private void carregaTelaParaEntidade(final ClasseWrapperAngular entidade,
+			TelaAppRepositorio rep) {
+		rep.findByIdEntidadeGerador(entidade.getId(),
+				new ListCallback<TelaAppRest>() {
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+					}
+
+					@Override
+					public void onSuccess(List<TelaAppRest> lista) {
+						entidade.setListaTelaApp(lista);
+						System.out.println("*** Adicionou lista com ");
+					}
+				});
+	}
+
+	private void carregaTelaParaEntidadePut(
+			final ClasseWrapperAngular entidade, TelaAppRepositorio rep) {
+		rep.findByIdEntidadePutGerador(entidade.getId(),
+				new ListCallback<TelaAppRest>() {
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+					}
+
+					@Override
+					public void onSuccess(List<TelaAppRest> lista) {
+						entidade.setListaTelaAppPut(lista);
+						System.out.println("*** Adicionou lista tela put com ");
+					}
+				});
+	}
+
+	public synchronized PaletaCorRest obtemPaletaCor() {
+		paletaCor = null;
+
+		PaletaCorRepositorio rep = adapter
+				.createRepository(PaletaCorRepositorio.class);
+		rep.findByIdAplicacao(aplicacao.getId(),
+				new ObjectCallback<PaletaCorRest>() {
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+					}
+
+					@Override
+					public void onSuccess(PaletaCorRest item) {
+						paletaCor = item;
+					}
+				});
 		do {
 		} while (paletaCor == null);
 		return paletaCor;
 	}
-	
 
 	public synchronized List getListaEntidade() throws DaoException {
 		listaEntidade = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
-		EntidadeRepositorio rep = adapter.createRepository(EntidadeRepositorio.class);
-		rep.findByIdAplicacao(aplicacao.getId(), new ListCallback<EntidadeRest>() {
-			@Override
-			public void onError(Throwable t) {
-				t.printStackTrace();
-			}
+		// RestAdapter adapter = new
+		// RestAdapter("http://validacao.kinghost.net:21101/api");
+		EntidadeRepositorio rep = adapter
+				.createRepository(EntidadeRepositorio.class);
+		rep.findByIdAplicacao(aplicacao.getId(),
+				new ListCallback<EntidadeRest>() {
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+					}
 
-			@Override
-			public void onSuccess(List<EntidadeRest> lista) {
-				List listaSaida = new ArrayList();
-				for (EntidadeRest item : lista) {
-					System.out.println("ID:" + item.getId());
-					listaSaida.add(item.criaItem());
-				}
-				listaEntidade = listaSaida;
-			}
-		});
+					@Override
+					public void onSuccess(List<EntidadeRest> lista) {
+						List listaSaida = new ArrayList();
+						for (EntidadeRest item : lista) {
+							System.out.println("ID:" + item.getId());
+							listaSaida.add(item.criaItem());
+						}
+						listaEntidade = listaSaida;
+					}
+				});
 		do {
 		} while (listaEntidade == null);
 		return listaEntidade;
@@ -121,118 +170,131 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 
 	public synchronized List getListaTelaWeb() {
 		listaTelaWeb = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
-		TelaWebRepositorio rep = adapter.createRepository(TelaWebRepositorio.class);
+		// RestAdapter adapter = new
+		// RestAdapter("http://validacao.kinghost.net:21101/api");
+		TelaWebRepositorio rep = adapter
+				.createRepository(TelaWebRepositorio.class);
 		System.out.println("Chamada TelaWeb...");
-		rep.findByIdAplicacaoGerador(aplicacao.getId(), new ListCallback<TelaWebRest>() {
-			@Override
-			public void onError(Throwable t) {
-				t.printStackTrace();
-				System.exit(1);
-			}
+		rep.findByIdAplicacaoGerador(aplicacao.getId(),
+				new ListCallback<TelaWebRest>() {
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+						System.exit(1);
+					}
 
-			@Override
-			public void onSuccess(List<TelaWebRest> lista) {
-				System.out.println("Resposta TelaWeb");
-				List listaSaida = new ArrayList();
-				for (TelaWebRest item : lista) {
-					listaSaida.add(new TelaWebWrapper(item));
-				}
-				listaTelaWeb = listaSaida;
-			}
-		});
+					@Override
+					public void onSuccess(List<TelaWebRest> lista) {
+						System.out.println("Resposta TelaWeb");
+						List listaSaida = new ArrayList();
+						for (TelaWebRest item : lista) {
+							listaSaida.add(new TelaWebWrapper(item));
+						}
+						listaTelaWeb = listaSaida;
+					}
+				});
 		do {
-			//System.out.println("aguardando tela web...");
+			// System.out.println("aguardando tela web...");
 		} while (listaTelaWeb == null);
 		return listaTelaWeb;
 	}
 
-	
 	private void mostraTelaApp() {
 		for (TelaAppWrapper app : this.listaTelaApp) {
-			
+
 		}
 	}
-	
-	
+
 	public synchronized List getListaTelaApp() {
 		listaTelaApp = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
-		TelaAppRepositorio rep = adapter.createRepository(TelaAppRepositorio.class);
+		// RestAdapter adapter = new
+		// RestAdapter("http://validacao.kinghost.net:21101/api");
+		TelaAppRepositorio rep = adapter
+				.createRepository(TelaAppRepositorio.class);
 		System.out.println("Chamada TelaApp...");
-		rep.findByIdAplicacaoGerador(aplicacao.getId(), new ListCallback<TelaAppRest>() {
-			@Override
-			public void onError(Throwable t) {
-				t.printStackTrace();
-			}
+		rep.findByIdAplicacaoGerador(aplicacao.getId(),
+				new ListCallback<TelaAppRest>() {
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+					}
 
-			@Override
-			public void onSuccess(List<TelaAppRest> lista) {
-				System.out.println("Resposta TelaApp");
-				List listaSaida = new ArrayList();
-				for (TelaAppRest item : lista) {
-					
-					listaSaida.add(new TelaAppWrapper(item));
-				}
-				listaTelaApp = listaSaida;
-			}
-		});
+					@Override
+					public void onSuccess(List<TelaAppRest> lista) {
+						System.out.println("Resposta TelaApp");
+						List listaSaida = new ArrayList();
+						for (TelaAppRest item : lista) {
+
+							listaSaida.add(new TelaAppWrapper(item));
+						}
+						listaTelaApp = listaSaida;
+					}
+				});
 		do {
 			System.out.println("aguardando tela app...");
 		} while (listaTelaApp == null);
 		return listaTelaApp;
 	}
 
-	public synchronized List getListaAtributos(long idEntidade) throws DaoException {
+	public synchronized List getListaAtributos(long idEntidade)
+			throws DaoException {
 		listaAtributo = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
-		AtributoEntidadeRepositorio rep = adapter.createRepository(AtributoEntidadeRepositorio.class);
+		// RestAdapter adapter = new
+		// RestAdapter("http://validacao.kinghost.net:21101/api");
+		AtributoEntidadeRepositorio rep = adapter
+				.createRepository(AtributoEntidadeRepositorio.class);
 		System.out.println("Chamada Atributos");
-		rep.findByIdEntidade(idEntidade, new ListCallback<AtributoEntidadeRest>() {
-			@Override
-			public void onError(Throwable t) {
-				t.printStackTrace();
-			}
+		rep.findByIdEntidade(idEntidade,
+				new ListCallback<AtributoEntidadeRest>() {
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+					}
 
-			@Override
-			public void onSuccess(List<AtributoEntidadeRest> lista) {
-				System.out.println("Respostsa Atributos");
-				List listaSaida = new ArrayList();
-				for (AtributoEntidadeRest item : lista) {
-					System.out.println("ID:" + item.getNome());
-					listaSaida.add(item.criaItem());
-				}
-				listaAtributo = listaSaida;
-			}
-		});
+					@Override
+					public void onSuccess(List<AtributoEntidadeRest> lista) {
+						System.out.println("Respostsa Atributos");
+						List listaSaida = new ArrayList();
+						for (AtributoEntidadeRest item : lista) {
+							System.out.println("ID:" + item.getNome());
+							listaSaida.add(item.criaItem());
+						}
+						listaAtributo = listaSaida;
+					}
+				});
 		do {
 			System.out.println("aguardando atributo");
 		} while (listaAtributo == null);
 		return listaAtributo;
 	}
 
-	public synchronized List getListaRelacionamento(long idEntidade) throws DaoException {
+	public synchronized List getListaRelacionamento(long idEntidade)
+			throws DaoException {
 		listaRelacionamento = null;
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
-		RelacionamentoEntidadeRepositorio rep = adapter.createRepository(RelacionamentoEntidadeRepositorio.class);
+		// RestAdapter adapter = new
+		// RestAdapter("http://validacao.kinghost.net:21101/api");
+		RelacionamentoEntidadeRepositorio rep = adapter
+				.createRepository(RelacionamentoEntidadeRepositorio.class);
 
-		rep.findByIdEntidade(idEntidade, new ListCallback<RelacionamentoEntidadeRest>() {
+		rep.findByIdEntidade(idEntidade,
+				new ListCallback<RelacionamentoEntidadeRest>() {
 
-			@Override
-			public void onError(Throwable t) {
-				t.printStackTrace();
-			}
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+					}
 
-			@Override
-			public void onSuccess(List<RelacionamentoEntidadeRest> lista) {
-				List listaSaida = new ArrayList();
-				for (RelacionamentoEntidadeRest item : lista) {
-					System.out.println("ID-Rel:" + item.getId_relacionamento_entidade());
-					listaSaida.add(item.criaItem());
-				}
-				listaRelacionamento = listaSaida;
-			}
-		});
+					@Override
+					public void onSuccess(List<RelacionamentoEntidadeRest> lista) {
+						List listaSaida = new ArrayList();
+						for (RelacionamentoEntidadeRest item : lista) {
+							System.out.println("ID-Rel:"
+									+ item.getId_relacionamento_entidade());
+							listaSaida.add(item.criaItem());
+						}
+						listaRelacionamento = listaSaida;
+					}
+				});
 		do {
 			System.out.println("aguardando relacionamento");
 		} while (listaRelacionamento == null);
@@ -251,8 +313,11 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 		return new ArrayList();
 	}
 
-	protected void copiaArquivo(String arquivo, String pathOrigem, String pathDestino, Recursos recurso)
-			throws IOException {
+	protected void copiaArquivo(String arquivo, String pathOrigem, String pathDestino, Recursos recurso) throws IOException {
 		this.copiaArquivo(pathOrigem + arquivo, pathDestino + arquivo);
+	}
+
+	protected void copiaArquivoSeNaoExiste(String arquivo, String pathOrigem, String pathDestino, Recursos recurso) throws IOException {
+		this.copiaArquivoSeNaoExiste(pathOrigem + arquivo, pathDestino + arquivo);
 	}
 }

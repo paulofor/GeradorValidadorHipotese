@@ -1,5 +1,6 @@
 package jet.wrappers.base;
 
+import gerapp.app.Recursos;
 import gerapp.modelo.AtributoEntidade;
 import gerapp.modelo.Entidade;
 import gerapp.modelo.FiltroColecao;
@@ -26,11 +27,19 @@ public abstract class ClasseWrapper {
 	private AtributoEntidade identificador;
 	private List<String> listaHtml;
 	
+	
+	
 	protected abstract RelacionamentoWrapper criaRelacionamentoWrapper(RelacionamentoEntidade item);
 	protected abstract AtributoWrapper criaAtributoWrapper(AtributoEntidade item);
 	protected abstract ProcValorWrapper criaProcValorWrapper(ProcValor item);
+	
+	protected Recursos recursos;
 
 	private ClasseWrapper classeMatriz = null;
+	
+	public void setRecursos(Recursos item) {
+		this.recursos = item;
+	}
 
 	public List<ProcValorWrapper> getListaDerivadaDemanda() {
 		List<ProcValorWrapper> lista = new ArrayList<ProcValorWrapper>();
@@ -107,6 +116,36 @@ public abstract class ClasseWrapper {
 		}
 		throw new RuntimeException("Existe mais de dois relacionamentos nessa associação " + this.getNomeParaClasse());
 	}
+	
+	
+	public List<RelacionamentoWrapper> getListaItemN() {
+		List<RelacionamentoWrapper> listaRel = new ArrayList<RelacionamentoWrapper> ();
+		Iterator<RelacionamentoEntidade> itRelac = listaRelacionamento.iterator();
+		while (itRelac.hasNext()) {
+			RelacionamentoEntidade relac = itRelac.next();
+			if (outroLadoN(relac)) {
+				RelacionamentoWrapper relW = criaRelacionamentoWrapper(relac);
+				relW.setEntidadeReferencia(this);
+				listaRel.add(relW);
+			}
+		}
+		return listaRel;
+	}
+	
+	public List<RelacionamentoWrapper> getListaItem1() {
+		List<RelacionamentoWrapper> listaRel = new ArrayList<RelacionamentoWrapper> ();
+		Iterator<RelacionamentoEntidade> itRelac = listaRelacionamento.iterator();
+		while (itRelac.hasNext()) {
+			RelacionamentoEntidade relac = itRelac.next();
+			if (!outroLadoN(relac)) {
+				RelacionamentoWrapper relW = criaRelacionamentoWrapper(relac);
+				relW.setEntidadeReferencia(this);
+				listaRel.add(relW);
+			}
+		}
+		return listaRel;	
+	}
+	
 	
 	private List<RelacionamentoEntidade> getListaRelacionamentoSemUsuario() {
 		List<RelacionamentoEntidade> listaSaida = new LinkedList<RelacionamentoEntidade>();
@@ -342,6 +381,33 @@ public abstract class ClasseWrapper {
 		return false;
 	}
 	
+	private boolean outroLadoN(RelacionamentoEntidade rel) {
+		if (this.entidade.getIdEntidade()==rel.getIdEntidade1()) {
+			if (rel.getQtdeEntidade1().toUpperCase().equals("N")) {
+				return true;
+			}
+		}
+		if (this.entidade.getIdEntidade()==rel.getIdEntidade2()) {
+			if (rel.getQtdeEntidade2().toUpperCase().equals("N")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	private boolean outroLado1(RelacionamentoEntidade rel) {
+		if (this.entidade.getIdEntidade()==rel.getIdEntidade1()) {
+			if (rel.getQtdeEntidade1().toUpperCase().equals("1")) {
+				return true;
+			}
+		}
+		if (this.entidade.getIdEntidade()==rel.getIdEntidade2()) {
+			if (rel.getQtdeEntidade2().toUpperCase().equals("1")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void setChave(AtributoEntidade chave) {
 		this.chave = chave;
 	}
@@ -387,7 +453,9 @@ public abstract class ClasseWrapper {
 		Iterator<AtributoEntidade> it = lista.iterator();
 		listaAtributoW = new LinkedList<AtributoWrapper>();
 		while (it.hasNext()) {
-			listaAtributoW.add(criaAtributoWrapper(it.next()));
+			AtributoEntidade att = it.next();
+			att.setEntidade(this.entidade);
+			listaAtributoW.add(criaAtributoWrapper(att));
 		}
 		
 	}
@@ -414,6 +482,9 @@ public abstract class ClasseWrapper {
 	
 	public List<AtributoWrapper> getListaAtributoEntidadeW() {
 		return listaAtributoW;
+	}
+	public Iterator<AtributoWrapper> getIteratorAtributo() {
+		return listaAtributoW.iterator();
 	}
 	
 	public void setListaProcValor(List<ProcValor> lista) {

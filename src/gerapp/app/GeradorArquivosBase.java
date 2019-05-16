@@ -68,6 +68,11 @@ public abstract class GeradorArquivosBase {
 		geraArquivoFonte(texto, destino);
 	}
 
+	protected void copiaArquivoSeNaoExiste(String origem, String destino) throws IOException {
+		if (!this.existe(destino)) copiaArquivo(origem,destino);
+	}
+	
+	
 	public String leArquivoTexto(String fileName) throws IOException {
 		String returnValue = "";
 		FileReader file;
@@ -119,7 +124,7 @@ public abstract class GeradorArquivosBase {
 		return confW;
 	}
 
-	private void montaListaClasse() throws DaoException {
+	private void montaListaClasse(Recursos recurso) throws DaoException {
 		System.out.println("Inicio Monta Lista Classe");
 		listaClasse = new ArrayList<ClasseWrapper>();
 		List lista = getListaEntidade();
@@ -128,6 +133,7 @@ public abstract class GeradorArquivosBase {
 			Entidade entidade = (Entidade) iterador.next();
 			System.out.println("Vai tratar " + entidade.getNome());
 			ClasseWrapper corrente = criaWrapper(entidade);
+			corrente.setRecursos(recurso);
 			List<AtributoEntidade> listaAtributos = getListaAtributos(corrente.getId());
 
 			AtributoEntidade attChave = this.getAtributo(corrente.getIdChave(), listaAtributos);
@@ -173,11 +179,11 @@ public abstract class GeradorArquivosBase {
 	public void criaArquivos() {
 		// TODO Auto-generated method stub
 		try {
-
-			montaListaClasse();
-			AplicacaoWrapper.setEntidades(listaClasse);
 			Recursos recurso = new Recursos();
 			recurso.setConfiguracao(criaConfiguracao());
+			montaListaClasse(recurso);
+			AplicacaoWrapper.setEntidades(listaClasse);
+			
 			recurso.setListaClasse(listaClasse);
 			montaListasNovas(recurso);
 			verificaDiretorios(recurso);

@@ -21,7 +21,11 @@ public class AppModuleTs
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
+<<<<<<< HEAD
   protected final String TEXT_2 = NL + "import { BrowserModule } from '@angular/platform-browser';" + NL + "import { ErrorHandler, NgModule } from '@angular/core';" + NL + "import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';" + NL + "import { HttpClientModule } from '@angular/common/http';" + NL + "import { SocketDriver } from '../shared/sdk/sockets/socket.driver';" + NL + "import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../shared/sdk';" + NL + "import { MyApp } from './app.component';" + NL + "import { HomePage } from '../pages/home/home';" + NL + "import { Screenshot } from '@ionic-native/screenshot';";
+=======
+  protected final String TEXT_2 = NL + "import { BrowserModule } from '@angular/platform-browser';" + NL + "import { ErrorHandler, NgModule } from '@angular/core';" + NL + "import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';" + NL + "import { HttpClientModule } from '@angular/common/http';" + NL + "import { SocketDriver } from '../shared/sdk/sockets/socket.driver';" + NL + "import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../shared/sdk';" + NL + "import { MyApp } from './app.component';" + NL + "import { HomePage } from '../pages/home/home';" + NL + "import { Screenshot } from '@ionic-native/screenshot';" + NL + "import { ChartsModule } from 'ng2-charts';" + NL + "import { SignupPage } from '../pages/signup/signup';" + NL + "import { LoginPage } from '../pages/login/login';" + NL + "import { IonicStorageModule } from '@ionic/storage';" + NL + "import { BrMaskerModule } from 'brmasker-ionic-3';" + NL;
+>>>>>>> c70d4da1a0217900b196db61835d24c3c6435e10
   protected final String TEXT_3 = NL + "import { ";
   protected final String TEXT_4 = " } from '../pages/";
   protected final String TEXT_5 = "/";
@@ -29,16 +33,27 @@ public class AppModuleTs
   protected final String TEXT_7 = NL + NL + "import { StatusBar } from '@ionic-native/status-bar';" + NL + "import { SplashScreen } from '@ionic-native/splash-screen';";
   protected final String TEXT_8 = NL + "import { ";
   protected final String TEXT_9 = "Api } from '../shared/sdk';";
+<<<<<<< HEAD
   protected final String TEXT_10 = NL + NL + NL + "@NgModule({" + NL + "  declarations: [" + NL + "    MyApp," + NL + "    HomePage,";
   protected final String TEXT_11 = NL + "    ";
   protected final String TEXT_12 = "," + NL + "\t";
   protected final String TEXT_13 = NL + "  ]," + NL + "  imports: [" + NL + "    BrowserModule," + NL + "    IonicModule.forRoot(MyApp)," + NL + "    HttpClientModule," + NL + "    SDKBrowserModule.forRoot()" + NL + "    " + NL + "  ]," + NL + "  bootstrap: [IonicApp]," + NL + "  entryComponents: [" + NL + "    MyApp," + NL + "    HomePage,";
+=======
+  protected final String TEXT_10 = NL + NL + NL + "@NgModule({" + NL + "  declarations: [" + NL + "    MyApp," + NL + "    HomePage," + NL + "    LoginPage," + NL + "    SignupPage,";
+  protected final String TEXT_11 = NL + "    ";
+  protected final String TEXT_12 = "," + NL + "\t";
+  protected final String TEXT_13 = NL + "  ]," + NL + "  imports: [" + NL + "    BrowserModule," + NL + "    IonicModule.forRoot(MyApp)," + NL + "    HttpClientModule," + NL + "    SDKBrowserModule.forRoot()," + NL + "    ChartsModule," + NL + "    IonicStorageModule.forRoot()," + NL + "    BrMaskerModule" + NL + "  ]," + NL + "  bootstrap: [IonicApp]," + NL + "  entryComponents: [" + NL + "    MyApp," + NL + "    HomePage," + NL + "    LoginPage," + NL + "    SignupPage,";
+>>>>>>> c70d4da1a0217900b196db61835d24c3c6435e10
   protected final String TEXT_14 = NL + "    ";
   protected final String TEXT_15 = "," + NL + "\t";
   protected final String TEXT_16 = NL + "  ]," + NL + "  providers: [" + NL + "    StatusBar," + NL + "    SplashScreen," + NL + "    {provide: ErrorHandler, useClass: IonicErrorHandler}," + NL + "    SocketDriver," + NL + "    SDKModels," + NL + "    LoopBackAuth," + NL + "    InternalStorage,";
   protected final String TEXT_17 = NL + "\t";
   protected final String TEXT_18 = "Api," + NL + "\t";
+<<<<<<< HEAD
   protected final String TEXT_19 = NL + "    Screenshot" + NL + "  ]" + NL + "})" + NL + "export class AppModule {}";
+=======
+  protected final String TEXT_19 = NL + "    Screenshot," + NL + "    Storage" + NL + "  ]" + NL + "})" + NL + "export class AppModule {}";
+>>>>>>> c70d4da1a0217900b196db61835d24c3c6435e10
   protected final String TEXT_20 = NL;
 
   public String generate(Object argument)

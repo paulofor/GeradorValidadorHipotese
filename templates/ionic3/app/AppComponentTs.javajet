@@ -13,6 +13,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
 while (iterador.hasNext()) {
@@ -30,7 +31,7 @@ import { <%= tela.getNome() %> } from '../pages/<%= tela.getPathArquivo() %>/<%=
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -43,9 +44,11 @@ export class MyApp {
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
 		TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+		if (tela.getNomeMenu().length()>0) {
 	%>
-      { title: '<%= tela.getMenuPrototipo() %>' , component: <%= tela.getNome() %>},
+      { title: '<%= tela.getNomeMenu() %>' , component: <%= tela.getNome() %>},
 	<%
+		}
 	}
 	%>
      ];

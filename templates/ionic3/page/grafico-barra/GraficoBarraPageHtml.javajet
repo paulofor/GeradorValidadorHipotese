@@ -1,0 +1,25 @@
+<%@ jet package="jet.ionic3.page.graficoBarra" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="GraficoBarraPageHtml" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+<ion-header >
+  <ion-navbar color="titulo">
+    <ion-title (click)="testaFoto()"><%= tela.getNome() %></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="quadroBase">
+  <ng-container *ngIf="item">
+    <ion-card>
+      <div class="card-title"></div>
+      <div class="card-subtitle"></div>
+    </ion-card>
+
+
+  </ng-container>
+</ion-content>

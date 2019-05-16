@@ -11,6 +11,9 @@ public class ConverteTipoAngular extends ConverteTipo{
 		return getTipoPorOriginal(proc.getTipo());
 	}
 	public String getTipo(AtributoEntidade atributo) {
+		if (atributo.getTipo()==null) {
+			throw new RuntimeException("Atributo: " + atributo.getEntidade().getNome() + "." + atributo.getNome() + " sem tipo");
+		}
 		return getTipoPorOriginal(atributo.getTipo());
 	}
 	
@@ -41,6 +44,7 @@ public class ConverteTipoAngular extends ConverteTipo{
 	}
 	
 	public String getTipoPorOriginal(String tipoOriginal) {
+
 		if (tipoOriginal.compareTo("TNota10")==0	)
 			return "number";
 		if (tipoOriginal.compareTo("TLbl")==0 || 
@@ -57,7 +61,7 @@ public class ConverteTipoAngular extends ConverteTipo{
 			tipoOriginal.compareTo("DTemp")==0)
 			return "Date";
 		if (tipoOriginal.compareTo("Logic")==0)
-			return "string";
+			return "number";
 		if (tipoOriginal.compareTo("NInt")==0)
 			return "number";
 		if (tipoOriginal.compareTo("Itens")==0)

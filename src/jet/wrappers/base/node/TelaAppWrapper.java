@@ -26,6 +26,25 @@ public class TelaAppWrapper implements ItemComponente{
 	 */
 
 	
+	public TelaAppWrapper getTelaEdicao() {
+		if (this.principal.getTelaEdicao()==null) return null;
+		else return new TelaAppWrapper(this.principal.getTelaEdicao());
+	}
+	
+	public String getNomeMenu() {
+		return this.principal.getNomeMenu();
+	}
+	
+	
+	public String getMetodoCarga() {
+		String nome = "get" + this.getNome() + "Load";
+		return nome;
+	}
+	public String getMetodoCargaConstante() {
+		return this.getEntidade().getNomeParaConstante() + "_" + this.getNome().toUpperCase();
+	}
+	
+	
 	@Override
 	public String getArquivo() {
 		return getNomeParaArquivo();
@@ -34,6 +53,10 @@ public class TelaAppWrapper implements ItemComponente{
 	@Override
 	public String getNome() {
 		return principal.getNome() + "Page";
+	}
+	
+	public String getTipo() {
+		return principal.getTipo();
 	}
 
 	@Override
@@ -46,9 +69,7 @@ public class TelaAppWrapper implements ItemComponente{
 		return "page-" + getNomeParaArquivo();
 	}
 	
-	public String getMenuPrototipo() {
-		return principal.getNome();
-	}
+	
 	
 	private String getNomeParaArquivo() {
 		String nome = principal.getNome();
@@ -67,6 +88,12 @@ public class TelaAppWrapper implements ItemComponente{
 	private TelaAppRest principal = null;
 	
 	private ClasseWrapper entidade = null;
+	
+	private ClasseWrapper entidadePut = null;
+	
+	public boolean ehTipo(String tipo) {
+		return (this.principal.getTipo().compareTo(tipo)==0);
+	}
 	
 	
 	public boolean tipoLista() {
@@ -90,6 +117,12 @@ public class TelaAppWrapper implements ItemComponente{
 	public boolean tipoDetalhe() {
 		return ("DETALHE".equals(this.principal.getTipo()));
 	}
+	public boolean tipoGetPut() {
+		return ("GETPUT".equals(this.principal.getTipo()));
+	}
+	public boolean tipoGraficoBarra() {
+		return ("GRAFICO_BARRA".equals(this.principal.getTipo()));
+	}
 	
 	public boolean possuiEntidade() {
 		return (entidade!=null);
@@ -98,9 +131,22 @@ public class TelaAppWrapper implements ItemComponente{
 		return this.entidade;
 	}
 	
+	public boolean possuiEntidadePut() {
+		return (entidadePut!=null);
+	}
+	public ClasseWrapper getEntidadePut() {
+		return this.entidadePut;
+	}
+	public void setClasseWrapperPut(ClasseWrapper entidade) {
+		this.entidadePut = entidade;
+	}
+	
 	
 	public long getIdEntidade() {
 		return (principal.getEntidadeId()!=null?principal.getEntidadeId():0);
+	}
+	public long getIdEntidadePut() {
+		return (principal.getEntidadePutId()!=null?principal.getEntidadePutId():0);
 	}
 	public void setClasseWrapper(ClasseWrapper entidade) {
 		this.entidade = entidade;
@@ -109,10 +155,18 @@ public class TelaAppWrapper implements ItemComponente{
 	public TelaAppWrapper(TelaAppRest principal) {
 		this.principal = principal;
 	}
+	public TelaAppWrapper(String nomeTela) {
+		TelaAppRest tela = new TelaAppRest();
+		tela.setNome(nomeTela);
+		this.principal = tela;
+	}
 	
 	
 	public boolean sobrescreveHtml() {
 		return this.principal.getSobrescreveHtml() == 1;
+	}
+	public boolean sobrescreveTs() {
+		return this.principal.getSobrescreveTs() == 1;
 	}
 	
 	

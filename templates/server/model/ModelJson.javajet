@@ -1,0 +1,137 @@
+<%@ jet package="jet.server.model" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.* jet.wrappers.base.node.*" 
+class="ModelJson" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+Configuracao conf = recursos.getConfiguracao();
+ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
+%>
+{
+  "name": "<%= classe.getNomeModeloServer() %>",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+<%
+boolean primeiro = true;
+Iterator<AtributoWrapper> iteradorAtt = classe.getIteratorAtributo();
+while (iteradorAtt.hasNext()) {
+	AtributoWrapper atributo = (AtributoWrapper) iteradorAtt.next();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+	"<%= atributo.getNomeVariavel() %>": {
+	<% if (!atributo.ehChave()) { %>
+      "type": "<%= atributo.getTipoNode() %>"
+    <% } else { %>
+      "id": true,
+      "type": "string",
+      "defaultFn": "uuid"
+    <% } %>
+    }
+<%
+}
+%>
+  },
+  "validations": [],
+  "relations": {
+<%
+primeiro = true;
+Iterator<RelacionamentoWrapper> itRel =  classe.obtemListaSemChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+	"<%= oposta.getNomeParaVariavel() %>": {
+      "type": "belongsTo",
+      "model": "<%= oposta.getNomeModeloServer() %>",
+      "foreignKey": "<%= oposta.getNomeParaVariavel() %>Id"
+    }
+<%
+}
+%>  
+<%
+itRel =  classe.obtemListaComChaveEstrangeira().iterator();
+while (itRel.hasNext()) {
+	RelacionamentoWrapper relac = itRel.next();
+	ClasseWrapperAngular oposta = (ClasseWrapperAngular) relac.getClasseOposta();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+	"lista<%= oposta.getNomeParaClasse() %>": {
+      "type": "hasMany",
+      "model": "<%= oposta.getNomeModeloServer() %>",
+      "foreignKey": "<%= classe.getNomeParaVariavel() %>Id"
+    }
+<%
+}
+%>
+  },
+  "acls": [],
+  "methods": {
+<%
+primeiro = true;
+Iterator<TelaAppWrapper> itEdita = classe.getListaTelaPorTipo("EDITA").iterator();
+while (itEdita.hasNext()) {
+	TelaAppWrapper tela = itEdita.next();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+      "Submit<%= tela.getNome() %>": {
+      "accepts": [
+        {
+          "arg": "item",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "resultado",
+          "type": "object",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "submit da tela <%= tela.getNome() %>",
+      "http": [
+        {
+          "path": "/submit<%= tela.getNome() %>",
+          "verb": "post"
+        }
+      ]
+    }
+<%
+}
+Iterator<TelaAppWrapper> itGetPut = classe.getListaTelaPutPorTipo("GETPUT").iterator();
+while (itGetPut.hasNext()) {
+	TelaAppWrapper tela = itGetPut.next();
+	if (primeiro) { primeiro = false; } else {%>,<% } %> 
+      "Submit<%= tela.getNome() %>": {
+      "accepts": [
+        {
+          "arg": "item",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "resultado",
+          "type": "object",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "submit da tela <%= tela.getNome() %>",
+      "http": [
+        {
+          "path": "/submit<%= tela.getNome() %>",
+          "verb": "post"
+        }
+      ]
+    }
+<%
+}
+%>
+  }
+}

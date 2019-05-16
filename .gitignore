@@ -1,1 +1,8 @@
 bin/*
+src/jet/ionic3/*
+src/jet/server/*
+src/jet/angular/*
+
+src/jet/ionic3/
+src/jet/server/
+src/jet/angular/

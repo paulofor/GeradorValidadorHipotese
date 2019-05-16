@@ -1,0 +1,93 @@
+<%@ jet package="jet.ionic3.page.getPut" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="GetPutPageProdBaseTs" %>
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidadePut().getNomeParaClasse() %>,  <%= tela.getEntidade().getNomeParaClasse() %>Api , <%= tela.getEntidadePut().getNomeParaClasse() %>Api, LoopBackFilter, Usuario } from '../../shared/sdk';
+import { NavParams, NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
+// Tipo: <%= tela.getTipo() %>
+export abstract class <%= tela.getNome() %>Base {
+  
+  protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
+  
+  protected usuario: Usuario;
+  
+  // filtro com parametro id
+  protected abstract filtroLoadId(id:any) : LoopBackFilter;
+  // filtro sem parametro id
+  protected abstract filtroLoadOne() : LoopBackFilter;
+  // chamada depois do submit e de nova inicializacao
+  protected abstract resultadoSubmit(result:<%= tela.getEntidadePut().getNomeParaClasse() %>)
+ 
+  constructor(	public navParams: NavParams,
+  				public navCtrl: NavController,
+				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
+				public srvPut: <%= tela.getEntidadePut().getNomeParaClasse() %>Api,
+				protected storage: Storage) {
+  } 
+  
+	private inicializaItem() {
+		this.item = this.navParams.get('item');
+		console.log('<%= tela.getNome() %>Base:ItemParametro: ', this.item);
+		if (!this.item) {
+			var id = this.navParams.get('id');
+			console.log('<%= tela.getNome() %>Base:Id: ' , id);
+			if (id) {
+				console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.filtroLoadId(id)));
+				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findById');
+				this.srv.findById(id, this.filtroLoadId(id))
+					.subscribe(
+						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
+							this.item = result;
+							console.log('<%= tela.getNome() %>Base.item: ' , this.item)
+						},
+						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
+					)
+			} else  {
+				console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.filtroLoadOne()));
+				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findOne');
+				this.srv.findOne(this.filtroLoadOne())
+					.subscribe(
+						(result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
+							this.item = result;
+							console.log('<%= tela.getNome() %>Base.item: ' , this.item)
+						},
+						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
+					)
+			}
+		}  
+	}
+
+  
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+    this.carregaUsuario();
+    this.inicializaItem();
+  }
+  ionViewDidLoad() {
+  	console.log('ionViewDidLoad <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+  }
+  carregaUsuario() {
+	this.storage.get('user').then((val: Usuario) => {
+		this.usuario = val;
+	})
+  }
+  
+	protected submit(itemSubmit:<%= tela.getEntidadePut().getNomeParaClasse() %> ) {
+		console.log('<%= tela.getNome() %>Base:Submit-Item:' , itemSubmit);
+		console.log('<%= tela.getEntidadePut().getNomeParaClasse() %>:submit<%= tela.getNome() %>:' , JSON.stringify(itemSubmit));
+		this.srvPut.submit<%= tela.getNome() %>(itemSubmit)
+			.subscribe((resultado:<%= tela.getEntidadePut().getNomeParaClasse() %>) => {
+				console.log('<%= tela.getNome() %>Base:Submit-Result: ' , resultado);
+				this.resultadoSubmit(resultado);
+				this.inicializaItem();
+			})
+	}
+}
+    
+    

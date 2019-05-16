@@ -21,12 +21,20 @@ public class AppComponentTs
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
+<<<<<<< HEAD
   protected final String TEXT_2 = NL + "import { Component, ViewChild } from '@angular/core';" + NL + "import { Nav, Platform } from 'ionic-angular';" + NL + "import { StatusBar } from '@ionic-native/status-bar';" + NL + "import { SplashScreen } from '@ionic-native/splash-screen';" + NL + "" + NL + "import { HomePage } from '../pages/home/home';";
+=======
+  protected final String TEXT_2 = NL + "import { Component, ViewChild } from '@angular/core';" + NL + "import { Nav, Platform } from 'ionic-angular';" + NL + "import { StatusBar } from '@ionic-native/status-bar';" + NL + "import { SplashScreen } from '@ionic-native/splash-screen';" + NL + "" + NL + "import { HomePage } from '../pages/home/home';" + NL + "import { LoginPage } from '../pages/login/login';";
+>>>>>>> c70d4da1a0217900b196db61835d24c3c6435e10
   protected final String TEXT_3 = NL + "import { ";
   protected final String TEXT_4 = " } from '../pages/";
   protected final String TEXT_5 = "/";
   protected final String TEXT_6 = "';";
+<<<<<<< HEAD
   protected final String TEXT_7 = NL + NL + NL + "@Component({" + NL + "  templateUrl: 'app.html'" + NL + "})" + NL + "export class MyApp {" + NL + "  @ViewChild(Nav) nav: Nav;" + NL + "" + NL + "  rootPage: any = HomePage;" + NL + "" + NL + "  pages: Array<{title: string, component: any}>;" + NL + "" + NL + "  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {" + NL + "    this.initializeApp();" + NL + "" + NL + "    // used for an example of ngFor and navigation" + NL + "    this.pages = [" + NL + "\t";
+=======
+  protected final String TEXT_7 = NL + NL + NL + "@Component({" + NL + "  templateUrl: 'app.html'" + NL + "})" + NL + "export class MyApp {" + NL + "  @ViewChild(Nav) nav: Nav;" + NL + "" + NL + "  rootPage: any = LoginPage;" + NL + "" + NL + "  pages: Array<{title: string, component: any}>;" + NL + "" + NL + "  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {" + NL + "    this.initializeApp();" + NL + "" + NL + "    // used for an example of ngFor and navigation" + NL + "    this.pages = [" + NL + "\t";
+>>>>>>> c70d4da1a0217900b196db61835d24c3c6435e10
   protected final String TEXT_8 = NL + "      { title: '";
   protected final String TEXT_9 = "' , component: ";
   protected final String TEXT_10 = "}," + NL + "\t";
@@ -63,13 +71,24 @@ while (iterador.hasNext()) {
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
 		TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
+<<<<<<< HEAD
 	
     stringBuffer.append(TEXT_8);
     stringBuffer.append( tela.getMenuPrototipo() );
+=======
+		if (tela.getNomeMenu().length()>0) {
+	
+    stringBuffer.append(TEXT_8);
+    stringBuffer.append( tela.getNomeMenu() );
+>>>>>>> c70d4da1a0217900b196db61835d24c3c6435e10
     stringBuffer.append(TEXT_9);
     stringBuffer.append( tela.getNome() );
     stringBuffer.append(TEXT_10);
     
+<<<<<<< HEAD
+=======
+		}
+>>>>>>> c70d4da1a0217900b196db61835d24c3c6435e10
 	}
 	
     stringBuffer.append(TEXT_11);

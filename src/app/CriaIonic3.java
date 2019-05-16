@@ -8,6 +8,7 @@ import loopback.cliente.repositorio.AplicacaoRepositorio;
 import loopback.remoting.adapters.RestAdapter;
 
 public class CriaIonic3 {
+	
 	/**
 	 * @param args
 	 */
@@ -17,7 +18,7 @@ public class CriaIonic3 {
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 		
-		rep.findById(27, new ObjectCallback<AplicacaoRest>() { 
+		rep.findById(31, new ObjectCallback<AplicacaoRest>() { 
             @Override 
             public void onSuccess(AplicacaoRest model) { 
             	System.out.println("Sucesso: " + model);

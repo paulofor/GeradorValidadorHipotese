@@ -1,0 +1,84 @@
+<%@ jet package="jet.ionic3.page.listaItem" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ListaItemPageProdBaseTs" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+TelaAppWrapper telaEdicao = tela.getTelaEdicao();
+%>
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api, Usuario } from '../../shared/sdk';
+import { LoopBackFilter } from '../../shared/sdk';
+import { NavController } from 'ionic-angular';
+import { Page } from 'ionic-angular/umd/navigation/nav-util';
+<% if (telaEdicao!=null) { %>
+import { <%= telaEdicao.getNome() %> } from '../<%= telaEdicao.getPathArquivo() %>/<%= telaEdicao.getArquivo() %>';
+<% } %>
+import { Storage } from '@ionic/storage';
+
+// Tipo: <%= tela.getTipo() %>
+export abstract class <%= tela.getNome() %>Base {
+
+    protected usuario: Usuario;
+
+	protected listaItem: <%= tela.getEntidade().getNomeParaClasse() %>[];
+	protected abstract inicializacao();
+	protected abstract getFiltro(): LoopBackFilter;
+	
+	 
+	getPageEdicao(): Page {
+	<% if (telaEdicao==null) { %>
+    	throw new Error("<%= tela.getNome() %> sem tela de edicao.");
+    	<% } else { %>
+    	return <%= telaEdicao.getNome() %>;
+    	<% } %>
+  	}
+  	getPageDetalhe(): Page {
+	<% if (telaEdicao==null) { %>
+    	throw new Error("<%= tela.getNome() %> sem tela de detalhe.");
+    	<% } else { %>
+    	return <%= telaEdicao.getNome() %>;
+    	<% } %>
+  	}
+
+	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,protected storage: Storage) {
+	}
+
+	ionViewWillEnter() {
+    		console.log('ionViewWillEnter <%= tela.getNome() %><<<%= tela.getTipo() %>>>');
+    		this.carregaUsuario();
+    		this.inicializacao();
+    		
+  	}
+  	
+  	carregaLista() {
+  		console.log('<%= tela.getNome() %>Base:filtro: ' , JSON.stringify(this.getFiltro()));
+		console.log('<%= tela.getEntidade().getNomeParaClasse() %>.find');
+  		this.srv.find(this.getFiltro())
+  			.subscribe((resultado: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
+  				console.log('<%= tela.getNome() %>Base:LoadLista:' , resultado);
+  				this.listaItem = resultado;
+  			})
+  	}
+  	  carregaUsuario() {
+		this.storage.get('user').then((val: Usuario) => {
+			this.usuario = val;
+			this.carregaLista();
+		})
+  	}
+  
+	protected detalheId(item: <%= tela.getEntidade().getNomeParaClasse() %>) {
+		this.navCtrl.push(this.getPageEdicao(), {
+      		id: item.id
+		});
+  	}
+  	protected alterarId(item: <%= tela.getEntidade().getNomeParaClasse() %>) {
+		this.navCtrl.push(this.getPageDetalhe(), {
+      		id: item.id
+		});
+  	}
+  	protected novo() {
+		this.navCtrl.push(this.getPageEdicao());
+	}
+}

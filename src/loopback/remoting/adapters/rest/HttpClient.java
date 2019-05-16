@@ -158,7 +158,7 @@ public class HttpClient extends AsyncHttpClient {
 		}
 
 		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987", "Jenlop01");
-		request.setProxyServer(proxy);
+		//request.setProxyServer(proxy);
 
 		System.out.println("Url:" + this.url + "?" + this.param);
 
@@ -253,6 +253,6 @@ public class HttpClient extends AsyncHttpClient {
 	
 	
 	private String debugRequest(BoundRequestBuilder request) {
-		return request.;
+		return request.toString();
 	}
 }
