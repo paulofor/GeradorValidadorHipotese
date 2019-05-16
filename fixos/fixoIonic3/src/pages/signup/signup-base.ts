@@ -23,6 +23,11 @@ export abstract class SignupPageBase {
   ionViewDidLoad() {
     //console.log('ionViewDidLoad LoginPage');
   }
+  
+  ionViewWillEnter() {
+    console.log('');
+    console.log('Tela: SignupPage');
+  }
 
   onSubmit() {
     this.usuario = new Usuario();

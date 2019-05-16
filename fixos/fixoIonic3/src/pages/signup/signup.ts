@@ -21,5 +21,8 @@ export class SignupPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPage');
   }
-
+  ionViewWillEnter() {
+    console.log('');
+    console.log('Tela: SignupPage');
+  }
 }
