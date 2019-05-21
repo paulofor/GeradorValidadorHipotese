@@ -22,13 +22,11 @@
         <ion-label floating>Senha</ion-label>
         <ion-input type="{{tipo}}" formControlName="senha1"></ion-input>
       </ion-item>
-
       <ion-item *ngIf="signupForm.get('senha1').invalid && signupForm.get('senha1').dirty">
         <p style="color:red">
-          Digite uma senha de pelo menos 8 caracteres.
+          Mínimo de 8 caracteres.
         </p>
       </ion-item>
-
 
       <ion-item>
         <ion-label floating>Repetir Senha</ion-label>
@@ -36,13 +34,13 @@
       </ion-item>
       <ion-item *ngIf="signupForm.get('senha2').invalid && signupForm.get('senha2').dirty">
         <p style="color:red">
-          Digite uma senha de pelo menos 8 caracteres.
+          Mínimo de 8 caracteres.
         </p>
       </ion-item>
 
       <ion-item>
         <ion-label>Mostrar Senha</ion-label>
-        <ion-checkbox [(ngModel)]="passwordCheckbox" (ionChange)="mudaStatusSenha()"  [ngModelOptions]="{standalone: true}"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="passwordCheckbox" (ionChange)="mudaStatusSenha()" [ngModelOptions]="{standalone: true}"></ion-checkbox>
       </ion-item>
 
       <ion-item *ngIf="erroMsg">
