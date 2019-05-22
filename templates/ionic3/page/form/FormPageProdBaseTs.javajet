@@ -44,7 +44,7 @@ export abstract class <%= tela.getNome() %>Base {
   // quando existe parametro item
   protected abstract complementaItem(novo:<%= tela.getEntidade().getNomeParaClasse() %>) : <%= tela.getEntidade().getNomeParaClasse() %>;
 
-
+  protected abstract antesSubmit();
 
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
@@ -128,6 +128,7 @@ while (itRel.hasNext()) {
 }
 %>
 	protected submit() {
+	   		this.antesSubmit();
 		console.log('<%= tela.getEntidade().getNomeParaClasse() %>Api.submit<%= tela.getNome() %>:' , JSON.stringify(this.item));
     	this.srv.submit<%= tela.getNome() %>(this.item)
       		.subscribe((resultado:<%= tela.getEntidade().getNomeParaClasse() %>) => {
