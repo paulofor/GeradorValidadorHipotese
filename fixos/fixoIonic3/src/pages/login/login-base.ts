@@ -2,7 +2,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Storage } from '@ionic/storage';
-import { Usuario, UsuarioApi, LoopBackFilter } from '../../shared/sdk';
+import { Usuario, UsuarioApi, LoopBackFilter, AcaoApi, Acao } from '../../shared/sdk';
 import { Page } from 'ionic-angular/navigation/nav-util';
 
 
@@ -17,7 +17,7 @@ export abstract class LoginPageBase {
   abstract getMensagemNaoEncontrado() : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-    protected formBuilder: FormBuilder, protected srv: UsuarioApi, protected storage: Storage) {
+    protected formBuilder: FormBuilder, protected srv: UsuarioApi, protected srvAcao: AcaoApi, protected storage: Storage) {
     this.loginForm = this.formBuilder.group({
       login: '',
       senha: ''
@@ -38,6 +38,7 @@ export abstract class LoginPageBase {
       .subscribe(
         (result:Usuario) => {
           console.log('UserLogin: ' , result);
+          this.executouLogin(result);
           this.storage.set('user' , result);
           this.mudaTela();
         },
@@ -46,6 +47,19 @@ export abstract class LoginPageBase {
           this.erroMsg = this.getMensagemNaoEncontrado();
         }
       )
+  }
+
+  executouLogin(usuario: Usuario) {
+    let acao:Acao = new Acao();
+    acao.dataHora = new Date();
+    acao.nome = 'Login';
+    acao.usuarioId = usuario.id;
+    acao.objeto = 'Login';
+    console.log('Acao: ' , JSON.stringify(acao));
+    this.srvAcao.create(acao)
+      .subscribe(result => {
+        console.log('Result: ' , result);
+      })
   }
 
   mudaTela() {

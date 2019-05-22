@@ -17,6 +17,8 @@ public class GeradorBDMySql extends GeradorNodeBase{
 		String nomeArquivo = pathDestino + "cria-tabelas.sql";
 		String conteudo = MySqlCreate.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		System.out.println("Arquivo: " + nomeArquivo);
 	}
 
 }
