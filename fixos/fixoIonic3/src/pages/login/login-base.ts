@@ -39,11 +39,13 @@ export abstract class LoginPageBase {
         (result:Usuario) => {
           console.log('UserLogin: ' , result);
           this.executouLogin(result);
-          this.storage.set('user' , result);
-          this.mudaTela();
+          this.storage.set("user",result).then((successData)=>{
+            this.mudaTela();
+          })
         },
         (erro) => {
           console.log('Erro login: ' , erro);
+          this.errouLogin();
           this.erroMsg = this.getMensagemNaoEncontrado();
         }
       )
@@ -52,8 +54,21 @@ export abstract class LoginPageBase {
   executouLogin(usuario: Usuario) {
     let acao:Acao = new Acao();
     acao.dataHora = new Date();
-    acao.nome = 'Login';
+    acao.nome = 'LoginOk';
     acao.usuarioId = usuario.id;
+    acao.objeto = 'Login';
+    console.log('Acao: ' , JSON.stringify(acao));
+    this.srvAcao.create(acao)
+      .subscribe(result => {
+        console.log('Result: ' , result);
+      })
+  }
+
+  errouLogin() {
+    let acao:Acao = new Acao();
+    acao.dataHora = new Date();
+    acao.nome = 'LoginErro';
+    //acao.usuarioId = usuario.id;
     acao.objeto = 'Login';
     console.log('Acao: ' , JSON.stringify(acao));
     this.srvAcao.create(acao)

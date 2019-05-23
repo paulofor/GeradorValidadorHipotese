@@ -6,9 +6,12 @@ src/jet/ionic3/page/*
 src/jet/ionic3/page/*/*
 src/jet/ionic3/page/*/*/*
 src/jet/ionic3/app/*
+src/jet/ionic3/page/listaItem/*
 
 src/jet/ionic3/
 src/jet/server/
 src/jet/angular/
 src/jet/ionic3/page/
 src/jet/ionic3/app/
+.src/jet/ionic3/page/listaItem/*
+src/jet/ionic3/page/listaItem/ListaItemPageHtml.java

@@ -64,13 +64,12 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		String pathDestino = raizDestino;
 		String pathOrigem = raizOrigem;
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo("ionic.config.json", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("package.json", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("package-lock.json", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("tsconfig.json", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("tslint.json", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("tslint.json", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo(".gitignore", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("ionic.config.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("package.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("package-lock.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("tsconfig.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("tslint.json", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste(".gitignore", pathOrigem, pathDestino, recurso);
 
 		pathDestino = raizDestino + "src/";
 		pathOrigem = raizOrigem + "src/";

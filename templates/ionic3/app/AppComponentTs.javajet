@@ -23,7 +23,7 @@ import { <%= tela.getNome() %> } from '../pages/<%= tela.getPathArquivo() %>/<%=
 <%
 }
 %>
-import { timer } from 'rxjs/Observable/timer';
+import { timer } from 'rxjs/observable/timer';
 
 @Component({
   templateUrl: 'app.html'
