@@ -55,7 +55,12 @@ public class LoopbackService
   protected final String TEXT_34 = "> {" + NL + "\t\tlet _method: string = \"POST\";" + NL + "\t\tlet _url: string = LoopBackConfig.getPath() + \"/\" + LoopBackConfig.getApiVersion() +" + NL + "    \t\t\"/";
   protected final String TEXT_35 = "s/submit";
   protected final String TEXT_36 = "\";" + NL + "    \tlet _routeParams: any = {};" + NL + "    \tlet _postBody: any = {};" + NL + "    \tlet _urlParams: any = {};" + NL + "    \tif (typeof item !== 'undefined' && item !== null) _urlParams.item = item;" + NL + "    \tlet result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);" + NL + "    \treturn result;" + NL + "\t}";
-  protected final String TEXT_37 = NL + "}";
+  protected final String TEXT_37 = NL + NL + "  // aprender mais para fazer algo que trate falha de conexao --> 25/05/2019" + NL + "  public createDg<";
+  protected final String TEXT_38 = ">(data: ";
+  protected final String TEXT_39 = ", erroMsg? :string, customHeaders?: Function): Observable<";
+  protected final String TEXT_40 = "> {" + NL + "    let result : Observable<";
+  protected final String TEXT_41 = "> = this.create(data,customHeaders);" + NL + "    //result.subscribe((result:";
+  protected final String TEXT_42 = ") => {}, (erro:any) => {}); // com isso duplica" + NL + "    return result;" + NL + "  }" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -161,6 +166,16 @@ while (itGetPut.hasNext()) {
 }
 
     stringBuffer.append(TEXT_37);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_38);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_39);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_40);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_41);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_42);
     return stringBuffer.toString();
   }
 }

@@ -164,4 +164,11 @@ while (itGetPut.hasNext()) {
 <%
 }
 %>
+
+  // aprender mais para fazer algo que trate falha de conexao --> 25/05/2019
+  public createDg<<%= classe.getNomeParaClasse() %>>(data: <%= classe.getNomeParaClasse() %>, erroMsg? :string, customHeaders?: Function): Observable<<%= classe.getNomeParaClasse() %>> {
+    let result : Observable<<%= classe.getNomeParaClasse() %>> = this.create(data,customHeaders);
+    //result.subscribe((result:<%= classe.getNomeParaClasse() %>) => {}, (erro:any) => {}); // com isso duplica
+    return result;
+  }
 }

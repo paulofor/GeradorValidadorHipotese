@@ -4,33 +4,34 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="quadroBase" *ngIf="usuario" padding>
 
-  <div class="quadro30">
-
+  <div padding class="quadro40" >
+    <img style="margin-top:36px;" src="assets/imgs/logoTela.png" />
+    <ion-card *ngIf="erroMsg" padding>
+      <ion-card-content>
+        <p class="erroMsg">{{erroMsg}}</p>
+      </ion-card-content>
+    </ion-card>
   </div>
 
-  <ion-list class="quadro70">
-
-    <ion-item>
-      <button (click)="executaSerie()" [disabled]="!existeSerie()" ion-button block large icon-start>
-        <ion-icon name="create"></ion-icon>&nbsp; Administrar Series
+  <ion-list class="quadro60">
+    <ion-item class="quadroBase">
+      <button (click)="executaSerie()" [disabled]="!existeSerie" ion-button block large icon-start>
+        <ion-icon name="create"></ion-icon><label>Administrar Séries</label>
       </button>
     </ion-item>
-
-    <ion-item>
-      <button (click)="executaDiaTreino()" [disabled]="!existeDiaTreino()" ion-button block large icon-start>
-        <ion-icon name="body"></ion-icon>&nbsp; Iniciar Dia de Treino
+    <ion-item class="quadroBase">
+      <button (click)="executaDiaTreino()" [disabled]="!existeDiaTreino" ion-button block large icon-start>
+        <ion-icon name="body"></ion-icon><label>Iniciar Dia de Treino</label>
       </button>
     </ion-item>
-
-    <ion-item>
-      <button (click)="executaConsulta()" [disabled]="!existeConsulta()"  ion-button block large icon-start>
-        <ion-icon name="stats"></ion-icon>&nbsp; Consultar Performances
+    <ion-item class="quadroBase">
+      <button (click)="executaConsulta()" [disabled]="!existeConsulta" ion-button block large icon-start>
+        <ion-icon name="stats"></ion-icon><label>Consultar Performances</label>
       </button>
     </ion-item>
-
-
   </ion-list>
+
 
 </ion-content>

@@ -9,6 +9,7 @@ Configuracao conf = recursos.getConfiguracao();
 import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api , LoopBackFilter, Usuario } from '../../shared/sdk';
 import { NavParams, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { MSG_SEM_INTERNET } from '../../app/const';
 
 // Tipo: <%= tela.getTipo() %>
 export abstract class <%= tela.getNome() %>Base {
@@ -34,6 +35,8 @@ export abstract class <%= tela.getNome() %>Base {
   protected listaLoadOne : <%= tela.getEntidade().getNomeParaClasse() %>[];
   protected itemNaoEncontrado: boolean;
   
+  
+  protected erroMsg: string;
  
   constructor(	public navParams: NavParams,
   				public navCtrl: NavController,
@@ -54,7 +57,12 @@ export abstract class <%= tela.getNome() %>Base {
 							this.posItemLoad();
 							console.log('item: ' , this.item)
 						},
-						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
+						(erro: any) => {
+							console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro));
+							if (erro == 'Server error') {
+								this.erroMsg = MSG_SEM_INTERNET;
+							}
+						}
 					)
 			} else  {
 				console.log('<%= tela.getEntidade().getNomeParaClasse() %>.findOne , filtroLoadOne: ' , JSON.stringify(this.filtroLoadOne()));
@@ -74,7 +82,12 @@ export abstract class <%= tela.getNome() %>Base {
 							}
 								//if (!this.item) this.itemNaoEncontrado();
 						},
-						(erro: any) => console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro))
+						(erro: any) => {
+							console.log('<%= tela.getNome() %>Base:LoadId(Erro): ' , JSON.stringify(erro));
+							if (erro == 'Server error') {
+								this.erroMsg = MSG_SEM_INTERNET;
+							}
+						}
 					)
 			}
 		} else {
@@ -98,6 +111,12 @@ export abstract class <%= tela.getNome() %>Base {
 	}
   
 	ionViewDidLoad() {
+	}
+	
+	protected verificaConexao(erro: any) {
+		if (erro == 'Server error') {
+			this.erroMsg = MSG_SEM_INTERNET;
+		}
 	}
 }
     
