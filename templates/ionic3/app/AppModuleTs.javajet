@@ -45,7 +45,11 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
 <%
 }
 %>
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [
@@ -108,7 +112,8 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
 	}
 	%>
     Screenshot,
-    Storage
+    Storage,
+    { provide: LOCALE_ID, useValue: 'pt-BR' } 
   ]
 })
 export class AppModule {}
