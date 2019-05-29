@@ -122,7 +122,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		String conteudo = PageModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
 		this.copiaArquivo("login.html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivoSeNaoExiste("login.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("login.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
 		
@@ -150,8 +150,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		nomeArquivo = pathDestino + "signup.module.ts";
 		conteudo = PageModuleTs.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		this.copiaArquivoSeNaoExiste("signup.html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivoSeNaoExiste("signup.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("signup.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("signup.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("signup.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("signup-base.ts", pathOrigem, pathDestino, recurso);
 

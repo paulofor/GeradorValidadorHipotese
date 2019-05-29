@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SignupPageBase } from './signup-base';
+import { FormBuilder } from '@angular/forms';
+import { UsuarioApi } from '../../shared/sdk/index';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the SignupPage page.
@@ -13,16 +17,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-signup',
   templateUrl: 'signup.html',
 })
-export class SignupPage {
+export class SignupPage extends SignupPageBase{
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  tipo = 'password';
+  passwordCheckbox
+
+  constructor(public navCtrl: NavController, protected formBuilder: FormBuilder, protected storage:Storage, protected srv: UsuarioApi) {
+    super(navCtrl, formBuilder, storage, srv);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
+
+  mudaStatusSenha() {
+    console.log('Status: ' , this.passwordCheckbox);
+    if (this.passwordCheckbox) {
+      this.tipo = 'text'
+    } else {
+      this.tipo = 'password';
+    }
   }
-  ionViewWillEnter() {
-    console.log('');
-    console.log('Tela: SignupPage');
-  }
+
 }
