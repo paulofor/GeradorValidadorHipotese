@@ -34,7 +34,7 @@ public class CriaIonic3ProdBack {
 	
 	public static void executa(AplicacaoRest appRest) {
 		Aplicacao aplicacao = appRest.criaItem();
-		GeradorIonic3Back gerador = new GeradorIonic3Back();
+		GeradorIonic3Back gerador = new GeradorIonic3Back(GeradorIonic3Back.AMBIENTE_PRODUCAO);
 		try {
 			gerador.setAplicacao(aplicacao);
 			gerador.criaArquivos();

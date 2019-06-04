@@ -7,7 +7,7 @@ import loopback.cliente.modelo.AplicacaoRest;
 import loopback.cliente.repositorio.AplicacaoRepositorio;
 import loopback.remoting.adapters.RestAdapter;
 
-public class CriaIonic3Back {
+public class CriaIonic3DesenBack {
 
 	/**
 	 * @param args
@@ -34,7 +34,7 @@ public class CriaIonic3Back {
 	
 	public static void executa(AplicacaoRest appRest) {
 		Aplicacao aplicacao = appRest.criaItem();
-		GeradorIonic3Back gerador = new GeradorIonic3Back();
+		GeradorIonic3Back gerador = new GeradorIonic3Back(GeradorIonic3Back.AMBIENTE_DESENVOLVIMENTO);
 		try {
 			gerador.setAplicacao(aplicacao);
 			gerador.criaArquivos();

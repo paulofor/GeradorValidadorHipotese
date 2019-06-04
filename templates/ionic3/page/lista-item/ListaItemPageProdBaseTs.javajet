@@ -17,9 +17,11 @@ import { <%= telaEdicao.getNome() %> } from '../<%= telaEdicao.getPathArquivo() 
 <% } %>
 import { Storage } from '@ionic/storage';
 import { MSG_SEM_INTERNET } from '../../app/const';
+import { ComponenteBase } from '../componente-base';
+
 
 // Tipo: <%= tela.getTipo() %>
-export abstract class <%= tela.getNome() %>Base {
+export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
 
     protected usuario: Usuario;
 
@@ -45,6 +47,7 @@ export abstract class <%= tela.getNome() %>Base {
   	}
 
 	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,protected storage: Storage) {
+		super();
 	}
 
 	ionViewWillEnter() {

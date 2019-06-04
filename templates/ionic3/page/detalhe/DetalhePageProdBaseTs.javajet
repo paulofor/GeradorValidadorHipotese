@@ -10,9 +10,10 @@ import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().g
 import { NavParams, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MSG_SEM_INTERNET } from '../../app/const';
+import { ComponenteBase } from '../componente-base';
 
 // Tipo: <%= tela.getTipo() %>
-export abstract class <%= tela.getNome() %>Base {
+export abstract class <%= tela.getNome() %>Base extends ComponenteBase{ 
 
   protected usuario: Usuario;
   
@@ -42,6 +43,7 @@ export abstract class <%= tela.getNome() %>Base {
   				public navCtrl: NavController,
 				public srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,
 				protected storage: Storage) {
+		super();
   } 
   
 	private inicializaItem() {

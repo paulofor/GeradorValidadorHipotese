@@ -20,9 +20,10 @@ import { <%= oposta.getNomeParaClasse() %>, <%= oposta.getNomeParaClasse() %>Api
 %>
 import { NavParams, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { ComponenteBase } from '../componente-base';
 
 // Tipo: EDITA
-export abstract class <%= tela.getNome() %>Base {
+export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
 
   protected usuario: Usuario;
   
@@ -61,6 +62,7 @@ while (itRel.hasNext()) {
 }
 %>
   				) {
+  				super();
   }
   private inicializaItem() {
 	this.item = this.navParams.get('item');

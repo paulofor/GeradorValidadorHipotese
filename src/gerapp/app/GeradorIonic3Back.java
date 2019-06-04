@@ -53,6 +53,22 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 	protected Configuracao configuracao = null;
 	protected ClasseWrapper entidade = null;
 
+	public static final String AMBIENTE_PRODUCAO = "prod";
+	public static final String AMBIENTE_DESENVOLVIMENTO = "desen";
+	private String ambiente;
+	
+	public GeradorIonic3Back(String ambiente) {
+		this.ambiente = ambiente;
+	}
+	
+	private boolean ehProducao() {
+		return (ambiente.compareTo(AMBIENTE_PRODUCAO)==0);
+	}
+	private boolean ehDesenvolvimento() {
+		return (ambiente.compareTo(AMBIENTE_DESENVOLVIMENTO)==0); 
+	}
+	
+	
 	private String getDiretorioAngular(Recursos recurso) {
 		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/src/";
 	}
@@ -200,6 +216,16 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		nomeArquivo = getDiretorioAngular(recurso) + "/theme/variables.scss";
 		conteudo = ThemeVariables.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		
+		String pathDestino = getDiretorioAngular(recurso) + "/pages/";
+		String pathOrigem = ".//fixos//fixoIonic3//src//pages//";
+		if (ehProducao()) {
+		    	this.copiaArquivo(pathOrigem + "/componente-base-prod.ts", pathDestino + "/componente-base.ts");
+		}
+		if (ehDesenvolvimento()) {
+			this.copiaArquivo(pathOrigem + "/componente-base-desen.ts", pathDestino + "/componente-base.ts");
+		}
 
 	}
 
@@ -436,7 +462,14 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.criaCaminhoSeNaoExiste(pathDestino + "//storage//");
 
 		// Raiz
-		this.copiaArquivo("lb.config.ts", pathOrigem, pathDestino, recurso);
+		//this.copiaArquivo("lb.config.ts", pathOrigem, pathDestino, recurso);
+		if (ehProducao()) {
+			this.copiaArquivo(pathOrigem + "/lb.config-prod.ts", pathDestino + "/lb.config.ts");
+		}
+		if (ehDesenvolvimento()) {
+			this.copiaArquivo(pathOrigem + "/lb.config-desen.ts", pathDestino + "/lb.config.ts");
+		}
+		
 
 		// Models
 		this.copiaArquivo("//models//BaseModels.ts", pathOrigem, pathDestino, recurso);

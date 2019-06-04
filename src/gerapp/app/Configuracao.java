@@ -2,22 +2,16 @@ package gerapp.app;
 
 public class Configuracao {
 	
-	public final String AMBIENTE_PRODUCAO = "prod";
-	public final String AMBIENTE_DESENVOLVIMENTO = "desen";
+
 	
-	private String ambiente;
+	
 
 	private AplicacaoWrapper aplicacao;
 
 	public void setAmbiente(String dado) {
 		this.ambiente = dado;
 	}
-	public boolean ehProducao() {
-		return (ambiente.compareTo(AMBIENTE_PRODUCAO)==0);
-	}
-	public boolean ehDesenvolvimento() {
-		return (ambiente.compareTo(AMBIENTE_DESENVOLVIMENTO)==0); 
-	}
+	
 	
 	public Configuracao(AplicacaoWrapper aplic) {
 		aplicacao = aplic;
