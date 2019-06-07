@@ -36,6 +36,7 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
 		SDKModels,
 		LoopBackAuth,
 		InternalStorage,
+		PagSeguroApi,
 <%
 iterador = classes.iterator();
 while (iterador.hasNext()) {
