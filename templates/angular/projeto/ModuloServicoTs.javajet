@@ -24,6 +24,7 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
 }
 %>
 
+// Nao tem PagSeguroApi pq parece nao ser usado em lugar nenhum.
 
 @NgModule({
 	imports: [
@@ -36,7 +37,6 @@ import { <%= classe.getNomeParaClasse() %>Api } from '../shared/sdk';
 		SDKModels,
 		LoopBackAuth,
 		InternalStorage,
-		PagSeguroApi,
 <%
 iterador = classes.iterator();
 while (iterador.hasNext()) {

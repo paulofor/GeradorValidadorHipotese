@@ -23,6 +23,7 @@ import { LoginPage } from '../pages/login/login';
 import { ComandosZeroPage } from '../pages/comandos-zero/comandos-zero';
 import { IonicStorageModule } from '@ionic/storage';
 import { BrMaskerModule } from 'brmasker-ionic-3';
+import { PagSeguroApi } from '../shared/sdk/services/integracao/PagSeguro';
 
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
@@ -102,6 +103,7 @@ registerLocaleData(localePt, 'pt-BR');
     SDKModels,
     LoopBackAuth,
     InternalStorage,
+    PagSeguroApi,
     <%
 	iteradorCl = classes.iterator();
 	while (iteradorCl.hasNext()) {
