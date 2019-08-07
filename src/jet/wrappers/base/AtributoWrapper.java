@@ -181,7 +181,7 @@ public abstract class AtributoWrapper implements AtributoTotalI {
 
 	public final String getTipoNode() {
 		if (base.getTipo().equals("NInt") || base.getTipo().equals("Decimal")
-				|| base.getTipo().equals("Logic") || base.getTipo().equals("")
+				|| base.getTipo().equals("Logic") || base.getTipo().equals("Moeda")
 				|| base.getTipo().equals("")) {
 			return "number";
 		}
