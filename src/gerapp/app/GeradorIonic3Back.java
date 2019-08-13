@@ -56,19 +56,19 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 	public static final String AMBIENTE_PRODUCAO = "prod";
 	public static final String AMBIENTE_DESENVOLVIMENTO = "desen";
 	private String ambiente;
-	
+
 	public GeradorIonic3Back(String ambiente) {
 		this.ambiente = ambiente;
 	}
-	
+
 	private boolean ehProducao() {
-		return (ambiente.compareTo(AMBIENTE_PRODUCAO)==0);
+		return (ambiente.compareTo(AMBIENTE_PRODUCAO) == 0);
 	}
+
 	private boolean ehDesenvolvimento() {
-		return (ambiente.compareTo(AMBIENTE_DESENVOLVIMENTO)==0); 
+		return (ambiente.compareTo(AMBIENTE_DESENVOLVIMENTO) == 0);
 	}
-	
-	
+
 	private String getDiretorioAngular(Recursos recurso) {
 		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/src/";
 	}
@@ -103,6 +103,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		// this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
 		// this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("main.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("const.ts", pathOrigem, pathDestino, recurso);
 
 		pathDestino = raizDestino + "src/assets/icon/";
 		pathOrigem = raizOrigem + "src/assets/icon/";
@@ -127,7 +128,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("list.html", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.ts", pathOrigem, pathDestino, recurso);
-		
+
 		// login
 		TelaAppWrapper tela = new TelaAppWrapper("Login");
 		recurso.setItemCorrente(tela);
@@ -141,8 +142,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("login.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("login.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
-		
-		
+
 		// ComandosZero
 		tela = new TelaAppWrapper("ComandosZero");
 		recurso.setItemCorrente(tela);
@@ -156,7 +156,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("comandos-zero.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("comandos-zero.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("comandos-zero-base.ts", pathOrigem, pathDestino, recurso);
-		
+
 		// signup
 		tela = new TelaAppWrapper("Signup");
 		recurso.setItemCorrente(tela);
@@ -174,9 +174,13 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		pathDestino = raizDestino + "src/theme/";
 		pathOrigem = raizOrigem + "src/theme/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		// this.copiaArquivo("variables.scss", pathOrigem, pathDestino,
-		// recurso);
 
+		
+		pathDestino = raizDestino + "src/shared/sdk/services/integracao/";
+		pathOrigem = "./fixos/angular/integracao/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("PagSeguro.ts", pathOrigem, pathDestino, recurso);
+		
 	}
 
 	@Override
@@ -216,12 +220,11 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		nomeArquivo = getDiretorioAngular(recurso) + "/theme/variables.scss";
 		conteudo = ThemeVariables.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
-		
-		
+
 		String pathDestino = getDiretorioAngular(recurso) + "/pages/";
 		String pathOrigem = ".//fixos//fixoIonic3//src//pages//";
 		if (ehProducao()) {
-		    	this.copiaArquivo(pathOrigem + "/componente-base-prod.ts", pathDestino + "/componente-base.ts");
+			this.copiaArquivo(pathOrigem + "/componente-base-prod.ts", pathDestino + "/componente-base.ts");
 		}
 		if (ehDesenvolvimento()) {
 			this.copiaArquivo(pathOrigem + "/componente-base-desen.ts", pathDestino + "/componente-base.ts");
@@ -282,7 +285,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
-		
+
 		if (tela.tipoGraficoBarra()) {
 
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
@@ -340,7 +343,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
-		
+
 		// Generica
 		if (tela.tipoGenerica()) {
 
@@ -462,14 +465,13 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.criaCaminhoSeNaoExiste(pathDestino + "//storage//");
 
 		// Raiz
-		//this.copiaArquivo("lb.config.ts", pathOrigem, pathDestino, recurso);
+		// this.copiaArquivo("lb.config.ts", pathOrigem, pathDestino, recurso);
 		if (ehProducao()) {
 			this.copiaArquivo(pathOrigem + "/lb.config-prod.ts", pathDestino + "/lb.config.ts");
 		}
 		if (ehDesenvolvimento()) {
 			this.copiaArquivo(pathOrigem + "/lb.config-desen.ts", pathDestino + "/lb.config.ts");
 		}
-		
 
 		// Models
 		this.copiaArquivo("//models//BaseModels.ts", pathOrigem, pathDestino, recurso);

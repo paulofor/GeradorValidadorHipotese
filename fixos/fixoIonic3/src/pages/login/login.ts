@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UsuarioApi, AcaoApi } from '../../shared/sdk/index';
+import { UsuarioApi, AcaoApi, Usuario } from '../../shared/sdk/index';
 import { FormBuilder } from '@angular/forms';
 import { LoginPageBase } from './login-base';
 import { Storage } from '@ionic/storage';
 import { Page } from 'ionic-angular/navigation/nav-util';
 import { ComandosZeroPage } from '../comandos-zero/comandos-zero';
+import { PagSeguroApi } from '../../shared/sdk/services/integracao/PagSeguro';
 
 
 /**
@@ -25,6 +26,8 @@ export class LoginPage extends LoginPageBase {
 
 
 
+
+
   getPaginaInicial(): Page {
     var proxima = ComandosZeroPage;
     console.log('Proxima: ' , proxima);
@@ -34,8 +37,9 @@ export class LoginPage extends LoginPageBase {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-    protected formBuilder: FormBuilder, protected srv: UsuarioApi, protected srvACao: AcaoApi, protected storage: Storage) {
-    super(navCtrl, navParams, formBuilder, srv, srvACao, storage);
+    protected formBuilder: FormBuilder, protected srv: UsuarioApi, 
+    protected srvACao: AcaoApi, protected storage: Storage, protected pagSeguro:PagSeguroApi) {
+    super(navCtrl, navParams, formBuilder, srv, srvACao, storage, pagSeguro);
   }
 
   ionViewDidLoad() {

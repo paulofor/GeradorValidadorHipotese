@@ -14,24 +14,24 @@ public class CriaIonic3DesenBack {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Ola Mundo");
-		
+
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 		// Treino --> 27
-		rep.findById(27, new ObjectCallback<AplicacaoRest>() { 
-            @Override 
-            public void onSuccess(AplicacaoRest model) { 
-            	System.out.println("Sucesso: " + model);
-            	executa(model);
-            }
+		rep.findById(27, new ObjectCallback<AplicacaoRest>() {
+			@Override
+			public void onSuccess(AplicacaoRest model) {
+				System.out.println("Sucesso: " + model);
+				executa(model);
+			}
+
 			@Override
 			public void onError(Throwable t) {
 				t.printStackTrace();
-			} 
-	    });
+			}
+		});
 	}
-	
-	
+
 	public static void executa(AplicacaoRest appRest) {
 		Aplicacao aplicacao = appRest.criaItem();
 		GeradorIonic3Back gerador = new GeradorIonic3Back(GeradorIonic3Back.AMBIENTE_DESENVOLVIMENTO);

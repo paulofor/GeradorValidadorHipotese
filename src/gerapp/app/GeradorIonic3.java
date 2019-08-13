@@ -112,7 +112,13 @@ public class GeradorIonic3 extends GeradorNodeBase {
 		pathDestino = raizDestino + "src/theme/";
 		pathOrigem = raizOrigem + "src/theme/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		//this.copiaArquivo("variables.scss", pathOrigem, pathDestino, recurso);
+		
+		
+		pathDestino = raizDestino + "src/shared/sdk/services/integracao/";
+		pathOrigem = "./fixos/angular/integracao/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("list.html", pathOrigem, pathDestino, recurso);
+
 
 	}
 	
