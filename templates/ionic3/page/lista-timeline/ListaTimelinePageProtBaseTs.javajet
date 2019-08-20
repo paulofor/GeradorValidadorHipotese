@@ -1,0 +1,52 @@
+<%@ jet package="jet.ionic3.page.listaTimeline" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ListaTimelinePageProtBaseTs" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+
+
+import { Component } from '@angular/core';
+import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { Screenshot } from '@ionic-native/screenshot';
+
+
+import { <%= tela.getEntidade().getNomeParaClasse() %>, <%= tela.getEntidade().getNomeParaClasse() %>Api } from '../../shared/sdk';
+
+
+export abstract class <%= tela.getNome() %>Base {
+
+  protected item: <%= tela.getEntidade().getNomeParaClasse() %>;
+
+  constructor(protected navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api, 
+  				 protected screenshot: Screenshot) {
+  }
+
+  //protected abstract getLista();
+  
+  protected carrega() {
+    this.srv.<%= tela.getMetodoCarga() %>()
+      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
+        console.log('Result', JSON.stringify(result));
+        this.item = result;
+      });
+  }
+  
+   
+  protected carregaPrototipo() {
+    this.srv.<%= tela.getMetodoCarga() %>()
+      .subscribe((result: <%= tela.getEntidade().getNomeParaClasse() %>) => {
+        console.log('Result-Prototipo', JSON.stringify(result));
+        this.item = result;
+      });
+  }
+  
+  protected testaFoto() {
+    this.screenshot.save('jpg', 100, '<%= tela.getNome() %>');
+  }
+
+  
+}

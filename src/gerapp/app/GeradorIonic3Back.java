@@ -44,6 +44,9 @@ import jet.ionic3.page.listaGrid.ListaGridPageTs;
 import jet.ionic3.page.listaItem.ListaItemPageHtml;
 import jet.ionic3.page.listaItem.ListaItemPageProdBaseTs;
 import jet.ionic3.page.listaItem.ListaItemPageTs;
+import jet.ionic3.page.listaItem.ListaTimelinePageTs;
+import jet.ionic3.page.listaTimeline.ListaTimelinePageHtml;
+import jet.ionic3.page.listaTimeline.ListaTimelinePageProdBaseTs;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 
@@ -103,7 +106,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		// this.copiaArquivo("app.module.ts", pathOrigem, pathDestino, recurso);
 		// this.copiaArquivo("app.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("main.ts", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("const.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("const.ts", pathOrigem, pathDestino, recurso);
 
 		pathDestino = raizDestino + "src/assets/icon/";
 		pathOrigem = raizOrigem + "src/assets/icon/";
@@ -144,6 +147,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
 
 		// ComandosZero
+		/*
 		tela = new TelaAppWrapper("ComandosZero");
 		recurso.setItemCorrente(tela);
 		pathDestino = raizDestino + "src/pages/comandos-zero/";
@@ -156,6 +160,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("comandos-zero.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivoSeNaoExiste("comandos-zero.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("comandos-zero-base.ts", pathOrigem, pathDestino, recurso);
+		*/
 
 		// signup
 		tela = new TelaAppWrapper("Signup");
@@ -254,6 +259,27 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 			geraArquivoFonte(conteudo, nomeArquivo);
 		}
 
+		
+		if (tela.tipoLista()) {
+			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
+			conteudo = ListaTimelinePageProdBaseTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
+				conteudo = ListaTimelinePageTs.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+				conteudo = ListaTimelinePageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
+		
+		
+		/*
 		if (tela.tipoLista()) {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
@@ -267,6 +293,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
+		*/
+		
 		if (tela.tipoDetalhe()) {
 
 			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";

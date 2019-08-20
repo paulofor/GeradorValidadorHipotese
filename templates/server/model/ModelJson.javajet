@@ -9,6 +9,7 @@ ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();
 %>
 {
   "name": "<%= classe.getNomeModeloServer() %>",
+  "plural": "<%= classe.getNomeModeloServer() %>s",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
