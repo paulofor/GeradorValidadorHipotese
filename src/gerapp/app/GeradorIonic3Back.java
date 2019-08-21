@@ -75,6 +75,23 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 	private String getDiretorioAngular(Recursos recurso) {
 		return PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/src/";
 	}
+	
+	
+	protected void criaModeloFixo(Recursos recurso) throws IOException {
+		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/src/shared/sdk/";
+		String raizOrigem = "./fixos/fixoIonic3/src/shared/sdk/";
+		
+		String pathDestino = raizDestino + "models/";
+		String pathOrigem = raizOrigem + "models/";
+		this.copiaArquivoSeNaoExiste("Visitante.ts", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "services/custom/";
+		pathOrigem = raizOrigem + "services/custom/";
+		this.copiaArquivoSeNaoExiste("Visitante.ts", pathOrigem, pathDestino, recurso);
+		
+		
+	}
+	
 
 	protected void criaArquivoProjeto(Recursos recurso) throws IOException {
 		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/";
@@ -474,6 +491,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 			conteudo = LoopbackService.create("\n").generate(recurso);
 			geraArquivoFonte(conteudo, nomeArquivo);
 		}
+		
 	}
 
 	private void arquivosLoopbackClientFixo(Recursos recurso, String pathDestino) throws IOException {
@@ -530,6 +548,9 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("//storage//cookie.browser.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("//storage//storage.browser.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("//storage//storage.swaps.ts", pathOrigem, pathDestino, recurso);
+		
+		// Modelo - Fixo
+		criaModeloFixo(recurso);
 
 	}
 
