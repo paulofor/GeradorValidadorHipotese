@@ -24,6 +24,9 @@ import { ComandosZeroPage } from '../pages/comandos-zero/comandos-zero';
 import { IonicStorageModule } from '@ionic/storage';
 import { BrMaskerModule } from 'brmasker-ionic-3';
 import { PagSeguroApi } from '../shared/sdk/services/integracao/PagSeguro';
+import { VisitanteApi } from '../shared/sdk/services/custom/Visitante';
+import { CookieService } from 'ngx-cookie-service';
+import { FCM } from '@ionic-native/fcm';
 
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
@@ -104,6 +107,7 @@ registerLocaleData(localePt, 'pt-BR');
     LoopBackAuth,
     InternalStorage,
     PagSeguroApi,
+    VisitanteApi,
     <%
 	iteradorCl = classes.iterator();
 	while (iteradorCl.hasNext()) {
@@ -115,7 +119,9 @@ registerLocaleData(localePt, 'pt-BR');
 	%>
     Screenshot,
     Storage,
-    { provide: LOCALE_ID, useValue: 'pt-BR' } 
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    CookieService,
+    FCM
   ]
 })
 export class AppModule {}

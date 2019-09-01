@@ -83,11 +83,11 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		
 		String pathDestino = raizDestino + "models/";
 		String pathOrigem = raizOrigem + "models/";
-		this.copiaArquivoSeNaoExiste("Visitante.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
 		
 		pathDestino = raizDestino + "services/custom/";
 		pathOrigem = raizOrigem + "services/custom/";
-		this.copiaArquivoSeNaoExiste("Visitante.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
 		
 		
 	}

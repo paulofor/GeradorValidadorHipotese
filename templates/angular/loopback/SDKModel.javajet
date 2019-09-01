@@ -10,6 +10,7 @@ Configuracao conf = recursos.getConfiguracao();
 import { Injectable } from '@angular/core';
 import { Container } from '../../models/Container';
 import { User } from '../../models/User';
+import { Visitante } from '../../models/Visitante';
 <%
 Iterator<ClasseWrapper> iterador = classes.iterator();
 while (iterador.hasNext()) {
@@ -35,7 +36,8 @@ while (iterador.hasNext()) {
 }
 %>
 	User: User,
-    Container: Container
+    Container: Container,
+    Visitante : Visitante 
   };
 
   public get(modelName: string): any {

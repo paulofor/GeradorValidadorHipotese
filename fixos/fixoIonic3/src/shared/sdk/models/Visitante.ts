@@ -1,9 +1,5 @@
 /* tslint:disable */
 import {
-  PaginaValidacaoWeb,
-  PaginaInstalacaoApp,
-  VersaoApp,
-  RespostaVersao
 } from '../index';
 
 declare var Object: any;
@@ -12,13 +8,9 @@ export interface VisitanteInterface {
   "dataHora"?: Date;
   "id"?: number;
   "dispositivo"?: string;
-  "paginaValidacaoWebId"?: number;
-  "paginaInstalacaoAppId"?: number;
   "versaoAppId"?: number;
-  paginaValidacaoWeb?: PaginaValidacaoWeb;
-  paginaInstalacaoApp?: PaginaInstalacaoApp;
-  versaoApp?: VersaoApp;
-  respostaVersaos?: RespostaVersao[];
+  "fcmToken"?: string;
+  "dataHoraNotificacao"?: Date;
 }
 
 export class Visitante implements VisitanteInterface {
@@ -26,13 +18,9 @@ export class Visitante implements VisitanteInterface {
   "dataHora": Date;
   "id": number;
   "dispositivo": string;
-  "paginaValidacaoWebId": number;
-  "paginaInstalacaoAppId": number;
   "versaoAppId": number;
-  paginaValidacaoWeb: PaginaValidacaoWeb;
-  paginaInstalacaoApp: PaginaInstalacaoApp;
-  versaoApp: VersaoApp;
-  respostaVersaos: RespostaVersao[];
+  "fcmToken": string;
+  "dataHoraNotificacao": Date;
   constructor(data?: VisitanteInterface) {
     Object.assign(this, data);
   }
@@ -82,52 +70,20 @@ export class Visitante implements VisitanteInterface {
           name: 'dispositivo',
           type: 'string'
         },
-        "paginaValidacaoWebId": {
-          name: 'paginaValidacaoWebId',
-          type: 'number'
-        },
-        "paginaInstalacaoAppId": {
-          name: 'paginaInstalacaoAppId',
-          type: 'number'
-        },
         "versaoAppId": {
           name: 'versaoAppId',
           type: 'number'
         },
+        "fcmToken": {
+          name: 'fcmToken',
+          type: 'string'
+        },
+        "dataHoraNotificacao": {
+          name: 'dataHoraNotificacao',
+          type: 'Date'
+        }
       },
       relations: {
-        paginaValidacaoWeb: {
-          name: 'paginaValidacaoWeb',
-          type: 'PaginaValidacaoWeb',
-          model: 'PaginaValidacaoWeb',
-          relationType: 'belongsTo',
-                  keyFrom: 'paginaValidacaoWebId',
-          keyTo: 'id'
-        },
-        paginaInstalacaoApp: {
-          name: 'paginaInstalacaoApp',
-          type: 'PaginaInstalacaoApp',
-          model: 'PaginaInstalacaoApp',
-          relationType: 'belongsTo',
-                  keyFrom: 'paginaInstalacaoAppId',
-          keyTo: 'id'
-        },
-        versaoApp: {
-          name: 'versaoApp',
-          type: 'VersaoApp',
-          model: 'VersaoApp',
-          relationType: 'belongsTo',
-                  keyFrom: 'versaoAppId',
-          keyTo: 'id'
-        },
-        respostaVersaos: {
-          name: 'respostaVersaos',
-          type: 'RespostaVersao[]',
-          model: 'RespostaVersao',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'visitanteId'
-        },
       }
     }
   }
