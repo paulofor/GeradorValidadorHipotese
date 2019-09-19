@@ -27,6 +27,8 @@ import { PagSeguroApi } from '../shared/sdk/services/integracao/PagSeguro';
 import { VisitanteApi } from '../shared/sdk/services/custom/Visitante';
 import { CookieService } from 'ngx-cookie-service';
 import { FCM } from '@ionic-native/fcm';
+import { AcessaFcmService } from '../servico/AcessaFcmService';
+import { DispositivoUsuarioApi } from '../shared/sdk/services/custom/DispositivoUsuario';
 
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
@@ -121,7 +123,9 @@ registerLocaleData(localePt, 'pt-BR');
     Storage,
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     CookieService,
-    FCM
+    FCM,
+    AcessaFcmService,
+    DispositivoUsuarioApi
   ]
 })
 export class AppModule {}

@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 import { Container } from '../../models/Container';
 import { User } from '../../models/User';
 import { Visitante } from '../../models/Visitante';
+import { DispositivoUsuario } from '../../models/DispositivoUsuario';
 <%
 Iterator<ClasseWrapper> iterador = classes.iterator();
 while (iterador.hasNext()) {
@@ -37,7 +38,8 @@ while (iterador.hasNext()) {
 %>
 	User: User,
     Container: Container,
-    Visitante : Visitante 
+    Visitante : Visitante,
+    DispositivoUsuario : DispositivoUsuario
   };
 
   public get(modelName: string): any {
