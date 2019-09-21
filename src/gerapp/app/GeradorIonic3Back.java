@@ -110,7 +110,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		// Visitante
 		String pathDestino = raizDestino;
 		String pathOrigem = raizOrigem;
-		this.copiaArquivo("AcessaFcmService.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("acessa-fcm-service.ts", pathOrigem, pathDestino, recurso);
 		
 		
 	}

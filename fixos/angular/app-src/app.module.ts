@@ -8,7 +8,7 @@ import { PrincipalRoutingModule } from './principal-routing/principal-routing.mo
 import { ComponenteTelaModule } from './tela/componente-tela.module';
 import { ServicoModule } from './servico/servico.module';
 import { ComponenteListaModule } from './lista/componente-lista.module';
-import { AcessaFcmService } from '../servico/AcessaFcmService';
+import { AcessaFcmService } from '../servico/acessa-fcm-service';
 import { DispositivoUsuarioApi } from '../shared/sdk/services/custom/DispositivoUsuario';
 
 @NgModule({

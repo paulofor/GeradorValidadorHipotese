@@ -1,31 +1,32 @@
 /* tslint:disable */
-import {
-} from '../index';
 
 declare var Object: any;
 export interface DispositivoUsuarioInterface {
   "tokenFcm"?: string;
   "dataHoraCriacao"?: Date;
-  "id"?: number;
   "dataUltimoAcesso"?: Date;
   "dataChamada"?: Date;
   "temMudanca"?: number;
   "ativo"?: number;
-  "codigoDispositivo"? : number;
-  "microSd"? : number
-  "campanhaAdsId"? : number
+  "codigoDispositivo"?: string;
+  "microSd"?: number;
+  "id"?: number;
+  "campanhaAdsId"?: number;
+  "versaoAppId"?: number;
 }
 
 export class DispositivoUsuario implements DispositivoUsuarioInterface {
   "tokenFcm": string;
   "dataHoraCriacao": Date;
-  "id": number;
   "dataUltimoAcesso": Date;
   "dataChamada": Date;
   "temMudanca": number;
   "ativo": number;
-  "codigoDispositivo" : number;
-  "microSd" : number;
+  "codigoDispositivo": string;
+  "microSd": number;
+  "id": number;
+  "campanhaAdsId": number;
+  "versaoAppId": number;
   constructor(data?: DispositivoUsuarioInterface) {
     Object.assign(this, data);
   }
@@ -40,7 +41,7 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Visitante for dynamic purposes.
+  * This method creates an instance of DispositivoUsuario for dynamic purposes.
   **/
   public static factory(data: DispositivoUsuarioInterface): DispositivoUsuario{
     return new DispositivoUsuario(data);
@@ -67,10 +68,6 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
           name: 'dataHoraCriacao',
           type: 'Date'
         },
-        "id": {
-          name: 'id',
-          type: 'number'
-        },
         "dataUltimoAcesso": {
           name: 'dataUltimoAcesso',
           type: 'Date'
@@ -95,8 +92,16 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
           name: 'microSd',
           type: 'number'
         },
+        "id": {
+          name: 'id',
+          type: 'number'
+        },
         "campanhaAdsId": {
           name: 'campanhaAdsId',
+          type: 'number'
+        },
+        "versaoAppId": {
+          name: 'versaoAppId',
           type: 'number'
         },
       },

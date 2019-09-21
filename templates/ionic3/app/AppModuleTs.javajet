@@ -27,7 +27,7 @@ import { PagSeguroApi } from '../shared/sdk/services/integracao/PagSeguro';
 import { VisitanteApi } from '../shared/sdk/services/custom/Visitante';
 import { CookieService } from 'ngx-cookie-service';
 import { FCM } from '@ionic-native/fcm';
-import { AcessaFcmService } from '../servico/AcessaFcmService';
+import { AcessaFcmService } from '../servico/acessa-fcm-service';
 import { DispositivoUsuarioApi } from '../shared/sdk/services/custom/DispositivoUsuario';
 
 <%

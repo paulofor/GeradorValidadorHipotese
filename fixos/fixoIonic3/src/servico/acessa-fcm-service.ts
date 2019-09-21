@@ -15,37 +15,39 @@ export class AcessaFcmService {
     ) {
     }
 
-    public obtemTokenDispostivoUsuario() {
+    public obtemTokenDispostivoUsuarioFake(versaoAppId:number) {
         var token = '112231213215415615151515'
         console.log('Token fake: ', token);
-        let disppositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
-        disppositivoUsuario.tokenFcm = token;
-        disppositivoUsuario.dataHoraCriacao = new Date();
-        this.dispositivoUsuarioSrv.criaItem(disppositivoUsuario)
+        let dispositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
+        dispositivoUsuario.tokenFcm = token;
+        dispositivoUsuario.versaoAppId = versaoAppId;
+        dispositivoUsuario.dataHoraCriacao = new Date();
+        this.dispositivoUsuarioSrv.criaItem(dispositivoUsuario)
             .subscribe((resultado: any) => {
                 console.log('Resultado:', resultado);
             })
     }
-    public obtemTokenDispostivoUsuario1() {
+    public obtemTokenDispostivoUsuario(versaoAppId:number) {
         this.fcm.subscribeToTopic('all');
-        alert('inscreveu');
-        let disppositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
+        //alert('inscreveu');
+        let dispositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
         this.fcm.getToken().then(token => {
-            alert(token);
-            disppositivoUsuario.tokenFcm = token;
-            disppositivoUsuario.dataHoraCriacao = new Date();
-            alert(JSON.stringify(disppositivoUsuario));
-            this.dispositivoUsuarioSrv.criaItem(disppositivoUsuario)
+            //alert(token);
+            dispositivoUsuario.tokenFcm = token;
+            dispositivoUsuario.dataHoraCriacao = new Date();
+            dispositivoUsuario.versaoAppId = versaoAppId;
+            //alert(JSON.stringify(disppositivoUsuario));
+            this.dispositivoUsuarioSrv.criaItem(dispositivoUsuario)
             .subscribe((resultado: any) => {
                 console.log('Resultado:', resultado);
             })
         });
         this.fcm.onNotification().subscribe(data => {
-            alert('Recebeu notificacao')
+            //alert('Recebeu notificacao')
             if (data.wasTapped) {
-                alert('background');
+                //alert('background');
             } else {
-                alert('foreground');
+                //alert('foreground');
             }
             //let visitaNotificacao = new Visitante();
             //visitaNotificacao.versaoAppId = 789;
