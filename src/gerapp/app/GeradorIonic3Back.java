@@ -37,16 +37,14 @@ import jet.ionic3.page.getPut.GetPutPageTs;
 import jet.ionic3.page.graficoBarra.GraficoBarraPageHtml;
 import jet.ionic3.page.graficoBarra.GraficoBarraPageProdBaseTs;
 import jet.ionic3.page.graficoBarra.GraficoBarraPageTs;
-import jet.ionic3.page.lista.ListaPageHtml;
-import jet.ionic3.page.lista.ListaPageTs;
 import jet.ionic3.page.listaGrid.ListaGridPageHtml;
 import jet.ionic3.page.listaGrid.ListaGridPageTs;
 import jet.ionic3.page.listaItem.ListaItemPageHtml;
 import jet.ionic3.page.listaItem.ListaItemPageProdBaseTs;
 import jet.ionic3.page.listaItem.ListaItemPageTs;
-import jet.ionic3.page.listaItem.ListaTimelinePageTs;
 import jet.ionic3.page.listaTimeline.ListaTimelinePageHtml;
 import jet.ionic3.page.listaTimeline.ListaTimelinePageProdBaseTs;
+import jet.ionic3.page.listaTimeline.ListaTimelinePageTs;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 

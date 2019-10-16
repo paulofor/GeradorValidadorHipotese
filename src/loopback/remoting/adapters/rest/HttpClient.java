@@ -157,8 +157,8 @@ public class HttpClient extends AsyncHttpClient {
 			request.addHeader(header, getHeader(header));
 		}
 
-		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987", "Piquet08");
-		//request.setProxyServer(proxy);
+		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987", "Mclaren1");
+		request.setProxyServer(proxy);
 
 		System.out.println("Url:" + this.url + "?" + this.param);
 
