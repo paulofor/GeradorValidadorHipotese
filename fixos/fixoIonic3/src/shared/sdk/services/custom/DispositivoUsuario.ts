@@ -139,6 +139,18 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
     .pipe(map((data: DispositivoUsuario) => this.model.factory(data)));
   }
 
+
+  public CriaComUsuario(dispositivo: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = DispositivoUsuarioApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    "/DispositivoUsuarios/criaComUsuario";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof dispositivo !== 'undefined' && dispositivo !== null) _urlParams.dispositivo = dispositivo;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
   /**
    * The name of the model represented by this $resource,
    * i.e. `DispositivoUsuario`.

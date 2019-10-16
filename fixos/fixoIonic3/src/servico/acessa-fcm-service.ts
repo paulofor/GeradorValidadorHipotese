@@ -8,38 +8,70 @@ import { DispositivoUsuario } from "../shared/sdk/models/DispositivoUsuario";
 @Injectable()
 export class AcessaFcmService {
 
+
+
     constructor(
         @Inject(FCM) protected fcm: FCM,
         @Inject(DispositivoUsuarioApi) protected dispositivoUsuarioSrv: DispositivoUsuarioApi,
-        @Inject(VisitanteApi) protected visitanteSrv: VisitanteApi
+        @Inject(VisitanteApi) protected visitanteSrv: VisitanteApi,
+        @Inject(Storage) protected storage: Storage
     ) {
     }
 
-    public obtemTokenDispostivoUsuarioFake(versaoAppId:number) {
+
+    public executaValidacao(versaoAppId:number) {
+        this.storage.get("dispositivo").then((dado) => {
+            if (dado) {
+                this.registraVisita(dado);
+            } else {
+                this.obtemTokenDispostivoUsuario(versaoAppId);
+            }
+        });
+    }
+    public executaValidacaoFake(versaoAppId:number) {
+        this.storage.get("dispositivo").then((dado) => {
+            if (dado) {
+                this.registraVisita(dado);
+            } else {
+                this.obtemTokenDispostivoUsuarioFake(versaoAppId);
+            }
+        });
+    }
+
+	
+    private registraMobile(chave) {
+        this.storage.set("chave", chave).then((successData) => {
+            this.registraVisita(chave);
+        })
+    }
+    private registraVisita(chave) {
+
+    }
+    private obtemTokenDispostivoUsuarioFake(versaoAppId:number) {
         var token = '112231213215415615151515'
         console.log('Token fake: ', token);
         let dispositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
         dispositivoUsuario.tokenFcm = token;
         dispositivoUsuario.versaoAppId = versaoAppId;
-        dispositivoUsuario.dataHoraCriacao = new Date();
-        this.dispositivoUsuarioSrv.criaItem(dispositivoUsuario)
+        this.dispositivoUsuarioSrv.CriaComUsuario(dispositivoUsuario)
             .subscribe((resultado: any) => {
                 console.log('Resultado:', resultado);
+                this.registraMobile(resultado);
             })
     }
-    public obtemTokenDispostivoUsuario(versaoAppId:number) {
+    private obtemTokenDispostivoUsuario(versaoAppId:number) {
         this.fcm.subscribeToTopic('all');
         //alert('inscreveu');
         let dispositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
         this.fcm.getToken().then(token => {
             //alert(token);
             dispositivoUsuario.tokenFcm = token;
-            dispositivoUsuario.dataHoraCriacao = new Date();
             dispositivoUsuario.versaoAppId = versaoAppId;
             //alert(JSON.stringify(disppositivoUsuario));
-            this.dispositivoUsuarioSrv.criaItem(dispositivoUsuario)
+            this.dispositivoUsuarioSrv.CriaComUsuario(dispositivoUsuario)
             .subscribe((resultado: any) => {
                 console.log('Resultado:', resultado);
+                this.registraMobile(resultado);
             })
         });
         this.fcm.onNotification().subscribe(data => {

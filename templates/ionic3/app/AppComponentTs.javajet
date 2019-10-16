@@ -1,78 +1,157 @@
-<%@ jet package="jet.ionic3.app" 
-imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
-class="AppComponentTs" %>
+import { Injectable, Inject } from "@angular/core";
+import { FCM } from "@ionic-native/fcm";
+import { VisitanteApi } from "../shared/sdk/services/custom/Visitante";
+import { Visitante } from "../shared/sdk/models/Visitante";
+import { DispositivoUsuarioApi } from "../shared/sdk/services/custom/DispositivoUsuario";
+import { DispositivoUsuario } from "../shared/sdk/models/DispositivoUsuario";
 
-<%
-Recursos recursos = (Recursos) argument;  
-List<ItemComponente> listaTela = recursos.getListaTelaApp();
-Configuracao conf = recursos.getConfiguracao();
-%>
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+@Injectable()
+export class AcessaFcmService {
 
-import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
-import { AcessaFcmService } from '../servico/acessa-fcm-service';
-import { VERSAO_APP_ID } from './const';
-<%
-Iterator<ItemComponente> iterador = listaTela.iterator();
-while (iterador.hasNext()) {
-	TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
-%>
-import { <%= tela.getNome() %> } from '../pages/<%= tela.getPathArquivo() %>/<%= tela.getPathArquivo() %>';
-<%
-}
-%>
-import { timer } from 'rxjs/observable/timer';
 
-@Component({
-  templateUrl: 'app.html'
-})
-export class MyApp {
-  @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+    constructor(
+        @Inject(FCM) protected fcm: FCM,
+        @Inject(DispositivoUsuarioApi) protected dispositivoUsuarioSrv: DispositivoUsuarioApi,
+        @Inject(VisitanteApi) protected visitanteSrv: VisitanteApi,
+        @Inject(Storage) protected storage: Storage
+    ) {
+    }
 
-  pages: Array<{title: string, component: any}>;
-  showSplash = true;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-  				private fcmSrv:AcessaFcmService ) {
-    this.initializeApp();
+    public executaValidacao(versaoAppId:number) {
+        this.storage.get("dispositivo").then((dado) => {
+            if (dado) {
+                this.registraVisita(dado);
+            } else {
+                this.obtemTokenDispostivoUsuario(versaoAppId);
+            }
+        });
+    }
+    public executaValidacaoFake(versaoAppId:number) {
+        console.log('Vai executar storage');
+        this.storage.get('age').then((val) => {
+            console.log('Your age is', val);
+        });
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-	<%
-	iterador = listaTela.iterator();
-	while (iterador.hasNext()) {
-		TelaAppWrapper tela = (TelaAppWrapper) iterador.next();
-		if (tela.getNomeMenu().length()>0) {
-	%>
-      { title: '<%= tela.getNomeMenu() %>' , component: <%= tela.getNome() %>},
-	<%
-		}
-	}
-	%>
-     ];
+        this.storage.get("dispositivo").then((dado) => {
+            if (dado) {
+                this.registraVisita(dado);
+            } else {
+                this.obtemTokenDispostivoUsuarioFake(versaoAppId);
+            }
+        });
+    }
 
-  }
+	
+    private registraMobile(chave) {
+        this.storage.set("chave", chave).then((successData) => {
+            this.registraVisita(chave);
+        })
+    }
+    private registraVisita(chave) {
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.fcmSrv.obtemTokenDispostivoUsuario(VERSAO_APP_ID);
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-      timer(3000).subscribe(() => this.showSplash = false)
-    });
-  }
+    }
+    private obtemTokenDispostivoUsuarioFake(versaoAppId:number) {
+        var token = '112231213215415615151515'
+        console.log('Token fake: ', token);
+        let dispositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
+        dispositivoUsuario.tokenFcm = token;
+        dispositivoUsuario.versaoAppId = versaoAppId;
+        this.dispositivoUsuarioSrv.CriaComUsuario(dispositivoUsuario)
+            .subscribe((resultado: any) => {
+                console.log('Resultado:', resultado);
+                this.registraMobile(resultado);
+            })
+    }
+    private obtemTokenDispostivoUsuario(versaoAppId:number) {
+        this.fcm.subscribeToTopic('all');
+        //alert('inscreveu');
+        let dispositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
+        this.fcm.getToken().then(token => {
+            //alert(token);
+            dispositivoUsuario.tokenFcm = token;
+            dispositivoUsuario.versaoAppId = versaoAppId;
+            //alert(JSON.stringify(disppositivoUsuario));
+            this.dispositivoUsuarioSrv.CriaComUsuario(dispositivoUsuario)
+            .subscribe((resultado: any) => {
+                console.log('Resultado:', resultado);
+                this.registraMobile(resultado);
+            })
+        });
+        this.fcm.onNotification().subscribe(data => {
+            //alert('Recebeu notificacao')
+            if (data.wasTapped) {
+                //alert('background');
+            } else {
+                //alert('foreground');
+            }
+            //let visitaNotificacao = new Visitante();
+            //visitaNotificacao.versaoAppId = 789;
+            //this.visitanteSrv.criaItem(visitaNotificacao)
+            //    .subscribe((resultado: any) => {
+            //        alert('notificacao: ' + JSON.stringify(resultado));
+            //    })
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.push(page.component);
-  }
+        });
+        this.fcm.onTokenRefresh().subscribe(token => {
+            //alert('token')
+        });
+
+    }
+
+
+    
+    public obtemToken(visitanteCorrente: Visitante) {
+        var token = '112231213215415615151515'
+        console.log('Token fake: ', token);
+        visitanteCorrente.fcmToken = token;
+        visitanteCorrente.dataHoraNotificacao = new Date();
+        this.visitanteSrv.atualizaItem(visitanteCorrente.id, visitanteCorrente)
+            .subscribe((resultado: any) => {
+                console.log('Resultado:', resultado);
+            })
+    }
+
+
+
+    public obtemToken1(visitanteCorrente: Visitante) {
+        this.fcm.subscribeToTopic('all');
+        alert('inscreveu');
+        this.fcm.getToken().then(token => {
+            alert(token);
+            //localStorage.setItem('token', token);
+            visitanteCorrente.fcmToken = token;
+            visitanteCorrente.dataHoraNotificacao = new Date();
+            alert(JSON.stringify(visitanteCorrente));
+            this.visitanteSrv.atualizaItem(visitanteCorrente.id, visitanteCorrente)
+                .subscribe(
+                    (resultado: any) => {
+                        alert('Sucesso:' + JSON.stringify(resultado))
+                    },
+                    (erro: any) => {
+                        alert('Erro:' + JSON.stringify(erro))
+                    });
+        });
+        this.fcm.onNotification().subscribe(data => {
+            alert('Recebeu notificacao')
+            if (data.wasTapped) {
+                alert('background');
+            } else {
+                alert('foreground');
+            }
+            let visitaNotificacao = new Visitante();
+            visitaNotificacao.versaoAppId = 789;
+            this.visitanteSrv.criaItem(visitaNotificacao)
+                .subscribe((resultado: any) => {
+                    alert('notificacao: ' + JSON.stringify(resultado));
+                })
+
+        });
+        this.fcm.onTokenRefresh().subscribe(token => {
+            //alert('token')
+        });
+
+    }
+
 }
