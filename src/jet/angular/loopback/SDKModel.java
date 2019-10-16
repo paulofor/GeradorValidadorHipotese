@@ -19,7 +19,7 @@ public class SDKModel
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
-  protected final String TEXT_2 = NL + "import { Injectable } from '@angular/core';" + NL + "import { Container } from '../../models/Container';" + NL + "import { User } from '../../models/User';" + NL + "import { Visitante } from '../../models/Visitante';";
+  protected final String TEXT_2 = NL + "import { Injectable } from '@angular/core';" + NL + "import { Container } from '../../models/Container';" + NL + "import { User } from '../../models/User';" + NL + "import { Visitante } from '../../models/Visitante';" + NL + "import { DispositivoUsuario } from '../../models/DispositivoUsuario';";
   protected final String TEXT_3 = NL + "import { ";
   protected final String TEXT_4 = " } from '../../models/";
   protected final String TEXT_5 = "';";
@@ -27,7 +27,7 @@ public class SDKModel
   protected final String TEXT_7 = NL + "\t";
   protected final String TEXT_8 = ": ";
   protected final String TEXT_9 = ",";
-  protected final String TEXT_10 = NL + "\tUser: User," + NL + "    Container: Container," + NL + "    Visitante : Visitante " + NL + "  };" + NL + "" + NL + "  public get(modelName: string): any {" + NL + "    return this.models[modelName];" + NL + "  }" + NL + "" + NL + "  public getAll(): Models {" + NL + "    return this.models;" + NL + "  }" + NL + "" + NL + "  public getModelNames(): string[] {" + NL + "    return Object.keys(this.models);" + NL + "  }" + NL + "}";
+  protected final String TEXT_10 = NL + "\tUser: User," + NL + "    Container: Container," + NL + "    Visitante : Visitante," + NL + "    DispositivoUsuario : DispositivoUsuario" + NL + "  };" + NL + "" + NL + "  public get(modelName: string): any {" + NL + "    return this.models[modelName];" + NL + "  }" + NL + "" + NL + "  public getAll(): Models {" + NL + "    return this.models;" + NL + "  }" + NL + "" + NL + "  public getModelNames(): string[] {" + NL + "    return Object.keys(this.models);" + NL + "  }" + NL + "}";
   protected final String TEXT_11 = NL;
 
   public String generate(Object argument)

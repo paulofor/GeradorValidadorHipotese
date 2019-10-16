@@ -79,6 +79,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/src/shared/sdk/";
 		String raizOrigem = "./fixos/fixoIonic3/src/shared/sdk/";
 		
+		// Visitante
 		String pathDestino = raizDestino + "models/";
 		String pathOrigem = raizOrigem + "models/";
 		this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
@@ -86,6 +87,28 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		pathDestino = raizDestino + "services/custom/";
 		pathOrigem = raizOrigem + "services/custom/";
 		this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
+		
+		
+		// Dispositivo Usuario
+		pathDestino = raizDestino + "models/";
+		pathOrigem = raizOrigem + "models/";
+		this.copiaArquivo("DispositivoUsuario.ts", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "services/custom/";
+		pathOrigem = raizOrigem + "services/custom/";
+		this.copiaArquivo("DispositivoUsuario.ts", pathOrigem, pathDestino, recurso);
+		
+		
+	}
+	
+	protected void criaServicosDiversos(Recursos recurso) throws IOException {
+		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/src/servico/";
+		String raizOrigem = "./fixos/fixoIonic3/src/servico/";
+		
+		// Visitante
+		String pathDestino = raizDestino;
+		String pathOrigem = raizOrigem;
+		this.copiaArquivo("acessa-fcm-service.ts", pathOrigem, pathDestino, recurso);
 		
 		
 	}
@@ -549,7 +572,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		
 		// Modelo - Fixo
 		criaModeloFixo(recurso);
-
+		
+;
 	}
 
 	private void criaModuloServico(Recursos recurso) throws IOException {
@@ -566,6 +590,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		nomeArquivo = pathDestino + modulo.getArquivo() + ".spec.ts";
 		conteudo = ModuloSpec.create("\n").generate(recurso);
 		geraArquivoFonte(conteudo, nomeArquivo);
+		
+		criaServicosDiversos(recurso);
 
 	}
 
