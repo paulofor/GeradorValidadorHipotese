@@ -121,7 +121,6 @@ registerLocaleData(localePt, 'pt-BR');
 	}
 	%>
     Screenshot,
-    Storage,
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     CookieService,
     FCM,
