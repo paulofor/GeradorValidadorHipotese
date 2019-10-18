@@ -4,6 +4,7 @@ import { VisitanteApi } from "../shared/sdk/services/custom/Visitante";
 import { Visitante } from "../shared/sdk/models/Visitante";
 import { DispositivoUsuarioApi } from "../shared/sdk/services/custom/DispositivoUsuario";
 import { DispositivoUsuario } from "../shared/sdk/models/DispositivoUsuario";
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AcessaFcmService {
@@ -19,60 +20,62 @@ export class AcessaFcmService {
     }
 
 
-    public executaValidacao(versaoAppId:number) {
-        this.storage.get("dispositivo").then((dado) => {
+    public executaValidacao(versaoAppId: number) {
+        this.storage.get("chave").then((dado) => {
             if (dado) {
-                this.registraVisita(dado);
+                console.log('Recuperou Chave');
+                this.registraVisitaApp(dado, versaoAppId);
             } else {
                 this.obtemTokenDispostivoUsuario(versaoAppId);
             }
         });
     }
-    public executaValidacaoFake(versaoAppId:number) {
-        this.storage.get("dispositivo").then((dado) => {
+    public executaValidacaoFake(versaoAppId: number) {
+        this.storage.get("chave").then((dado) => {
             if (dado) {
-                this.registraVisita(dado);
+                console.log('Recuperou Chave');
+                this.registraVisitaApp(dado, versaoAppId);
             } else {
                 this.obtemTokenDispostivoUsuarioFake(versaoAppId);
             }
         });
     }
 
-	
-    private registraMobile(chave) {
+
+    private registraMobile(chave, versaoAppId) {
         this.storage.set("chave", chave).then((successData) => {
-            this.registraVisita(chave);
+            this.registraVisitaApp(chave, versaoAppId);
         })
     }
-    private registraVisita(chave) {
-
+    private registraVisitaApp(chave, versaoAppId) {
+        console.log('Passou em visita: ', chave);
     }
-    private obtemTokenDispostivoUsuarioFake(versaoAppId:number) {
+    private obtemTokenDispostivoUsuarioFake(versaoAppId: number) {
         var token = '112231213215415615151515'
         console.log('Token fake: ', token);
-        let dispositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
+        let dispositivoUsuario: DispositivoUsuario = new DispositivoUsuario();
         dispositivoUsuario.tokenFcm = token;
         dispositivoUsuario.versaoAppId = versaoAppId;
         this.dispositivoUsuarioSrv.CriaComUsuario(dispositivoUsuario)
             .subscribe((resultado: any) => {
-                console.log('Resultado:', resultado);
-                this.registraMobile(resultado);
+                console.log('Chave-Server:', resultado);
+                this.registraMobile(resultado, versaoAppId);
             })
     }
-    private obtemTokenDispostivoUsuario(versaoAppId:number) {
+    private obtemTokenDispostivoUsuario(versaoAppId: number) {
         this.fcm.subscribeToTopic('all');
         //alert('inscreveu');
-        let dispositivoUsuario : DispositivoUsuario = new DispositivoUsuario();
+        let dispositivoUsuario: DispositivoUsuario = new DispositivoUsuario();
         this.fcm.getToken().then(token => {
             //alert(token);
             dispositivoUsuario.tokenFcm = token;
             dispositivoUsuario.versaoAppId = versaoAppId;
             //alert(JSON.stringify(disppositivoUsuario));
             this.dispositivoUsuarioSrv.CriaComUsuario(dispositivoUsuario)
-            .subscribe((resultado: any) => {
-                console.log('Resultado:', resultado);
-                this.registraMobile(resultado);
-            })
+                .subscribe((resultado: any) => {
+                    console.log('Chave-Server:', resultado);
+                    this.registraMobile(resultado, versaoAppId);
+                })
         });
         this.fcm.onNotification().subscribe(data => {
             //alert('Recebeu notificacao')
@@ -96,7 +99,7 @@ export class AcessaFcmService {
     }
 
 
-    
+
     public obtemToken(visitanteCorrente: Visitante) {
         var token = '112231213215415615151515'
         console.log('Token fake: ', token);
@@ -110,43 +113,6 @@ export class AcessaFcmService {
 
 
 
-    public obtemToken1(visitanteCorrente: Visitante) {
-        this.fcm.subscribeToTopic('all');
-        alert('inscreveu');
-        this.fcm.getToken().then(token => {
-            alert(token);
-            //localStorage.setItem('token', token);
-            visitanteCorrente.fcmToken = token;
-            visitanteCorrente.dataHoraNotificacao = new Date();
-            alert(JSON.stringify(visitanteCorrente));
-            this.visitanteSrv.atualizaItem(visitanteCorrente.id, visitanteCorrente)
-                .subscribe(
-                    (resultado: any) => {
-                        alert('Sucesso:' + JSON.stringify(resultado))
-                    },
-                    (erro: any) => {
-                        alert('Erro:' + JSON.stringify(erro))
-                    });
-        });
-        this.fcm.onNotification().subscribe(data => {
-            alert('Recebeu notificacao')
-            if (data.wasTapped) {
-                alert('background');
-            } else {
-                alert('foreground');
-            }
-            let visitaNotificacao = new Visitante();
-            visitaNotificacao.versaoAppId = 789;
-            this.visitanteSrv.criaItem(visitaNotificacao)
-                .subscribe((resultado: any) => {
-                    alert('notificacao: ' + JSON.stringify(resultado));
-                })
 
-        });
-        this.fcm.onTokenRefresh().subscribe(token => {
-            //alert('token')
-        });
-
-    }
 
 }
