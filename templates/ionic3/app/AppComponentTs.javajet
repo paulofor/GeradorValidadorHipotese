@@ -4,6 +4,7 @@ import { VisitanteApi } from "../shared/sdk/services/custom/Visitante";
 import { Visitante } from "../shared/sdk/models/Visitante";
 import { DispositivoUsuarioApi } from "../shared/sdk/services/custom/DispositivoUsuario";
 import { DispositivoUsuario } from "../shared/sdk/models/DispositivoUsuario";
+import { VisitaAppApi } from "../shared/sdk/services/custom/VisitaApp";
 
 @Injectable()
 export class AcessaFcmService {
@@ -13,6 +14,7 @@ export class AcessaFcmService {
     constructor(
         @Inject(FCM) protected fcm: FCM,
         @Inject(DispositivoUsuarioApi) protected dispositivoUsuarioSrv: DispositivoUsuarioApi,
+        @Inject(VisitaAppApi) protected visitaAppSrv: VisitaAppApi,
         @Inject(VisitanteApi) protected visitanteSrv: VisitanteApi,
         @Inject(Storage) protected storage: Storage
     ) {

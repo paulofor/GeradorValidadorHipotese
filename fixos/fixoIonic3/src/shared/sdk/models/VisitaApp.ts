@@ -1,9 +1,4 @@
 /* tslint:disable */
-import {
-  TelaApp,
-  UsuarioProduto,
-  VersaoApp
-} from '../index';
 
 declare var Object: any;
 export interface VisitaAppInterface {
@@ -12,9 +7,6 @@ export interface VisitaAppInterface {
   "telaAppId"?: number;
   "usuarioProdutoId"?: number;
   "versaoAppId"?: number;
-  telaApp?: TelaApp;
-  usuarioProduto?: UsuarioProduto;
-  versaoApp?: VersaoApp;
 }
 
 export class VisitaApp implements VisitaAppInterface {
@@ -23,9 +15,6 @@ export class VisitaApp implements VisitaAppInterface {
   "telaAppId": number;
   "usuarioProdutoId": number;
   "versaoAppId": number;
-  telaApp: TelaApp;
-  usuarioProduto: UsuarioProduto;
-  versaoApp: VersaoApp;
   constructor(data?: VisitaAppInterface) {
     Object.assign(this, data);
   }
