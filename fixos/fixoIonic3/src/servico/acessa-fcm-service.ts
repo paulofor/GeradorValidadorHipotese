@@ -5,9 +5,8 @@ import { Visitante } from "../shared/sdk/models/Visitante";
 import { DispositivoUsuarioApi } from "../shared/sdk/services/custom/DispositivoUsuario";
 import { DispositivoUsuario } from "../shared/sdk/models/DispositivoUsuario";
 import { VisitaAppApi } from "../shared/sdk/services/custom/VisitaApp";
-
 import { Storage } from '@ionic/storage';
-import { VisitaAppApi } from "../shared/sdk/services/custom/VisitaApp";
+
 
 @Injectable()
 export class AcessaFcmService {
