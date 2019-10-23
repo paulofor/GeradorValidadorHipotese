@@ -22,7 +22,19 @@ export class AcessaFcmService {
     ) {
     }
 
-
+	// Chamada externa para as paginas
+    public registraVisitaPagina(chavePagina) {
+        this.storage.get("chave").then((chaveUsuario) => {
+            if (chaveUsuario) {
+                this.visitaAppSrv.RegistraVisitaTelaApp(chaveUsuario,chavePagina)
+                .subscribe((resultado: any) => {
+                    console.log('Resultado-Visita' , resultado);
+                })
+            }
+        });
+    }
+    
+    
     public executaValidacao(versaoAppId: number) {
         this.storage.get("chave").then((dado) => {
             if (dado) {
