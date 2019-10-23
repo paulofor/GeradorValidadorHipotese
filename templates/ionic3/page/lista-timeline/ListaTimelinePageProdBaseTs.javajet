@@ -18,6 +18,7 @@ import { <%= telaEdicao.getNome() %> } from '../<%= telaEdicao.getPathArquivo() 
 import { Storage } from '@ionic/storage';
 import { MSG_SEM_INTERNET } from '../../app/const';
 import { ComponenteBase } from '../componente-base';
+import { AcessaFcmService } from '../../servico/acessa-fcm-service';
 
 
 // Tipo: <%= tela.getTipo() %>
@@ -29,6 +30,8 @@ export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
 	protected abstract inicializacao();
 	protected abstract getFiltro(): LoopBackFilter;
 	protected erroMsg: string;
+	
+	private chave : string = '<%= tela.getChave() %>';
 	
 	 
 	getPageEdicao(): Page {
@@ -46,11 +49,13 @@ export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
     	<% } %>
   	}
 
-	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,protected storage: Storage) {
+	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,
+		protected storage: Storage, private fcmSrv: AcessaFcmService) {
 		super();
 	}
 
 	ionViewWillEnter() {
+		this.fcmSrv.registraVisitaPagina(this.chave);
 		console.log('');
     		console.log('Tela: <%= tela.getNome() %><<<%= tela.getTipo() %>>> : <%= tela.getEntidade().getNomeParaClasse() %>');
     		this.carregaUsuario();

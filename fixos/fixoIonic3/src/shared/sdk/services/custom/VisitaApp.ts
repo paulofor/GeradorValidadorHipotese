@@ -11,9 +11,6 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { VisitaApp } from '../../models/VisitaApp';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { TelaApp } from '../../models/TelaApp';
-import { UsuarioProduto } from '../../models/UsuarioProduto';
-import { VersaoApp } from '../../models/VersaoApp';
 
 
 /**
@@ -21,6 +18,8 @@ import { VersaoApp } from '../../models/VersaoApp';
  */
 @Injectable()
 export class VisitaAppApi extends BaseLoopBackApi {
+
+  private static pathValidador : string = '//validacao.kinghost.net:21101';
 
   constructor(
     @Inject(HttpClient) protected http: HttpClient,
@@ -50,7 +49,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
    */
   public getTelaApp(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = VisitaAppApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/VisitaApps/:id/telaApp";
     let _routeParams: any = {
       id: id
@@ -80,7 +79,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
    */
   public getUsuarioProduto(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = VisitaAppApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/VisitaApps/:id/usuarioProduto";
     let _routeParams: any = {
       id: id
@@ -110,7 +109,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
    */
   public getVersaoApp(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = VisitaAppApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/VisitaApps/:id/versaoApp";
     let _routeParams: any = {
       id: id
@@ -140,7 +139,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = VisitaAppApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/VisitaApps";
     let _routeParams: any = {};
     let _postBody: any = {
@@ -171,7 +170,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = VisitaAppApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/VisitaApps/:id";
     let _routeParams: any = {
       id: id
@@ -206,7 +205,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
    */
   public RegistraVisitaTelaApp(chaveUsuario: any, chavePagina: any, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = VisitaAppApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/VisitaApps/registraVisitaTelaApp";
     let _routeParams: any = {};
     let _postBody: any = {};
@@ -239,7 +238,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
    */
   public RegistraVisitaVersaoApp(chaveUsuario: any = {}, chaveVersaoApp: any, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = VisitaAppApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/VisitaApps/registraVisitaVersaoApp";
     let _routeParams: any = {};
     let _postBody: any = {};

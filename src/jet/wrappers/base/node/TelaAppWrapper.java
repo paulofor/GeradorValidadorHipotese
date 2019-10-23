@@ -183,6 +183,9 @@ public class TelaAppWrapper implements ItemComponente{
 	
 	// *** Metodos Principais *** 
 	
+	public String getChave() {
+		return this.principal.getChave();
+	}
 
 	
 	public String toString() {

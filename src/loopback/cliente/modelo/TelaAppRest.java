@@ -15,6 +15,7 @@ public class TelaAppRest extends Model{
 	private Integer sobrescreveHtml;
 	private Integer sobrescreveTs;
 	private String nomeMenu;
+	private String chave;
 	
 	private Integer telaEdicaoId;
 	private TelaAppRest telaEdicao;
@@ -83,6 +84,11 @@ public class TelaAppRest extends Model{
 	public void setEntidadePutId(Integer entidadePutId) {
 		this.entidadePutId = entidadePutId;
 	}
-	
+	public void setChave(String chave) {
+		this.chave = chave;
+	}
+	public String getChave() {
+		return this.chave;
+	}
 	
 }

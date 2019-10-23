@@ -10,6 +10,7 @@ import { ServicoModule } from './servico/servico.module';
 import { ComponenteListaModule } from './lista/componente-lista.module';
 import { AcessaFcmService } from '../servico/acessa-fcm-service';
 import { DispositivoUsuarioApi } from '../shared/sdk/services/custom/DispositivoUsuario';
+import { VisitaAppApi } from '../shared/sdk/services/custom/VisitaApp';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DispositivoUsuarioApi } from '../shared/sdk/services/custom/Dispositivo
   ],
   providers: [
     AcessaFcmService,
-    DispositivoUsuarioApi
+    DispositivoUsuarioApi,
+    VisitaAppApi
   ],
   bootstrap: [AppComponent]
 })

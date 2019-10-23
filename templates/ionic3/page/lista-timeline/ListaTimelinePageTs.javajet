@@ -13,6 +13,7 @@ import { Page } from 'ionic-angular/navigation/nav-util';
 import { <%= tela.getNome() %>Base } from './<%= tela.getArquivo() %>-base';
 import { <%= tela.getEntidade().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
 import { Storage } from '@ionic/storage';
+import { AcessaFcmService } from '../../servico/acessa-fcm-service';
 
 
 @IonicPage()
@@ -25,8 +26,9 @@ export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
   inicializacao() {
   }
 
-  constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,protected storage: Storage) {
-    super(navCtrl,srv,storage);
+  constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,
+  	protected storage: Storage, private fcmSrv: AcessaFcmService) {
+    super(navCtrl,srv,storage, fcmSrv);
   }
 
 

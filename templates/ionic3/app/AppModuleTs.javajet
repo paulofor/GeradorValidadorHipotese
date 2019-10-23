@@ -29,6 +29,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { FCM } from '@ionic-native/fcm';
 import { AcessaFcmService } from '../servico/acessa-fcm-service';
 import { DispositivoUsuarioApi } from '../shared/sdk/services/custom/DispositivoUsuario';
+import { VisitaAppApi } from '../shared/sdk/services/custom/VisitaApp';
 
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
@@ -124,7 +125,8 @@ registerLocaleData(localePt, 'pt-BR');
     CookieService,
     FCM,
     AcessaFcmService,
-    DispositivoUsuarioApi
+    DispositivoUsuarioApi,
+    VisitaAppApi
   ]
 })
 export class AppModule {}
