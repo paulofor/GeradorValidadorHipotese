@@ -46,7 +46,8 @@ export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
     	<% } %>
   	}
 
-	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,protected storage: Storage) {
+	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api
+				,protected storage: Storage, protected fcmSrv: Acessa) {
 		super();
 	}
 

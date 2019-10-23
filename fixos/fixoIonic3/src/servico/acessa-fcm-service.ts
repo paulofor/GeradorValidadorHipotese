@@ -5,6 +5,7 @@ import { Visitante } from "../shared/sdk/models/Visitante";
 import { DispositivoUsuarioApi } from "../shared/sdk/services/custom/DispositivoUsuario";
 import { DispositivoUsuario } from "../shared/sdk/models/DispositivoUsuario";
 import { Storage } from '@ionic/storage';
+import { VisitaAppApi } from "../shared/sdk/services/custom/VisitaApp";
 
 @Injectable()
 export class AcessaFcmService {
@@ -15,10 +16,23 @@ export class AcessaFcmService {
         @Inject(FCM) protected fcm: FCM,
         @Inject(DispositivoUsuarioApi) protected dispositivoUsuarioSrv: DispositivoUsuarioApi,
         @Inject(VisitanteApi) protected visitanteSrv: VisitanteApi,
+        @Inject(VisitaAppApi) protected visitaAppSrv: VisitaAppApi,
         @Inject(Storage) protected storage: Storage
     ) {
     }
 
+
+ 	// Chamada externa para as paginas
+    public registraVisitaPagina(chavePagina) {
+        this.storage.get("chave").then((chaveUsuario) => {
+            if (chaveUsuario) {
+                this.visitaAppSrv.RegistraVisitaTelaApp(chaveUsuario,chavePagina)
+                .subscribe((resultado: any) => {
+                    console.log('Resultado-Visita' , resultado);
+                })
+            }
+        });
+    }
 
     public executaValidacao(versaoAppId: number) {
         this.storage.get("chave").then((dado) => {
