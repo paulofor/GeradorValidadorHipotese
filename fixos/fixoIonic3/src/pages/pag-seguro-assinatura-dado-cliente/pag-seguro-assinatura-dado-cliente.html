@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title (click)="preencher()">Endereço</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form >
+    <ion-item>
+      <ion-label floating>Rua</ion-label>
+      <ion-input [(ngModel)]="address.street" name="street"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Número</ion-label>
+      <ion-input [(ngModel)]="address.number" name="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Complemento</ion-label>
+      <ion-input [(ngModel)]="address.complement" name="complement"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Bairro</ion-label>
+      <ion-input [(ngModel)]="address.district" name="district"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Município</ion-label>
+      <ion-input [(ngModel)]="address.city" name="city"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Estado</ion-label>
+      <ion-input [(ngModel)]="address.state" name="state"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>CEP</ion-label>
+      <ion-input [(ngModel)]="address.postalCode" name="postalCode"></ion-input>
+    </ion-item>
+    
+    <button ion-button (click)="voltar()">Voltar</button>
+    <button ion-button (click)="avancar()">Avançar</button>
+  </form>
+</ion-content>

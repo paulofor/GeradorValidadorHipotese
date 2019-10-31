@@ -165,6 +165,17 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("list.scss", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("list.ts", pathOrigem, pathDestino, recurso);
 
+		
+		
+		//******   PagSeguro   ***** 
+		this.montaPage(raizDestino, raizOrigem, "inicio-fluxo", recurso);
+		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-dado-identificacao", recurso);
+		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-dado-cliente", recurso);
+		this.montaPage(raizDestino, raizOrigem, "teste-pag-seguro", recurso);
+		//******   PagSeguro   ***** 
+		
+		
+		
 		// login
 		TelaAppWrapper tela = new TelaAppWrapper("Login");
 		recurso.setItemCorrente(tela);
@@ -220,6 +231,17 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("PagSeguro.ts", pathOrigem, pathDestino, recurso);
 		
 	}
+	
+	private void montaPage(String raizDestino, String raizOrigem, String nomePage, Recursos recurso) throws IOException{
+		String pathDestino = raizDestino + "src/pages/" + nomePage +"/";
+		String pathOrigem = raizOrigem + "src/pages/" + nomePage + "/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo(nomePage + ".html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo(nomePage + ".scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo(nomePage + ".ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo(nomePage + ".module.ts", pathOrigem, pathDestino, recurso);
+	}
+	
 
 	@Override
 	public void criaArquivoUnico(Recursos recurso) throws IOException {
