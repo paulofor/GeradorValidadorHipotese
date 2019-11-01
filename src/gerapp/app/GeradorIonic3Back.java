@@ -171,7 +171,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.montaPage(raizDestino, raizOrigem, "inicio-fluxo", recurso);
 		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-dado-identificacao", recurso);
 		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-dado-cliente", recurso);
-		this.montaPage(raizDestino, raizOrigem, "teste-pag-seguro", recurso);
+		//this.montaPage(raizDestino, raizOrigem, "teste-pag-seguro", recurso);
+		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-dado-cartao" , recurso );
 		//******   PagSeguro   ***** 
 		
 		
@@ -229,6 +230,11 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		pathOrigem = "./fixos/angular/integracao/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
 		this.copiaArquivo("PagSeguro.ts", pathOrigem, pathDestino, recurso);
+		
+		pathDestino = raizDestino + "src/shared/";
+		pathOrigem = raizOrigem + "src/shared/";
+		//this.criaCaminhoSeNaoExiste(pathDestino);
+		this.copiaArquivo("assinatura.ts", pathOrigem, pathDestino, recurso);
 		
 	}
 	
