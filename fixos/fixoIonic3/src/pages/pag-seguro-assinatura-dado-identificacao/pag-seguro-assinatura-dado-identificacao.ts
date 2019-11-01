@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Assinatura } from '../../app/shared/assinatura';
+import { Assinatura } from '../../shared/assinatura';
 import { PagSeguroAssinaturaDadoClientePage } from '../pag-seguro-assinatura-dado-cliente/pag-seguro-assinatura-dado-cliente';
 import { DatePipe } from '@angular/common';
 

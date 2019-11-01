@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
-import { PagSeguroApi } from '../../app/shared/sdk/index';
+import { PagSeguroApi } from '../../shared/sdk/services/integracao/PagSeguro';
 
 declare var PagSeguroDirectPayment: any;
 

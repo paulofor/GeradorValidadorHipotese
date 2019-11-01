@@ -30,6 +30,9 @@ import { FCM } from '@ionic-native/fcm';
 import { AcessaFcmService } from '../servico/acessa-fcm-service';
 import { DispositivoUsuarioApi } from '../shared/sdk/services/custom/DispositivoUsuario';
 import { VisitaAppApi } from '../shared/sdk/services/custom/VisitaApp';
+import { PagSeguroAssinaturaDadoIdentificacaoPage } from '../pages/pag-seguro-assinatura-dado-identificacao/pag-seguro-assinatura-dado-identificacao';
+import { PagSeguroAssinaturaDadoClientePage } from '../pages/pag-seguro-assinatura-dado-cliente/pag-seguro-assinatura-dado-cliente';
+import { PagSeguroAssinaturaDadoCartaoPage } from '../pages/pag-seguro-assinatura-dado-cartao/pag-seguro-assinatura-dado-cartao';
 
 <%
 Iterator<ItemComponente> iterador = listaTela.iterator();
@@ -65,6 +68,9 @@ registerLocaleData(localePt, 'pt-BR');
     LoginPage,
     SignupPage,
     ComandosZeroPage,
+    PagSeguroAssinaturaDadoIdentificacaoPage,
+    PagSeguroAssinaturaDadoClientePage,
+    PagSeguroAssinaturaDadoCartaoPage,
     <%
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
@@ -91,6 +97,9 @@ registerLocaleData(localePt, 'pt-BR');
     LoginPage,
     SignupPage,
     ComandosZeroPage,
+    PagSeguroAssinaturaDadoIdentificacaoPage,
+    PagSeguroAssinaturaDadoClientePage,
+    PagSeguroAssinaturaDadoCartaoPage,
     <%
 	iterador = listaTela.iterator();
 	while (iterador.hasNext()) {
