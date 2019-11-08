@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title (click)="preencher()">PagSeguroAssinaturaDadoCartao</ion-title>
+    <ion-title (click)="preencher()">Cartão de Crédito (3 de 3)</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -16,21 +16,36 @@
       <ion-label floating>Nome no Cartão</ion-label>
       <ion-input [(ngModel)]="cartao.name" name="nome"></ion-input>
     </ion-item>
+    <ion-item no-lines *ngIf="erroNome">
+      <p class="erroMsg">{{erroNome}}</p>
+    </ion-item>
     <ion-item>
       <ion-label floating>Número</ion-label>
       <ion-input [(ngModel)]="cartao.numero" name="numero"></ion-input>
+    </ion-item>
+    <ion-item no-lines *ngIf="erroNumero">
+      <p class="erroMsg">{{erroNumero}}</p>
     </ion-item>
     <ion-item>
       <ion-label floating>Mês de Expiracao</ion-label>
       <ion-input [(ngModel)]="cartao.mesExpira" name="mesExpira"></ion-input>
     </ion-item>
+    <ion-item no-lines *ngIf="erroMes">
+      <p class="erroMsg">{{erroMes}}</p>
+    </ion-item>
     <ion-item>
       <ion-label floating>Ano de Expiracao</ion-label>
       <ion-input [(ngModel)]="cartao.anoExpira" name="anoExpira"></ion-input>
     </ion-item>
+    <ion-item no-lines *ngIf="erroAno">
+      <p class="erroMsg">{{erroAno}}</p>
+    </ion-item>
     <ion-item>
       <ion-label floating>CVV</ion-label>
       <ion-input [(ngModel)]="cartao.verificador" name="verificador"></ion-input>
+    </ion-item>
+    <ion-item no-lines *ngIf="erroVerificador">
+      <p class="erroMsg">{{erroVerificador}}</p>
     </ion-item>
 
     <button ion-button type="submit" block>Enviar</button>

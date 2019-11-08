@@ -18,13 +18,25 @@ import { DatePipe } from '@angular/common';
 })
 export class PagSeguroAssinaturaDadoIdentificacaoPage {
 
-  dataNascimento: Date = new Date();
+  erroNome: string;
+  erroEmail: string;
+  erroNomeMsg: string;
+  erroTelDDD: string;
+  erroTelNumero: string;
+  erroCpf: string;
+  erroNascimento: string;
+
+
+
+
+
+  dataNascimento: Date;
 
   sender = {
     "name": "",
     "email": "",
 
-    "hash" : "",
+    "hash": "",
     "phone": {
       "areaCode": "",
       "number": ""
@@ -56,10 +68,12 @@ export class PagSeguroAssinaturaDadoIdentificacaoPage {
   }
 
   avancar() {
-    var datePipe:DatePipe = new DatePipe('en-US');
+    var datePipe: DatePipe = new DatePipe('en-US');
     Assinatura.paymentMethod.creditCard.holder.birthDate = datePipe.transform(this.dataNascimento, 'dd/MM/yyyy');
-    console.log('PagSeguroAssinaturaDadoIdentificacaoPage:Assinatura: ' , Assinatura);
-    this.navCtrl.push(PagSeguroAssinaturaDadoClientePage);
+    console.log('PagSeguroAssinaturaDadoIdentificacaoPage:Assinatura: ', Assinatura);
+    if (this.validacao()) {
+      this.navCtrl.push(PagSeguroAssinaturaDadoClientePage);
+    }
   }
 
   preenhcer() {
@@ -68,6 +82,47 @@ export class PagSeguroAssinaturaDadoIdentificacaoPage {
     this.sender.phone.areaCode = '21';
     this.sender.phone.number = '992902732';
     this.sender.documents[0].value = '01114740780'
+  }
+
+  validacao(): boolean {
+    let saida = true;
+    if (!this.sender.name) {
+      this.erroNome = "Coloque seu nome";
+      saida = false;
+    } else {
+      this.erroNome = null;
+    }
+    if (!this.sender.email) {
+      this.erroEmail = "Coloque seu email";
+      saida = false;
+    } else {
+      this.erroEmail = null;
+    }
+    if (!this.sender.phone.areaCode) {
+      this.erroTelDDD = "Coloque o DDD do seu telefone";
+      saida = false;
+    } else {
+      this.erroTelDDD = null;
+    }
+    if (!this.sender.phone.number) {
+      this.erroTelNumero = "Coloque seu número de telefone";
+      saida = false;
+    } else {
+      this.erroTelNumero = null;
+    }
+    if (!this.sender.documents[0].value) {
+      this.erroCpf = "Coloque seu cpf";
+      saida = false;
+    } else {
+      this.erroCpf = null;
+    }
+    if (!this.dataNascimento) {
+      this.erroNascimento = "Coloque sua data de nascimento";
+      saida = false;
+    } else {
+      this.erroNascimento = null;
+    }
+    return saida;
   }
 
 }

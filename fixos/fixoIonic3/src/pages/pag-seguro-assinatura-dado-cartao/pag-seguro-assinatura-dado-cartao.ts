@@ -21,6 +21,13 @@ declare var PagSeguroDirectPayment: any;
 
 export class PagSeguroAssinaturaDadoCartaoPage {
 
+
+  erroNome: string;
+  erroNumero: string;
+  erroMes: string;
+  erroAno: string;
+  erroVerificador: string;
+
   codigoFinal = '';
 
   cartao = {

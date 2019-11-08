@@ -18,6 +18,15 @@ import { PagSeguroAssinaturaDadoIdentificacaoPage } from '../pag-seguro-assinatu
 })
 export class PagSeguroAssinaturaDadoClientePage {
 
+  erroRua: string;
+  erroNumero: string;
+  erroComplemento: string;
+  erroEstado: string;
+  erroCidade: string;
+  erroBairro: string;
+  erroCep: string;
+
+
 
   address = {
     "street": "",
@@ -40,7 +49,9 @@ export class PagSeguroAssinaturaDadoClientePage {
   }
 
   avancar() {
-    this.navCtrl.push(PagSeguroAssinaturaDadoCartaoPage);
+    if (this.validacao()) {
+      this.navCtrl.push(PagSeguroAssinaturaDadoCartaoPage);
+    }
   }
   voltar() {
     this.navCtrl.push(PagSeguroAssinaturaDadoIdentificacaoPage);
@@ -56,4 +67,51 @@ export class PagSeguroAssinaturaDadoClientePage {
     this.address.postalCode = '20511190';
   }
 
+
+  validacao(): boolean {
+    let saida = true;
+    if (!this.address.street) {
+      this.erroRua = "Coloque o nome da rua do seu endereço";
+      saida = false;
+    } else {
+      this.erroRua = null;
+    }
+    if (!this.address.number) {
+      this.erroNumero = "Coloque o número do seu endereço";
+      saida = false;
+    } else {
+      this.erroNumero = null;
+    }
+    if (! this.address.complement) {
+      this.erroComplemento = "Coloque o complemento do seu endereço";
+      saida = false;
+    } else {
+      this.erroComplemento = null;
+    }
+    if (!this.address.district) {
+      this.erroBairro = "Coloque o bairro do seu endereço";
+      saida = false;
+    } else {
+      this.erroBairro = null;
+    }
+    if (!this.address.city) {
+      this.erroCidade = "Coloque a cidade do seu endereço";
+      saida = false;
+    } else {
+      this.erroCidade = null;
+    }
+    if (! this.address.state) {
+      this.erroEstado = "Coloque o estado do seu endereço";
+      saida = false;
+    } else {
+      this.erroEstado = null;
+    }
+    if (! this.address.postalCode) {
+      this.erroCep = "Coloque o cep do seu endereço";
+      saida = false;
+    } else {
+      this.erroCep = null;
+    }
+    return saida;
+  }
 }
