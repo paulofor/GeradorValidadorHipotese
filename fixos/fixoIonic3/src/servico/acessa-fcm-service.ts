@@ -6,6 +6,7 @@ import { DispositivoUsuarioApi } from "../shared/sdk/services/custom/Dispositivo
 import { DispositivoUsuario } from "../shared/sdk/models/DispositivoUsuario";
 import { VisitaAppApi } from "../shared/sdk/services/custom/VisitaApp";
 import { Storage } from '@ionic/storage';
+import { Device } from '@ionic-native/device/ngx';
 
 
 @Injectable()
@@ -18,7 +19,8 @@ export class AcessaFcmService {
         @Inject(DispositivoUsuarioApi) protected dispositivoUsuarioSrv: DispositivoUsuarioApi,
         @Inject(VisitaAppApi) protected visitaAppSrv: VisitaAppApi,
         @Inject(VisitanteApi) protected visitanteSrv: VisitanteApi,
-        @Inject(Storage) protected storage: Storage
+        @Inject(Storage) protected storage: Storage,
+        @Inject(Device) protected device: Device
     ) {
     }
 
@@ -26,6 +28,7 @@ export class AcessaFcmService {
     public registraVisitaPagina(chavePagina) {
         this.storage.get("chave").then((chaveUsuario) => {
             if (chaveUsuario) {
+                this.atualizacaoToken(chaveUsuario);
                 this.visitaAppSrv.RegistraVisitaTelaApp(chaveUsuario,chavePagina)
                 .subscribe((resultado: any) => {
                     console.log('Resultado-Visita' , resultado);
@@ -68,6 +71,13 @@ export class AcessaFcmService {
                 console.log('Resultado-Visita' , resultado);
             })
     }
+    
+    
+    private atualizacaoToken(chave) {
+        this.fcm.getToken().then(token => {
+            this.dispositivoUsuarioSrv.AtualizaToken(chave,token);
+        });
+    }
 
     private obtemTokenDispostivoUsuarioFake(versaoAppId: number) {
         var token = '112231213215415615151515'
@@ -75,6 +85,8 @@ export class AcessaFcmService {
         let dispositivoUsuario: DispositivoUsuario = new DispositivoUsuario();
         dispositivoUsuario.tokenFcm = token;
         dispositivoUsuario.versaoAppId = versaoAppId;
+        dispositivoUsuario.codigoDispositivo = 'fakeDevice';
+        dispositivoUsuario.versaoOs = 'fakeOs';
         this.dispositivoUsuarioSrv.CriaComUsuario(dispositivoUsuario)
             .subscribe((resultado: any) => {
                 console.log('Chave-Server:', resultado);
@@ -89,6 +101,14 @@ export class AcessaFcmService {
             //alert(token);
             dispositivoUsuario.tokenFcm = token;
             dispositivoUsuario.versaoAppId = versaoAppId;
+            dispositivoUsuario.codigoDispositivo = "indisponivel device";
+            dispositivoUsuario.versaoOs = "indisponivel os";
+            //if (this.device) {
+            //    dispositivoUsuario.codigoDispositivo = this.device.model;
+            //} else {
+            //    dispositivoUsuario.codigoDispositivo = "indisponivel";
+            //}
+            //dispositivoUsuario.versaoOs = this.device.version;
             //alert(JSON.stringify(disppositivoUsuario));
             this.dispositivoUsuarioSrv.CriaComUsuario(dispositivoUsuario)
                 .subscribe((resultado: any) => {
