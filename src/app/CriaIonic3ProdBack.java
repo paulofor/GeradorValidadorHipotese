@@ -9,38 +9,13 @@ import loopback.remoting.adapters.RestAdapter;
 
 public class CriaIonic3ProdBack {
 
-	/**
-	 * @param args
-	 */
+	
+	
 	public static void main(String[] args) {
-		System.out.println("Ola Mundo");
-
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
-		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
-
-		rep.findById(32, new ObjectCallback<AplicacaoRest>() {
-			@Override
-			public void onSuccess(AplicacaoRest model) {
-				System.out.println("Sucesso: " + model);
-				executa(model);
-			}
-
-			@Override
-			public void onError(Throwable t) {
-				t.printStackTrace();
-			}
-		});
+		CriaIonic3BackObj obj = new CriaIonic3BackObj();
+		obj.run(GeradorIonic3Back.AMBIENTE_PRODUCAO);
 	}
-
-	public static void executa(AplicacaoRest appRest) {
-		Aplicacao aplicacao = appRest.criaItem();
-		GeradorIonic3Back gerador = new GeradorIonic3Back(GeradorIonic3Back.AMBIENTE_PRODUCAO);
-		try {
-			gerador.setAplicacao(aplicacao);
-			gerador.criaArquivos();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
+	
 
 }
