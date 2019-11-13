@@ -31,7 +31,7 @@ export class AcessaFcmService {
                 this.atualizacaoToken(chaveUsuario);
                 this.visitaAppSrv.RegistraVisitaTelaApp(chaveUsuario,chavePagina)
                 .subscribe((resultado: any) => {
-                    console.log('Resultado-Visita' , resultado);
+                    console.log('Resultado-VisitaPagina' , resultado);
                 })
             }
         });
@@ -68,7 +68,7 @@ export class AcessaFcmService {
         console.log('Passou em visita: ', chave);
         this.visitaAppSrv.RegistraVisitaVersaoApp(chave,versaoAppId)
             .subscribe((resultado: any) => {
-                console.log('Resultado-Visita' , resultado);
+                console.log('Resultado-VisitaApp' , resultado);
             })
     }
     

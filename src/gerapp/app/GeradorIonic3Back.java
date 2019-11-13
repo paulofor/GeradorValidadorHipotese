@@ -561,12 +561,13 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 
 		// Raiz
 		// this.copiaArquivo("lb.config.ts", pathOrigem, pathDestino, recurso);
-		if (ehProducao()) {
-			this.copiaArquivo(pathOrigem + "/lb.config-prod.ts", pathDestino + "/lb.config.ts");
-		}
-		if (ehDesenvolvimento()) {
-			this.copiaArquivo(pathOrigem + "/lb.config-desen.ts", pathDestino + "/lb.config.ts");
-		}
+		//if (ehProducao()) {
+		//	this.copiaArquivo(pathOrigem + "/lb.config-prod.ts", pathDestino + "/lb.config.ts");
+		//}
+		//if (ehDesenvolvimento()) {
+		//	this.copiaArquivo(pathOrigem + "/lb.config-desen.ts", pathDestino + "/lb.config.ts");
+		//}
+		this.copiaArquivo(pathOrigem + "/lb.config-prod.ts", pathDestino + "/lb.config.ts");
 
 		// Models
 		this.copiaArquivo("//models//BaseModels.ts", pathOrigem, pathDestino, recurso);

@@ -20,7 +20,7 @@ import { SocketConnection } from '../../sockets/socket.connections';
 @Injectable()
 export class VisitanteApi extends BaseLoopBackApi {
 
-  private static pathValidador : string = '//validacao.kinghost.net:21101';
+  private static pathValidador : string = '//validacao.kinghost.net:21040';
 
   constructor(
     @Inject(HttpClient) protected http: HttpClient,
