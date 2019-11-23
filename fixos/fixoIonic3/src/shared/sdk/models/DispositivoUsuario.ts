@@ -9,11 +9,14 @@ export interface DispositivoUsuarioInterface {
   "temMudanca"?: number;
   "ativo"?: number;
   "codigoDispositivo"?: string;
-  "versaoOs"?: string;
+  "versaoSo"?: string;
   "microSd"?: number;
   "id"?: number;
   "campanhaAdsId"?: number;
   "versaoAppId"?: number;
+  "fabricante"? : string;
+  "serial"? : string;
+  "uuid"? : string;
 }
 
 export class DispositivoUsuario implements DispositivoUsuarioInterface {
@@ -24,11 +27,14 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
   "temMudanca": number;
   "ativo": number;
   "codigoDispositivo": string;
-  "versaoOs": string;
+  "versaoSo": string;
   "microSd": number;
   "id": number;
   "campanhaAdsId": number;
   "versaoAppId": number;
+  "fabricante" : string;
+  "serial" : string;
+  "uuid" : string;
   constructor(data?: DispositivoUsuarioInterface) {
     Object.assign(this, data);
   }
@@ -90,8 +96,8 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
           name: 'codigoDispositivo',
           type: 'string'
         },
-        "versaoOs": {
-          name: 'versaoOs',
+        "versaoSo": {
+          name: 'versaoSo',
           type: 'string'
         },
         "microSd": {
@@ -110,6 +116,18 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
           name: 'versaoAppId',
           type: 'number'
         },
+        "serial": {
+          name: 'serial',
+          type: 'string'
+        },
+        "uuid": {
+          name: 'uuid',
+          type: 'string'
+        },
+        "fabricante": {
+          name: 'fabricante',
+          type: 'string'
+        }
       },
       relations: {
       }

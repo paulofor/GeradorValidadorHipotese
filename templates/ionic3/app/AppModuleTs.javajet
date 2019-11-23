@@ -17,7 +17,7 @@ import { SDKBrowserModule, SDKModels, LoopBackAuth, InternalStorage } from '../s
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Screenshot } from '@ionic-native/screenshot';
-import { Device } from '@ionic-native/device/ngx';
+import { Device } from '@ionic-native/device';
 import { ChartsModule } from 'ng2-charts';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
