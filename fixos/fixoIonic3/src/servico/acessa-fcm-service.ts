@@ -63,7 +63,6 @@ export class AcessaFcmService {
         this.storage.get("chave").then((dado) => {
             if (dado) {
                 //console.log('Recuperou Chave');
-               
                 this.registraVisitaApp(dado, versaoAppId);
             } else {
                 this.obtemTokenDispostivoUsuarioFake(versaoAppId);
@@ -151,17 +150,22 @@ export class AcessaFcmService {
             //alert('token')
             //alert('Novo token: ' + token);
         });
-
     }
 
+
+
     private ligaNotificacao() {
-        //alert('Passou liga notificacao');
+        alert('Passou liga notificacao');
         this.fcm.onNotification().subscribe(data => {
-            //alert('Recebeu notificacao: ' + JSON.stringify(data));
+            alert('Recebeu notificacao-01: ' + JSON.stringify(data));
+            alert('Token:' + data.tokenNotificacao);
+            this.registraNotificacao(data.tokenNotificacao);
             if (data.wasTapped) {
-                //alert('background');
+                
+                alert('background-01');
+                //alert('Meu Token' + data.tokenNotificacao);
             } else {
-                //alert('foreground');
+                alert('foreground-01');
             }
             //let visitaNotificacao = new Visitante();
             //visitaNotificacao.versaoAppId = 789;
@@ -169,10 +173,23 @@ export class AcessaFcmService {
             //    .subscribe((resultado: any) => {
             //        alert('notificacao: ' + JSON.stringify(resultado));
             //    })
-
         });
     }
 
+
+    private registraNotificacao(token:string) {
+        this.storage.set("token", token).then((successData) => {
+        })
+    }
+    public mostraToken() {
+        this.storage.get("token").then((dado) => {
+            if (dado) {
+                alert('token:' + dado);
+            } else {
+                alert('token nao encontrado');
+            }
+        });
+    }
 
     public obtemToken(visitanteCorrente: Visitante) {
         var token = '112231213215415615151515'
