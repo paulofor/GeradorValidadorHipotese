@@ -15,7 +15,7 @@ public class CriaLoopbackServer {
 	public static void main(String[] args) {
 		System.out.println("Ola Mundo - Loopback Server");
 		
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		RestAdapter adapter = new RestAdapter("http://www.digicom.inf.br:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 		
 		rep.findById(32, new ObjectCallback<AplicacaoRest>() { 

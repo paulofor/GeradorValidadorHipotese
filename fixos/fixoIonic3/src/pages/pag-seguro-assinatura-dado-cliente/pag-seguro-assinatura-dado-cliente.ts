@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Assinatura } from '../../shared/assinatura';
 import { PagSeguroAssinaturaDadoCartaoPage } from '../pag-seguro-assinatura-dado-cartao/pag-seguro-assinatura-dado-cartao';
 import { PagSeguroAssinaturaDadoIdentificacaoPage } from '../pag-seguro-assinatura-dado-identificacao/pag-seguro-assinatura-dado-identificacao';
+import { AcessaFcmService } from '../../servico/acessa-fcm-service';
 
 /**
  * Generated class for the PagSeguroAssinaturaDadoClientePage page.
@@ -17,6 +18,8 @@ import { PagSeguroAssinaturaDadoIdentificacaoPage } from '../pag-seguro-assinatu
   templateUrl: 'pag-seguro-assinatura-dado-cliente.html',
 })
 export class PagSeguroAssinaturaDadoClientePage {
+
+  chavePagina = '7bd51c0887db867d7e6e91323fdecd1f88a8188e';
 
   erroRua: string;
   erroNumero: string;
@@ -39,12 +42,17 @@ export class PagSeguroAssinaturaDadoClientePage {
     "postalCode": ""
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,  protected fcmSrv: AcessaFcmService) {
     console.log('Assinatura:', Assinatura.sender.address.street);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PagSeguroAssinaturaDadoClientePage');
+    this.inicializacao();
+    this.fcmSrv.registraVisitaPagina(this.chavePagina);
+  }
+
+  inicializacao() {
     this.address = Assinatura.sender.address;
   }
 
@@ -54,7 +62,8 @@ export class PagSeguroAssinaturaDadoClientePage {
     }
   }
   voltar() {
-    this.navCtrl.push(PagSeguroAssinaturaDadoIdentificacaoPage);
+    //this.navCtrl.push(PagSeguroAssinaturaDadoIdentificacaoPage);
+    this.navCtrl.pop();
   }
 
   preencher() {

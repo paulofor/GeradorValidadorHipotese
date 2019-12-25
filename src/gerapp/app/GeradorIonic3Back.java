@@ -86,6 +86,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("DispositivoUsuario.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("VisitaApp.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("NotificacaoApp.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("UsuarioProduto.ts", pathOrigem, pathDestino, recurso);
 		
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		if (this.ehProducao()) {
@@ -97,6 +99,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("DispositivoUsuario.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("VisitaApp.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("NotificacaoApp.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("UsuarioProduto.ts", pathOrigem, pathDestino, recurso);
 		
 		
 	}
@@ -178,6 +182,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-dado-cliente", recurso);
 		//this.montaPage(raizDestino, raizOrigem, "teste-pag-seguro", recurso);
 		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-dado-cartao" , recurso );
+		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-confirmacao" , recurso );
+		this.montaPage(raizDestino, raizOrigem, "pag-seguro-assinatura-sucesso" , recurso );
 		//******   PagSeguro   ***** 
 		
 		
@@ -504,7 +510,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		}
 	}
 
-	// *** Esse pedaço todo pode ser passado para uma classe geral
+	// *** Esse pedaï¿½o todo pode ser passado para uma classe geral
 
 	private void arquivosLoopbackClient(Recursos recurso) throws IOException {
 		String pathDestino = getDiretorioAngular(recurso) + "/shared/sdk/";

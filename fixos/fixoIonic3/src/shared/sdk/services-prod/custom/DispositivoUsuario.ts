@@ -11,6 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DispositivoUsuario } from '../../models/DispositivoUsuario';
 import { SocketConnection } from '../../sockets/socket.connections';
+import { PathValidador } from '../../../assinatura';
 
 
 
@@ -20,7 +21,7 @@ import { SocketConnection } from '../../sockets/socket.connections';
 @Injectable()
 export class DispositivoUsuarioApi extends BaseLoopBackApi {
 
-  private static pathValidador : string = '//validacao.kinghost.net:21101';
+
 
   constructor(
     @Inject(HttpClient) protected http: HttpClient,
@@ -54,7 +55,7 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
-    let _url: string = DispositivoUsuarioApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/DispositivoUsuarios";
     let _routeParams: any = {};
     let _postBody: any = {
@@ -85,7 +86,7 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
-    let _url: string = DispositivoUsuarioApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/DispositivoUsuarios/:id";
     let _routeParams: any = {
       id: id
@@ -111,7 +112,7 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
    */
   public proximoCookie(customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
-    let _url: string = DispositivoUsuarioApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/DispositivoUsuarios/proximoCookie";
     let _routeParams: any = {};
     let _postBody: any = {};
@@ -123,15 +124,26 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
 
   public criaItem(data: DispositivoUsuario, customHeaders?: Function): Observable<DispositivoUsuario> {
     return this.request('POST', [
-      DispositivoUsuarioApi.pathValidador,
+      PathValidador,
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().path
     ].join('/'), undefined, undefined, { data }, null, customHeaders)
     .pipe(map((data: DispositivoUsuario) => this.model.factory(data)));
   }
+
+  public findOneItem<DispositivoUsuario>(filter: LoopBackFilter = {}, customHeaders?: Function): Observable<DispositivoUsuario> {
+    return this.request('GET', [
+      PathValidador,
+      LoopBackConfig.getApiVersion(),
+      this.model.getModelDefinition().path,
+      'findOne'
+    ].join('/'), undefined, { filter }, undefined, null, customHeaders)
+    .pipe(map((data: DispositivoUsuario) => this.model.factory(data)));
+  }
+
   public atualizaItem(id: any, data: DispositivoUsuario, customHeaders?: Function): Observable<DispositivoUsuario> {
     return this.request('PUT', [
-      DispositivoUsuarioApi.pathValidador,
+      PathValidador,
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().path,
       ':id'
@@ -142,7 +154,7 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
 
   public CriaComUsuario(dispositivo: any, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
-    let _url: string = DispositivoUsuarioApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/DispositivoUsuarios/criaComUsuario";
     let _routeParams: any = {};
     let _postBody: any = {};
@@ -155,7 +167,7 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
   
   public AtualizaToken(chaveUsuario: any = {}, token: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
-    let _url: string = DispositivoUsuarioApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/DispositivoUsuarios/atualizaToken";
     let _routeParams: any = {};
     let _postBody: any = {};

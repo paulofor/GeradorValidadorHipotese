@@ -1,40 +1,52 @@
 /* tslint:disable */
+import {
+  UsuarioProduto,
+  NotificacaoApp
+} from '../index';
 
 declare var Object: any;
 export interface DispositivoUsuarioInterface {
   "tokenFcm"?: string;
   "dataHoraCriacao"?: Date;
   "dataUltimoAcesso"?: Date;
+  "dataAlteracao"?: Date;
   "dataChamada"?: Date;
   "temMudanca"?: number;
   "ativo"?: number;
   "codigoDispositivo"?: string;
-  "versaoSo"?: string;
   "microSd"?: number;
+  "versaoSo"?: string;
+  "serial"?: string;
+  "uuid"?: string;
+  "fabricante"?: string;
   "id"?: number;
   "campanhaAdsId"?: number;
   "versaoAppId"?: number;
-  "fabricante"? : string;
-  "serial"? : string;
-  "uuid"? : string;
+  "usuarioProdutoId"?: number;
+  usuarioProduto?: UsuarioProduto;
+  notificacaoApps?: NotificacaoApp[];
 }
 
 export class DispositivoUsuario implements DispositivoUsuarioInterface {
   "tokenFcm": string;
   "dataHoraCriacao": Date;
   "dataUltimoAcesso": Date;
+  "dataAlteracao": Date;
   "dataChamada": Date;
   "temMudanca": number;
   "ativo": number;
   "codigoDispositivo": string;
-  "versaoSo": string;
   "microSd": number;
+  "versaoSo": string;
+  "serial": string;
+  "uuid": string;
+  "fabricante": string;
   "id": number;
   "campanhaAdsId": number;
   "versaoAppId": number;
-  "fabricante" : string;
-  "serial" : string;
-  "uuid" : string;
+  "usuarioProdutoId": number;
+  usuarioProduto: UsuarioProduto;
+  notificacaoApps: NotificacaoApp[];
   constructor(data?: DispositivoUsuarioInterface) {
     Object.assign(this, data);
   }
@@ -80,6 +92,10 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
           name: 'dataUltimoAcesso',
           type: 'Date'
         },
+        "dataAlteracao": {
+          name: 'dataAlteracao',
+          type: 'Date'
+        },
         "dataChamada": {
           name: 'dataChamada',
           type: 'Date'
@@ -96,13 +112,25 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
           name: 'codigoDispositivo',
           type: 'string'
         },
+        "microSd": {
+          name: 'microSd',
+          type: 'number'
+        },
         "versaoSo": {
           name: 'versaoSo',
           type: 'string'
         },
-        "microSd": {
-          name: 'microSd',
-          type: 'number'
+        "serial": {
+          name: 'serial',
+          type: 'string'
+        },
+        "uuid": {
+          name: 'uuid',
+          type: 'string'
+        },
+        "fabricante": {
+          name: 'fabricante',
+          type: 'string'
         },
         "id": {
           name: 'id',
@@ -116,20 +144,28 @@ export class DispositivoUsuario implements DispositivoUsuarioInterface {
           name: 'versaoAppId',
           type: 'number'
         },
-        "serial": {
-          name: 'serial',
-          type: 'string'
+        "usuarioProdutoId": {
+          name: 'usuarioProdutoId',
+          type: 'number'
         },
-        "uuid": {
-          name: 'uuid',
-          type: 'string'
-        },
-        "fabricante": {
-          name: 'fabricante',
-          type: 'string'
-        }
       },
       relations: {
+        usuarioProduto: {
+          name: 'usuarioProduto',
+          type: 'UsuarioProduto',
+          model: 'UsuarioProduto',
+          relationType: 'belongsTo',
+                  keyFrom: 'usuarioProdutoId',
+          keyTo: 'id'
+        },
+        notificacaoApps: {
+          name: 'notificacaoApps',
+          type: 'NotificacaoApp[]',
+          model: 'NotificacaoApp',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'dispositivoUsuarioId'
+        },
       }
     }
   }

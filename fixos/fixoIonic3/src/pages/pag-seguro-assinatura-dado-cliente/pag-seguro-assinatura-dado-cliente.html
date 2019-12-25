@@ -1,10 +1,11 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title (click)="preencher()">EndereÃ§o (2 de 3)</ion-title>
+  <ion-navbar color="titulo">
+    <ion-title (click)="preencher()">Endereço (2 de 4)</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-label padding>Assinatura: R$ 4,99 / mês</ion-label>
   <form>
     <ion-item>
       <ion-label floating>Rua*</ion-label>
@@ -14,7 +15,7 @@
       <p class="erroMsg">{{erroRua}}</p>
     </ion-item>
     <ion-item>
-      <ion-label floating>NÃºmero*</ion-label>
+      <ion-label floating>Número*</ion-label>
       <ion-input [(ngModel)]="address.number" name="number"></ion-input>
     </ion-item>
     <ion-item no-lines *ngIf="erroNumero">
@@ -35,7 +36,7 @@
       <p class="erroMsg">{{erroBairro}}</p>
     </ion-item>
     <ion-item>
-      <ion-label floating>MunicÃ­pio*</ion-label>
+      <ion-label floating>Município*</ion-label>
       <ion-input [(ngModel)]="address.city" name="city"></ion-input>
     </ion-item>
     <ion-item no-lines *ngIf="erroCidade">
@@ -77,13 +78,13 @@
       <p class="erroMsg">{{erroEstado}}</p>
     </ion-item>
     <ion-item>
-      <ion-label floating>CEP* (somente nÃºmeros)</ion-label>
-      <ion-input [(ngModel)]="address.postalCode" name="postalCode"></ion-input>
+      <ion-label floating>CEP* (somente números)</ion-label>
+      <ion-input maxlength="8" [(ngModel)]="address.postalCode" name="postalCode"></ion-input>
     </ion-item>
     <ion-item no-lines *ngIf="erroCep">
       <p class="erroMsg">{{erroCep}}</p>
     </ion-item>
     <button ion-button (click)="voltar()">Voltar</button>
-    <button ion-button (click)="avancar()">AvanÃ§ar</button>
+    <button ion-button (click)="avancar()">Avançar</button>
   </form>
 </ion-content>

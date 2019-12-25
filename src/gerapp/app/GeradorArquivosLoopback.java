@@ -41,7 +41,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	protected PaletaCorRest paletaCor = null;
 
 	RestAdapter adapter = new RestAdapter(
-			"http://validacao.kinghost.net:21101/api");
+			"http://www.digicom.inf.br:21101/api");
 
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 		this.aplicacao = new AplicacaoWrapper(aplicacao);

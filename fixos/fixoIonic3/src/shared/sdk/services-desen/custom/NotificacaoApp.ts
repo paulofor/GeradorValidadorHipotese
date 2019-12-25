@@ -11,6 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NotificacaoApp } from '../../models/NotificacaoApp';
 import { SocketConnection } from '../../sockets/socket.connections';
+import { PathValidador } from '../../../assinatura';
 
 
 /**
@@ -19,7 +20,6 @@ import { SocketConnection } from '../../sockets/socket.connections';
 @Injectable()
 export class NotificacaoAppApi extends BaseLoopBackApi {
 
-  private static pathValidador: string = '//validacao.kinghost.net:21040';
 
   constructor(
     @Inject(HttpClient) protected http: HttpClient,
@@ -34,7 +34,7 @@ export class NotificacaoAppApi extends BaseLoopBackApi {
 
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
       "/NotificacaoApps";
     let _routeParams: any = {};
     let _postBody: any = {
@@ -48,7 +48,7 @@ export class NotificacaoAppApi extends BaseLoopBackApi {
 
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
       "/NotificacaoApps/:id";
     let _routeParams: any = {
       id: id
@@ -64,7 +64,7 @@ export class NotificacaoAppApi extends BaseLoopBackApi {
 
   public RegistraAcesso(tokenNotificacao: any, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
-    let _url: string = NotificacaoAppApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
       "/NotificacaoApps/registraAcesso";
     let _routeParams: any = {};
     let _postBody: any = {};

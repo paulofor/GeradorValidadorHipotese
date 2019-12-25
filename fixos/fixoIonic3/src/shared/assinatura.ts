@@ -1,7 +1,19 @@
+export var PathValidador : string = 'http://www.digicom.inf.br:21040';
+
+
+export var Cartao = {
+    "nomeCartao": "",
+    "bandeira": "",
+    "numero": "",
+    "anoExpira": "",
+    "mesExpira": "",
+    "verificador": ""
+}
+
 
 
 export var Assinatura = {
-    "plan": "E92722E0F7F7BB5CC4DB8F82ACF92613",
+    "plan": "E2BB1113ECECEC5884A45FAA7983BB24",
     "sender": {
         "name": "",
         "email": "",

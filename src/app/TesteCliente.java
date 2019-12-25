@@ -18,7 +18,7 @@ public class TesteCliente {
 	public static void main(String[] args) {
 		System.out.println("Ola Mundo");
 		
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		RestAdapter adapter = new RestAdapter("http://www.digicom.inf.br:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 		
 		rep.findById(1, new ObjectCallback<AplicacaoRest>() { 

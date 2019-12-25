@@ -5,12 +5,14 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title (click)="preenhcer()">IdentificaÃ§Ã£o (1 de 3)</ion-title>
+  <ion-navbar color="titulo">
+    <ion-title (click)="preenhcer()">Identificação (1 de 4)</ion-title>
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
+  <ion-label padding>Assinatura: R$ 4,99 / mês</ion-label>
   <form  (ngSubmit)="avancar()">
     <ion-item>
       <ion-label floating>Nome*</ion-label>
@@ -27,35 +29,35 @@
       <p class="erroMsg">{{erroEmail}}</p>
     </ion-item>
     <ion-item>
-      <ion-label floating>Telefone - DDD* (somente nÃºmeros)</ion-label>
-      <ion-input [(ngModel)]="sender.phone.areaCode" name="areaCode"></ion-input>
+      <ion-label floating>Telefone - DDD* (somente números)</ion-label>
+      <ion-input type="number" max="2" [(ngModel)]="sender.phone.areaCode" name="areaCode"></ion-input>
     </ion-item>
     <ion-item no-lines *ngIf="erroTelDDD">
       <p class="erroMsg">{{erroTelDDD}}</p>
     </ion-item>
     <ion-item>
-      <ion-label floating>Telefone - NÃºmero* (somente nÃºmeros)</ion-label>
-      <ion-input [(ngModel)]="sender.phone.number" name="number"></ion-input>
+      <ion-label floating>Telefone - Número* (somente números)</ion-label>
+      <ion-input type="number" max="9" [(ngModel)]="sender.phone.number" name="number"></ion-input>
     </ion-item>
     <ion-item no-lines *ngIf="erroTelNumero">
       <p class="erroMsg">{{erroTelNumero}}</p>
     </ion-item>
     <ion-item>
-      <ion-label floating>CPF* (somente nÃºmeros)</ion-label>
-      <ion-input [(ngModel)]="sender.documents[0].value" name="value"></ion-input>
+      <ion-label floating>CPF* (somente números)</ion-label>
+      <ion-input type="number" max="11" [(ngModel)]="sender.documents[0].value" name="value"></ion-input>
     </ion-item>
     <ion-item no-lines *ngIf="erroCpf">
       <p class="erroMsg">{{erroCpf}}</p>
     </ion-item>
     <ion-item>
       <ion-label floating>Data Nascimento*</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="dataNascimento" name="dataNascimento"></ion-datetime>
+      <ion-datetime pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" [(ngModel)]="dataNascimento" name="dataNascimento"></ion-datetime>
     </ion-item>
     <ion-item no-lines *ngIf="erroNascimento">
       <p class="erroMsg">{{erroNascimento}}</p>
     </ion-item>
     
-    <button ion-button type="submit" block>AvanÃ§ar</button>
+    <button ion-button type="submit" block>Avançar</button>
   </form>
 </ion-content>
 
