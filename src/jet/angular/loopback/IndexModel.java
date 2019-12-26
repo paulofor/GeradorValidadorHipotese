@@ -21,7 +21,7 @@ public class IndexModel
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL + "export * from './";
   protected final String TEXT_3 = "';";
-  protected final String TEXT_4 = NL + "export * from './Container';" + NL + "export * from './BaseModels';" + NL + "export * from './FireLoopRef';";
+  protected final String TEXT_4 = NL + "export * from './Container';" + NL + "export * from './BaseModels';" + NL + "export * from './FireLoopRef';" + NL + "export * from './UsuarioProduto';" + NL + "export * from './DispositivoUsuario';" + NL + "export * from './NotificacaoApp';";
   protected final String TEXT_5 = NL;
 
   public String generate(Object argument)

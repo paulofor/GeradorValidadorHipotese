@@ -41,7 +41,7 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	protected PaletaCorRest paletaCor = null;
 
 	RestAdapter adapter = new RestAdapter(
-			"http://www.digicom.inf.br:21101/api");
+			"https://www.digicom.inf.br:21101/api");
 
 	public void setAplicacao(Aplicacao aplicacao) throws DaoException {
 		this.aplicacao = new AplicacaoWrapper(aplicacao);
@@ -316,7 +316,11 @@ public abstract class GeradorArquivosLoopback extends GeradorArquivosBase {
 	protected void copiaArquivo(String arquivo, String pathOrigem, String pathDestino, Recursos recurso) throws IOException {
 		this.copiaArquivo(pathOrigem + arquivo, pathDestino + arquivo);
 	}
-
+	protected void copiaArquivoBinario(String arquivo, String pathOrigem, String pathDestino, Recursos recurso) throws IOException {
+		this.copiaArquivoBinario(pathOrigem + arquivo, pathDestino + arquivo);
+	}
+	
+	
 	protected void copiaArquivoSeNaoExiste(String arquivo, String pathOrigem, String pathDestino, Recursos recurso) throws IOException {
 		this.copiaArquivoSeNaoExiste(pathOrigem + arquivo, pathDestino + arquivo);
 	}

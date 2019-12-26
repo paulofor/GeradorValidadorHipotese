@@ -25,6 +25,7 @@ import gerapp.regracolecao.filtro.RelacionamentoEntidadeFiltro;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -66,6 +67,19 @@ public abstract class GeradorArquivosBase {
 	protected void copiaArquivo(String origem, String destino) throws IOException {
 		String texto = leArquivoTexto(origem);
 		geraArquivoFonte(texto, destino);
+	}
+	
+	protected void copiaArquivoBinario(String origem, String destino) throws IOException {
+		FileInputStream fin = new FileInputStream(origem);
+		FileOutputStream fout = new FileOutputStream(destino);
+		byte[] b = new byte[1024];
+		int noOfBytes = 0;
+		while( (noOfBytes = fin.read(b)) != -1 )
+		{
+			fout.write(b, 0, noOfBytes);
+		}
+		fin.close();
+		fout.close();	
 	}
 
 	protected void copiaArquivoSeNaoExiste(String origem, String destino) throws IOException {

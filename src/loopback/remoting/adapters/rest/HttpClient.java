@@ -1,8 +1,16 @@
 package loopback.remoting.adapters.rest;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import loopback.android.remoting.JsonUtil;
 import loopback.remoting.adapters.RestAdapter;
@@ -12,8 +20,10 @@ import org.json.JSONException;
 
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.ProxyServer;
 import com.ning.http.client.Response;
+
 
 public class HttpClient extends AsyncHttpClient {
 
@@ -30,8 +40,12 @@ public class HttpClient extends AsyncHttpClient {
 	}
 
 	private String baseUrl;
+	
+	
+	public HttpClient(String baseUrl, AsyncHttpClientConfig config) {
+		super(config);
 
-	public HttpClient(String baseUrl) {
+		//setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
 		if (baseUrl == null) {
 			throw new IllegalArgumentException("The baseUrl cannot be null");
 		}
@@ -50,6 +64,7 @@ public class HttpClient extends AsyncHttpClient {
 
 		setUserAgent(userAgent);
 		addHeader("Accept", "application/json");
+
 	}
 
 	private void setUserAgent(String userAgent) {
@@ -70,7 +85,10 @@ public class HttpClient extends AsyncHttpClient {
 		this.url = baseUrl + path;
 		this.metodo = method;
 		this.param = "";
+		
+
 		BoundRequestBuilder request = prepareRequest(method, baseUrl + path);
+		
 
 		String contentType = null;
 		String charset = "utf-8";
@@ -157,7 +175,7 @@ public class HttpClient extends AsyncHttpClient {
 			request.addHeader(header, getHeader(header));
 		}
 
-		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987", "Mclaren1");
+		ProxyServer proxy = new ProxyServer("10.21.7.10", 82, "tr626987", "LojaDig1");
 		//request.setProxyServer(proxy);
 
 		System.out.println("Url:" + this.url + "?" + this.param);
@@ -181,7 +199,9 @@ public class HttpClient extends AsyncHttpClient {
 	}
 
 	private BoundRequestBuilder prepareRequest(String method, String url) {
-		//
+		
+		
+		
 		if ("GET".equalsIgnoreCase(method)) {
 			return prepareGet(url);
 		} else if ("HEAD".equalsIgnoreCase(method)) {
@@ -255,4 +275,8 @@ public class HttpClient extends AsyncHttpClient {
 	private String debugRequest(BoundRequestBuilder request) {
 		return request.toString();
 	}
+	
+	
+    
+	
 }

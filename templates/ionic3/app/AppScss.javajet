@@ -72,3 +72,5 @@ Configuracao conf = recursos.getConfiguracao();
     z-index: 999;
     opacity: 0.3;
 }
+
+

@@ -1,6 +1,14 @@
 package loopback.remoting.adapters;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.Map;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import loopback.android.RestRepository;
 import loopback.remoting.adapters.rest.BinaryHandler;
@@ -8,6 +16,7 @@ import loopback.remoting.adapters.rest.CallbackHandler;
 import loopback.remoting.adapters.rest.HttpClient;
 
 import com.ning.http.client.AsyncCompletionHandler;
+import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.Response;
 
 public class RestAdapter extends Adapter {
@@ -31,7 +40,7 @@ public class RestAdapter extends Adapter {
 		if (url == null) {
 			client = null;
 		} else {
-			client = new HttpClient(url);
+			client = new HttpClient(url,obtemConfig());
 		}
 	}
 
@@ -119,6 +128,41 @@ public class RestAdapter extends Adapter {
 	}
 
 	
+	private SSLContext createSslContext() throws NoSuchAlgorithmException, KeyManagementException  {
+        X509TrustManager tm = new X509TrustManager() {
 
+            public void checkClientTrusted(X509Certificate[] xcs,
+                                       String string) throws CertificateException {
+            }
+
+            public void checkServerTrusted(X509Certificate[] xcs,
+                                       String string) throws CertificateException {
+            }
+
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+        };
+
+        SSLContext ctx = SSLContext.getInstance("TLS");
+        ctx.init(null, new TrustManager[] { tm }, null);
+        return ctx;
+    }
+    
+    private AsyncHttpClientConfig obtemConfig()  {
+    	AsyncHttpClientConfig config = null;
+    	try {
+			config = new AsyncHttpClientConfig.Builder()
+			.setSSLContext(createSslContext())
+			.build();
+		} catch (KeyManagementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return config;
+    }
 	
 }

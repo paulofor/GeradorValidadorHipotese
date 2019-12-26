@@ -18,7 +18,7 @@ public class CriaIonic3BackObj {
 		this.ambiente = ambiente;
 		System.out.println("Ola Mundo " + ambiente);
 
-		RestAdapter adapter = new RestAdapter("http://www.digicom.inf.br:21101/api");
+		RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 
 		rep.findById(32, new ObjectCallback<AplicacaoRest>() {

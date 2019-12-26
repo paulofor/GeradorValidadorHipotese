@@ -15,7 +15,7 @@ public class CriaBDMySql {
 	public static void main(String[] args) {
 		System.out.println("Ola Mundo");
 		
-		RestAdapter adapter = new RestAdapter("http://www.digicom.inf.br:21101/api");
+		RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 		
 		rep.findById(27, new ObjectCallback<AplicacaoRest>() { 

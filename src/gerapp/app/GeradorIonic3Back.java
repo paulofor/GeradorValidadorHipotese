@@ -253,10 +253,10 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		String pathDestino = raizDestino + "src/pages/" + nomePage +"/";
 		String pathOrigem = raizOrigem + "src/pages/" + nomePage + "/";
 		this.criaCaminhoSeNaoExiste(pathDestino);
-		this.copiaArquivo(nomePage + ".html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo(nomePage + ".scss", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo(nomePage + ".ts", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo(nomePage + ".module.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoBinario(nomePage + ".html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoBinario(nomePage + ".scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoBinario(nomePage + ".ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoBinario(nomePage + ".module.ts", pathOrigem, pathDestino, recurso);
 	}
 	
 
