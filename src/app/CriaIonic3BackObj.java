@@ -21,7 +21,10 @@ public class CriaIonic3BackObj {
 		RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
 		AplicacaoRepositorio rep = adapter.createRepository(AplicacaoRepositorio.class);
 
+		//Cosmetic Center
 		rep.findById(32, new ObjectCallback<AplicacaoRest>() {
+		//Treino 465
+		 //rep.findById(27, new ObjectCallback<AplicacaoRest>() {
 			@Override
 			public void onSuccess(AplicacaoRest model) {
 				System.out.println("Sucesso: " + model);

@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="titulo">
-    <ion-title (click)="preencher()">Cartão de Crédito (3 de 4)</ion-title>
+    <ion-title (click)="preencher()">CartÃ£o de CrÃ©dito (3 de 4)</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,7 +15,7 @@
 </ion-content>
 
 <ion-content padding>
-  <ion-label padding>Assinatura: R$ 4,99 / mês</ion-label>
+  <ion-label padding>Assinatura: R$ 4,99 / mÃªs</ion-label>
   <ion-card>
     <ion-label class="erroMsg">{{erroServidor}}</ion-label>
     <form>
@@ -38,21 +38,21 @@
         </ion-item>
       </ion-item-group>
       <ion-item>
-        <ion-label floating>Nome no Cartão</ion-label>
+        <ion-label floating>Nome no CartÃ£o</ion-label>
         <ion-input [(ngModel)]="cartao.nomeCartao" name="nomeCartao"></ion-input>
       </ion-item>
       <ion-item no-lines *ngIf="erroNome">
         <p class="erroMsg">{{erroNome}}</p>
       </ion-item>
       <ion-item>
-        <ion-label floating>Número</ion-label>
+        <ion-label floating>NÃºmero</ion-label>
         <ion-input [(ngModel)]="cartao.numero" name="numero"></ion-input>
       </ion-item>
       <ion-item no-lines *ngIf="erroNumero">
         <p class="erroMsg">{{erroNumero}}</p>
       </ion-item>
       <ion-item>
-        <ion-label floating>Mês de Expiracao</ion-label>
+        <ion-label floating>MÃªs de Expiracao</ion-label>
         <ion-input maxlength="2" [(ngModel)]="cartao.mesExpira" name="mesExpira"></ion-input>
       </ion-item>
       <ion-item no-lines *ngIf="erroMes">
@@ -75,7 +75,7 @@
 
 
       <button ion-button (click)="voltar()" padding>Voltar</button>
-      <button ion-button (click)="enviar()" padding>Avançar</button>
+      <button ion-button (click)="enviar()" padding>AvanÃ§ar</button>
 
 
     </form>

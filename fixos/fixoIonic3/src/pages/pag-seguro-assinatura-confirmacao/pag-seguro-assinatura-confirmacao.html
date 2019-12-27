@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="titulo">
-    <ion-title >Confirmação (4 de 4)</ion-title>
+    <ion-title >ConfirmaÃ§Ã£o (4 de 4)</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,7 +15,7 @@
 </ion-content>
 
 <ion-content *ngIf="assinatura" padding>
-  <ion-label>Assinatura: R$ 4,99 / mês</ion-label>
+  <ion-label>Assinatura: R$ 4,99 / mÃªs</ion-label>
   <ion-label></ion-label>
   <ion-label class="erroMsg">{{erroServidor}}</ion-label>
   <ion-label></ion-label>
@@ -25,14 +25,14 @@
   <ion-label>Cpf: {{assinatura.sender.documents[0].value}}</ion-label>
   <ion-label>Data Nascimento: {{assinatura.paymentMethod.creditCard.holder.birthDate}}</ion-label>
   <ion-label></ion-label>
-  <ion-label>Endereço:</ion-label>
+  <ion-label>EndereÃ§o:</ion-label>
   <ion-label>{{assinatura.sender.address.street}}, {{assinatura.sender.address.number}} {{assinatura.sender.address.complement}}</ion-label>
   <ion-label>{{assinatura.sender.address.district}} - {{assinatura.sender.address.city}} ({{assinatura.sender.address.state}})</ion-label>
   <ion-label>{{assinatura.sender.address.postalCode}}</ion-label>
   <ion-label></ion-label>
-  <ion-label>Cartão</ion-label>
+  <ion-label>CartÃ£o</ion-label>
   <ion-label>Nome: {{cartao.nomeCartao}}</ion-label>
-  <ion-label>Número: {{cartao.numero}}</ion-label>
+  <ion-label>NÃºmero: {{cartao.numero}}</ion-label>
   <ion-label>Validade: {{cartao.mesExpira}}/{{cartao.anoExpira}}</ion-label>
   <ion-label>Cvv: {{cartao.verificador}}</ion-label>
   <ion-label>Bandeira: {{getBandeira()}}</ion-label>
