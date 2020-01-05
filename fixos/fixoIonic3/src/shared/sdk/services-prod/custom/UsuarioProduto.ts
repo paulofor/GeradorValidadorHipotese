@@ -13,7 +13,7 @@ import { UsuarioProduto } from '../../models/UsuarioProduto';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { DispositivoUsuario } from '../../models/DispositivoUsuario';
 import { NotificacaoApp } from '../../models/NotificacaoApp';
-import { PathValidador } from '../../../assinatura';
+import { PathValidador } from '../../../../app/const';
 
 
 /**

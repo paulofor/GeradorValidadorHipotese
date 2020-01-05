@@ -11,7 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { VisitaApp } from '../../models/VisitaApp';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { PathValidador } from '../../../assinatura';
+import { PathValidador } from '../../../../app/const';
 
 
 /**
