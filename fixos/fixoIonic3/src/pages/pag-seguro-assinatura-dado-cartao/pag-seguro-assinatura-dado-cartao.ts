@@ -5,7 +5,7 @@ import { PagSeguroApi } from '../../shared/sdk/services/integracao/PagSeguro';
 import { PagSeguroAssinaturaConfirmacaoPage } from '../pag-seguro-assinatura-confirmacao/pag-seguro-assinatura-confirmacao';
 import { PagSeguroAssinaturaDadoClientePage } from '../pag-seguro-assinatura-dado-cliente/pag-seguro-assinatura-dado-cliente';
 import { AcessaFcmService } from '../../servico/acessa-fcm-service';
-
+import { VERSAO_APP_ID } from '../../app/const';
 
 /**
  * Generated class for the PagSeguroAssinaturaDadoCartaoPage page.
@@ -100,7 +100,7 @@ export class PagSeguroAssinaturaDadoCartaoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestePagSeguroPage');
-    this.fcmSrv.registraVisitaPagina(this.chavePagina);
+    this.fcmSrv.registraVisitaPagina(this.chavePagina, VERSAO_APP_ID);
     this.pagSrv.ObtemSessao()
       .subscribe((resp) => {
         console.log('Resp- Sessao:' + JSON.stringify(resp));

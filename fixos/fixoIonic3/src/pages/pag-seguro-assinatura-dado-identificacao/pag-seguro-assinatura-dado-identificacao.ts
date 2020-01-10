@@ -4,7 +4,7 @@ import { Assinatura } from '../../shared/assinatura';
 import { PagSeguroAssinaturaDadoClientePage } from '../pag-seguro-assinatura-dado-cliente/pag-seguro-assinatura-dado-cliente';
 import { DatePipe } from '@angular/common';
 import { AcessaFcmService } from '../../servico/acessa-fcm-service';
-
+import { VERSAO_APP_ID } from '../../app/const';
 /**
  * Generated class for the PagSeguroAssinaturaDadoIdentificacaoPage page.
  *
@@ -65,7 +65,7 @@ export class PagSeguroAssinaturaDadoIdentificacaoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PagSeguroAssinaturaDadoIdentificacaoPage');
     this.inicializacao();
-    this.fcmSrv.registraVisitaPagina(this.chavePagina);
+    this.fcmSrv.registraVisitaPagina(this.chavePagina, VERSAO_APP_ID);
   }
 
   inicializacao() {

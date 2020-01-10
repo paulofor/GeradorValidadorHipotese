@@ -204,7 +204,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
    * This usually means the response is a `VisitaApp` object.)
    * </em>
    */
-  public RegistraVisitaTelaApp(chaveUsuario: any, chavePagina: any, customHeaders?: Function): Observable<any> {
+  public RegistraVisitaTelaApp(chaveUsuario: any, chavePagina: any, idVersaoApp: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/VisitaApps/registraVisitaTelaApp";
@@ -213,6 +213,7 @@ export class VisitaAppApi extends BaseLoopBackApi {
     let _urlParams: any = {};
     if (typeof chaveUsuario !== 'undefined' && chaveUsuario !== null) _urlParams.chaveUsuario = chaveUsuario;
     if (typeof chavePagina !== 'undefined' && chavePagina !== null) _urlParams.chavePagina = chavePagina;
+    if (typeof idVersaoApp !== 'undefined' && idVersaoApp !== null) _urlParams.idVersaoApp = idVersaoApp;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

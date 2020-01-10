@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListaOportunidadePrecoAssinaturaPage } from '../lista-oportunidade-preco-assinatura/lista-oportunidade-preco-assinatura';
 import { AcessaFcmService } from '../../servico/acessa-fcm-service';
-
+import { VERSAO_APP_ID } from '../../app/const';
 /**
  * Generated class for the PagSeguroAssinaturaSucessoPage page.
  *
@@ -24,7 +24,7 @@ export class PagSeguroAssinaturaSucessoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PagSeguroAssinaturaSucessoPage');
-    this.fcmSrv.registraVisitaPagina(this.chavePagina);
+    this.fcmSrv.registraVisitaPagina(this.chavePagina, VERSAO_APP_ID);
   }
 
 

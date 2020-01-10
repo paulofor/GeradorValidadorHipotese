@@ -33,10 +33,10 @@ export class AcessaFcmService {
 
 
     // Chamada externa
-    public registraVisitaPagina(chavePagina) {
+    public registraVisitaPagina(chavePagina, versaoAppId) {
         this.storage.get("chave").then((chaveUsuario) => {
             if (chaveUsuario) {
-                this.visitaAppSrv.RegistraVisitaTelaApp(chaveUsuario, chavePagina)
+                this.visitaAppSrv.RegistraVisitaTelaApp(chaveUsuario, chavePagina, versaoAppId)
                     .subscribe((resultado: any) => {
                         //console.log('Resultado-VisitaPagina' , resultado);
                     })

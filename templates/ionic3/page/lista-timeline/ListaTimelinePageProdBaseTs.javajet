@@ -16,7 +16,7 @@ import { Page } from 'ionic-angular/umd/navigation/nav-util';
 import { <%= telaEdicao.getNome() %> } from '../<%= telaEdicao.getPathArquivo() %>/<%= telaEdicao.getArquivo() %>';
 <% } %>
 import { Storage } from '@ionic/storage';
-import { MSG_SEM_INTERNET } from '../../app/const';
+import { MSG_SEM_INTERNET, VERSAO_APP_ID } from '../../app/const';
 import { ComponenteBase } from '../componente-base';
 import { AcessaFcmService } from '../../servico/acessa-fcm-service';
 
@@ -55,7 +55,7 @@ export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
 	}
 
 	ionViewWillEnter() {
-		this.fcmSrv.registraVisitaPagina(this.chave);
+		this.fcmSrv.registraVisitaPagina(this.chave,VERSAO_APP_ID);
 		console.log('');
     		console.log('Tela: <%= tela.getNome() %><<<%= tela.getTipo() %>>> : <%= tela.getEntidade().getNomeParaClasse() %>');
     		this.carregaUsuario();

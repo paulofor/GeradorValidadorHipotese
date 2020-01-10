@@ -6,6 +6,7 @@ import { UsuarioProdutoApi } from '../../shared/sdk/services/custom/UsuarioProdu
 import { Storage } from '@ionic/storage';
 import { PagSeguroAssinaturaSucessoPage } from '../pag-seguro-assinatura-sucesso/pag-seguro-assinatura-sucesso';
 import { AcessaFcmService } from '../../servico/acessa-fcm-service';
+import { VERSAO_APP_ID } from '../../app/const';
 /**
  * Generated class for the PagSeguroAssinaturaConfirmacaoPage page.
  *
@@ -38,7 +39,7 @@ export class PagSeguroAssinaturaConfirmacaoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PagSeguroAssinaturaConfirmacaoPage');
-    this.fcmSrv.registraVisitaPagina(this.chavePagina);
+    this.fcmSrv.registraVisitaPagina(this.chavePagina, VERSAO_APP_ID);
     this.assinatura = Assinatura;
     this.cartao = Cartao;
     this.storage.get("chave")
