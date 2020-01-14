@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 
 import { SocketConnection } from '../../sockets/socket.connections';
 import { SDKModels } from '..';
-import { PathValidador } from '../../../assinatura';
+import { PathValidador } from '../../../../app/const';
 
 /**
  * Api services for the `PagSeguro` model.

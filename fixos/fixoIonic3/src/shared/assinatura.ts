@@ -1,4 +1,3 @@
-export var PathValidador : string = 'https://www.digicom.inf.br:21040';
 
 
 export var Cartao = {
