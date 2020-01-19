@@ -18,7 +18,7 @@ public class LoopbackModel
   }
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-  protected final String TEXT_1 = "";
+  protected final String TEXT_1 = "// Criado por : templates/angular/loopback/LoopbackModel.javajet";
   protected final String TEXT_2 = NL + "/* tslint:disable */" + NL + "import {";
   protected final String TEXT_3 = NL + "\t";
   protected final String TEXT_4 = ",";

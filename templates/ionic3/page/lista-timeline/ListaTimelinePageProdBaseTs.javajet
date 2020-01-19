@@ -21,7 +21,7 @@ import { ComponenteBase } from '../componente-base';
 import { AcessaFcmService } from '../../servico/acessa-fcm-service';
 
 
-// Tipo: <%= tela.getTipo() %>
+// Tipo: <%= tela.getTipo() %> - Criado por: templates/ionic3/pages/lista-timeline/ListaTimelinePageProdBaseTs.javajet
 export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
 
     protected usuario: Usuario;

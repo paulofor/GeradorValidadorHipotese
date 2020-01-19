@@ -1,6 +1,6 @@
-<%@ jet package="jet.ionic3.page.listaItem" 
+<%@ jet package="jet.ionic3.page.listaFindApp" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
-class="ListaItemPageProdBaseTs" %>
+class="ListaFindAppPageProdBaseTs" %>
 
 <%
 Recursos recursos = (Recursos) argument;  
@@ -16,20 +16,22 @@ import { Page } from 'ionic-angular/umd/navigation/nav-util';
 import { <%= telaEdicao.getNome() %> } from '../<%= telaEdicao.getPathArquivo() %>/<%= telaEdicao.getArquivo() %>';
 <% } %>
 import { Storage } from '@ionic/storage';
-import { MSG_SEM_INTERNET } from '../../app/const';
+import { MSG_SEM_INTERNET , VERSAO_APP_ID} from '../../app/const';
 import { ComponenteBase } from '../componente-base';
 import { AcessaFcmService } from '../../servico/acessa-fcm-service';
 
 
-// Tipo: <%= tela.getTipo() %>  - Criado por: templates/ionic3/pages/lista-item/ListaItemPageProdBaseTs.javajet
+// Tipo: <%= tela.getTipo() %> - Criado por: templates/ionic3/pages/lista-find-app/ListaFindAppPageProdBaseTs.javajet
 export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
 
-    protected usuario: Usuario;
+     protected usuario: Usuario;
 
 	protected listaItem: <%= tela.getEntidade().getNomeParaClasse() %>[];
 	protected abstract inicializacao();
 	protected abstract getFiltro(): LoopBackFilter;
 	protected erroMsg: string;
+	
+	private chave : string = '<%= tela.getChave() %>';
 	
 	 
 	getPageEdicao(): Page {
@@ -47,12 +49,13 @@ export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
     	<% } %>
   	}
 
-	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api
-				,protected storage: Storage, protected fcmSrv: AcessaFcmService) {
+	constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,
+		protected storage: Storage, protected fcmSrv: AcessaFcmService) {
 		super();
 	}
 
 	ionViewWillEnter() {
+		this.fcmSrv.registraVisitaPagina(this.chave,VERSAO_APP_ID);
 		console.log('');
     		console.log('Tela: <%= tela.getNome() %><<<%= tela.getTipo() %>>> : <%= tela.getEntidade().getNomeParaClasse() %>');
     		this.carregaUsuario();
@@ -62,7 +65,7 @@ export abstract class <%= tela.getNome() %>Base extends ComponenteBase{
   	
   	carregaLista() {
   		console.log('<%= tela.getEntidade().getNomeParaClasse() %>.find: ', JSON.stringify(this.getFiltro()));
-  		this.srv.find(this.getFiltro())
+  		this.srv.ListaApp()
   			.subscribe((resultado: <%= tela.getEntidade().getNomeParaClasse() %>[]) => {
   				console.log('Result:' , resultado);
   				this.listaItem = resultado;

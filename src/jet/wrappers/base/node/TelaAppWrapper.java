@@ -108,6 +108,9 @@ public class TelaAppWrapper implements ItemComponente{
 	public boolean tipoListaItem() {
 		return ("LISTA_ITEM".equals(this.principal.getTipo()));
 	}
+	public boolean tipoListaFindApp() {
+		return ("LISTA_FIND_APP".equals(this.principal.getTipo()));
+	}
 	public boolean tipoItemLista() {
 		return ("ITEM_LISTA".equals(this.principal.getTipo()));
 	}

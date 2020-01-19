@@ -1,0 +1,37 @@
+<%@ jet package="jet.ionic3.page.listaFindApp" 
+imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.base.node.* jet.wrappers.angular.* gerapp.modelo.* gerapp.modelo.node.*" 
+class="ListaFindAppPageTs" %>
+
+<%
+Recursos recursos = (Recursos) argument;  
+TelaAppWrapper tela = (TelaAppWrapper) recursos.getItemCorrente();
+Configuracao conf = recursos.getConfiguracao();
+%>
+import { Component } from '@angular/core';
+import { IonicPage, NavController } from 'ionic-angular';
+import { Page } from 'ionic-angular/navigation/nav-util';
+import { <%= tela.getNome() %>Base } from './<%= tela.getArquivo() %>-base';
+import { <%= tela.getEntidade().getNomeParaClasse() %>Api, LoopBackFilter } from '../../shared/sdk';
+import { Storage } from '@ionic/storage';
+
+
+@IonicPage()
+@Component({
+  selector: '<%= tela.getNomeControle() %>',
+  templateUrl: '<%= tela.getArquivo() %>.html'
+})
+export class <%= tela.getNome() %> extends <%= tela.getNome() %>Base {
+
+  inicializacao() {
+  }
+
+  constructor(public navCtrl: NavController, protected srv: <%= tela.getEntidade().getNomeParaClasse() %>Api,protected storage: Storage) {
+    super(navCtrl,srv,storage);
+  }
+
+
+  protected getFiltro(): LoopBackFilter {
+    return {};
+  }
+  
+}

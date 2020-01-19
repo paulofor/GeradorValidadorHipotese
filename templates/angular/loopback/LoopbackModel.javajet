@@ -1,7 +1,7 @@
 <%@ jet package="jet.angular.loopback" 
 imports="java.util.* gerapp.app.* jet.wrappers.base.* jet.wrappers.angular.* gerapp.modelo.* " 
 class="LoopbackModel" %>
-
+// Criado por : templates/angular/loopback/LoopbackModel.javajet
 <%
 Recursos recursos = (Recursos) argument;  
 ClasseWrapperAngular classe = (ClasseWrapperAngular) recursos.getClasse();

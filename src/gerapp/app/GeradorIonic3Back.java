@@ -37,6 +37,9 @@ import jet.ionic3.page.getPut.GetPutPageTs;
 import jet.ionic3.page.graficoBarra.GraficoBarraPageHtml;
 import jet.ionic3.page.graficoBarra.GraficoBarraPageProdBaseTs;
 import jet.ionic3.page.graficoBarra.GraficoBarraPageTs;
+import jet.ionic3.page.listaFindApp.ListaFindAppPageHtml;
+import jet.ionic3.page.listaFindApp.ListaFindAppPageProdBaseTs;
+import jet.ionic3.page.listaFindApp.ListaFindAppPageTs;
 import jet.ionic3.page.listaGrid.ListaGridPageHtml;
 import jet.ionic3.page.listaGrid.ListaGridPageTs;
 import jet.ionic3.page.listaItem.ListaItemPageHtml;
@@ -491,6 +494,23 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
 			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
 				conteudo = ListaItemPageHtml.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+		}
+		if (tela.tipoListaFindApp()) {
+			nomeArquivo = pathDestino + tela.getArquivo() + "-base.ts";
+			conteudo = ListaFindAppPageProdBaseTs.create("\n").generate(recurso);
+			geraArquivoFonte(conteudo, nomeArquivo);
+
+			nomeArquivo = pathDestino + tela.getArquivo() + ".ts";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveTs()) {
+				conteudo = ListaFindAppPageTs.create("\n").generate(recurso);
+				geraArquivoFonte(conteudo, nomeArquivo);
+			}
+
+			nomeArquivo = pathDestino + tela.getArquivo() + ".html";
+			if (!this.existe(nomeArquivo) || tela.sobrescreveHtml()) {
+				conteudo = ListaFindAppPageHtml.create("\n").generate(recurso);
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}

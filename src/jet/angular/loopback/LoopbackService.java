@@ -60,7 +60,9 @@ public class LoopbackService
   protected final String TEXT_39 = ", erroMsg? :string, customHeaders?: Function): Observable<";
   protected final String TEXT_40 = "> {" + NL + "    let result : Observable<";
   protected final String TEXT_41 = "> = this.create(data,customHeaders);" + NL + "    //result.subscribe((result:";
-  protected final String TEXT_42 = ") => {}, (erro:any) => {}); // com isso duplica" + NL + "    return result;" + NL + "  }" + NL + "}";
+  protected final String TEXT_42 = ") => {}, (erro:any) => {}); // com isso duplica" + NL + "    return result;" + NL + "  }" + NL + "  /*" + NL + "  public ListaApp(customHeaders?: Function): Observable<any> {" + NL + "    let _method: string = \"GET\";" + NL + "    let _url: string = LoopBackConfig.getPath() + \"/\" + LoopBackConfig.getApiVersion() +" + NL + "      \"/";
+  protected final String TEXT_43 = "/listaApp\";" + NL + "    let result = this.request(_method, _url, null, null, null, null, customHeaders);" + NL + "    return result;" + NL + "  }" + NL + "  */" + NL + "  public ListaApp(customHeaders?: Function): Observable<any> {" + NL + "    let _method: string = \"GET\";" + NL + "    let _url: string = LoopBackConfig.getPath() + \"/\" + LoopBackConfig.getApiVersion() +" + NL + "    \"/";
+  protected final String TEXT_44 = "s/listaApp\";" + NL + "    let _routeParams: any = {};" + NL + "    let _postBody: any = {};" + NL + "    let _urlParams: any = {};" + NL + "    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);" + NL + "    return result;" + NL + "  }" + NL + "}";
 
   public String generate(Object argument)
   {
@@ -176,6 +178,10 @@ while (itGetPut.hasNext()) {
     stringBuffer.append(TEXT_41);
     stringBuffer.append( classe.getNomeParaClasse() );
     stringBuffer.append(TEXT_42);
+    stringBuffer.append( classe.getNomeParaClasse() );
+    stringBuffer.append(TEXT_43);
+    stringBuffer.append( classe.getNomeModeloServer() );
+    stringBuffer.append(TEXT_44);
     return stringBuffer.toString();
   }
 }
