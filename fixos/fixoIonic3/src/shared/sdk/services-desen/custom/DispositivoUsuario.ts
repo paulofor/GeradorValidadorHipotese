@@ -13,6 +13,7 @@ import { DispositivoUsuario } from '../../models/DispositivoUsuario';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { PathValidador } from '../../../../app/const';
 
+// Copiado de: fixos/fixoIonic3/src/shared/sdk/services-desen/custom/DispositivoUsuario.ts
 
 
 /**
@@ -136,7 +137,7 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
       PathValidador,
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().path,
-      'findOne'
+      'findOneApp'
     ].join('/'), undefined, { filter }, undefined, null, customHeaders)
     .pipe(map((data: DispositivoUsuario) => this.model.factory(data)));
   }
