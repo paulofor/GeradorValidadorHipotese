@@ -67,7 +67,8 @@ export class AcessaFcmService {
     public executaValidacaoRemote(versaoAppId: number) {
         let filtro = { "include": "usuarioProduto", "where": { "and": [{ "uuid": this.device.uuid }] } }
         console.log('Tentativa recuperação chave por uuid: ', this.device.uuid);
-        this.dispositivoUsuarioSrv.findOneItem(filtro)
+        //this.dispositivoUsuarioSrv.findOneItem(filtro)
+        this.dispositivoUsuarioSrv.FindByUuid(this.device.uuid)
             .subscribe(
                 (dispositvo: DispositivoUsuario) => {
                     console.log('Encontrou usuario por uuid');

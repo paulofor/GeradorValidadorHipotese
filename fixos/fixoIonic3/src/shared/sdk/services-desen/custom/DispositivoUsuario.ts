@@ -178,6 +178,20 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
+  
+  
+  public FindByUuid(uuid: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
+    "/DispositivoUsuarios/findByUuid";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof uuid !== 'undefined' && uuid !== null) _urlParams.uuid = uuid;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+  
   /**
    * The name of the model represented by this $resource,
    * i.e. `DispositivoUsuario`.
