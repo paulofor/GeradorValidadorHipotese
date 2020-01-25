@@ -70,11 +70,16 @@ export class AcessaFcmService {
         //this.dispositivoUsuarioSrv.findOneItem(filtro)
         this.dispositivoUsuarioSrv.FindByUuid(this.device.uuid)
             .subscribe(
-                (dispositvo: DispositivoUsuario) => {
-                    console.log('Encontrou usuario por uuid');
-                    this.ligaReceptorNotificacao();
-                    this.registraMobile(dispositvo.usuarioProduto.chave,versaoAppId);
-                    this.registraVisitaApp(dispositvo.usuarioProduto.chave, versaoAppId);
+                (dispositivo: DispositivoUsuario) => {
+                					if (dispositivo) {
+                    						console.log('Encontrou usuario por uuid');
+                    						this.ligaReceptorNotificacao();
+                    						this.registraMobile(dispositivo.usuarioProduto.chave,versaoAppId);
+                    						this.registraVisitaApp(dispositivo.usuarioProduto.chave, versaoAppId);
+                    					} else {
+                    					 	console.log('Não encontrou usuario por uuid');
+                    						this.inscreveFcm(versaoAppId)
+                    					}
                 },
                 erro => {
                     console.log('Não encontrou usuario por uuid');
