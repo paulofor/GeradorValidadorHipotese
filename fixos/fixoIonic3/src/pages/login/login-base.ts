@@ -4,10 +4,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { Usuario, UsuarioApi, LoopBackFilter, AcaoApi, Acao } from '../../shared/sdk';
 import { Page } from 'ionic-angular/navigation/nav-util';
-import { MSG_SEM_INTERNET, MSG_ERRO_LOGIN } from '../../app/const';
+import { MSG_SEM_INTERNET, MSG_ERRO_LOGIN, VERSAO_APP_ID } from '../../app/const';
 import { SignupPage } from '../signup/signup';
 import { ComponenteBase } from '../componente-base';
 import { PagSeguroApi } from '../../shared/sdk/services/integracao/PagSeguro';
+import { AcessaFcmService } from "../../servico/acessa-fcm-service";
 
 
 export abstract class LoginPageBase extends ComponenteBase{
@@ -19,10 +20,11 @@ export abstract class LoginPageBase extends ComponenteBase{
   
   abstract getPaginaInicial() : Page;
  
+  chavePagina = '079053c61df3fa29a8c281c38a8a06d0526499f5';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     protected formBuilder: FormBuilder, protected srv: UsuarioApi, protected srvAcao: AcaoApi, protected storage: Storage
-    , protected pagSeguro:PagSeguroApi) {
+    , protected pagSeguro:PagSeguroApi,  protected fcmSrv: AcessaFcmService) {
     super();
     this.loginForm = this.formBuilder.group({
       login: '',
@@ -33,6 +35,7 @@ export abstract class LoginPageBase extends ComponenteBase{
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad LoginPage');
+    this.fcmSrv.registraVisitaPagina(this.chavePagina, VERSAO_APP_ID);
   }
 
   onSubmit() {

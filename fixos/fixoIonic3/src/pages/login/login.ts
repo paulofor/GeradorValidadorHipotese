@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import { Page } from 'ionic-angular/navigation/nav-util';
 import { ComandosZeroPage } from '../comandos-zero/comandos-zero';
 import { PagSeguroApi } from '../../shared/sdk/services/integracao/PagSeguro';
-
+import { AcessaFcmService } from "../../servico/acessa-fcm-service";
 
 /**
  * Generated class for the LoginPage page.
@@ -38,13 +38,11 @@ export class LoginPage extends LoginPageBase {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     protected formBuilder: FormBuilder, protected srv: UsuarioApi, 
-    protected srvACao: AcaoApi, protected storage: Storage, protected pagSeguro:PagSeguroApi) {
-    super(navCtrl, navParams, formBuilder, srv, srvACao, storage, pagSeguro);
+    protected srvACao: AcaoApi, protected storage: Storage, protected pagSeguro:PagSeguroApi,  protected fcmSrv: AcessaFcmService) {
+    super(navCtrl, navParams, formBuilder, srv, srvACao, storage, pagSeguro, fcmSrv);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+
 
 
 

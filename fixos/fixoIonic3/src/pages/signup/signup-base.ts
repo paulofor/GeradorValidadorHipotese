@@ -5,8 +5,8 @@ import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
 import { ComandosZeroPage } from "../comandos-zero/comandos-zero";
 import { ComponenteBase } from '../componente-base';
-import { MSG_CADASTRO_TAMANHO_SENHA, MSG_CADASTRO_EMAIL } from "../../app/const";
-
+import { MSG_CADASTRO_TAMANHO_SENHA, MSG_CADASTRO_EMAIL, VERSAO_APP_ID } from "../../app/const";
+import { AcessaFcmService } from "../../servico/acessa-fcm-service";
 
 export abstract class SignupPageBase extends ComponenteBase{
 
@@ -18,7 +18,10 @@ export abstract class SignupPageBase extends ComponenteBase{
   protected msgSenha:string = MSG_CADASTRO_TAMANHO_SENHA;
   protected msgEmail:string = MSG_CADASTRO_EMAIL;
 
-  constructor(public navCtrl: NavController, protected formBuilder: FormBuilder, protected storage: Storage, protected srv: UsuarioApi) {
+  chavePagina = 'c2b925b0dd233741e199e83a93afc1ad46047828';
+
+  constructor(public navCtrl: NavController, protected formBuilder: FormBuilder, protected storage: Storage, 
+  			protected srv: UsuarioApi,  protected fcmSrv: AcessaFcmService) {
     super();
     this.signupForm = this.formBuilder.group({
       login: ['', Validators.email],
@@ -29,6 +32,7 @@ export abstract class SignupPageBase extends ComponenteBase{
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad LoginPage');
+    this.fcmSrv.registraVisitaPagina(this.chavePagina, VERSAO_APP_ID);
   }
   
   ionViewWillEnter() {
