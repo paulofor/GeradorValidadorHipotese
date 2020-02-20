@@ -604,7 +604,7 @@ export class UsuarioProdutoApi extends BaseLoopBackApi {
    */
   public createManyDispositivoUsuarios(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/UsuarioProdutos/:id/dispositivoUsuarios";
     let _routeParams: any = {
       id: id
@@ -637,7 +637,7 @@ export class UsuarioProdutoApi extends BaseLoopBackApi {
    */
   public createManyNotificacaoApps(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
     "/UsuarioProdutos/:id/notificacaoApps";
     let _routeParams: any = {
       id: id
@@ -649,6 +649,19 @@ export class UsuarioProdutoApi extends BaseLoopBackApi {
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
+
+  public PrimeiroAcesso(usuario: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
+    "/UsuarioProdutos/primeiroAcesso";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof usuario !== 'undefined' && usuario !== null) _urlParams.usuario = usuario;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
 
   /**
    * The name of the model represented by this $resource,

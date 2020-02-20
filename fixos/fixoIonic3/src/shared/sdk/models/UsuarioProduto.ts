@@ -9,6 +9,7 @@ import {
     "nome"?: string;
     "senha"?: string;
     "chave"?: string;
+    "email"?: string;
     "dataHoraCriacao"?: Date;
     "dataUltimoAcesso"?: Date;
     "id"?: number;
@@ -21,6 +22,7 @@ import {
     "nome": string;
     "senha": string;
     "chave": string;
+    "email" : string;
     "dataHoraCriacao": Date;
     "dataUltimoAcesso": Date;
     "id": number;
@@ -70,6 +72,10 @@ import {
           },
           "chave": {
             name: 'chave',
+            type: 'string'
+          },
+          "email": {
+            name: 'email',
             type: 'string'
           },
           "dataHoraCriacao": {
