@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Usuario, UsuarioApi, UsuarioProduto } from "../../shared/sdk/index";
 import { HomePage } from "../home/home";
 import { Storage } from '@ionic/storage';
-import { ComandosZeroPage } from "../comandos-zero/comandos-zero";
+//import { ComandosZeroPage } from "../comandos-zero/comandos-zero";
 import { ComponenteBase } from '../componente-base';
 import { MSG_CADASTRO_TAMANHO_SENHA, MSG_CADASTRO_EMAIL, VERSAO_APP_ID } from "../../app/const";
 import { AcessaFcmService } from "../../servico/acessa-fcm-service";

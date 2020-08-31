@@ -9,19 +9,18 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { ErrorHandler } from '../core/error.service';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DispositivoUsuario } from '../../models/DispositivoUsuario';
+import { Visitante } from '../../models/Visitante';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { PathValidador } from '../../../../app/const';
 
 
 
 /**
- * Api services for the `DispositivoUsuario` model.
+ * Api services for the `Visitante` model.
  */
 @Injectable()
-export class DispositivoUsuarioApi extends BaseLoopBackApi {
+export class VisitanteApi extends BaseLoopBackApi {
 
-
+  private static pathValidador : string = '//validacao.kinghost.net:21101';
 
   constructor(
     @Inject(HttpClient) protected http: HttpClient,
@@ -50,13 +49,13 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `DispositivoUsuario` object.)
+   * This usually means the response is a `Visitante` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
-    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
-    "/DispositivoUsuarios";
+    let _url: string = VisitanteApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    "/Visitantes";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -69,7 +68,7 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id DispositivoUsuario id
+   * @param {any} id Visitante id
    *
    * @param {object} data Request data.
    *
@@ -81,13 +80,13 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `DispositivoUsuario` object.)
+   * This usually means the response is a `Visitante` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
-    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
-    "/DispositivoUsuarios/:id";
+    let _url: string = VisitanteApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    "/Visitantes/:id";
     let _routeParams: any = {
       id: id
     };
@@ -112,8 +111,8 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
    */
   public proximoCookie(customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
-    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
-    "/DispositivoUsuarios/proximoCookie";
+    let _url: string = VisitanteApi.pathValidador + "/" + LoopBackConfig.getApiVersion() +
+    "/Visitantes/proximoCookie";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
@@ -122,66 +121,29 @@ export class DispositivoUsuarioApi extends BaseLoopBackApi {
   }
 
 
-  public criaItem(data: DispositivoUsuario, customHeaders?: Function): Observable<DispositivoUsuario> {
+  public criaItem(data: Visitante, customHeaders?: Function): Observable<Visitante> {
     return this.request('POST', [
-      PathValidador,
+      VisitanteApi.pathValidador,
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().path
     ].join('/'), undefined, undefined, { data }, null, customHeaders)
-    .pipe(map((data: DispositivoUsuario) => this.model.factory(data)));
+    .pipe(map((data: Visitante) => this.model.factory(data)));
   }
-
-  public findOneItem<DispositivoUsuario>(filter: LoopBackFilter = {}, customHeaders?: Function): Observable<DispositivoUsuario> {
-    return this.request('GET', [
-      PathValidador,
-      LoopBackConfig.getApiVersion(),
-      this.model.getModelDefinition().path,
-      'findOne'
-    ].join('/'), undefined, { filter }, undefined, null, customHeaders)
-    .pipe(map((data: DispositivoUsuario) => this.model.factory(data)));
-  }
-
-  public atualizaItem(id: any, data: DispositivoUsuario, customHeaders?: Function): Observable<DispositivoUsuario> {
+  public atualizaItem(id: any, data: Visitante, customHeaders?: Function): Observable<Visitante> {
     return this.request('PUT', [
-      PathValidador,
+      VisitanteApi.pathValidador,
       LoopBackConfig.getApiVersion(),
       this.model.getModelDefinition().path,
       ':id'
     ].join('/'), { id }, undefined, { data }, null, customHeaders)
-    .pipe(map((data: DispositivoUsuario) => this.model.factory(data)));
+    .pipe(map((data: Visitante) => this.model.factory(data)));
   }
 
-
-  public CriaComUsuario(dispositivo: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
-    "/DispositivoUsuarios/criaComUsuario";
-    let _routeParams: any = {};
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof dispositivo !== 'undefined' && dispositivo !== null) _urlParams.dispositivo = dispositivo;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-  
-  
-  public AtualizaToken(chaveUsuario: any = {}, token: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = PathValidador + "/" + LoopBackConfig.getApiVersion() +
-    "/DispositivoUsuarios/atualizaToken";
-    let _routeParams: any = {};
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof chaveUsuario !== 'undefined' && chaveUsuario !== null) _urlParams.chaveUsuario = chaveUsuario;
-    if (typeof token !== 'undefined' && token !== null) _urlParams.token = token;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `DispositivoUsuario`.
+   * i.e. `Visitante`.
    */
   public getModelName() {
-    return "DispositivoUsuario";
+    return "Visitante";
   }
 }

@@ -94,11 +94,17 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		pathOrigem = raizOrigem + "services/custom/";
-		
 		pathDestino = raizDestino + "services/custom/";
+		String pathOrigemProducao = raizOrigem + "services-prod/custom/";
+		
+		
 		this.copiaArquivo("DispositivoUsuario.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("VisitaApp.ts", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
+		if (ehProducao()) {
+			this.copiaArquivo("Visitante.ts", pathOrigemProducao, pathDestino, recurso);
+		} else {
+			this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
+		}
 		this.copiaArquivo("NotificacaoApp.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("UsuarioProduto.ts", pathOrigem, pathDestino, recurso);
 		
