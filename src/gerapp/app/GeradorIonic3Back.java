@@ -91,6 +91,8 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("Visitante.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("NotificacaoApp.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("UsuarioProduto.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("MonitorFaseInicialApp.ts", pathOrigem, pathDestino, recurso);
+
 		
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		pathOrigem = raizOrigem + "services/custom/";
@@ -107,6 +109,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		}
 		this.copiaArquivo("NotificacaoApp.ts", pathOrigem, pathDestino, recurso);
 		this.copiaArquivo("UsuarioProduto.ts", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("MonitorFaseInicialApp.ts", pathOrigem, pathDestino, recurso);
 		
 		
 	}
