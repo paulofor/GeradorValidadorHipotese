@@ -10,7 +10,7 @@ import { _throw } from 'rxjs/observable/throw';
 @Injectable()
 export class ErrorHandler {
   public handleError(errorResponse: HttpErrorResponse) {
-  	return _throw(errorResponse.error.error || 'Server error');
+  	return _throw(errorResponse.error.error || JSON.stringify(errorResponse));
     //return throwError(errorResponse.error.error || 'Server error');
     //console.log('ErroHttp: ', errorResponse);
 	//return null;

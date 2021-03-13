@@ -48,6 +48,8 @@ import jet.ionic3.page.listaItem.ListaItemPageTs;
 import jet.ionic3.page.listaTimeline.ListaTimelinePageHtml;
 import jet.ionic3.page.listaTimeline.ListaTimelinePageProdBaseTs;
 import jet.ionic3.page.listaTimeline.ListaTimelinePageTs;
+import jet.ionic3.page.listaTimeline.LoginBaseTs;
+import jet.ionic3.page.signup.SignupBaseTs;
 import jet.wrappers.base.ClasseWrapper;
 import jet.wrappers.base.node.TelaAppWrapper;
 
@@ -197,20 +199,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		
 		
 		
-		// login
-		TelaAppWrapper tela = new TelaAppWrapper("Login");
-		recurso.setItemCorrente(tela);
-		pathDestino = raizDestino + "src/pages/login/";
-		pathOrigem = raizOrigem + "src/pages/login/";
-		this.criaCaminhoSeNaoExiste(pathDestino);
-		String nomeArquivo = pathDestino + "login.module.ts";
-		String conteudo = PageModuleTs.create("\n").generate(recurso);
-		geraArquivoFonte(conteudo, nomeArquivo);
-		this.copiaArquivo("login.html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("login.scss", pathOrigem, pathDestino, recurso);
-		this.copiaArquivoSeNaoExiste("login.ts", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
-
+		
 		// ComandosZero
 		/*
 		tela = new TelaAppWrapper("ComandosZero");
@@ -227,19 +216,7 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		this.copiaArquivo("comandos-zero-base.ts", pathOrigem, pathDestino, recurso);
 		*/
 
-		// signup
-		tela = new TelaAppWrapper("Signup");
-		recurso.setItemCorrente(tela);
-		pathDestino = raizDestino + "src/pages/signup/";
-		pathOrigem = raizOrigem + "src/pages/signup/";
-		this.criaCaminhoSeNaoExiste(pathDestino);
-		nomeArquivo = pathDestino + "signup.module.ts";
-		conteudo = PageModuleTs.create("\n").generate(recurso);
-		geraArquivoFonte(conteudo, nomeArquivo);
-		this.copiaArquivo("signup.html", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("signup.scss", pathOrigem, pathDestino, recurso);
-		this.copiaArquivoSeNaoExiste("signup.ts", pathOrigem, pathDestino, recurso);
-		this.copiaArquivo("signup-base.ts", pathOrigem, pathDestino, recurso);
+
 
 		pathDestino = raizDestino + "src/theme/";
 		pathOrigem = raizOrigem + "src/theme/";
@@ -332,6 +309,16 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 		System.out.println("Tela: " + tela.getNome());
 		System.out.println("Item Tela: " + tela);
 
+		if(tela.tipoLogin()) {
+			criaTelaLogin(recurso,tela);
+			return;
+		}
+		if (tela.tipoSignup()) {
+			criaTelaSignup(recurso,tela);
+			return;
+		}
+		
+		
 		if (!tela.possuiEntidade())
 			return;
 
@@ -678,6 +665,46 @@ public class GeradorIonic3Back extends GeradorNodeBase {
 				geraArquivoFonte(conteudo, nomeArquivo);
 			}
 		}
+	}
+	
+	private void criaTelaLogin(Recursos recurso, TelaAppWrapper tela) throws IOException {
+		// login
+		//TelaAppWrapper tela = new TelaAppWrapper("Login");
+		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/";
+		String raizOrigem = "./fixos/fixoIonic3/";
+		recurso.setItemCorrente(tela);
+		String pathDestino = raizDestino + "src/pages/login/";
+		String pathOrigem = raizOrigem + "src/pages/login/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		String nomeArquivo = pathDestino + "login.module.ts";
+		String conteudo = PageModuleTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		this.copiaArquivo("login.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("login.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("login.ts", pathOrigem, pathDestino, recurso);
+		conteudo = LoginBaseTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, pathDestino + "login-base.ts");
+		//this.copiaArquivo("login-base.ts", pathOrigem, pathDestino, recurso);
+
+	}
+	private void criaTelaSignup(Recursos recurso, TelaAppWrapper tela) throws IOException {
+		// signup
+		//tela = new TelaAppWrapper("Signup");
+		String raizDestino = PATH + recurso.getConfiguracao().getNamespace() + "/ionic3_back/";
+		String raizOrigem = "./fixos/fixoIonic3/";
+		recurso.setItemCorrente(tela);
+		String pathDestino = raizDestino + "src/pages/signup/";
+		String pathOrigem = raizOrigem + "src/pages/signup/";
+		this.criaCaminhoSeNaoExiste(pathDestino);
+		String nomeArquivo = pathDestino + "signup.module.ts";
+		String conteudo = PageModuleTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, nomeArquivo);
+		this.copiaArquivo("signup.html", pathOrigem, pathDestino, recurso);
+		this.copiaArquivo("signup.scss", pathOrigem, pathDestino, recurso);
+		this.copiaArquivoSeNaoExiste("signup.ts", pathOrigem, pathDestino, recurso);
+		conteudo = SignupBaseTs.create("\n").generate(recurso);
+		geraArquivoFonte(conteudo, pathDestino + "signup-base.ts");
+		//this.copiaArquivo("signup-base.ts", pathOrigem, pathDestino, recurso);
 	}
 
 }

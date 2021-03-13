@@ -50,6 +50,7 @@ $colors: (
   dark:       #222,
   titulo:   <%= paleta.getCor1() %>,
   botao:      <%= paleta.getCor1() %>,
+  acesso1:	   #ff6600
 );
 
 
